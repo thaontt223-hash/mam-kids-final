@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <!-- Nền squircle mềm mại đồng bộ nhận diện thương hiệu Mầm Kids -->
+  <rect x="2" y="2" width="60" height="60" rx="18" fill="#E6F1EB" stroke="#4E8773" stroke-width="2.5" />
+
+  <!-- Dáng áo em bé màu trắng -->
+  <path
+    d="M 18 35
+       L 21.5 48 C 21.5 50 23.5 51.5 25.5 51.5
+       L 38.5 51.5 C 40.5 51.5 42.5 50 42.5 48
+       L 46 35
+       C 42 37 38 38 32 38
+       C 26 38 22 37 18 35 Z"
+    fill="#FFFFFF"
+    stroke="#285A48"
+    stroke-width="2.5"
+    stroke-linejoin="round"
+  />
+
+  <!-- Cổ áo tròn Peter Pan -->
+  <path
+    d="M 23 35 C 26 38.5 38 38.5 41 35"
+    stroke="#4E8773"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Cúc áo màu vàng ấm #F2B544 -->
+  <circle cx="32" cy="43" r="2.4" fill="#F2B544" />
+  <circle cx="32" cy="47.5" r="1.6" fill="#F2B544" opacity="0.85" />
+
+  <!-- Bờ vai móc áo em bé -->
+  <path
+    d="M 15 35 C 20 30 44 30 49 35"
+    stroke="#285A48"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+
+  <!-- Trục mầm cây vươn lên từ móc áo -->
+  <path
+    d="M 32 30 L 32 20"
+    stroke="#285A48"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+
+  <circle cx="32" cy="20.5" r="2" fill="#285A48" />
+
+  <!-- Lá mầm bên trái (Xanh Sage #4E8773) -->
+  <path
+    d="M 32 20.5 C 24 19 21 11 27 8 C 31 10 32 16 32 20.5 Z"
+    fill="#4E8773"
+  />
+
+  <!-- Lá mầm bên phải (Xanh lá non #8BC34A) -->
+  <path
+    d="M 32 20.5 C 34 14.5 39 8.5 44 11 C 44.5 16.5 39 19.5 32 20.5 Z"
+    fill="#8BC34A"
+  />
+
+  <!-- Điểm sáng ban mai trên lá -->
+  <circle cx="27" cy="9" r="1.2" fill="#FFF9F0" />
+</svg>

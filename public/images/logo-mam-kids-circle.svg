@@ -1,0 +1,297 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" fill="none">
+  <defs>
+    <!-- Radial Gradient cho nền kem be ấm áp -->
+    <radialGradient id="creamBg" cx="50%" cy="46%" r="52%">
+      <stop offset="0%" stop-color="#FCFAF2" />
+      <stop offset="70%" stop-color="#FAF7EE" />
+      <stop offset="100%" stop-color="#F4EEE0" />
+    </radialGradient>
+
+    <!-- Gradient cho lá mầm tươi non bên trái -->
+    <linearGradient id="leafLeftGrad" x1="15%" y1="100%" x2="85%" y2="0%">
+      <stop offset="0%" stop-color="#78BD4E" />
+      <stop offset="60%" stop-color="#8DC566" />
+      <stop offset="100%" stop-color="#A2D77D" />
+    </linearGradient>
+
+    <!-- Gradient cho lá mầm sage đậm bên phải -->
+    <linearGradient id="leafRightGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#36654F" />
+      <stop offset="60%" stop-color="#3F7159" />
+      <stop offset="100%" stop-color="#4F876E" />
+    </linearGradient>
+
+    <!-- Gradient cho cổ áo Peter Pan màu bơ / đào nhạt -->
+    <linearGradient id="collarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDC463" />
+      <stop offset="100%" stop-color="#F5B245" />
+    </linearGradient>
+
+    <!-- Gradient cho nút áo -->
+    <linearGradient id="buttonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F69152" />
+      <stop offset="100%" stop-color="#EA7A36" />
+    </linearGradient>
+  </defs>
+
+  <!-- =========================================================================
+       1. HÌNH TRÒN CĂN BẢN (NỀN TRONG SUỐT BÊN NGOÀI, NỀN KEM BÊN TRONG)
+       ========================================================================= -->
+  <circle cx="300" cy="300" r="260" fill="url(#creamBg)" />
+
+  <!-- =========================================================================
+       2. TIA NẮNG ẤM ÁP (2 ACCENTS Ở GÓC TRÊN BÊN TRÁI MÓC ÁO)
+       ========================================================================= -->
+  <g id="sun-accents" transform="translate(162, 118)">
+    <!-- Tia nắng trên vươn dài -->
+    <path
+      d="M 26 56 C 21 38 30 18 40 8 C 44 4 51 8 49 14 C 46 27 41 45 35 57 C 33 61 28 61 26 56 Z"
+      fill="#F7BA50"
+    />
+    <!-- Tia nắng dưới nhỏ nhắn -->
+    <path
+      d="M 4 70 C -4 63 1 53 7 49 C 16 45 27 49 30 57 C 32 62 26 69 20 70 C 15 72 8 73 4 70 Z"
+      fill="#F7BA50"
+    />
+  </g>
+
+  <!-- =========================================================================
+       3. MÓC ÁO TRẺ EM (CHILDREN'S CLOTHES HANGER) & ÁO EM BÉ
+       ========================================================================= -->
+  <g id="hanger-and-shirt">
+    <!-- Móc treo uốn cong tròn phía trên -->
+    <path
+      d="M 300 188
+         L 300 168
+         C 300 148 314 132 332 132
+         C 348 132 358 144 358 159
+         C 358 172 348 184 336 189
+         C 328 193 324 198 324 204"
+      stroke="#487563"
+      stroke-width="15"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      fill="none"
+    />
+
+    <!-- Khung vai móc áo trẻ em uốn mở rộng hai bên -->
+    <path
+      d="M 205 240
+         C 240 206 274 194 300 194
+         C 326 194 360 206 395 240"
+      stroke="#487563"
+      stroke-width="16"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Thân áo em bé màu trắng kem với viền xanh sage bo tròn -->
+    <path
+      d="M 235 212
+         L 194 236 C 188 240 186 248 190 255 L 202 272 C 206 278 214 280 220 276 L 232 268
+         L 232 315 C 232 322 238 328 245 328
+         L 355 328 C 362 328 368 322 368 315
+         L 368 268 L 380 276 C 386 280 394 278 398 272 L 410 255 C 414 248 412 240 406 236
+         L 365 212
+         C 348 228 325 236 300 236 C 275 236 252 228 235 212 Z"
+      fill="#FFFFFF"
+      stroke="#487563"
+      stroke-width="16"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+    />
+
+    <!-- Cổ áo Peter Pan hai cánh tròn xòe màu vàng bơ / cam đào -->
+    <!-- Cánh cổ áo trái -->
+    <path
+      d="M 297 228
+         C 285 243 256 246 246 226
+         C 241 216 248 205 262 204
+         C 278 203 294 214 297 228 Z"
+      fill="url(#collarGrad)"
+      stroke="#487563"
+      stroke-width="5.5"
+    />
+    <!-- Cánh cổ áo phải -->
+    <path
+      d="M 303 228
+         C 315 243 344 246 354 226
+         C 359 216 352 205 338 204
+         C 322 203 306 214 303 228 Z"
+      fill="url(#collarGrad)"
+      stroke="#487563"
+      stroke-width="5.5"
+    />
+
+    <!-- Hai nút áo nhỏ màu cam đào ở giữa ngực áo -->
+    <circle cx="300" cy="256" r="8" fill="url(#buttonGrad)" />
+    <circle cx="300" cy="282" r="8" fill="url(#buttonGrad)" />
+  </g>
+
+  <!-- =========================================================================
+       4. HAI CHIẾC LÁ MẦM LỚN ÔM TRỌN CHIẾC ÁO (BIỂU TƯỢNG MẦM XANH LỚN DẦN)
+       ========================================================================= -->
+  <g id="sprout-leaves">
+    <!-- Chiếc lá lớn bên trái (Màu xanh tươi non - biểu trưng sức sống mới) -->
+    <path
+      d="M 297 416
+         C 283 392 254 356 200 350
+         C 142 344 110 262 130 245
+         C 145 233 182 248 217 276
+         C 265 315 289 369 297 416 Z"
+      fill="url(#leafLeftGrad)"
+      stroke="#487563"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+
+    <!-- Gân lá chính bên trái (Đường cong mảnh nhẹ màu xanh kem tươi) -->
+    <path
+      d="M 288 404
+         C 264 360 230 326 185 294
+         C 160 276 140 264 136 256"
+      stroke="#E5F7D8"
+      stroke-width="6"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Chiếc lá lớn bên phải (Màu xanh Sage đậm - biểu trưng che chở yêu thương) -->
+    <path
+      d="M 303 416
+         C 317 392 346 356 400 350
+         C 458 344 490 262 470 245
+         C 455 233 418 248 383 276
+         C 335 315 311 369 303 416 Z"
+      fill="url(#leafRightGrad)"
+      stroke="#325E4B"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+
+    <!-- Gân lá chính bên phải (Đường cong mảnh nhẹ màu xanh mint) -->
+    <path
+      d="M 312 404
+         C 336 360 370 326 415 294
+         C 440 276 460 264 464 256"
+      stroke="#BCE6D2"
+      stroke-width="6"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Cuống mầm kết nối ở đáy -->
+    <path
+      d="M 294 416 C 300 422 300 422 306 416"
+      stroke="#36654F"
+      stroke-width="6"
+      stroke-linecap="round"
+      fill="none"
+    />
+  </g>
+
+  <!-- =========================================================================
+       5. CHỮ “MẦM KIDS” Ở NỬA DƯỚI HÌNH TRÒN
+       (Thiết kế dạng vector path chuẩn xác 100%, không lo lỗi font, đúng dấu tiếng Việt)
+       ========================================================================= -->
+  <g id="typography" transform="translate(154, 436)">
+    <!-- ==================== TỪ “Mầm” (MÀU XANH SAGE ĐẬM #346650) ==================== -->
+    <g id="word-mam" fill="#346650">
+      <!-- Chữ 'M' in hoa: bo tròn, mập mạp, chắc chắn (w ~ 48px) -->
+      <path
+        d="M 6 48
+           C 2.5 48 0 45.5 0 42 L 0 6 C 0 2.5 2.5 0 6 0 C 9.5 0 12 2.5 12 6
+           L 12 28 L 20 14 C 22 10.5 26 10.5 28 14 L 36 28 L 36 6
+           C 36 2.5 38.5 0 42 0 C 45.5 0 48 2.5 48 6 L 48 42
+           C 48 45.5 45.5 48 42 48 C 38.5 48 36 45.5 36 42 L 36 36 L 27 21 C 25.5 18.5 22.5 18.5 21 21 L 12 36 L 12 42
+           C 12 45.5 9.5 48 6 48 Z"
+      />
+
+      <!-- Chữ 'ầ' thường: thân tròn trịa, đáng yêu (w ~ 36px) -->
+      <!-- Thân chữ a -->
+      <path
+        d="M 74 15
+           C 84 15 90 22 90 32 L 90 42 C 90 45.5 87.5 48 84 48 C 80.5 48 78 45.5 78 42 L 78 39
+           C 74 45 67 48 60 48 C 50 48 43 41 43 31 C 43 21 51 15 63 15 L 78 15 L 78 30
+           C 78 36 74 39 67 39 C 61 39 56 36 56 31 C 56 26 60 23 66 23 L 74 23 Z"
+      />
+
+      <!-- Dấu mũ '^' và Dấu huyền '' của chữ 'ầ' -->
+      <!-- Dấu mũ tròn mềm mại -->
+      <path
+        d="M 57 11 C 55 9 56 6 59 5 L 66 1 C 67.5 0 69.5 0 71 1 L 78 5 C 81 6 82 9 80 11 C 78 13 75 13 73 11 L 68.5 8 L 64 11 C 62 13 59 13 57 11 Z"
+      />
+      <!-- Dấu huyền nghiêng nhẹ nhàng chuẩn ngữ pháp tiếng Việt -->
+      <path
+        d="M 53 -2 C 51 -4 52 -7 55 -8 L 61 -11 C 64 -12 67 -11 67 -8 C 67 -5 65 -4 63 -3 L 58 0 C 56 1 54 0 53 -2 Z"
+      />
+
+      <!-- Chồi mầm nhỏ 2 lá màu xanh tươi trang trí trên chữ 'ầ' (Dấu ấn Mầm Xanh độc đáo) -->
+      <g transform="translate(74, -1)">
+        <path d="M 0 0 C -6 -3 -9 -9 -3 -12 C 1 -10 2 -4 0 0 Z" fill="#8DC566" />
+        <path d="M 2 0 C 8 -3 11 -9 5 -12 C 1 -10 0 -4 2 0 Z" fill="#8DC566" />
+      </g>
+
+      <!-- Chữ 'm' thường: 2 nhịp vòm tròn đầy đặn (w ~ 44px) -->
+      <path
+        d="M 103 48
+           C 99.5 48 97 45.5 97 42 L 97 21 C 97 17.5 99.5 15 103 15 C 106.5 15 109 17.5 109 21 L 109 24
+           C 112 18 118 15 125 15 C 131 15 135 18 138 23 C 142 18 148 15 155 15 C 165 15 171 21 171 31 L 171 42
+           C 171 45.5 168.5 48 165 48 C 161.5 48 159 45.5 159 42 L 159 31 C 159 25 156 23 151 23 C 146 23 143 26 143 32 L 143 42
+           C 143 45.5 140.5 48 137 48 C 133.5 48 131 45.5 131 42 L 131 31 C 131 25 128 23 123 23 C 118 23 115 26 115 32 L 115 42
+           C 115 45.5 112.5 48 109 48 Z"
+      />
+    </g>
+
+    <!-- ==================== TỪ “Kids” (MÀU VÀNG BƠ ẤM #F7B855) ==================== -->
+    <g id="word-kids" fill="#F7B855" transform="translate(186, 0)">
+      <!-- Chữ 'K' in hoa: bo tròn, vui tươi (w ~ 34px) -->
+      <path
+        d="M 6 48
+           C 2.5 48 0 45.5 0 42 L 0 6 C 0 2.5 2.5 0 6 0 C 9.5 0 12 2.5 12 6 L 12 24
+           L 24 9 C 26 6.5 29.5 6 32 8 C 34.5 10.5 35 14 32.5 16.5 L 20 30
+           L 33 42 C 35.5 44.5 35 48 32 50 C 29.5 52 26 51.5 24 49 L 12 37 L 12 42
+           C 12 45.5 9.5 48 6 48 Z"
+      />
+
+      <!-- Chữ 'i' thường: tròn xoe với chấm tròn xinh xắn (w ~ 12px) -->
+      <circle cx="48" cy="5" r="5.5" />
+      <path
+        d="M 48 48
+           C 44.5 48 42 45.5 42 42 L 42 21 C 42 17.5 44.5 15 48 15 C 51.5 15 54 17.5 54 21 L 54 42
+           C 54 45.5 51.5 48 48 48 Z"
+      />
+
+      <!-- Chữ 'd' thường: lưng tròn, cột cao (w ~ 36px) -->
+      <path
+        d="M 94 48
+           C 90.5 48 88 45.5 88 42 L 88 38 C 84 44 78 48 70 48 C 59 48 51 40 51 30 C 51 20 59 12 70 12
+           C 78 12 84 16 88 22 L 88 6 C 88 2.5 90.5 0 94 0 C 97.5 0 100 2.5 100 6 L 100 42
+           C 100 45.5 97.5 48 94 48 Z
+           M 75 38 C 81 38 88 34 88 28 C 88 22 81 20 75 20 C 69 20 63 24 63 29 C 63 34 69 38 75 38 Z"
+      />
+
+      <!-- Chữ 's' thường: uốn lượn múp míp, đáng yêu (w ~ 28px) -->
+      <path
+        d="M 119 48
+           C 108 48 102 43 102 36 C 102 32.5 104.5 30 108 30 C 111.5 30 114 32.5 114 36 C 114 37.5 116 40 120 40
+           C 124 40 127 38 127 35 C 127 31 123 30 117 28 C 108 25 104 22 104 16 C 104 7 113 2 121 2
+           C 129 2 136 6 137 12 C 137 15.5 134.5 18 131 18 C 127.5 18 125 15.5 125 12 C 125 10.5 123 9 121 9
+           C 117 9 115 11 115 14 C 115 17 118 18 124 20 C 133 23 137 26 137 33 C 137 42 129 48 119 48 Z"
+      />
+    </g>
+  </g>
+
+  <!-- =========================================================================
+       6. VIỀN NGOÀI HÌNH TRÒN XANH SAGE DÀY DẶN (THICK CIRCULAR BORDER)
+       (R = 260, stroke-width = 24px - Tạo khung tròn trọn vẹn hoàn hảo)
+       ========================================================================= -->
+  <circle
+    cx="300"
+    cy="300"
+    r="260"
+    fill="none"
+    stroke="#487563"
+    stroke-width="24"
+  />
+</svg>

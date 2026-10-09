@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 56" width="250" height="56" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Be+Vietnam+Pro:wght@600;700&amp;display=swap');
+      .brand-mam-white {
+        font-family: 'Baloo 2', 'Quicksand', 'Be Vietnam Pro', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 26px;
+        fill: #FFFFFF;
+      }
+      .brand-kids-gold {
+        font-family: 'Baloo 2', 'Quicksand', 'Be Vietnam Pro', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 26px;
+        fill: #F2B544;
+      }
+      .brand-sub-light {
+        font-family: 'Be Vietnam Pro', 'Quicksand', -apple-system, sans-serif;
+        font-weight: 700;
+        font-size: 9.5px;
+        letter-spacing: 2.2px;
+        fill: #E6F1EB;
+      }
+    </style>
+  </defs>
+
+  <!-- ICON BÊN TRÁI CHO NỀN TỐI -->
+  <g transform="translate(4, 4)">
+    <!-- Nền squircle tối dịu có viền sáng -->
+    <rect x="0" y="0" width="48" height="48" rx="14" fill="#1F4638" stroke="#3A6F5C" stroke-width="1.5" />
+
+    <!-- Dáng áo em bé màu trắng -->
+    <path
+      d="M 15.5 26.5
+         L 18 37 C 18 38.5 19.5 39.5 21 39.5
+         L 27 39.5 C 28.5 39.5 30 38.5 30 37
+         L 32.5 26.5
+         C 30 28 27.5 28.8 24 28.8
+         C 20.5 28.8 18 28 15.5 26.5 Z"
+      fill="#FFFFFF"
+      stroke="#E6F1EB"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
+
+    <!-- Cổ áo Peter Pan -->
+    <path
+      d="M 19 26.5 C 21 29 27 29 29 26.5"
+      stroke="#285A48"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Cúc áo màu vàng ấm #F2B544 -->
+    <circle cx="24" cy="33.5" r="1.6" fill="#F2B544" />
+    <circle cx="24" cy="37" r="1.2" fill="#F2B544" opacity="0.85" />
+
+    <!-- Móc áo em bé -->
+    <path
+      d="M 13 26.5 C 16.5 22.8 31.5 22.8 35 26.5"
+      stroke="#E6F1EB"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Trục mầm -->
+    <path
+      d="M 24 23 L 24 16"
+      stroke="#E6F1EB"
+      stroke-width="2.2"
+      stroke-linecap="round"
+    />
+
+    <circle cx="24" cy="16.5" r="1.5" fill="#E6F1EB" />
+
+    <!-- Lá mầm trái -->
+    <path
+      d="M 24 16.5 C 18.5 15.5 16 9.5 20.5 7 C 23.5 8.5 24 13 24 16.5 Z"
+      fill="#68C29D"
+    />
+
+    <!-- Lá mầm phải -->
+    <path
+      d="M 24 16.5 C 25.5 12 29 7.5 32.5 9.5 C 33 13.5 28.8 15.8 24 16.5 Z"
+      fill="#9EE05B"
+    />
+  </g>
+
+  <!-- CHỮ BÊN PHẢI -->
+  <g transform="translate(62, 0)">
+    <text x="0" y="32" class="brand-mam-white">Mầm</text>
+    <text x="60" y="32" class="brand-kids-gold">Kids</text>
+
+    <!-- Chấm lá trên chữ 'i' -->
+    <path
+      d="M 78.5 17.5 C 80.5 15 82 16.5 81 18.5 C 80 19 79 18.5 78.5 17.5 Z"
+      fill="#9EE05B"
+    />
+    <circle cx="78" cy="17" r="1.2" fill="#68C29D" />
+
+    <text x="1" y="47" class="brand-sub-light">THỜI TRANG TRẺ EM</text>
+  </g>
+</svg>

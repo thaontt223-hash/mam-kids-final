@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 56" width="250" height="56" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&amp;family=Be+Vietnam+Pro:wght@600;700&amp;display=swap');
+      .brand-mam {
+        font-family: 'Baloo 2', 'Quicksand', 'Be Vietnam Pro', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 26px;
+        fill: #285A48;
+      }
+      .brand-kids {
+        font-family: 'Baloo 2', 'Quicksand', 'Be Vietnam Pro', -apple-system, sans-serif;
+        font-weight: 800;
+        font-size: 26px;
+        fill: #F2B544;
+      }
+      .brand-sub {
+        font-family: 'Be Vietnam Pro', 'Quicksand', -apple-system, sans-serif;
+        font-weight: 700;
+        font-size: 9.5px;
+        letter-spacing: 2.2px;
+        fill: #4E8773;
+      }
+    </style>
+  </defs>
+
+  <!-- =========================================================================
+       ICON BÊN TRÁI: HUY HIỆU ÁO EM BÉ + MẦM CÂY VƯƠN LÊN
+       ========================================================================= -->
+  <g transform="translate(4, 4)">
+    <!-- Nền squircle mềm mại #E6F1EB -->
+    <rect x="0" y="0" width="48" height="48" rx="14" fill="#E6F1EB" stroke="#CDE0D7" stroke-width="1.5" />
+
+    <!-- Dáng áo em bé màu trắng -->
+    <path
+      d="M 15.5 26.5
+         L 18 37 C 18 38.5 19.5 39.5 21 39.5
+         L 27 39.5 C 28.5 39.5 30 38.5 30 37
+         L 32.5 26.5
+         C 30 28 27.5 28.8 24 28.8
+         C 20.5 28.8 18 28 15.5 26.5 Z"
+      fill="#FFFFFF"
+      stroke="#285A48"
+      stroke-width="1.8"
+      stroke-linejoin="round"
+    />
+
+    <!-- Cổ áo tròn Peter Pan dịu êm -->
+    <path
+      d="M 19 26.5 C 21 29 27 29 29 26.5"
+      stroke="#4E8773"
+      stroke-width="1.6"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Cúc áo màu vàng ấm #F2B544 -->
+    <circle cx="24" cy="33.5" r="1.6" fill="#F2B544" />
+    <circle cx="24" cy="37" r="1.2" fill="#F2B544" opacity="0.85" />
+
+    <!-- Bờ vai móc áo em bé -->
+    <path
+      d="M 13 26.5 C 16.5 22.8 31.5 22.8 35 26.5"
+      stroke="#285A48"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      fill="none"
+    />
+
+    <!-- Trục mầm cây vươn lên từ móc áo -->
+    <path
+      d="M 24 23 L 24 16"
+      stroke="#285A48"
+      stroke-width="2.2"
+      stroke-linecap="round"
+    />
+
+    <!-- Điểm giao mầm lá -->
+    <circle cx="24" cy="16.5" r="1.5" fill="#285A48" />
+
+    <!-- Lá mầm bên trái (Xanh Sage #4E8773) -->
+    <path
+      d="M 24 16.5 C 18.5 15.5 16 9.5 20.5 7 C 23.5 8.5 24 13 24 16.5 Z"
+      fill="#4E8773"
+    />
+
+    <!-- Lá mầm bên phải (Xanh lá non #8BC34A) -->
+    <path
+      d="M 24 16.5 C 25.5 12 29 7.5 32.5 9.5 C 33 13.5 28.8 15.8 24 16.5 Z"
+      fill="#8BC34A"
+    />
+
+    <!-- Ánh sáng sớm dịu nhẹ -->
+    <circle cx="20.5" cy="8" r="0.8" fill="#FFF9F0" />
+  </g>
+
+  <!-- =========================================================================
+       CHỮ BÊN PHẢI: “Mầm Kids” + “THỜI TRANG TRẺ EM”
+       ========================================================================= -->
+  <g transform="translate(62, 0)">
+    <!-- Tên thương hiệu -->
+    <text x="0" y="32" class="brand-mam">Mầm</text>
+    <text x="60" y="32" class="brand-kids">Kids</text>
+
+    <!-- Mầm lá nhỏ xinh thay dấu chấm chữ 'i' trong 'Kids' -->
+    <path
+      d="M 78.5 17.5 C 80.5 15 82 16.5 81 18.5 C 80 19 79 18.5 78.5 17.5 Z"
+      fill="#8BC34A"
+    />
+    <circle cx="78" cy="17" r="1.2" fill="#4E8773" />
+
+    <!-- Tagline phụ định vị ngành hàng -->
+    <text x="1" y="47" class="brand-sub">THỜI TRANG TRẺ EM</text>
+  </g>
+</svg>

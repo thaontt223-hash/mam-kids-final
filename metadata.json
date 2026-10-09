@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Mầm Kids - Thời Trang Trẻ Em",
+  "description": "Thương hiệu thời trang trẻ em cao cấp từ 3–12 tuổi. Growing with Love – Lớn lên trong yêu thương. Chất liệu tự nhiên, an toàn, thiết kế mềm mại và cá nhân hóa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

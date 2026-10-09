@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-sage: #4E8773;
+    --color-sage-dark: #355F52;
+    --color-sage-deepest: #28473D;
+    --color-sage-light-bg: #EAF3EF;
+    --color-cream: #FDF9F1;
+    --color-butter: #F5DFA0;
+    --color-peach: #F3B59A;
+    --color-soft-pink: #F2C7CE;
+    --color-text-dark: #2F403A;
+    --color-border: #EFE8D8;
+    --color-border-sage: #D2E3DC;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+    background-color: #FDF9F1;
+    color: #2F403A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: 'Quicksand', 'Be Vietnam Pro', sans-serif;
+  }
+}
+
+/* Button System */
+.btn-primary {
+  background-color: #4E8773;
+  color: #FFFFFF;
+  transition: all 0.2s ease;
+}
+.btn-primary:hover {
+  background-color: #355F52;
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  border: 1.5px solid #4E8773;
+  color: #355F52;
+  transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+  background-color: #EAF3EF;
+}
+
+.badge-sale {
+  background-color: #F3B59A;
+  color: #2F403A;
+}
+
+.badge-new {
+  background-color: #F5DFA0;
+  color: #355F52;
+}
+
+/* Subtle pleasant scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #FDF9F1;
+}
+::-webkit-scrollbar-thumb {
+  background: #D2E3DC;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #355F52;
+}
+
+/* Micro-interaction card lift */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-4px);
+}
