@@ -227,7 +227,7 @@ export const HomePage: React.FC = () => {
               {/* Main Photo Frame */}
               <div className="relative mx-auto max-w-md lg:max-w-none rounded-[36px] sm:rounded-[42px] overflow-hidden shadow-2xl border-6 sm:border-8 border-white bg-white">
                 <img
-                  src="/src/assets/images/hero_mother_child_1791214187156.jpg"
+                  src="/images/hero_mother_child_1791214187156.jpg"
                   alt={
                     language === 'en'
                       ? 'Mother embracing child with love – Mầm Kids gentle fashion'
