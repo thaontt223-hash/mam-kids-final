@@ -113,28 +113,90 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           1. HERO SECTION (ẤM ÁP, SINH ĐỘNG, NỔI BẬT – ĐIỂM NHẤN CẢM XÚC MẸ & BÉ)
           ========================================================================= */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#FFFDF8] via-[#FAF5EC] to-[#F5ECE1] pt-10 sm:pt-16 pb-16 sm:pb-22 border-b border-[#EAE2D2]">
-        {/* Subtle organic pastel background blobs & doodles */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-[#FCE7D8]/60 blur-3xl pointer-events-none -z-0" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-[#EAF3EF]/70 blur-3xl pointer-events-none -z-0" />
-        <div className="absolute top-1/3 left-1/4 w-64 h-64 rounded-full bg-[#FFF3D4]/50 blur-3xl pointer-events-none -z-0" />
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#FFF9F0] via-[#FFF5EC] to-[#F5EDE1] pt-10 sm:pt-16 pb-20 sm:pb-28">
+        {/* =========================================================================
+            BACKGROUND DEPTH & ORGANIC PASTEL BLOBS
+            ========================================================================= */}
+        {/* Warm ambient corner blobs */}
+        <div className="absolute -top-12 -right-12 w-96 h-96 rounded-full bg-[#F5D7CF]/45 blur-3xl pointer-events-none -z-0" />
+        <div className="absolute top-1/4 -left-16 w-80 h-80 rounded-full bg-[#FDF3CF]/50 blur-3xl pointer-events-none -z-0" />
+        <div className="absolute bottom-16 right-1/3 w-88 h-88 rounded-full bg-[#E6F1EB]/60 blur-3xl pointer-events-none -z-0" />
 
-        {/* Doodle Sun & Sprout (Top-Left Accent) */}
-        <div className="absolute top-6 left-6 sm:left-12 opacity-40 pointer-events-none select-none hidden sm:block">
-          <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="14" fill="#F2C94C" fillOpacity="0.4" stroke="#E5A118" strokeWidth="2" strokeDasharray="3 3" />
-            <path d="M30 6V11M30 49V54M6 30H11M49 30H54M13 13L17 17M43 43L47 47M13 47L17 43M43 17L47 13" stroke="#E5A118" strokeWidth="2" strokeLinecap="round" />
+        {/* Soft pastel clouds (hidden/reduced on mobile) */}
+        <div className="absolute top-6 left-1/3 opacity-60 pointer-events-none select-none hidden md:block">
+          <svg width="120" height="42" viewBox="0 0 120 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20 36C12 36 6 30 6 22C6 14.5 11.5 9 18.5 8.5C21.5 3.5 27.5 0 34.5 0C43.5 0 51 5.5 53 13.5C55.5 12 58.5 11 62 11C70.5 11 77.5 17.5 78 26C81 24.5 84.5 23.5 88.5 23.5C98 23.5 106 31 106 36H20Z"
+              fill="#FFFFFF"
+              fillOpacity="0.75"
+            />
+          </svg>
+        </div>
+        <div className="absolute top-12 right-12 opacity-50 pointer-events-none select-none hidden lg:block">
+          <svg width="90" height="32" viewBox="0 0 90 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15 28C9 28 4.5 23.5 4.5 17.5C4.5 11.8 8.6 7.5 13.9 7.1C16.1 3.2 20.6 0.5 25.9 0.5C32.6 0.5 38.3 4.6 39.8 10.6C41.6 9.5 43.9 8.8 46.5 8.8C52.9 8.8 58.1 13.7 58.5 20.1C60.8 19 63.4 18.2 66.4 18.2C73.5 18.2 79.5 23.8 79.5 28H15Z"
+              fill="#FFFFFF"
+              fillOpacity="0.7"
+            />
           </svg>
         </div>
 
-        {/* Doodle Botanical Leaf (Bottom-Left Accent) */}
-        <div className="absolute bottom-6 left-8 opacity-30 pointer-events-none select-none hidden lg:block">
-          <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 44C14 32 26 24 44 22C40 36 32 44 10 44Z" stroke="#3E6F5D" strokeWidth="2" fill="#EAF3EF" strokeLinejoin="round" />
-            <path d="M18 38C24 32 32 28 42 24" stroke="#3E6F5D" strokeWidth="1.5" strokeLinecap="round" />
+        {/* Doodle Sun with warm gentle rays (Top-Left) */}
+        <div className="absolute top-5 left-5 sm:left-10 pointer-events-none select-none hidden sm:block">
+          <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="34" r="15" fill="#F4C95D" fillOpacity="0.45" stroke="#E5A118" strokeWidth="1.8" />
+            <circle cx="34" cy="34" r="10" fill="#FFF9F0" fillOpacity="0.6" />
+            {/* Gentle dashed sunbeams */}
+            <path d="M34 6V12M34 56V62M6 34H12M56 34H62M14 14L18.5 18.5M49.5 49.5L54 54M14 54L18.5 49.5M49.5 18.5L54 14" stroke="#E5A118" strokeWidth="1.8" strokeLinecap="round" opacity="0.75" />
           </svg>
         </div>
 
+        {/* Non-cheating Nature Sprout & Branch (Left Corner Accent) */}
+        <div className="absolute top-28 left-3 sm:left-8 opacity-40 pointer-events-none select-none hidden lg:block">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 40C16 28 26 20 40 18C36 30 28 38 12 40Z" stroke="#4E8773" strokeWidth="1.8" fill="#E6F1EB" strokeLinejoin="round" />
+            <path d="M18 34C23 29 30 25 38 22" stroke="#4E8773" strokeWidth="1.4" strokeLinecap="round" />
+            <circle cx="38" cy="18" r="3" fill="#F4C95D" />
+          </svg>
+        </div>
+
+        {/* Floating Little Butterfly Doodle (Near Right) */}
+        <div className="absolute top-20 right-1/4 pointer-events-none select-none hidden md:block">
+          <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="transform -rotate-12 opacity-70">
+            {/* Butterfly left wing */}
+            <path d="M18 16C13 9 7 9 7 14C7 19 13 20 18 17Z" fill="#F39A73" fillOpacity="0.65" stroke="#D46241" strokeWidth="1.2" />
+            {/* Butterfly right wing */}
+            <path d="M18 16C23 9 29 9 29 14C29 19 23 20 18 17Z" fill="#F4C95D" fillOpacity="0.7" stroke="#D99414" strokeWidth="1.2" />
+            {/* Butterfly body */}
+            <line x1="18" y1="12" x2="18" y2="20" stroke="#285A48" strokeWidth="1.5" strokeLinecap="round" />
+            {/* Antennae */}
+            <path d="M17 12C15 9 14 9 13 10" stroke="#285A48" strokeWidth="1" strokeLinecap="round" />
+            <path d="M19 12C21 9 22 9 23 10" stroke="#285A48" strokeWidth="1" strokeLinecap="round" />
+          </svg>
+        </div>
+
+        {/* Floating Delicate Chamomile Blossom Doodle (Left mid) */}
+        <div className="absolute top-1/2 left-4 pointer-events-none select-none hidden xl:block opacity-65">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="9" r="3.5" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+            <circle cx="14" cy="19" r="3.5" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+            <circle cx="9" cy="14" r="3.5" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+            <circle cx="19" cy="14" r="3.5" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+            <circle cx="14" cy="14" r="3.5" fill="#F4C95D" />
+          </svg>
+        </div>
+
+        {/* Floating Tiny Leaf (Near left center) */}
+        <div className="absolute bottom-28 left-16 pointer-events-none select-none hidden md:block opacity-45">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 20C7 12 14 8 21 6C18 14 13 19 4 20Z" fill="#E6F1EB" stroke="#4E8773" strokeWidth="1.2" />
+          </svg>
+        </div>
+
+        {/* =========================================================================
+            MAIN HERO CONTENT (2-COLUMN GRID)
+            ========================================================================= */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Left Column: Headline, Emotional Slogan, Warm Narrative, CTAs & Value Badges */}
@@ -147,7 +209,7 @@ export const HomePage: React.FC = () => {
                     ? 'GENTLE FASHION FOR CHILDREN 3–12'
                     : 'THỜI TRANG DỊU LÀNH CHO BÉ 3–12 TUỔI'}
                 </span>
-                <Heart className="w-3.5 h-3.5 fill-[#C96852] text-[#C96852]" />
+                <Heart className="w-3.5 h-3.5 fill-[#F39A73] text-[#F39A73]" />
               </div>
 
               {/* Main Headline: Deep Forest Green #285A48 */}
@@ -155,12 +217,12 @@ export const HomePage: React.FC = () => {
                 MẦM KIDS
               </h1>
 
-              {/* Emotional Slogan with highlighted focus: Primary Sage #4E8773 & Terracotta #C96852 */}
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#4E8773] font-heading leading-snug sm:leading-tight">
+              {/* Emotional Slogan with highlighted focus: Deep Green & Peach #F39A73 */}
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#285A48] font-heading leading-snug sm:leading-tight">
                 {language === 'en' ? (
                   <>
                     More Than Style – Growing{' '}
-                    <span className="text-[#C96852] underline decoration-[#F4C95D]/60 decoration-wavy">
+                    <span className="text-[#F39A73] underline decoration-[#F4C95D]/75 decoration-wavy">
                       Green Habits
                     </span>{' '}
                     Together.
@@ -168,7 +230,7 @@ export const HomePage: React.FC = () => {
                 ) : (
                   <>
                     Không chỉ mặc đẹp – cùng bé{' '}
-                    <span className="text-[#C96852] underline decoration-[#F4C95D]/60 decoration-wavy">
+                    <span className="text-[#F39A73] underline decoration-[#F4C95D]/75 decoration-wavy">
                       gieo thói quen xanh
                     </span>
                     .
@@ -176,43 +238,45 @@ export const HomePage: React.FC = () => {
                 )}
               </div>
 
-              {/* Inspiring Subtitle: Dark Text #253A32 */}
-              <p className="text-base sm:text-lg text-[#253A32] max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              {/* Inspiring Subtitle: Warm dark text #2F423B */}
+              <p className="text-base sm:text-lg text-[#2F423B] max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
                 {t('hero.description')}
               </p>
 
-              {/* Action Buttons: Terracotta #C96852 and White with Primary Sage #4E8773 */}
+              {/* Action Buttons: Primary Peach #F39A73 and Warm Secondary Deep Green #285A48 */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-1">
+                {/* CTA chính: MUA SẮM NGAY (Peach/Terracotta #F39A73, chữ trắng, shadow nhẹ) */}
                 <Link
                   to="/san-pham"
-                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#C96852] hover:bg-[#B55743] text-white font-black text-sm sm:text-base tracking-wide transition-all shadow-md hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2.5 group cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-[#F39A73] hover:bg-[#E58459] text-white font-black text-sm sm:text-base tracking-wide transition-all shadow-md hover:shadow-xl hover:-translate-y-0.5 flex items-center justify-center gap-2.5 group cursor-pointer"
                 >
                   <ShoppingBag className="w-5 h-5 text-white" />
                   <span>{t('hero.shopNow')}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform" />
                 </Link>
 
+                {/* CTA phụ: KHÁM PHÁ MẦM XANH (Nền cream/trắng, viền Deep Green, chữ Deep Green) */}
                 <Link
                   to="/mam-xanh"
-                  className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-[#E6F1EB] text-[#4E8773] border-2 border-[#4E8773] font-black text-sm sm:text-base transition-all shadow-2xs hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-[#FFF9F0] hover:bg-white text-[#285A48] border-2 border-[#285A48] font-black text-sm sm:text-base transition-all shadow-2xs hover:shadow-md hover:-translate-y-0.5 flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <Leaf className="w-5 h-5 text-[#4E8773]" />
+                  <Leaf className="w-5 h-5 text-[#285A48]" />
                   <span>{t('hero.exploreMamXanh')}</span>
                 </Link>
               </div>
 
-              {/* Trust & Care Highlights */}
-              <div className="pt-4 border-t border-[#E8DFC9] flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs font-bold text-[#285A48]">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#D8E6DF] shadow-2xs">
+              {/* Trust & Care Highlights (Badges phía dưới: nền trắng/cream, border nhẹ, icon nhỏ) */}
+              <div className="pt-4 border-t border-[#E8DFC9]/80 flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 text-xs font-bold text-[#285A48]">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/95 border border-[#DCE8E2] shadow-2xs">
                   <Check className="w-3.5 h-3.5 text-[#4E8773]" />
                   <span>{language === 'en' ? '100% Organic & Gentle' : '100% Sợi hữu cơ dịu lành'}</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#D8E6DF] shadow-2xs">
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/95 border border-[#DCE8E2] shadow-2xs">
                   <Ruler className="w-3.5 h-3.5 text-[#4E8773]" />
                   <span>{language === 'en' ? 'Smart Size 98% Accurate' : 'Smart Size chuẩn 98%'}</span>
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/90 border border-[#D8E6DF] shadow-2xs">
-                  <Heart className="w-3.5 h-3.5 fill-[#C96852] text-[#C96852]" />
+                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/95 border border-[#DCE8E2] shadow-2xs">
+                  <Heart className="w-3.5 h-3.5 fill-[#F39A73] text-[#F39A73]" />
                   <span>{language === 'en' ? '15-Day Doorstep Exchange' : 'Đổi tận nhà trong 15 ngày'}</span>
                 </span>
               </div>
@@ -221,10 +285,29 @@ export const HomePage: React.FC = () => {
             {/* Right Column: Mother & Child Emotional Centerpiece */}
             <div className="lg:col-span-5 relative">
               {/* Warm decorative organic backdrop shapes */}
-              <div className="w-full h-full absolute -top-4 -right-4 bg-gradient-to-br from-[#FCE7D8] via-[#FFF3D4] to-[#EAF3EF] rounded-[44px] rotate-2 -z-0 opacity-80" />
-              <div className="absolute -bottom-5 -left-5 w-40 h-40 bg-[#EAF3EF] rounded-full blur-xl -z-0" />
+              <div className="w-full h-full absolute -top-4 -right-4 bg-gradient-to-br from-[#FCE7D8] via-[#FFF3D4] to-[#E6F1EB] rounded-[44px] rotate-2 -z-0 opacity-85 shadow-sm" />
+              <div className="absolute -bottom-5 -left-5 w-44 h-44 bg-[#E6F1EB] rounded-full blur-xl -z-0" />
 
-              {/* Main Photo Frame */}
+              {/* Tiny decorative doodle flower outside photo top-right */}
+              <div className="absolute -top-6 right-8 pointer-events-none select-none z-20 hidden sm:block">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="7" r="3" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+                  <circle cx="12" cy="17" r="3" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+                  <circle cx="7" cy="12" r="3" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+                  <circle cx="17" cy="12" r="3" fill="#FFFFFF" stroke="#E5DAC5" strokeWidth="0.8" />
+                  <circle cx="12" cy="12" r="2.8" fill="#F4C95D" />
+                </svg>
+              </div>
+
+              {/* Tiny decorative leaf doodle outside photo bottom-left */}
+              <div className="absolute -bottom-6 left-6 pointer-events-none select-none z-20 hidden sm:block">
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 21C8 13 15 9 22 7C19 15 14 20 5 21Z" fill="#E6F1EB" stroke="#4E8773" strokeWidth="1.3" />
+                  <circle cx="21" cy="8" r="2" fill="#F4C95D" />
+                </svg>
+              </div>
+
+              {/* Main Photo Frame: White frame with soft shadow */}
               <div className="relative mx-auto max-w-md lg:max-w-none rounded-[36px] sm:rounded-[42px] overflow-hidden shadow-2xl border-6 sm:border-8 border-white bg-white">
                 <img
                   src="/images/hero_mother_child_1791214187156.jpg"
@@ -237,7 +320,7 @@ export const HomePage: React.FC = () => {
                   className="w-full aspect-4/3 sm:aspect-4/3 lg:aspect-3/4 object-cover object-center"
                 />
 
-                {/* Subtle soft gradient overlay at bottom of photo for text contrast if needed */}
+                {/* Subtle soft gradient overlay at bottom of photo */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
               </div>
 
@@ -245,7 +328,7 @@ export const HomePage: React.FC = () => {
               <div className="absolute -top-3 sm:-top-4 -left-2 sm:-left-4 z-20 bg-white/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-lg border border-[#EFE8D8] flex items-center gap-2.5">
                 <span className="text-base sm:text-lg select-none">❤️</span>
                 <div>
-                  <span className="block text-[11px] sm:text-xs font-black text-[#2F4F43]">
+                  <span className="block text-[11px] sm:text-xs font-black text-[#285A48]">
                     {language === 'en' ? 'Growing with Love' : 'Lớn lên trong yêu thương'}
                   </span>
                   <span className="block text-[10px] text-[#5D726A] font-medium">
@@ -256,11 +339,11 @@ export const HomePage: React.FC = () => {
 
               {/* Floating Emotional Badge 2: Bottom-Right */}
               <div className="absolute -bottom-3 sm:-bottom-4 -right-2 sm:-right-4 z-20 bg-white/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-lg border border-[#EFE8D8] flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#EAF3EF] text-[#3E6F5D] flex items-center justify-center font-bold text-sm shadow-2xs">
+                <div className="w-8 h-8 rounded-xl bg-[#E6F1EB] text-[#285A48] flex items-center justify-center font-bold text-sm shadow-2xs">
                   🌱
                 </div>
                 <div>
-                  <span className="block text-[11px] sm:text-xs font-black text-[#2F4F43]">
+                  <span className="block text-[11px] sm:text-xs font-black text-[#285A48]">
                     {language === 'en' ? '25,000+ Happy Families' : '25.000+ Mẹ tin chọn'}
                   </span>
                   <div className="flex items-center gap-0.5 text-[#ECA032]">
@@ -271,6 +354,42 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            GENTLE ROLLING HILLS & NATURE MEADOW BOTTOM CURVE
+            ========================================================================= */}
+        <div className="absolute bottom-0 inset-x-0 overflow-hidden pointer-events-none leading-none z-0">
+          <svg
+            className="w-full h-10 sm:h-14 lg:h-16 text-[#E6F1EB]"
+            viewBox="0 0 1440 70"
+            fill="none"
+            preserveAspectRatio="none"
+          >
+            {/* Soft sage rolling hill background layer */}
+            <path
+              d="M0,28 C280,55 480,10 760,35 C1040,60 1260,18 1440,30 L1440,70 L0,70 Z"
+              fill="#E6F1EB"
+              fillOpacity="0.8"
+            />
+            {/* Slightly darker soft pastel curve */}
+            <path
+              d="M0,45 C320,22 620,58 980,36 C1220,20 1360,45 1440,40 L1440,70 L0,70 Z"
+              fill="#DCECE3"
+              fillOpacity="0.6"
+            />
+          </svg>
+          {/* Subtle sprout doodles peeking from the hill edge (hidden on mobile) */}
+          <div className="absolute bottom-1 left-24 opacity-60 hidden md:block">
+            <svg width="22" height="20" viewBox="0 0 22 20" fill="none">
+              <path d="M11 18V9M11 9C9 6 4 6 3 9C2 12 7 13 11 9ZM11 9C13 6 18 6 19 9C20 12 15 13 11 9Z" stroke="#285A48" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="#CBE0D4" />
+            </svg>
+          </div>
+          <div className="absolute bottom-1 right-32 opacity-50 hidden lg:block">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M9 16V8M9 8C7 5 3 5 2 8C1 10 5 11 9 8ZM9 8C11 5 15 5 16 8C17 10 13 11 9 8Z" stroke="#285A48" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" fill="#CBE0D4" />
+            </svg>
           </div>
         </div>
       </section>
