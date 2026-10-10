@@ -9,7 +9,7 @@ export const ECO_STORIES: EcoStory[] = [
     readTime: '3 phút cùng bé',
     targetAge: '3–10 tuổi',
     summary: 'Một câu chuyện dịu dàng kể cho bé nghe về cách hạt mầm thức giấc dưới đất mẹ, dệt nên chiếc áo con mặc mỗi ngày và bài học trao lại yêu thương khi áo đã chật.',
-    coverImage: '/src/assets/images/test_kids_polo_1791213587392.jpg',
+    coverImage: '/images/test_kids_polo_1791213587392.jpg',
     chapters: [
       {
         chapterNumber: 1,
@@ -56,7 +56,7 @@ export const ECO_STORIES: EcoStory[] = [
     readTime: '2 phút cùng bé',
     targetAge: '3–10 tuổi',
     summary: 'Khám phá bí mật vì sao chiếc áo linen và cotton của bé luôn thoáng mát, không đọng mồ hôi và cách bảo vệ nguồn nước trong veo.',
-    coverImage: '/src/assets/images/vay_hoa_mua_he_1791555693164.jpg',
+    coverImage: '/images/vay_hoa_mua_he_1791555693164.jpg',
     chapters: [
       {
         chapterNumber: 1,

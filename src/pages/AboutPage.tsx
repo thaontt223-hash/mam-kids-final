@@ -25,7 +25,7 @@ export const AboutPage: React.FC = () => {
       {/* Main Image banner */}
       <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-[#FAF6EC]">
         <img
-          src="/src/assets/images/hero_mam_kids_1791209393578.jpg"
+          src="/images/hero_mam_kids_1791209393578.jpg"
           alt="Mầm Kids – Không chỉ mặc đẹp, cùng bé gieo thói quen xanh"
           loading="lazy"
           referrerPolicy="no-referrer"

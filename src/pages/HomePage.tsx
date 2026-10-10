@@ -67,35 +67,35 @@ export const HomePage: React.FC = () => {
       name: t('categories.boys'),
       desc: t('categories.boysDesc'),
       link: '/be-trai',
-      image: '/src/assets/images/outfit_be_trai_polo_1791211333653.jpg',
+      image: '/images/outfit_be_trai_polo_1791211333653.jpg',
       accentBg: 'bg-[#EAF3EF]'
     },
     {
       name: t('categories.girls'),
       desc: t('categories.girlsDesc'),
       link: '/be-gai',
-      image: '/src/assets/images/outfit_be_gai_vay_nang_som_1791211350114.jpg',
+      image: '/images/outfit_be_gai_vay_nang_som_1791211350114.jpg',
       accentBg: 'bg-[#FDF0F2]'
     },
     {
       name: t('categories.sportswear'),
       desc: t('categories.sportswearDesc'),
       link: '/san-pham?category=the-thao',
-      image: '/src/assets/images/san_choi_vui_sage_cream_1791289011381.jpg',
+      image: '/images/san_choi_vui_sage_cream_1791289011381.jpg',
       accentBg: 'bg-[#FAF1ED]'
     },
     {
       name: t('categories.dailywear'),
       desc: t('categories.dailywearDesc'),
       link: '/san-pham?category=ao',
-      image: '/src/assets/images/muslin_loungewear_set_1791213737375.jpg',
+      image: '/images/muslin_loungewear_set_1791213737375.jpg',
       accentBg: 'bg-[#FCF8ED]'
     },
     {
       name: t('categories.accessories'),
       desc: t('categories.accessoriesDesc'),
       link: '/san-pham?category=phu-kien',
-      image: '/src/assets/images/phu_kien_mam_kids_1791211374046.jpg',
+      image: '/images/phu_kien_mam_kids_1791211374046.jpg',
       accentBg: 'bg-[#F4F8F6]'
     }
   ];

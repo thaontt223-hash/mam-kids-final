@@ -32,8 +32,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 142,
     images: [
-      '/src/assets/images/test_kids_polo_1791213587392.jpg',
-      '/src/assets/images/polo_sage_detail.jpg'
+      '/images/test_kids_polo_1791213587392.jpg',
+      '/images/polo_sage_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -74,8 +74,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 98,
     images: [
-      '/src/assets/images/linen_shirt_boy_1791213667396.jpg',
-      '/src/assets/images/linen_shirt_detail.jpg'
+      '/images/linen_shirt_boy_1791213667396.jpg',
+      '/images/linen_shirt_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -115,8 +115,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 88,
     images: [
-      '/src/assets/images/outfit_dao_pho_xanh_mat_flatlay.jpg',
-      '/src/assets/images/test_kids_polo_1791213587392.jpg'
+      '/images/outfit_dao_pho_xanh_mat_flatlay.jpg',
+      '/images/test_kids_polo_1791213587392.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -153,8 +153,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 115,
     images: [
-      '/src/assets/images/khaki_shorts_boy_1791213677552.jpg',
-      '/src/assets/images/khaki_shorts_detail.jpg'
+      '/images/khaki_shorts_boy_1791213677552.jpg',
+      '/images/khaki_shorts_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -190,8 +190,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 82,
     images: [
-      '/src/assets/images/hoodie_boy_sage_1791213696766.jpg',
-      '/src/assets/images/hoodie_sage_detail.jpg'
+      '/images/hoodie_boy_sage_1791213696766.jpg',
+      '/images/hoodie_sage_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -226,8 +226,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 74,
     images: [
-      '/src/assets/images/san_choi_vui_sage_cream_1791289011381.jpg',
-      '/src/assets/images/bo_the_thao_active_detail.jpg'
+      '/images/san_choi_vui_sage_cream_1791289011381.jpg',
+      '/images/bo_the_thao_active_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -264,8 +264,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 167,
     images: [
-      '/src/assets/images/bucket_hat_sage_1791213748501.jpg',
-      '/src/assets/images/bucket_hat_detail.jpg'
+      '/images/bucket_hat_sage_1791213748501.jpg',
+      '/images/bucket_hat_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -304,8 +304,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 53,
     images: [
-      '/src/assets/images/kids_crossbody_bag_1791213759841.jpg',
-      '/src/assets/images/crossbody_bag_detail.jpg'
+      '/images/kids_crossbody_bag_1791213759841.jpg',
+      '/images/crossbody_bag_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: false,
@@ -339,8 +339,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 91,
     images: [
-      '/src/assets/images/boy_leather_sandals_1791213771096.jpg',
-      '/src/assets/images/boy_sandals_detail.jpg'
+      '/images/boy_leather_sandals_1791213771096.jpg',
+      '/images/boy_sandals_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -377,8 +377,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 156,
     images: [
-      '/src/assets/images/product_vay_hoa_1791209422010.jpg',
-      '/src/assets/images/floral_dress_detail.jpg'
+      '/images/product_vay_hoa_1791209422010.jpg',
+      '/images/floral_dress_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -419,8 +419,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 124,
     images: [
-      '/src/assets/images/set_cong_chua_pastel_1791211362885.jpg',
-      '/src/assets/images/princess_tulle_detail.jpg'
+      '/images/set_cong_chua_pastel_1791211362885.jpg',
+      '/images/princess_tulle_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -455,8 +455,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 78,
     images: [
-      '/src/assets/images/peter_pan_blouse_1791213717068.jpg',
-      '/src/assets/images/peter_pan_blouse_detail.jpg'
+      '/images/peter_pan_blouse_1791213717068.jpg',
+      '/images/peter_pan_blouse_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -492,8 +492,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 86,
     images: [
-      '/src/assets/images/pink_pleated_skirt_1791213726732.jpg',
-      '/src/assets/images/pink_skirt_detail.jpg'
+      '/images/pink_pleated_skirt_1791213726732.jpg',
+      '/images/pink_skirt_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -528,8 +528,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 112,
     images: [
-      '/src/assets/images/outfit_be_gai_ngot_ngao_flatlay.jpg',
-      '/src/assets/images/pink_pleated_skirt_1791213726732.jpg'
+      '/images/outfit_be_gai_ngot_ngao_flatlay.jpg',
+      '/images/pink_pleated_skirt_1791213726732.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -566,8 +566,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 94,
     images: [
-      '/src/assets/images/yellow_princess_dress_1791213706637.jpg',
-      '/src/assets/images/princess_tulle_detail.jpg'
+      '/images/yellow_princess_dress_1791213706637.jpg',
+      '/images/princess_tulle_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -603,8 +603,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 148,
     images: [
-      '/src/assets/images/girl_flower_headband_1791213782133.jpg',
-      '/src/assets/images/headband_detail.jpg'
+      '/images/girl_flower_headband_1791213782133.jpg',
+      '/images/headband_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -638,8 +638,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 63,
     images: [
-      '/src/assets/images/girl_pink_handbag_1791213793616.jpg',
-      '/src/assets/images/girl_handbag_detail.jpg'
+      '/images/girl_pink_handbag_1791213793616.jpg',
+      '/images/girl_handbag_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: false,
@@ -673,8 +673,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 105,
     images: [
-      '/src/assets/images/girl_cream_sandals_1791213804798.jpg',
-      '/src/assets/images/girl_sandals_detail.jpg'
+      '/images/girl_cream_sandals_1791213804798.jpg',
+      '/images/girl_sandals_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -713,8 +713,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 158,
     images: [
-      '/src/assets/images/product_ao_gau_1791209408030.jpg',
-      '/src/assets/images/bear_tee_detail.jpg'
+      '/images/product_ao_gau_1791209408030.jpg',
+      '/images/bear_tee_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -755,8 +755,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 96,
     images: [
-      '/src/assets/images/vay_hoa_mua_he_1791555693164.jpg',
-      '/src/assets/images/floral_dress_detail.jpg'
+      '/images/vay_hoa_mua_he_1791555693164.jpg',
+      '/images/floral_dress_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -797,8 +797,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 84,
     images: [
-      '/src/assets/images/quan_short_unisex_nang_dong_1791555723938.jpg',
-      '/src/assets/images/quan_short_unisex_detail.jpg'
+      '/images/quan_short_unisex_nang_dong_1791555723938.jpg',
+      '/images/quan_short_unisex_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -834,8 +834,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 112,
     images: [
-      '/src/assets/images/muslin_loungewear_set_1791213737375.jpg',
-      '/src/assets/images/muslin_set_detail.jpg'
+      '/images/muslin_loungewear_set_1791213737375.jpg',
+      '/images/muslin_set_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -869,8 +869,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.7,
     reviewsCount: 73,
     images: [
-      '/src/assets/images/so_mi_be_trai_lich_lam_1791555713926.jpg',
-      '/src/assets/images/linen_shirt_detail.jpg'
+      '/images/so_mi_be_trai_lich_lam_1791555713926.jpg',
+      '/images/linen_shirt_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -904,8 +904,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 145,
     images: [
-      '/src/assets/images/hoodie_cau_vong_beige.jpg',
-      '/src/assets/images/hoodie_cau_vong_detail.jpg'
+      '/images/hoodie_cau_vong_beige.jpg',
+      '/images/hoodie_cau_vong_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: true,
@@ -939,8 +939,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 67,
     images: [
-      '/src/assets/images/kids_denim_jeans_1791213816631.jpg',
-      '/src/assets/images/denim_jeans_detail.jpg'
+      '/images/kids_denim_jeans_1791213816631.jpg',
+      '/images/denim_jeans_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: false,
@@ -974,8 +974,8 @@ export const PRODUCTS: Product[] = [
     rating: 5.0,
     reviewsCount: 89,
     images: [
-      '/src/assets/images/vay_cong_chua_pastel_1791555703651.jpg',
-      '/src/assets/images/princess_tulle_detail.jpg'
+      '/images/vay_cong_chua_pastel_1791555703651.jpg',
+      '/images/princess_tulle_detail.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -1009,8 +1009,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.8,
     reviewsCount: 76,
     images: [
-      '/src/assets/images/active_kids_navy_white_1791289037323.jpg',
-      '/src/assets/images/bo_the_thao_active_detail.jpg'
+      '/images/active_kids_navy_white_1791289037323.jpg',
+      '/images/bo_the_thao_active_detail.jpg'
     ],
     isPersonalizable: true,
     isBestSeller: false,
@@ -1045,8 +1045,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewsCount: 104,
     images: [
-      '/src/assets/images/windbreaker_jacket_yellow_1791213827122.jpg',
-      '/src/assets/images/ao_khoac_gio_detail_1791555733192.jpg'
+      '/images/windbreaker_jacket_yellow_1791213827122.jpg',
+      '/images/ao_khoac_gio_detail_1791555733192.jpg'
     ],
     isPersonalizable: false,
     isBestSeller: true,
@@ -1065,7 +1065,7 @@ export const SUMMER_COMBO = {
   originalPrice: 308000,
   comboPrice: 289000,
   saving: 19000,
-  image: '/src/assets/images/product_combo_he_1791209439469.jpg'
+  image: '/images/product_combo_he_1791209439469.jpg'
 };
 
 // 5 Complete Outfit Sets for "GỢI Ý PHỐI CÙNG"
@@ -1077,7 +1077,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     genderName: 'Bé trai',
     subtitle: 'Thanh lịch, thoáng mát & đậm chất nhí bảnh bao',
     description: 'Sự kết hợp ăn ý giữa Áo polo cotton cá sấu mềm mát, Quần short kaki đùi co giãn và Mũ bucket chồi xanh che nắng UPF 50+.',
-    image: '/src/assets/images/outfit_dao_pho_xanh_mat_flatlay.jpg',
+    image: '/images/outfit_dao_pho_xanh_mat_flatlay.jpg',
     items: [
       { productId: 'ao-polo-be-ngoan', productName: 'Áo polo Bé Ngoan', price: 189000, category: 'Áo' },
       { productId: 'quan-short-kaki-nang-dong', productName: 'Quần short Kaki Năng Động', price: 159000, category: 'Quần' },
@@ -1095,7 +1095,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     genderName: 'Bé gái',
     subtitle: 'Tiểu thư nhí trong trẻo dưới nắng mai',
     description: 'Váy hoa thô đũi mát lạnh phối cùng Băng đô hoa nhỏ mềm êm và Đôi sandal kem mây nâng đỡ bước chân.',
-    image: '/src/assets/images/outfit_be_gai_vay_nang_som_1791211350114.jpg',
+    image: '/images/outfit_be_gai_vay_nang_som_1791211350114.jpg',
     items: [
       { productId: 'vay-hoa-nang-som', productName: 'Váy hoa Nắng Sớm', price: 239000, category: 'Váy' },
       { productId: 'bang-do-hoa-nho', productName: 'Băng đô Hoa Nhỏ', price: 69000, category: 'Phụ kiện' },
@@ -1113,7 +1113,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     genderName: 'Bé trai',
     subtitle: 'Cậu bé thám hiểm mộc mạc và năng động',
     description: 'Sơ mi linen đũi mộc mạc phối Quần short cotton và Túi mini khám phá cho bé tha hồ thu thập những viên sỏi xinh xắn.',
-    image: '/src/assets/images/outfit_be_trai_kham_pha_flatlay.jpg',
+    image: '/images/outfit_be_trai_kham_pha_flatlay.jpg',
     items: [
       { productId: 'ao-so-mi-linen-mat-troi-nho', productName: 'Áo sơ mi linen Mặt Trời Nhỏ', price: 249000, category: 'Áo' },
       { productId: 'quan-short-nang-dong', productName: 'Quần short năng động', price: 159000, category: 'Quần' },
@@ -1131,7 +1131,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     genderName: 'Bé gái',
     subtitle: 'Bồng bềnh cổ tích cho các buổi tiệc ngọt ngào',
     description: 'Đầm công chúa ánh mai với voan tơ xếp lớp, điểm thêm băng đô hoa nhỏ và chiếc túi mini kẹo bông xinh xắn.',
-    image: '/src/assets/images/set_cong_chua_pastel_1791211362885.jpg',
+    image: '/images/set_cong_chua_pastel_1791211362885.jpg',
     items: [
       { productId: 'dam-cong-chua-anh-mai', productName: 'Đầm công chúa Ánh Mai', price: 289000, category: 'Đầm dạ tiệc' },
       { productId: 'bang-do-hoa-nho', productName: 'Băng đô Hoa Nhỏ', price: 69000, category: 'Phụ kiện' },
@@ -1149,7 +1149,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     genderName: 'Bé gái',
     subtitle: 'Áo blouse cổ sen phối chân váy mây hồng',
     description: 'Sự kết hợp ngọt lịm giữa áo blouse cổ sen viền ren và chân váy chữ A xếp ly có quần bảo hộ bên trong an toàn.',
-    image: '/src/assets/images/outfit_be_gai_ngot_ngao_flatlay.jpg',
+    image: '/images/outfit_be_gai_ngot_ngao_flatlay.jpg',
     items: [
       { productId: 'ao-blouse-co-sen-diu-dang', productName: 'Áo blouse Cổ Sen Dịu Dàng', price: 199000, category: 'Áo kiểu' },
       { productId: 'chan-vay-may-hong', productName: 'Chân váy Mây Hồng', price: 169000, category: 'Chân váy' },
@@ -1171,7 +1171,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#FAF2E6] to-[#FFFDF8]',
     accentColor: '#4E8773',
     count: 6,
-    image: '/src/assets/images/product_vay_hoa_1791209422010.jpg'
+    image: '/images/product_vay_hoa_1791209422010.jpg'
   },
   {
     id: 'be-trai-nang-dong',
@@ -1181,7 +1181,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#EFF5F2] to-[#FFFDF8]',
     accentColor: '#355F52',
     count: 6,
-    image: '/src/assets/images/test_kids_polo_1791213587392.jpg'
+    image: '/images/test_kids_polo_1791213587392.jpg'
   },
   {
     id: 'cong-chua-pastel',
@@ -1191,7 +1191,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#FDF0F2] to-[#FFFDF8]',
     accentColor: '#F2C7CE',
     count: 5,
-    image: '/src/assets/images/yellow_princess_dress_1791213706637.jpg'
+    image: '/images/yellow_princess_dress_1791213706637.jpg'
   },
   {
     id: 'be-vui-den-truong',
@@ -1201,7 +1201,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#FCF5E3] to-[#FFFDF8]',
     accentColor: '#F5DFA0',
     count: 5,
-    image: '/src/assets/images/linen_shirt_boy_1791213667396.jpg'
+    image: '/images/linen_shirt_boy_1791213667396.jpg'
   },
   {
     id: 'dao-choi-cuoi-tuan',
@@ -1211,7 +1211,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#FAF1ED] to-[#FFFDF8]',
     accentColor: '#F4B99B',
     count: 6,
-    image: '/src/assets/images/product_combo_he_1791209439469.jpg'
+    image: '/images/product_combo_he_1791209439469.jpg'
   },
   {
     id: 'the-thao-nhi',
@@ -1221,7 +1221,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#EFF5F2] to-[#FFFDF8]',
     accentColor: '#4E8773',
     count: 3,
-    image: '/src/assets/images/sport_set_boy_1791213687885.jpg'
+    image: '/images/sport_set_boy_1791213687885.jpg'
   },
   {
     id: 'gia-dinh-yeu-thuong',
@@ -1231,7 +1231,7 @@ export const COLLECTIONS = [
     colorScheme: 'from-[#FAF2DF] to-[#FFFDF8]',
     accentColor: '#355F52',
     count: 4,
-    image: '/src/assets/images/muslin_loungewear_set_1791213737375.jpg'
+    image: '/images/muslin_loungewear_set_1791213737375.jpg'
   }
 ];
 

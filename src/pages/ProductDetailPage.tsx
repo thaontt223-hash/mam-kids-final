@@ -160,6 +160,12 @@ export const ProductDetailPage: React.FC = () => {
               src={product.images[activeImageIndex] || product.images[0]}
               alt={product.name}
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (!target.src.endsWith('/images/test_kids_polo_1791213587392.jpg')) {
+                  target.src = '/images/test_kids_polo_1791213587392.jpg';
+                }
+              }}
               className="w-full h-full object-cover object-center transition-all duration-300"
             />
 
