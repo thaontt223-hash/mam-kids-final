@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { LanguageProvider } from './i18n/LanguageContext';
+import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider, useCart } from './context/CartContext';
 import { Header } from './components/common/Header';
@@ -61,6 +61,7 @@ const ScrollToTop = () => {
 // Global Toast Banner
 const ToastNotification: React.FC = () => {
   const { toast, dismissToast } = useCart();
+  const { language } = useLanguage();
 
   if (!toast) return null;
 
@@ -81,7 +82,7 @@ const ToastNotification: React.FC = () => {
         <button
           onClick={dismissToast}
           className="p-1 rounded-lg hover:bg-white/10 text-[#FDF9F1] hover:text-white transition-colors"
-          aria-label="Đóng thông báo"
+          aria-label={language === 'en' ? 'Close notification' : 'Đóng thông báo'}
         >
           <X className="w-4 h-4" />
         </button>
@@ -104,33 +105,15 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route
                   path="/san-pham"
-                  element={
-                    <ProductsPage
-                      initialGenderFilter="all"
-                      pageTitle="Danh mục sản phẩm"
-                      pageSubtitle="Khám phá trang phục dịu êm, an toàn và cá nhân hóa cho bé 3–12 tuổi"
-                    />
-                  }
+                  element={<ProductsPage initialGenderFilter="all" />}
                 />
                 <Route
                   path="/be-trai"
-                  element={
-                    <ProductsPage
-                      initialGenderFilter="be-trai"
-                      pageTitle="Thời trang Bé trai"
-                      pageSubtitle="Những thiết kế năng động, lịch lãm và chuẩn chất liệu thoáng mát cho bé trai từ 3–12 tuổi"
-                    />
-                  }
+                  element={<ProductsPage initialGenderFilter="be-trai" />}
                 />
                 <Route
                   path="/be-gai"
-                  element={
-                    <ProductsPage
-                      initialGenderFilter="be-gai"
-                      pageTitle="Thời trang Bé gái"
-                      pageSubtitle="Váy hoa bồng bềnh, đồ bộ pastel dịu dàng và đầm công chúa xinh xắn cho bé gái từ 3–12 tuổi"
-                    />
-                  }
+                  element={<ProductsPage initialGenderFilter="be-gai" />}
                 />
                 <Route path="/san-pham/:id" element={<ProductDetailPage />} />
                 <Route path="/bo-suu-tap" element={<CollectionsPage />} />

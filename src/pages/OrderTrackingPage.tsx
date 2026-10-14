@@ -3,9 +3,11 @@ import { useSearchParams, Link } from 'react-router-dom';
 import { Search, CheckCircle2, Clock, AlertCircle, Phone, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { formatVND } from '../data/products';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const OrderTrackingPage: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const { language, t } = useLanguage();
   const { getOrderById, orders } = useCart();
   const [searchCode, setSearchCode] = useState(searchParams.get('id') || '');
   const [searchedOrder, setSearchedOrder] = useState<any>(null);
@@ -42,10 +44,26 @@ export const OrderTrackingPage: React.FC = () => {
   };
 
   const steps = [
-    { title: 'Tiếp nhận đơn', desc: 'Đã nhận đơn và tạo mã', done: true },
-    { title: 'Chuẩn bị hàng', desc: 'Kiểm tra chất vải & thêu tên', done: true },
-    { title: 'Đang vận chuyển', desc: 'Bưu tá đang giao đến bé', done: false },
-    { title: 'Giao thành công', desc: 'Bé nhận trang phục xinh', done: false }
+    {
+      title: language === 'en' ? 'Order Received' : 'Tiếp nhận đơn',
+      desc: language === 'en' ? 'Order confirmed & code generated' : 'Đã nhận đơn và tạo mã',
+      done: true
+    },
+    {
+      title: language === 'en' ? 'Preparing Package' : 'Chuẩn bị hàng',
+      desc: language === 'en' ? 'Fabric checked & personalized' : 'Kiểm tra chất vải & thêu tên',
+      done: true
+    },
+    {
+      title: language === 'en' ? 'Out for Delivery' : 'Đang vận chuyển',
+      desc: language === 'en' ? 'Courier en route to your home' : 'Bưu tá đang giao đến bé',
+      done: false
+    },
+    {
+      title: language === 'en' ? 'Delivered' : 'Giao thành công',
+      desc: language === 'en' ? 'Package safely with child' : 'Bé nhận trang phục xinh',
+      done: false
+    }
   ];
 
   return (
@@ -56,16 +74,18 @@ export const OrderTrackingPage: React.FC = () => {
           className="text-xs font-semibold text-[#647B72] hover:text-[#4E8773] flex items-center gap-1 mb-2"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Về trang chủ</span>
+          <span>{language === 'en' ? 'Back to homepage' : 'Về trang chủ'}</span>
         </Link>
         <span className="text-xs font-bold uppercase tracking-wider text-[#4E8773] block font-heading">
-          Tra cứu bưu phẩm
+          {language === 'en' ? 'Parcel Tracking' : 'Tra cứu bưu phẩm'}
         </span>
         <h1 className="text-2xl sm:text-3xl font-black text-[#3E5149] font-heading">
-          Theo dõi tiến trình đơn hàng
+          {language === 'en' ? 'Track Order Progress' : 'Theo dõi tiến trình đơn hàng'}
         </h1>
         <p className="text-xs sm:text-sm text-[#5D6F66] mt-1">
-          Nhập mã đơn hàng (ví dụ: MK-26...) hoặc số điện thoại người nhận để kiểm tra trạng thái
+          {language === 'en'
+            ? 'Enter your order code (e.g. MK-26...) or recipient phone number to inspect delivery status'
+            : 'Nhập mã đơn hàng (ví dụ: MK-26...) hoặc số điện thoại người nhận để kiểm tra trạng thái'}
         </p>
       </div>
 
@@ -83,16 +103,16 @@ export const OrderTrackingPage: React.FC = () => {
               type="text"
               value={searchCode}
               onChange={(e) => setSearchCode(e.target.value)}
-              placeholder="Nhập mã đơn hàng hoặc số điện thoại..."
+              placeholder={language === 'en' ? 'Enter order ID or phone number...' : 'Nhập mã đơn hàng hoặc số điện thoại...'}
               className="w-full px-4 py-3 pl-11 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] placeholder-[#8B9D95] focus:outline-hidden focus:border-[#4E8773]"
             />
             <Search className="absolute left-4 top-3.5 w-4 h-4 text-[#8B9D95]" />
           </div>
           <button
             type="submit"
-            className="px-8 py-3 rounded-2xl bg-[#4E8773] hover:bg-[#417361] text-white font-bold text-sm transition-colors shadow-xs"
+            className="px-8 py-3 rounded-2xl bg-[#4E8773] hover:bg-[#417361] text-white font-bold text-sm transition-colors shadow-xs cursor-pointer"
           >
-            Tra cứu đơn
+            {language === 'en' ? 'Track Order' : 'Tra cứu đơn'}
           </button>
         </form>
       </div>
@@ -100,9 +120,13 @@ export const OrderTrackingPage: React.FC = () => {
       {notFound && (
         <div className="p-6 rounded-3xl bg-amber-50 border border-amber-200 text-center space-y-2">
           <AlertCircle className="w-6 h-6 text-amber-700 mx-auto" />
-          <h4 className="font-bold text-amber-900 text-sm">Chưa tìm thấy đơn hàng này</h4>
+          <h4 className="font-bold text-amber-900 text-sm">
+            {language === 'en' ? 'Order not found' : 'Chưa tìm thấy đơn hàng này'}
+          </h4>
           <p className="text-xs text-amber-800">
-            Vui lòng kiểm tra lại mã đơn hàng hoặc liên hệ hotline <strong>1900 6868</strong> để được hỗ trợ kiểm tra trực tiếp.
+            {language === 'en'
+              ? 'Please verify your order ID or contact hotline 1900 6868 for direct agent assistance.'
+              : 'Vui lòng kiểm tra lại mã đơn hàng hoặc liên hệ hotline 1900 6868 để được hỗ trợ kiểm tra trực tiếp.'}
           </p>
         </div>
       )}
@@ -112,19 +136,21 @@ export const OrderTrackingPage: React.FC = () => {
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFE8D8] shadow-xs space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[#FAF6EC] gap-2">
             <div>
-              <span className="text-xs text-[#647B72]">Mã đơn hàng:</span>
+              <span className="text-xs text-[#647B72]">
+                {language === 'en' ? 'Order ID:' : 'Mã đơn hàng:'}
+              </span>
               <h3 className="text-xl font-black text-[#4E8773] font-heading">{searchedOrder.orderId}</h3>
             </div>
             <div className="text-left sm:text-right text-xs text-[#647B72]">
-              <div>Ngày đặt: <strong>{searchedOrder.createdAt}</strong></div>
-              <div>Dự kiến nhận hàng: <strong>Sau 2-3 ngày</strong></div>
+              <div>{language === 'en' ? 'Ordered on:' : 'Ngày đặt:'} <strong>{searchedOrder.createdAt}</strong></div>
+              <div>{language === 'en' ? 'Estimated delivery:' : 'Dự kiến nhận hàng:'} <strong>{language === 'en' ? 'Within 2-3 business days' : 'Sau 2-3 ngày'}</strong></div>
             </div>
           </div>
 
           {/* Progress Timeline */}
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-[#647B72] block mb-4">
-              Tiến độ giao hàng:
+              {language === 'en' ? 'Delivery Milestones:' : 'Tiến độ giao hàng:'}
             </span>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {steps.map((st, i) => (
@@ -153,16 +179,16 @@ export const OrderTrackingPage: React.FC = () => {
           {/* Receiver Info */}
           <div className="p-4 rounded-2xl bg-[#FDF9F1] text-xs space-y-1 text-[#5D6F66] border border-[#EFE8D8]">
             <p>
-              Người nhận: <strong>{searchedOrder.customerInfo.fullName}</strong> · SĐT:{' '}
+              {language === 'en' ? 'Recipient:' : 'Người nhận:'} <strong>{searchedOrder.customerInfo.fullName}</strong> · {language === 'en' ? 'Phone:' : 'SĐT:'}{' '}
               <strong>{searchedOrder.customerInfo.phone}</strong>
             </p>
             <p>
-              Địa chỉ:{' '}
+              {language === 'en' ? 'Address:' : 'Địa chỉ:'}{' '}
               {searchedOrder.customerInfo.address}, {searchedOrder.customerInfo.district},{' '}
               {searchedOrder.customerInfo.city}
             </p>
             <p>
-              Tổng số tiền:{' '}
+              {language === 'en' ? 'Total Amount:' : 'Tổng số tiền:'}{' '}
               <strong className="text-[#4E8773] font-bold">
                 {formatVND(searchedOrder.totalAmount)}
               </strong>
@@ -171,7 +197,9 @@ export const OrderTrackingPage: React.FC = () => {
 
           {/* Items */}
           <div className="space-y-2 pt-2">
-            <span className="text-xs font-bold text-[#3E5149]">Trang phục trong kiện:</span>
+            <span className="text-xs font-bold text-[#3E5149]">
+              {language === 'en' ? 'Items in parcel:' : 'Trang phục trong kiện:'}
+            </span>
             {searchedOrder.items.map((it: any, idx: number) => (
               <div key={idx} className="flex items-center justify-between text-xs py-1.5 border-b border-[#FAF6EC]">
                 <span>
@@ -186,7 +214,12 @@ export const OrderTrackingPage: React.FC = () => {
 
           <div className="pt-2 text-center text-xs text-[#647B72] flex items-center justify-center gap-1.5">
             <Phone className="w-3.5 h-3.5 text-[#4E8773]" />
-            <span>Cần thay đổi địa chỉ hoặc giờ giao hàng? Vui lòng gọi: <strong>1900 6868</strong></span>
+            <span>
+              {language === 'en'
+                ? 'Need to change delivery address or preferred delivery window? Please call: '
+                : 'Cần thay đổi địa chỉ hoặc giờ giao hàng? Vui lòng gọi: '}
+              <strong>1900 6868</strong>
+            </span>
           </div>
         </div>
       )}

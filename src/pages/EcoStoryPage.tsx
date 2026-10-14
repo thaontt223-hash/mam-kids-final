@@ -5,6 +5,7 @@ import { PRODUCTS } from '../data/products';
 import { ProductCard } from '../components/common/ProductCard';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import { BookOpen, Sparkles, Award, ArrowLeft, ArrowRight, Share2, Volume2, VolumeX, CheckCircle2, ChevronRight, Recycle } from 'lucide-react';
 
 export const EcoStoryPage: React.FC = () => {
@@ -12,6 +13,7 @@ export const EcoStoryPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, addPoints } = useAuth();
   const { showToast } = useCart();
+  const { language } = useLanguage();
 
   const story = ECO_STORIES.find((s) => s.id === id) || ECO_STORIES[0];
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
@@ -49,19 +51,29 @@ export const EcoStoryPage: React.FC = () => {
     localStorage.setItem(`mam_eco_challenge_${story.id}`, 'true');
 
     if (user && addPoints) {
-      addPoints(story.challenge.pointsReward, `Hoàn thành thử thách Mầm Xanh: ${story.challenge.title}`);
+      addPoints(
+        story.challenge.pointsReward,
+        language === 'en'
+          ? `Completed Mầm Xanh challenge: ${story.challenge.title}`
+          : `Hoàn thành thử thách Mầm Xanh: ${story.challenge.title}`
+      );
     }
 
     showToast(
-      '🌱 Bé thật tuyệt vời!',
-      `Đã nhận +${story.challenge.pointsReward} Điểm Mầm & Huy hiệu "${story.challenge.badgeName}"!`
+      language === 'en' ? '🌱 Wonderful job, little hero!' : '🌱 Bé thật tuyệt vời!',
+      language === 'en'
+        ? `Earned +${story.challenge.pointsReward} Mầm Points & "${story.challenge.badgeName}" Badge!`
+        : `Đã nhận +${story.challenge.pointsReward} Điểm Mầm & Huy hiệu "${story.challenge.badgeName}"!`
     );
   };
 
   const handleShare = () => {
     if (navigator.clipboard) {
       navigator.clipboard.writeText(window.location.href);
-      showToast('Đã sao chép liên kết!', 'Mời bạn bè cùng đọc câu chuyện xanh.');
+      showToast(
+        language === 'en' ? 'Link copied!' : 'Đã sao chép liên kết!',
+        language === 'en' ? 'Invite friends to read this eco story together.' : 'Mời bạn bè cùng đọc câu chuyện xanh.'
+      );
     }
   };
 
@@ -77,9 +89,13 @@ export const EcoStoryPage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-[#5D726A]">
-          <Link to="/" className="hover:text-[#355F52]">Trang chủ</Link>
+          <Link to="/" className="hover:text-[#355F52]">
+            {language === 'en' ? 'Home' : 'Trang chủ'}
+          </Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <Link to="/#mam-xanh" className="hover:text-[#355F52]">Mầm Xanh</Link>
+          <Link to="/#mam-xanh" className="hover:text-[#355F52]">
+            Mầm Xanh
+          </Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[#2F403A] font-semibold truncate">{story.title}</span>
         </nav>
@@ -95,10 +111,10 @@ export const EcoStoryPage: React.FC = () => {
                 ⏱ {story.readTime}
               </span>
               <span className="px-2.5 py-1 rounded-full bg-white/20 text-[11px] font-semibold text-[#FDF9F1]">
-                👶 Độ tuổi: {story.targetAge}
+                👶 {language === 'en' ? `Ages: ${story.targetAge}` : `Độ tuổi: ${story.targetAge}`}
               </span>
               <span className="px-2.5 py-1 rounded-full bg-[#355F52]/60 text-[11px] font-bold text-[#F5DFA0]">
-                🌱 Một chiếc áo – Một câu chuyện – Một hành động xanh
+                🌱 {language === 'en' ? 'One outfit – One story – One green habit' : 'Một chiếc áo – Một câu chuyện – Một hành động xanh'}
               </span>
             </div>
 
@@ -119,12 +135,12 @@ export const EcoStoryPage: React.FC = () => {
                 {isPlayingAudio ? (
                   <>
                     <VolumeX className="w-3.5 h-3.5" />
-                    <span>Tạm dừng giọng đọc</span>
+                    <span>{language === 'en' ? 'Pause narration' : 'Tạm dừng giọng đọc'}</span>
                   </>
                 ) : (
                   <>
                     <Volume2 className="w-3.5 h-3.5" />
-                    <span>🎧 Bật giọng đọc cho bé nghe</span>
+                    <span>{language === 'en' ? '🎧 Listen to story narration' : '🎧 Bật giọng đọc cho bé nghe'}</span>
                   </>
                 )}
               </button>
@@ -134,7 +150,7 @@ export const EcoStoryPage: React.FC = () => {
                 className="text-xs text-[#E8F1EC] hover:text-white flex items-center gap-1.5 transition-colors cursor-pointer"
               >
                 <Share2 className="w-3.5 h-3.5" />
-                <span>Chia sẻ câu chuyện</span>
+                <span>{language === 'en' ? 'Share story' : 'Chia sẻ câu chuyện'}</span>
               </button>
             </div>
 
@@ -159,14 +175,14 @@ export const EcoStoryPage: React.FC = () => {
                 setIsPlayingAudio(false);
                 setAudioProgress(0);
               }}
-              className={`flex-1 min-w-[130px] sm:min-w-0 py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 ${
+              className={`flex-1 min-w-[130px] sm:min-w-0 py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
                 activeChapterIndex === idx
                   ? 'bg-[#355F52] text-white shadow-xs'
                   : 'text-[#5D726A] hover:text-[#355F52] hover:bg-white/60'
               }`}
             >
               <span>{ch.icon || '🌱'}</span>
-              <span>Chương {ch.chapterNumber}</span>
+              <span>{language === 'en' ? `Chapter ${ch.chapterNumber}` : `Chương ${ch.chapterNumber}`}</span>
             </button>
           ))}
         </div>
@@ -175,7 +191,11 @@ export const EcoStoryPage: React.FC = () => {
         <div className="bg-white rounded-[32px] p-6 sm:p-10 border border-[#EFE8D8] shadow-xs space-y-6">
           <div className="flex items-center gap-2 text-xs font-black text-[#4E8773] uppercase tracking-wider font-heading">
             <span className="text-xl">{currentChapter.icon || '🌱'}</span>
-            <span>Chương {currentChapter.chapterNumber} / {story.chapters.length}</span>
+            <span>
+              {language === 'en'
+                ? `Chapter ${currentChapter.chapterNumber} / ${story.chapters.length}`
+                : `Chương ${currentChapter.chapterNumber} / ${story.chapters.length}`}
+            </span>
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading">
@@ -191,7 +211,7 @@ export const EcoStoryPage: React.FC = () => {
             <Sparkles className="w-5 h-5 text-[#4E8773] shrink-0 mt-0.5" />
             <div>
               <strong className="text-xs sm:text-sm font-bold text-[#355F52] block mb-1">
-                Bài học yêu thiên nhiên cho bé:
+                {language === 'en' ? 'Nature lesson for child:' : 'Bài học yêu thiên nhiên cho bé:'}
               </strong>
               <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
                 {currentChapter.moral}
@@ -206,10 +226,10 @@ export const EcoStoryPage: React.FC = () => {
               disabled={activeChapterIndex === 0}
               onClick={() => setActiveChapterIndex((i) => Math.max(0, i - 1))}
               className={`text-xs font-bold flex items-center gap-1 ${
-                activeChapterIndex === 0 ? 'opacity-30 cursor-not-allowed text-[#5D726A]' : 'text-[#355F52] hover:underline'
+                activeChapterIndex === 0 ? 'opacity-30 cursor-not-allowed text-[#5D726A]' : 'text-[#355F52] hover:underline cursor-pointer'
               }`}
             >
-              ← Chương trước
+              {language === 'en' ? '← Previous Chapter' : '← Chương trước'}
             </button>
 
             <span className="text-xs text-[#5D726A] font-semibold">
@@ -220,14 +240,14 @@ export const EcoStoryPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setActiveChapterIndex((i) => i + 1)}
-                className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold flex items-center gap-1 shadow-2xs"
+                className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold flex items-center gap-1 shadow-2xs cursor-pointer"
               >
-                <span>Chương tiếp theo</span>
+                <span>{language === 'en' ? 'Next Chapter' : 'Chương tiếp theo'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             ) : (
               <span className="text-xs font-bold text-[#4E8773] flex items-center gap-1">
-                <CheckCircle2 className="w-4 h-4" /> Đã hoàn thành truyện
+                <CheckCircle2 className="w-4 h-4" /> {language === 'en' ? 'Story completed' : 'Đã hoàn thành truyện'}
               </span>
             )}
           </div>
@@ -242,7 +262,7 @@ export const EcoStoryPage: React.FC = () => {
               </span>
               <div>
                 <span className="text-[11px] font-black uppercase tracking-wider text-[#355F52] block font-heading">
-                  THỬ THÁCH XANH CÙNG BÉ
+                  {language === 'en' ? 'GREEN CHALLENGE FOR KIDS' : 'THỬ THÁCH XANH CÙNG BÉ'}
                 </span>
                 <h3 className="text-lg sm:text-xl font-bold text-[#2F403A] font-heading">
                   {story.challenge.title}
@@ -251,7 +271,7 @@ export const EcoStoryPage: React.FC = () => {
             </div>
 
             <span className="shrink-0 px-3 py-1 rounded-full bg-[#355F52] text-[#F5DFA0] text-xs font-bold tabular-nums">
-              +{story.challenge.pointsReward} Điểm Mầm
+              +{story.challenge.pointsReward} {language === 'en' ? 'Mầm Points' : 'Điểm Mầm'}
             </span>
           </div>
 
@@ -267,7 +287,7 @@ export const EcoStoryPage: React.FC = () => {
             {isChallengeCompleted ? (
               <div className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#355F52] text-white text-xs font-bold shadow-xs">
                 <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" />
-                <span>Bé đã hoàn thành xuất sắc! 🌱</span>
+                <span>{language === 'en' ? 'Child completed with flying colors! 🌱' : 'Bé đã hoàn thành xuất sắc! 🌱'}</span>
               </div>
             ) : (
               <button
@@ -276,7 +296,7 @@ export const EcoStoryPage: React.FC = () => {
                 className="px-6 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#F5DFA0]" />
-                <span>Bé đã làm thử thách này! 🌱</span>
+                <span>{language === 'en' ? 'Child took this challenge! 🌱' : 'Bé đã làm thử thách này! 🌱'}</span>
               </button>
             )}
           </div>
@@ -288,10 +308,14 @@ export const EcoStoryPage: React.FC = () => {
             <Recycle className="w-7 h-7 text-[#355F52] shrink-0 mt-1" />
             <div>
               <h3 className="text-base sm:text-lg font-bold text-[#2F403A] font-heading">
-                Chương trình "Mầm Again" – Trao lại áo cũ khi bé đã lớn
+                {language === 'en'
+                  ? 'Program "Mầm Again" – Give back clothes as kids grow up'
+                  : 'Chương trình "Mầm Again" – Trao lại áo cũ khi bé đã lớn'}
               </h3>
               <p className="text-xs text-[#5D726A] mt-1 max-w-xl leading-relaxed">
-                Khi bé lớn lên và áo không còn vừa, ba mẹ có thể gửi lại cho Mầm Kids hoàn toàn miễn phí vận chuyển để trao tặng hoặc tái chế, nhận ngay điểm Mầm hoặc voucher 50.000đ.
+                {language === 'en'
+                  ? 'When your child outgrows clothes, parents can send them back to Mầm Kids with free shipping to donate or recycle, receiving Mầm Points or 50,000 VND voucher immediately.'
+                  : 'Khi bé lớn lên và áo không còn vừa, ba mẹ có thể gửi lại cho Mầm Kids hoàn toàn miễn phí vận chuyển để trao tặng hoặc tái chế, nhận ngay điểm Mầm hoặc voucher 50.000đ.'}
               </p>
             </div>
           </div>
@@ -300,7 +324,7 @@ export const EcoStoryPage: React.FC = () => {
             to="/mam-again"
             className="shrink-0 px-5 py-2.5 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold transition-colors flex items-center justify-center gap-1 shadow-2xs"
           >
-            <span>Tham gia Mầm Again</span>
+            <span>{language === 'en' ? 'Join Mầm Again' : 'Tham gia Mầm Again'}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -308,7 +332,7 @@ export const EcoStoryPage: React.FC = () => {
         {/* Other Story Selector */}
         <div className="pt-4 border-t border-[#EFE8D8]">
           <h3 className="text-sm font-bold text-[#2F403A] mb-3 font-heading">
-            Các câu chuyện Mầm Xanh khác:
+            {language === 'en' ? 'Other Mầm Xanh Stories:' : 'Các câu chuyện Mầm Xanh khác:'}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {ECO_STORIES.map((s) => (
@@ -339,7 +363,7 @@ export const EcoStoryPage: React.FC = () => {
         {relatedGreenProducts.length > 0 && (
           <div className="pt-4 space-y-4">
             <h3 className="text-base font-bold text-[#2F403A] font-heading">
-              Sản phẩm đồng hành cùng câu chuyện này
+              {language === 'en' ? 'Products connected with this story' : 'Sản phẩm đồng hành cùng câu chuyện này'}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {relatedGreenProducts.map((p) => (

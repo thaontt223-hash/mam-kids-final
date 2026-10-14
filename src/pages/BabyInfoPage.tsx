@@ -2,26 +2,24 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import { BabyInfo } from '../types';
 import {
   Baby,
   PlusCircle,
   Edit2,
   Trash2,
-  Sparkles,
   Calendar,
   Ruler,
   Weight,
-  Heart,
-  Gift,
-  CheckCircle2,
-  AlertCircle
+  ArrowRight
 } from 'lucide-react';
 
 export const BabyInfoPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, isLoggedIn, addBaby, updateBaby, deleteBaby, getBabyRecommendedSize } = useAuth();
   const { showToast } = useCart();
+  const { language, t } = useLanguage();
 
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,7 +78,7 @@ export const BabyInfoPage: React.FC = () => {
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) {
-      alert('Vui lòng nhập tên bé');
+      showToast(language === 'en' ? 'Please enter child name' : 'Vui lòng nhập tên bé');
       return;
     }
 
@@ -98,7 +96,11 @@ export const BabyInfoPage: React.FC = () => {
         preferredSize: finalSize,
         note: note.trim() || undefined
       });
-      showToast(`Đã cập nhật thông tin bé ${name.trim()}!`);
+      showToast(
+        language === 'en'
+          ? `Updated profile for ${name.trim()}!`
+          : `Đã cập nhật thông tin bé ${name.trim()}!`
+      );
     } else {
       addBaby({
         name: name.trim(),
@@ -109,16 +111,31 @@ export const BabyInfoPage: React.FC = () => {
         preferredSize: finalSize,
         note: note.trim() || undefined
       });
-      showToast(`Đã thêm bé ${name.trim()} thành công!`, 'Bạn nhận được +50 Điểm Mầm thưởng');
+      showToast(
+        language === 'en'
+          ? `Added ${name.trim()} successfully!`
+          : `Đã thêm bé ${name.trim()} thành công!`,
+        language === 'en'
+          ? 'You received +50 bonus Mầm Points'
+          : 'Bạn nhận được +50 Điểm Mầm thưởng'
+      );
     }
 
     setIsModalOpen(false);
   };
 
   const handleDelete = (baby: BabyInfo) => {
-    if (window.confirm(`Bạn có chắc muốn xóa hồ sơ của bé ${baby.name}?`)) {
+    const confirmMsg =
+      language === 'en'
+        ? `Are you sure you want to delete profile of ${baby.name}?`
+        : `Bạn có chắc muốn xóa hồ sơ của bé ${baby.name}?`;
+    if (window.confirm(confirmMsg)) {
       deleteBaby(baby.id);
-      showToast(`Đã xóa hồ sơ bé ${baby.name}`);
+      showToast(
+        language === 'en'
+          ? `Deleted profile of ${baby.name}`
+          : `Đã xóa hồ sơ bé ${baby.name}`
+      );
     }
   };
 
@@ -129,10 +146,15 @@ export const BabyInfoPage: React.FC = () => {
       const now = new Date();
       const diffMonths = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
       if (diffMonths < 12) {
-        return `${Math.max(1, diffMonths)} tháng tuổi`;
+        return language === 'en'
+          ? `${Math.max(1, diffMonths)} months old`
+          : `${Math.max(1, diffMonths)} tháng tuổi`;
       }
       const years = Math.floor(diffMonths / 12);
       const remainingMonths = diffMonths % 12;
+      if (language === 'en') {
+        return remainingMonths > 0 ? `${years} yrs ${remainingMonths} mos` : `${years} years old`;
+      }
       return remainingMonths > 0 ? `${years} tuổi ${remainingMonths} tháng` : `${years} tuổi`;
     } catch {
       return '';
@@ -144,14 +166,16 @@ export const BabyInfoPage: React.FC = () => {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {t('nav.home')}
         </Link>
         <span>/</span>
         <Link to="/tai-khoan" className="hover:text-[#4E8773] transition-colors">
-          Tài khoản
+          {t('nav.account')}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Thông tin của bé</span>
+        <span className="text-[#355F52] font-semibold">
+          {language === 'en' ? 'Child Profile' : 'Thông tin của bé'}
+        </span>
       </nav>
 
       {/* Header Banner */}
@@ -159,13 +183,15 @@ export const BabyInfoPage: React.FC = () => {
         <div>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EAF3EF] text-[#355F52] mb-3">
             <Baby className="w-3.5 h-3.5" />
-            Trợ lý chọn size thông minh Mầm Kids
+            {language === 'en' ? 'Mầm Kids Smart Size Assistant' : 'Trợ lý chọn size thông minh Mầm Kids'}
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight">
-            Hồ sơ bé yêu ({user.babies.length})
+            {language === 'en' ? `Child Profiles (${user.babies.length})` : `Hồ sơ bé yêu (${user.babies.length})`}
           </h1>
           <p className="text-xs sm:text-sm text-[#6A7F77] mt-1 max-w-xl">
-            Lưu thông tin chiều cao, cân nặng và ngày sinh để Mầm Kids tự động gợi ý kích cỡ vừa vặn nhất và gửi quà sinh nhật cho bé mỗi năm.
+            {language === 'en'
+              ? 'Save height, weight and birthdate so Mầm Kids automatically suggests best sizes and delivers sweet birthday gifts each year.'
+              : 'Lưu thông tin chiều cao, cân nặng và ngày sinh để Mầm Kids tự động gợi ý kích cỡ vừa vặn nhất và gửi quà sinh nhật cho bé mỗi năm.'}
           </p>
         </div>
 
@@ -174,7 +200,7 @@ export const BabyInfoPage: React.FC = () => {
           className="px-5 py-3 rounded-2xl bg-[#4E8773] hover:bg-[#355F52] text-white font-bold text-xs tracking-wide transition-all shadow-xs hover:shadow-md flex items-center gap-2 cursor-pointer shrink-0"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>THÊM HỒ SƠ BÉ MỚI (+50 điểm)</span>
+          <span>{language === 'en' ? 'ADD CHILD PROFILE (+50 pts)' : 'THÊM HỒ SƠ BÉ MỚI (+50 điểm)'}</span>
         </button>
       </div>
 
@@ -199,7 +225,9 @@ export const BabyInfoPage: React.FC = () => {
                           {baby.name}
                         </h3>
                         <p className="text-xs text-[#6A7F77]">
-                          {baby.gender === 'be-gai' ? 'Bé gái' : 'Bé trai'}
+                          {baby.gender === 'be-gai'
+                            ? (language === 'en' ? 'Girl' : 'Bé gái')
+                            : (language === 'en' ? 'Boy' : 'Bé trai')}
                           {ageText && ` · ${ageText}`}
                         </p>
                       </div>
@@ -215,9 +243,11 @@ export const BabyInfoPage: React.FC = () => {
                     <div className="p-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] flex items-center gap-2.5">
                       <Ruler className="w-4 h-4 text-[#4E8773]" />
                       <div>
-                        <span className="text-[10px] text-[#6A7F77] block">Chiều cao:</span>
+                        <span className="text-[10px] text-[#6A7F77] block">
+                          {language === 'en' ? 'Height:' : 'Chiều cao:'}
+                        </span>
                         <span className="text-sm font-bold text-[#2F403A] font-heading">
-                          {baby.height ? `${baby.height} cm` : 'Chưa cập nhật'}
+                          {baby.height ? `${baby.height} cm` : (language === 'en' ? 'Not updated' : 'Chưa cập nhật')}
                         </span>
                       </div>
                     </div>
@@ -225,9 +255,11 @@ export const BabyInfoPage: React.FC = () => {
                     <div className="p-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] flex items-center gap-2.5">
                       <Weight className="w-4 h-4 text-[#4E8773]" />
                       <div>
-                        <span className="text-[10px] text-[#6A7F77] block">Cân nặng:</span>
+                        <span className="text-[10px] text-[#6A7F77] block">
+                          {language === 'en' ? 'Weight:' : 'Cân nặng:'}
+                        </span>
                         <span className="text-sm font-bold text-[#2F403A] font-heading">
-                          {baby.weight ? `${baby.weight} kg` : 'Chưa cập nhật'}
+                          {baby.weight ? `${baby.weight} kg` : (language === 'en' ? 'Not updated' : 'Chưa cập nhật')}
                         </span>
                       </div>
                     </div>
@@ -236,7 +268,10 @@ export const BabyInfoPage: React.FC = () => {
                   <div className="space-y-2 text-xs text-[#6A7F77]">
                     <p className="flex items-center gap-2">
                       <Calendar className="w-3.5 h-3.5 text-[#8B9D95]" />
-                      <span>Ngày sinh: <strong className="text-[#2F403A]">{baby.birthDate}</strong></span>
+                      <span>
+                        {language === 'en' ? 'Date of birth:' : 'Ngày sinh:'}{' '}
+                        <strong className="text-[#2F403A]">{baby.birthDate}</strong>
+                      </span>
                     </p>
                     {baby.note && (
                       <p className="italic text-[11px] text-[#8B9D95] bg-[#FAF6EC] p-2.5 rounded-xl border border-[#F5DFA0]">
@@ -248,26 +283,26 @@ export const BabyInfoPage: React.FC = () => {
 
                 <div className="mt-5 pt-4 border-t border-[#FAF6EC] flex items-center justify-between">
                   <Link
-                    to="/san-pham"
+                    to={`/san-pham?size=${encodeURIComponent(baby.preferredSize)}`}
                     className="text-xs font-bold text-[#4E8773] hover:text-[#355F52] hover:underline flex items-center gap-1"
                   >
-                    <span>Xem đồ vừa size {baby.preferredSize} →</span>
+                    <span>{language === 'en' ? `Browse size ${baby.preferredSize} →` : `Xem đồ vừa size ${baby.preferredSize} →`}</span>
                   </Link>
 
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => handleOpenEdit(baby)}
-                      className="p-2 rounded-xl text-[#355F52] hover:bg-[#EAF3EF] transition-colors"
-                      title="Chỉnh sửa thông tin"
+                      className="p-2 rounded-xl text-[#355F52] hover:bg-[#EAF3EF] transition-colors cursor-pointer"
+                      title={language === 'en' ? 'Edit' : 'Chỉnh sửa thông tin'}
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
                     <button
                       type="button"
                       onClick={() => handleDelete(baby)}
-                      className="p-2 rounded-xl text-red-500 hover:bg-red-50 transition-colors"
-                      title="Xóa hồ sơ"
+                      className="p-2 rounded-xl text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
+                      title={language === 'en' ? 'Delete' : 'Xóa hồ sơ'}
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
@@ -281,17 +316,19 @@ export const BabyInfoPage: React.FC = () => {
         <div className="text-center py-16 bg-white rounded-3xl border border-[#EFE8D8] shadow-xs">
           <Baby className="w-14 h-14 text-[#C1D2CB] mx-auto mb-3" />
           <h3 className="text-lg font-bold text-[#2F403A] font-heading">
-            Chưa có thông tin bé yêu nào
+            {language === 'en' ? 'No child profiles yet' : 'Chưa có thông tin bé yêu nào'}
           </h3>
           <p className="text-xs text-[#6A7F77] mt-1 max-w-sm mx-auto">
-            Thêm thông tin bé ngay hôm nay để nhận voucher sinh nhật 50.000đ và nhận thêm +50 Điểm Mầm tích lũy.
+            {language === 'en'
+              ? 'Add your child’s profile today to receive 50k birthday vouchers and +50 bonus Mầm Points.'
+              : 'Thêm thông tin bé ngay hôm nay để nhận voucher sinh nhật 50.000đ và nhận thêm +50 Điểm Mầm tích lũy.'}
           </p>
           <button
             onClick={handleOpenAdd}
             className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors cursor-pointer shadow-xs"
           >
             <PlusCircle className="w-4 h-4" />
-            <span>Thêm hồ sơ bé ngay (+50 điểm)</span>
+            <span>{language === 'en' ? 'Add child profile now (+50 pts)' : 'Thêm hồ sơ bé ngay (+50 điểm)'}</span>
           </button>
         </div>
       )}
@@ -307,31 +344,35 @@ export const BabyInfoPage: React.FC = () => {
             <div className="flex items-center justify-between pb-4 border-b border-[#FAF6EC] mb-5">
               <div>
                 <h3 className="text-lg font-bold text-[#2F403A] font-heading">
-                  {editingBabyId ? 'Chỉnh sửa hồ sơ bé' : 'Thêm hồ sơ bé yêu'}
+                  {editingBabyId
+                    ? (language === 'en' ? 'Edit Child Profile' : 'Chỉnh sửa hồ sơ bé')
+                    : (language === 'en' ? 'Add Child Profile' : 'Thêm hồ sơ bé yêu')}
                 </h3>
                 <p className="text-xs text-[#6A7F77]">
-                  {editingBabyId ? 'Cập nhật lại số đo để gợi ý size chính xác' : 'Nhận ngay +50 Điểm Mầm khi lưu thông tin bé'}
+                  {editingBabyId
+                    ? (language === 'en' ? 'Update measurements for accurate size suggestion' : 'Cập nhật lại số đo để gợi ý size chính xác')
+                    : (language === 'en' ? 'Get +50 Mầm Points instantly upon saving child info' : 'Nhận ngay +50 Điểm Mầm khi lưu thông tin bé')}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="text-xs font-bold text-[#8B9D95] hover:text-[#2F403A]"
+                className="text-xs font-bold text-[#8B9D95] hover:text-[#2F403A] cursor-pointer"
               >
-                Đóng
+                {t('common.close')}
               </button>
             </div>
 
             <form onSubmit={handleSave} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                  Tên gọi ở nhà hoặc Họ tên của bé <span className="text-red-500">*</span>
+                  {language === 'en' ? 'Child nickname or full name' : 'Tên gọi ở nhà hoặc Họ tên của bé'} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Ví dụ: Bé Bơ, Bé Sóc, Gia Hưng..."
+                  placeholder={language === 'en' ? 'Example: Leo, Mia...' : 'Ví dụ: Bé Bơ, Bé Sóc, Gia Hưng...'}
                   required
                   className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                 />
@@ -340,7 +381,7 @@ export const BabyInfoPage: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                    Ngày sinh của bé
+                    {language === 'en' ? 'Date of birth' : 'Ngày sinh của bé'}
                   </label>
                   <input
                     type="date"
@@ -352,16 +393,16 @@ export const BabyInfoPage: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                    Giới tính của bé
+                    {language === 'en' ? 'Gender' : 'Giới tính của bé'}
                   </label>
                   <select
                     value={gender}
                     onChange={(e) => setGender(e.target.value as any)}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                   >
-                    <option value="be-gai">Bé gái</option>
-                    <option value="be-trai">Bé trai</option>
-                    <option value="khac">Khác / Chưa rõ</option>
+                    <option value="be-gai">{language === 'en' ? 'Girl' : 'Bé gái'}</option>
+                    <option value="be-trai">{language === 'en' ? 'Boy' : 'Bé trai'}</option>
+                    <option value="khac">{language === 'en' ? 'Other / Unknown' : 'Khác / Chưa rõ'}</option>
                   </select>
                 </div>
               </div>
@@ -369,27 +410,27 @@ export const BabyInfoPage: React.FC = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                    Chiều cao của bé (cm)
+                    {language === 'en' ? 'Height (cm)' : 'Chiều cao của bé (cm)'}
                   </label>
                   <input
                     type="number"
                     value={height}
                     onChange={(e) => setHeight(e.target.value)}
-                    placeholder="Ví dụ: 105"
+                    placeholder="105"
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                   />
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                    Cân nặng của bé (kg)
+                    {language === 'en' ? 'Weight (kg)' : 'Cân nặng của bé (kg)'}
                   </label>
                   <input
                     type="number"
                     step="0.5"
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
-                    placeholder="Ví dụ: 16"
+                    placeholder="16"
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                   />
                 </div>
@@ -397,29 +438,31 @@ export const BabyInfoPage: React.FC = () => {
 
               <div>
                 <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                  Size thường mặc gợi ý
+                  {language === 'en' ? 'Recommended regular size' : 'Size thường mặc gợi ý'}
                 </label>
                 <input
                   type="text"
                   value={preferredSize}
                   onChange={(e) => setPreferredSize(e.target.value)}
-                  placeholder="Ví dụ: 100 (3-4T)"
+                  placeholder={language === 'en' ? 'Example: 100 (3-4T)' : 'Ví dụ: 100 (3-4T)'}
                   className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                 />
                 <p className="text-[11px] text-[#6A7F77] mt-1">
-                  💡 Hệ thống tự động tính toán kích cỡ vừa vặn nhất dựa trên chiều cao & cân nặng.
+                  💡 {language === 'en'
+                    ? 'Smart algorithm automatically calculates recommended size from height & weight.'
+                    : 'Hệ thống tự động tính toán kích cỡ vừa vặn nhất dựa trên chiều cao & cân nặng.'}
                 </p>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-1.5">
-                  Ghi chú sở thích của bé
+                  {language === 'en' ? 'Child preferences & note' : 'Ghi chú sở thích của bé'}
                 </label>
                 <textarea
                   rows={2}
                   value={note}
                   onChange={(e) => setNote(e.target.value)}
-                  placeholder="Ví dụ: Thích màu pastel, sợ chất vải thô ráp, thích form rộng rãi..."
+                  placeholder={language === 'en' ? 'E.g., loves pastel colors, prefers loose fit...' : 'Ví dụ: Thích màu pastel, sợ chất vải thô ráp, thích form rộng rãi...'}
                   className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                 />
               </div>
@@ -428,15 +471,17 @@ export const BabyInfoPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-[#EFE8D8] text-xs font-bold text-[#6A7F77] hover:bg-[#FDF9F1]"
+                  className="px-4 py-2.5 rounded-xl border border-[#EFE8D8] text-xs font-bold text-[#6A7F77] hover:bg-[#FDF9F1] cursor-pointer"
                 >
-                  Hủy
+                  {t('common.cancel')}
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors cursor-pointer"
                 >
-                  {editingBabyId ? 'Lưu thay đổi' : 'Thêm hồ sơ bé'}
+                  {editingBabyId
+                    ? (language === 'en' ? 'Save Changes' : 'Lưu thay đổi')
+                    : (language === 'en' ? 'Add Profile' : 'Thêm hồ sơ bé')}
                 </button>
               </div>
             </form>

@@ -1,0 +1,1432 @@
+[
+  {
+    "file": "src/components/common/EcoStoryModal.tsx",
+    "line": 278,
+    "text": "{/* Green Challenge Section (Thử Thách Xanh Cho Bé) */}"
+  },
+  {
+    "file": "src/components/common/EcoStoryModal.tsx",
+    "line": 327,
+    "text": "{/* Pillar 3: Trao Lại Yêu Thương (Mầm Again Teaser) */}"
+  },
+  {
+    "file": "src/components/common/Footer.tsx",
+    "line": 98,
+    "text": "186 Nguyễn Thị Minh Khai, Q.3, TP.HCM · 45 Phố Huế, Q. Hai Bà Trưng, HN"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 209,
+    "text": "{/* 1. Trang chủ */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 226,
+    "text": "{/* 2. Sản phẩm Dropdown */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 271,
+    "text": "{/* 3. Bộ sưu tập */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 336,
+    "text": "{/* 5. Khuyến mãi Dropdown */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 387,
+    "text": "{/* 6. Chính sách khách hàng Dropdown */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 541,
+    "text": "{/* Overlay phía sau: rgba(30, 50, 43, 0.35) & backdrop-blur 2px */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 595,
+    "text": "{/* Danh sách menu mobile: 6 danh mục chuẩn hóa theo Checkpoint 5 & 6 */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 599,
+    "text": "{/* 1. Trang chủ */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 652,
+    "text": "{/* 3. Bộ sưu tập */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 709,
+    "text": "{/* 5. Khuyến mãi Accordion */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 755,
+    "text": "{/* 6. Chính sách khách hàng Accordion */}"
+  },
+  {
+    "file": "src/components/common/Header.tsx",
+    "line": 972,
+    "text": "{/* CTA cuối menu */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 76,
+    "text": "Kết hợp tinh tế: Mầm lá non vươn lên từ móc áo & cổ áo em bé"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 87,
+    "text": "{/* Nền Squircle mềm mại */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 99,
+    "text": "{/* Dáng áo em bé màu trắng tinh khiết */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 113,
+    "text": "{/* Cổ áo tròn Peter Pan dịu dàng */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 122,
+    "text": "{/* 2 Cúc áo vàng ấm #F2B544 (Tượng trưng hạt mầm yêu thương) */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 126,
+    "text": "{/* Đường cong bờ vai móc áo em bé */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 135,
+    "text": "{/* Trục thân mầm vươn lên từ móc áo */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 143,
+    "text": "{/* Khớp nối mầm non */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 146,
+    "text": "{/* Lá mầm bên trái (Xanh Sage #4E8773) */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 152,
+    "text": "{/* Lá mầm bên phải (Xanh lá non tràn đầy sức sống #8BC34A) */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 158,
+    "text": "{/* Giọt sương mai lấp lánh */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 164,
+    "text": "“Mầm Kids” + dòng phụ “THỜI TRANG TRẺ EM”"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 168,
+    "text": "{/* Tên chính: Mầm Kids */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 178,
+    "text": "Mầm"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 187,
+    "text": "{/* Chiếc lá nhỏ trang trí vi diệu trên chữ i */}"
+  },
+  {
+    "file": "src/components/common/Logo.tsx",
+    "line": 195,
+    "text": "{/* Dòng phụ định vị ngành hàng: THỜI TRANG TRẺ EM / KIDS FASHION */}"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 52,
+    "text": "title: 'Chào mừng Mầm Kids',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 53,
+    "text": "description: 'Giảm 10% cho đơn hàng đầu tiên của thành viên mới Mầm Kids',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 60,
+    "text": "badge: 'Chào mừng'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 65,
+    "text": "title: 'Sinh nhật của bé',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 66,
+    "text": "description: 'Giảm 15% trong tháng sinh nhật bé yêu cho toàn bộ sản phẩm',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 73,
+    "text": "badge: 'Sinh nhật'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 78,
+    "text": "title: 'Đổi 100 Điểm Mầm',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 79,
+    "text": "description: 'Giảm 10.000 VND quy đổi từ 100 Điểm Mầm tích lũy',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 85,
+    "text": "badge: 'Đổi 100 Điểm'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 90,
+    "text": "title: 'Freeship Thành viên',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 91,
+    "text": "description: 'Miễn phí vận chuyển toàn quốc cho đơn hàng từ 150.000 VND',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 104,
+    "text": "fullName: 'Nguyễn Hoàng Yến',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 108,
+    "text": "membershipTier: 'Mầm Non',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 112,
+    "text": "defaultAddress: 'Số 45 ngõ 12 Đặng Thai Mai, P. Quảng An',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 113,
+    "text": "defaultCity: 'Hà Nội',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 114,
+    "text": "defaultDistrict: 'Quận Tây Hồ',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 118,
+    "text": "name: 'Bé Bơ (Hà Linh)',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 124,
+    "text": "note: 'Thích mặc váy mềm, màu pastel hồng và kem'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 128,
+    "text": "name: 'Bé Đậu (Minh Khang)',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 134,
+    "text": "note: 'Ưa thích áo thun cotton cộc tay thoáng khí'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 144,
+    "text": "description: 'Quà tặng chào mừng đăng ký thành viên mới Mầm Kids'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 151,
+    "text": "description: 'Thưởng cập nhật hồ sơ bé yêu (Bé Bơ)'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 158,
+    "text": "description: 'Tích điểm đơn hàng MK-268924 (Trị giá 170.000đ)',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 231,
+    "text": "const calculateMembershipTier = (points: number): 'Mầm Non' | 'Mầm Xanh' | 'Mầm Yêu Thương' => {"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 234,
+    "text": "return 'Mầm Non';"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 240,
+    "text": "if (!data.fullName.trim()) return { success: false, message: 'Vui lòng nhập Họ và tên' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 241,
+    "text": "if (!data.email.trim()) return { success: false, message: 'Vui lòng nhập Email' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 242,
+    "text": "if (!data.phone.trim()) return { success: false, message: 'Vui lòng nhập Số điện thoại' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 244,
+    "text": "return { success: false, message: 'Mật khẩu phải chứa ít nhất 6 ký tự' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 247,
+    "text": "return { success: false, message: 'Mật khẩu xác nhận không khớp' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 257,
+    "text": "return { success: false, message: 'Email hoặc số điện thoại đã được đăng ký trước đó' };"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 283,
+    "text": "description: 'Quà tặng chào mừng đăng ký tài khoản thành viên Mầm Kids'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 293,
+    "text": "description: 'Tặng điểm cập nhật thông tin bé yêu ngay khi đăng ký'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 334,
+    "text": "message: 'Tài khoản hoặc mật khẩu không chính xác. Vui lòng thử lại.'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 377,
+    "text": "description: `Thưởng thêm thông tin bé yêu (${newBaby.name})`"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 474,
+    "text": "message: 'Bạn cần tối thiểu 100 Điểm Mầm để đổi voucher 10.000 VND.'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 486,
+    "text": "title: 'Đổi 100 Điểm Mầm',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 487,
+    "text": "description: 'Giảm 10.000 VND quy đổi từ 100 Điểm Mầm tích lũy',"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 493,
+    "text": "badge: 'Đổi 100 Điểm'"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 501,
+    "text": "description: `Đổi 100 Điểm Mầm lấy Voucher ${voucherCode} (-10.000đ)`"
+  },
+  {
+    "file": "src/context/AuthContext.tsx",
+    "line": 514,
+    "text": "message: `Đổi thành công voucher ${voucherCode} giảm 10.000 VND!`"
+  },
+  {
+    "file": "src/pages/AccountPage.tsx",
+    "line": 390,
+    "text": "{/* Section: Thông tin của bé */}"
+  },
+  {
+    "file": "src/pages/AccountPage.tsx",
+    "line": 469,
+    "text": "{/* Section: Đơn hàng gần đây */}"
+  },
+  {
+    "file": "src/pages/AccountPage.tsx",
+    "line": 585,
+    "text": "{/* Section: Sản phẩm yêu thích (Wishlist Quick View) */}"
+  },
+  {
+    "file": "src/pages/AccountPage.tsx",
+    "line": 654,
+    "text": "{/* Section: Hành trình xanh của bé (Eco Badges & Green Journey) */}"
+  },
+  {
+    "file": "src/pages/CartPage.tsx",
+    "line": 161,
+    "text": "Mua thêm{' '}"
+  },
+  {
+    "file": "src/pages/CartPage.tsx",
+    "line": 165,
+    "text": "để được <strong>MIỄN PHÍ VẬN CHUYỂN</strong>!"
+  },
+  {
+    "file": "src/pages/CartPage.tsx",
+    "line": 316,
+    "text": "Bạn có <strong>{user.vouchers.filter((v) => !v.isUsed).length} voucher</strong> và <strong>{user.mamPoints} Điểm Mầm</strong> sẵn sàng dùng khi thanh toán."
+  },
+  {
+    "file": "src/pages/CheckoutPage.tsx",
+    "line": 32,
+    "text": "city: user?.defaultCity || 'Hà Nội',"
+  },
+  {
+    "file": "src/pages/CheckoutPage.tsx",
+    "line": 33,
+    "text": "district: user?.defaultDistrict || 'Quận Tây Hồ',"
+  },
+  {
+    "file": "src/pages/CheckoutPage.tsx",
+    "line": 48,
+    "text": "city: prev.city || user.defaultCity || 'Hà Nội',"
+  },
+  {
+    "file": "src/pages/CheckoutPage.tsx",
+    "line": 213,
+    "text": "{/* Step 1: Thông tin giao hàng */}"
+  },
+  {
+    "file": "src/pages/CheckoutPage.tsx",
+    "line": 359,
+    "text": "{/* Step 2: Phương thức thanh toán */}"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 50,
+    "text": "title: 'Quy định chung',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 52,
+    "text": "shortTitle: 'Quy định chung',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 55,
+    "text": "tagline: 'Phạm vi hoạt động, nguyên tắc phục vụ và cam kết chất lượng của Mầm Kids.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 61,
+    "text": "title: 'Điều khoản sử dụng',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 63,
+    "text": "shortTitle: 'Điều khoản sử dụng',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 66,
+    "text": "tagline: 'Quyền lợi, trách nhiệm và hướng dẫn mua sắm trực tuyến cho phụ huynh.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 72,
+    "text": "title: 'Chính sách giao hàng',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 74,
+    "text": "shortTitle: 'Giao hàng',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 77,
+    "text": "tagline: 'Miễn phí vận chuyển từ 300k toàn quốc, tặng kèm túi tote canvas.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 83,
+    "text": "title: 'Chính sách thanh toán',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 85,
+    "text": "shortTitle: 'Thanh toán',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 88,
+    "text": "tagline: 'Thanh toán khi nhận hàng COD, VietQR 24/7, thẻ và ví điện tử an toàn.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 94,
+    "text": "title: 'Chính sách đổi trả',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 96,
+    "text": "shortTitle: 'Đổi trả 15 ngày',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 99,
+    "text": "tagline: 'Đổi size miễn phí trong 15 ngày, shipper mang size mới đổi tận nhà.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 105,
+    "text": "title: 'Chính sách bảo mật',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 107,
+    "text": "shortTitle: 'Bảo mật thông tin',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 110,
+    "text": "tagline: 'Bảo vệ tuyệt đối thông tin gia đình và số đo của bé yêu.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 116,
+    "text": "title: 'Khách hàng thân thiết',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 118,
+    "text": "shortTitle: 'Khách hàng thân thiết',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 121,
+    "text": "tagline: '3 hạng hội viên Mầm Yêu Thương với ưu đãi giảm giá và quà sinh nhật bé.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 127,
+    "text": "title: 'Chính sách Điểm Mầm',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 128,
+    "text": "titleEn: 'Mầm Points Policy',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 130,
+    "text": "shortTitleEn: 'Mầm Points',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 132,
+    "text": "tagline: 'Tích điểm qua mua sắm và hành động xanh, khấu trừ trực tiếp khi thanh toán.',"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 309,
+    "text": "{/* 1. QUY ĐỊNH CHUNG */}"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 374,
+    "text": "{/* 2. ĐIỀU KHOẢN SỬ DỤNG */}"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 591,
+    "text": "{/* 5. CHÍNH SÁCH ĐỔI TRẢ 15 NGÀY */}"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 691,
+    "text": "• Đổi do sản phẩm lỗi kỹ thuật hoặc shop giao nhầm size: <strong>Miễn phí 100%</strong> phí vận chuyển 2 chiều.<br />"
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 692,
+    "text": "• Đổi size do bé muốn mặc rộng rãi hơn: Mầm Kids miễn phí vận chuyển lần đổi đầu tiên cho phụ huynh."
+  },
+  {
+    "file": "src/pages/CustomerPoliciesPage.tsx",
+    "line": 851,
+    "text": "{/* 8. CHÍNH SÁCH ĐIỂM MẦM */}"
+  },
+  {
+    "file": "src/pages/EcoStoryPage.tsx",
+    "line": 305,
+    "text": "{/* Trao Lại Quần Áo Cũ: Banner Mầm Again */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 114,
+    "text": "1. HERO SECTION (ẤM ÁP, SINH ĐỘNG, NỔI BẬT – ĐIỂM NHẤN CẢM XÚC MẸ & BÉ)"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 232,
+    "text": "Không chỉ mặc đẹp – cùng bé{' '}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 234,
+    "text": "gieo thói quen xanh"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 248,
+    "text": "{/* CTA chính: MUA SẮM NGAY (Peach/Terracotta #F39A73, chữ trắng, shadow nhẹ) */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 398,
+    "text": "2. MẦM XANH – ĐIỂM KHÁC BIỆT THƯƠNG HIỆU (USP CỐT LÕI NỔI BẬT NHẤT SAU HERO)"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 405,
+    "text": "{/* Doodle 1: Lá non vươn lên (Top Left) */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 422,
+    "text": "{/* Doodle 2: Cây con chồi biếc & ánh mặt trời ấm (Top Right) */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 433,
+    "text": "{/* Doodle 3: Nhánh lá uốn lượn tự nhiên (Bottom Left) */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 443,
+    "text": "{/* Doodle 4: Giọt sương & Mầm non (Bottom Right) */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 692,
+    "text": "{/* CTA Buttons: “KHÁM PHÁ MẦM XANH” nổi bật nhất */}"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 960,
+    "text": "6. GỢI Ý PHỐI ĐỒ (MIX & MATCH GỘP 1-2 OUTFIT TIÊU BIỂU)"
+  },
+  {
+    "file": "src/pages/HomePage.tsx",
+    "line": 1101,
+    "text": "7. ĐÁNH GIÁ TỪ PHỤ HUYNH (REVIEW)"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 173,
+    "text": "Tương đương giá trị quy đổi{' '}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 175,
+    "text": "{(currentPoints * 10).toLocaleString('vi-VN')} đ"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 177,
+    "text": "khi đổi voucher giảm giá áp dụng trực tiếp cho đơn hàng Mầm Kids."
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 212,
+    "text": "Cứ mỗi <strong>100 Điểm Mầm</strong>, bạn có thể bấm đổi ngay 1 voucher trị giá <strong>10.000 VND</strong> không giới hạn giá trị đơn hàng tối thiểu."
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 253,
+    "text": "{/* 3 SUMMARY METRIC BOXES: Điểm hiện tại, Điểm đã tích luỹ, Điểm đã dùng */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 255,
+    "text": "{/* Metric 1: Điểm hiện tại */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 280,
+    "text": "{/* Metric 2: Điểm đã tích luỹ */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 305,
+    "text": "{/* Metric 3: Điểm đã dùng */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 331,
+    "text": "{/* SECTION: QUY TẮC TÍCH ĐIỂM & BỘ CÔNG CỤ MÔ PHỎNG TÍNH ĐIỂM TƯƠNG TÁC */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 333,
+    "text": "{/* Left: Quy tắc tích điểm & đổi điểm */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 422,
+    "text": "{/* Right: Bộ công cụ tương tác mô phỏng tích điểm đơn hàng */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 545,
+    "text": "{/* SECTION: CÁCH KIẾM THÊM ĐIỂM MẦM */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 549,
+    "text": "<span>Cách Kiếm Thêm Điểm Mầm Nhanh Chóng</span>"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 559,
+    "text": "Đăng ký thành viên"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 562,
+    "text": "Tặng ngay <strong className=\"text-[#355F52]\">+100 Điểm Mầm</strong> và mã giảm giá 10% (MAMKIDS10) chào mừng thành viên mới."
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 566,
+    "text": "✓ Bạn đã nhận"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 576,
+    "text": "Cập nhật thông tin bé yêu"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 579,
+    "text": "Tặng thêm <strong className=\"text-[#355F52]\">+50 Điểm Mầm</strong> cho mỗi hồ sơ bé được cập nhật chiều cao, cân nặng và ngày sinh."
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 586,
+    "text": "<span>Xem & bổ sung hồ sơ bé</span>"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 597,
+    "text": "Mua sắm trang phục trẻ em"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 600,
+    "text": "Tự động tích lũy <strong className=\"text-[#355F52]\">1 điểm cho mỗi 1.000đ</strong> sau khi đơn hàng được giao thành công."
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 607,
+    "text": "<span>Xem danh mục sản phẩm</span>"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 614,
+    "text": "{/* SECTION: LỊCH SỬ TÍCH & DÙNG ĐIỂM MẦM */}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 620,
+    "text": "<span>Lịch Sử Giao Dịch Điểm Mầm</span>"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 623,
+    "text": "Theo dõi chi tiết các lượt nhận điểm và đổi thưởng của bạn"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 638,
+    "text": "Tất cả ({user.pointsHistory.length})"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 649,
+    "text": "Tích lũy (+)"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 660,
+    "text": "Đã đổi (-)"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 687,
+    "text": "{item.date} {item.orderId && `· Mã đơn hàng: #${item.orderId}`}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 700,
+    "text": "{item.points > 0 ? `+${item.points}` : item.points} điểm"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 703,
+    "text": "{item.type === 'bonus' ? 'Thưởng' : item.type === 'earn' ? 'Tích lũy' : 'Đổi voucher'}"
+  },
+  {
+    "file": "src/pages/MamPointsPage.tsx",
+    "line": 711,
+    "text": "Chưa có giao dịch nào phù hợp với bộ lọc."
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 101,
+    "text": "{/* Trụ cột 1: MẶC XANH */}"
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 143,
+    "text": "{/* Trụ cột 2: HỌC XANH */}"
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 186,
+    "text": "{/* Trụ cột 3: TRAO LẠI */}"
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 230,
+    "text": "{/* ECO STORIES: Một chiếc áo – Một câu chuyện – Một hành động xanh */}"
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 300,
+    "text": "{/* Sản phẩm Mầm Xanh nổi bật */}"
+  },
+  {
+    "file": "src/pages/MamXanhPage.tsx",
+    "line": 332,
+    "text": "{/* Trao lại cùng Mầm Again Banner */}"
+  },
+  {
+    "file": "src/pages/ProductDetailPage.tsx",
+    "line": 446,
+    "text": "{/* Personalization Section: Tạm ẩn khỏi UI để tinh gọn theo yêu cầu */}"
+  },
+  {
+    "file": "src/pages/ProductDetailPage.tsx",
+    "line": 447,
+    "text": "{/* Giữ lại Smart Size & Hồ sơ bé */}"
+  },
+  {
+    "file": "src/pages/ProductDetailPage.tsx",
+    "line": 576,
+    "text": "{/* Frequently Paired With / Gợi ý phối cùng */}"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 240,
+    "text": "vi: 'Chào Mầm Mới – Giảm 10% đơn đầu tiên',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 244,
+    "text": "vi: 'Món quà làm quen yêu thương dành tặng gia đình nhỏ lần đầu mua sắm tại Mầm Kids.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 248,
+    "text": "vi: 'Đơn từ 250.000đ (giảm tối đa 100.000đ), 1 lần/tài khoản',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 252,
+    "text": "vi: 'Xuyên suốt năm 2026',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 271,
+    "text": "vi: 'Miễn phí giao hàng tận nhà',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 275,
+    "text": "vi: 'Giao hàng tận nơi chu đáo, kiểm tra hàng thoải mái trước khi thanh toán.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 279,
+    "text": "vi: 'Đơn hàng từ 300.000đ trở lên, áp dụng toàn quốc',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 283,
+    "text": "vi: 'Áp dụng mọi ngày',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 293,
+    "text": "vi: 'GIẢM 50.000đ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 294,
+    "text": "en: '50,000đ OFF'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 302,
+    "text": "vi: 'Ưu Đãi Tủ Đồ Yêu Thương',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 306,
+    "text": "vi: 'Mua sắm các món đồ cơ bản hữu cơ mềm dịu cho bé cả tuần thoải mái.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 310,
+    "text": "vi: 'Áp dụng cho đơn hàng từ 599.000đ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 314,
+    "text": "vi: 'Hạn dùng: Đến 31/12/2026',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 323,
+    "text": "vi: 'GIẢM 100.000đ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 324,
+    "text": "en: '100,000đ OFF'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 328,
+    "text": "vi: 'SIÊU ƯU ĐÃI',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 332,
+    "text": "vi: 'Đơn Lớn Tiết Kiệm Lớn',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 336,
+    "text": "vi: 'Trọn gói trang phục đi học, dạo phố và mặc nhà an lành cho các bé.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 340,
+    "text": "vi: 'Áp dụng cho đơn hàng từ 999.000đ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 344,
+    "text": "vi: 'Số lượng 500 lượt/tháng',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 362,
+    "text": "vi: 'Tặng 01 Túi Canvas Hạt Mầm Eco',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 363,
+    "text": "en: 'Free Mầm Eco Canvas Tote Bag'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 366,
+    "text": "vi: 'Túi vải canvas 100% tự nhiên quai êm, đựng bình nước và đồ chơi cho bé dạo chơi.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 370,
+    "text": "vi: 'Đơn từ 400.000đ, tự động tặng kèm khi thanh toán',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 374,
+    "text": "vi: 'Đến khi hết quà tặng',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 392,
+    "text": "vi: 'Càng Mua Càng Hời',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 396,
+    "text": "vi: 'Ưu đãi cho phụ huynh sắm trọn đồ đôi cho anh chị em trong nhà.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 400,
+    "text": "vi: 'Mua từ 3 sản phẩm bất kỳ trong giỏ hàng',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 404,
+    "text": "vi: 'Áp dụng suốt tuần',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 417,
+    "text": "vi: 'TÍCH ĐIỂM XANH',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 421,
+    "text": "vi: '1.000 VND = 1 Điểm Mầm (Đổi Voucher)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 422,
+    "text": "en: '1,000 VND = 1 Mầm Point (Redeem Vouchers)'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 425,
+    "text": "vi: 'Tích lũy tự động sau mỗi đơn hàng thành công',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 429,
+    "text": "vi: 'Cứ mỗi 100 Điểm Mầm đổi ngay voucher 10.000đ trực tiếp khi thanh toán. Không giới hạn số điểm tối đa.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 430,
+    "text": "en: 'Every 100 Mầm Points can be redeemed for a 10,000 VND direct discount voucher. No point cap.'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 433,
+    "text": "vi: 'Áp dụng tự động cho tài khoản đăng ký thành viên Mầm Kids.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 437,
+    "text": "vi: 'Tích lũy vĩnh viễn, điểm không hết hạn',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 441,
+    "text": "vi: 'XEM VÍ ĐIỂM MẦM',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 454,
+    "text": "vi: 'Voucher 15% Trong Tháng Sinh Nhật Của Bé',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 458,
+    "text": "vi: 'Giảm 15% tối đa 150.000đ + Thiệp chúc mừng viết tay',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 462,
+    "text": "vi: 'Gửi trọn tình yêu thương tới bé con nhân dịp tròn thêm một tuổi. Voucher được gửi thẳng vào ví tài khoản của mẹ.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 466,
+    "text": "vi: 'Chỉ cần cập nhật ngày sinh của bé trong mục Hồ Sơ Bé trước 7 ngày.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 470,
+    "text": "vi: 'Có hiệu lực trong trọn vẹn 30 ngày tháng sinh nhật của bé',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 487,
+    "text": "vi: 'Đặc Quyền Thăng Hạng: Mầm Ươm ➔ Rừng Xanh',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 491,
+    "text": "vi: 'Tặng quà tri ân mỗi khi lên hạng thành viên',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 495,
+    "text": "vi: 'Từ hạng Mầm Xanh trở lên, gia đình được ưu tiên trải nghiệm bộ sưu tập mới sớm 48 giờ và nhận quà giáng sinh độc quyền.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 499,
+    "text": "vi: 'Tự động tính theo tổng chi tiêu tích lũy trong năm.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 503,
+    "text": "vi: 'Duy trì thứ hạng 12 tháng liên tục',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 523,
+    "text": "vi: 'Combo “Ngày Nắng Năng Động” (Áo Polo + Quần Short)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 527,
+    "text": "vi: 'Tiết kiệm 50.000đ so với mua lẻ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 531,
+    "text": "vi: 'Set phối sẵn tông màu trang nhã, chất liệu cotton organic co giãn nhẹ giúp bé thoải mái chạy nhảy cả ngày dài.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 535,
+    "text": "vi: ['01 Áo polo cotton organic cổ mềm', '01 Quần short linen lưng thun co giãn'],"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 539,
+    "text": "vi: 'Áp dụng trực tiếp khi chọn mua nguyên bộ trong mục Bộ sưu tập.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 543,
+    "text": "vi: 'Diễn ra thường niên trong năm',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 559,
+    "text": "vi: 'Combo “Nàng Thơ Nhí” (Váy Xòe + Băng Đô Hoa Tặng Kèm)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 563,
+    "text": "vi: 'Tiết kiệm 60.000đ + Tặng băng đô 45k',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 567,
+    "text": "vi: 'Váy xòe vải sợi tre kháng khuẩn êm ái, tặng kèm phụ kiện đồng điệu cho bé diện đi tiệc, đi chơi cuối tuần.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 571,
+    "text": "vi: ['01 Váy hoa xòe pastel công chúa', '01 Băng đô vải cotton hữu cơ êm tai'],"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 575,
+    "text": "vi: 'Số lượng 300 set phối sẵn mỗi tháng.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 579,
+    "text": "vi: 'Áp dụng cho mùa dạo phố cuối tuần',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 595,
+    "text": "vi: 'Gói 3 Áo Thun Basic Kháng Khuẩn Tuần Mới',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 599,
+    "text": "vi: 'Mua 3 tính tiền 2.5 (Tiết kiệm 75.000đ)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 603,
+    "text": "vi: 'Bộ ba màu sắc dịu lành (Trắng sữa, Xanh bơ, Be ấm) cho bé thay đổi mỗi ngày tới trường mà không lo bí bách.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 607,
+    "text": "vi: ['3 Áo thun organic cotton 100% không nhãn may cổ gây ngứa'],"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 611,
+    "text": "vi: 'Tự chọn size cho từng áo hoặc cùng 1 size.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 615,
+    "text": "vi: 'Ưu đãi liên tục quanh năm',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 636,
+    "text": "vi: 'Mùa Tựu Trường Rạng Rỡ – Bé Vui Đến Lớp',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 640,
+    "text": "vi: 'Giảm 5% khi mua từ 2 áo polo hoặc set đồ học đường',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 644,
+    "text": "vi: 'Chất liệu thoáng khí thấm hút mồ hôi vượt trội, đồng hành cùng con trong những tiết học và giờ ra chơi năng động.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 648,
+    "text": "vi: 'Áp dụng cho mùa nhập học (Tháng 8 – Tháng 10)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 653,
+    "text": "vi: 'XEM ĐỒ ĐI HỌC',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 666,
+    "text": "vi: 'Nắng Hè Tươi Vui – Dã Ngoại Khám Phá',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 670,
+    "text": "vi: 'Tặng nón bucket che nắng và túi canvas cho combo đồ dạo hè',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 674,
+    "text": "vi: 'Chống tia UV nhẹ tự nhiên từ sợi dệt mật độ cao, bảo vệ làn da non nớt của bé dưới ánh nắng vàng ươm.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 678,
+    "text": "vi: 'Áp dụng trong mùa hè (Tháng 5 – Tháng 7)',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 692,
+    "text": "vi: 'TRI ÂN GIA ĐÌNH',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 696,
+    "text": "vi: 'Tháng Tri Ân Gia Đình Mầm – Nhân Đôi Yêu Thương',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 697,
+    "text": "en: 'Mầm Family Gratitude Month – Double The Joy'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 700,
+    "text": "vi: 'Nhân đôi (x2) Điểm Mầm tích lũy cho toàn bộ đơn hàng',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 701,
+    "text": "en: '2x Double Mầm Points multiplier for all qualifying purchases'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 704,
+    "text": "vi: 'Cơ hội tuyệt vời để mẹ tích lũy điểm thưởng xanh, đổi ngay những phần quà bất ngờ dành cho cả gia đình.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 708,
+    "text": "vi: 'Áp dụng trong tháng gia đình',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 712,
+    "text": "vi: 'TÍCH ĐIỂM NGAY',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 729,
+    "text": "vi: 'Chương Trình “Mầm Again” – Trao Lại Quần Áo Cũ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 733,
+    "text": "vi: 'Nhận Voucher 30.000đ – 50.000đ cho mỗi món đồ gửi lại',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 734,
+    "text": "en: 'Get 30,000đ – 50,000đ voucher for each piece passed on'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 737,
+    "text": "vi: 'Bé lớn nhanh, quần áo chật? Mẹ hãy gửi lại Mầm Kids để được khử khuẩn, sửa chữa trao cho các em nhỏ vùng cao hoặc tái chế sợi vải.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 741,
+    "text": "vi: 'Đóng gói đồ cũ ➔ Đặt lịch gom miễn phí tại nhà ➔ Nhận voucher gửi vào ví mẹ.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 745,
+    "text": "vi: 'Chương trình diễn ra liên tục quanh năm',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 749,
+    "text": "vi: 'ĐẶT LỊCH GỬI ĐỒ CŨ',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 762,
+    "text": "vi: 'Quét Tem Áo Cùng Bé Nhận Điểm Mầm Xanh',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 766,
+    "text": "vi: 'Tặng ngay 50 Điểm Mầm + Huy hiệu Hiệp Sĩ Xanh',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 767,
+    "text": "en: 'Instant 50 Mầm Points + Eco Knight Badge'"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 770,
+    "text": "vi: 'Mỗi chiếc áo Mầm Kids đều có tem QR dẫn tới mẩu chuyện thiên nhiên và 1 nhiệm vụ bảo vệ môi trường nhỏ cho bé.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 774,
+    "text": "vi: 'Dùng điện thoại quét mã QR trên mác áo ➔ Nghe truyện cùng con ➔ Bấm hoàn thành nhiệm vụ.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 778,
+    "text": "vi: 'Áp dụng trên mọi sản phẩm Mầm Kids có tem Green QR',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 951,
+    "text": "{ key: 'all', labelVi: 'Tất cả ưu đãi', labelEn: 'All Offers', icon: Sparkles },"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 952,
+    "text": "{ key: 'voucher', labelVi: 'Voucher & Mã giảm', labelEn: 'Vouchers & Codes', icon: Ticket },"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 953,
+    "text": "{ key: 'member', labelVi: 'Ưu đãi thành viên', labelEn: 'Member Perks', icon: Star },"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 954,
+    "text": "{ key: 'combo', labelVi: 'Combo tiết kiệm', labelEn: 'Smart Sets', icon: ShoppingBag },"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 955,
+    "text": "{ key: 'seasonal', labelVi: 'Ưu đãi theo mùa', labelEn: 'Seasonal Deals', icon: Calendar },"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 956,
+    "text": "{ key: 'eco', labelVi: 'Chiến dịch Mầm Xanh', labelEn: 'Eco Campaigns', icon: Leaf }"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1002,
+    "text": "4. VOUCHERS SECTION (MÃ ƯU ĐÃI & COUPON CARDS DẠNG VÉ)"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1138,
+    "text": "5. MEMBER PERKS SECTION (ƯU ĐÃI THÀNH VIÊN)"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1304,
+    "text": "7. SEASONAL CAMPAIGNS (ƯU ĐÃI THEO MÙA)"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1470,
+    "text": "9. TRANSPARENT CONDITIONS & USAGE GUIDE (HƯỚNG DẪN ÁP DỤNG & ĐIỀU KIỆN)"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1494,
+    "text": "titleVi: 'Sao chép mã',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1496,
+    "text": "descVi: 'Bấm nút \"Sao chép\" ở thẻ voucher trên trang này để lưu mã vào bộ nhớ tạm.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1501,
+    "text": "titleVi: 'Chọn đồ cho bé',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1503,
+    "text": "descVi: 'Lựa chọn các sản phẩm ưng ý và kiểm tra đúng size theo gợi ý Smart Size.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1508,
+    "text": "titleVi: 'Dán mã tại giỏ hàng',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1510,
+    "text": "descVi: 'Tại trang Giỏ hàng hoặc Thanh toán, dán mã vào ô \"Mã ưu đãi\" và bấm Áp dụng.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1515,
+    "text": "titleVi: 'Nhận ưu đãi & Quà',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1517,
+    "text": "descVi: 'Hệ thống tự động trừ tiền và bổ sung quà tặng tương ứng vào kiện hàng.',"
+  },
+  {
+    "file": "src/pages/PromotionsPage.tsx",
+    "line": 1562,
+    "text": "10. FOOTER CALLOUT: HỖ TRỢ & HỎI ĐÁP"
+  },
+  {
+    "file": "src/types/index.ts",
+    "line": 183,
+    "text": "membershipTier: 'Mầm Non' | 'Mầm Xanh' | 'Mầm Yêu Thương';"
+  }
+]

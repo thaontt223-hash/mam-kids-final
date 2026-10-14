@@ -19,8 +19,10 @@ import { PRODUCTS } from '../data/products';
 import { ProductCard } from '../components/common/ProductCard';
 import { EcoStoryModal } from '../components/common/EcoStoryModal';
 import { EcoStory } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const MamXanhPage: React.FC = () => {
+  const { language } = useLanguage();
   const [selectedStory, setSelectedStory] = useState<EcoStory | null>(null);
 
   // Products with isGreenProduct flag
@@ -31,7 +33,9 @@ export const MamXanhPage: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1.5 text-xs text-[#5D726A]">
-          <Link to="/" className="hover:text-[#355F52]">Trang chủ</Link>
+          <Link to="/" className="hover:text-[#355F52]">
+            {language === 'en' ? 'Home' : 'Trang chủ'}
+          </Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-[#2F403A] font-semibold">Mầm Xanh</span>
         </nav>
@@ -41,7 +45,7 @@ export const MamXanhPage: React.FC = () => {
           <div className="relative z-10 max-w-3xl space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F5DFA0] text-[#355F52] text-xs font-black uppercase tracking-wider shadow-2xs">
               <Leaf className="w-3.5 h-3.5" />
-              <span>Điểm khác biệt thương hiệu Mầm Kids</span>
+              <span>{language === 'en' ? 'Mầm Kids Distinctive Philosophy' : 'Điểm khác biệt thương hiệu Mầm Kids'}</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-[#FFF9E6]">
@@ -49,22 +53,27 @@ export const MamXanhPage: React.FC = () => {
             </h1>
 
             <p className="text-xl sm:text-2xl font-extrabold text-[#F5DFA0] font-heading">
-              “Mặc xanh – Học xanh – Lớn lên xanh.”
+              {language === 'en' ? '“Wear Green – Learn Green – Grow Up Green.”' : '“Mặc xanh – Học xanh – Lớn lên xanh.”'}
             </p>
 
             <p className="text-sm sm:text-base text-[#E8F1EC] leading-relaxed max-w-2xl font-normal">
-              Một hành trình nhỏ để bé học cách yêu thiên nhiên từ những điều gần gũi mỗi ngày.
+              {language === 'en'
+                ? 'A thoughtful journey helping children learn to cherish nature from everyday habits.'
+                : 'Một hành trình nhỏ để bé học cách yêu thiên nhiên từ những điều gần gũi mỗi ngày.'}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold text-[#FFF9E6]">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" /> Mặc xanh an lành
+                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" />
+                {language === 'en' ? 'Gentle green wear' : 'Mặc xanh an lành'}
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" /> Học xanh qua truyện
+                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" />
+                {language === 'en' ? 'Stories that inspire' : 'Học xanh qua truyện'}
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" /> Trao lại sẻ chia
+                <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" />
+                {language === 'en' ? 'Giving back & sharing' : 'Trao lại sẻ chia'}
               </span>
             </div>
           </div>
@@ -76,13 +85,15 @@ export const MamXanhPage: React.FC = () => {
         <section className="space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="text-xs font-extrabold uppercase tracking-widest text-[#4E8773] block font-heading">
-              TRIẾT LÝ PHÁT TRIỂN
+              {language === 'en' ? 'CORE PHILOSOPHY' : 'TRIẾT LÝ PHÁT TRIỂN'}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-[#355F52] font-heading">
-              Mặc xanh – Học xanh – Lớn lên xanh
+              {language === 'en' ? 'Wear Green – Learn Green – Grow Up Green' : 'Mặc xanh – Học xanh – Lớn lên xanh'}
             </h2>
             <p className="text-xs sm:text-sm text-[#5D726A]">
-              Ba trụ cột gắn liền với từng sản phẩm và hoạt động của Mầm Kids
+              {language === 'en'
+                ? 'Three pillars embedded in every product and initiative at Mầm Kids'
+                : 'Ba trụ cột gắn liền với từng sản phẩm và hoạt động của Mầm Kids'}
             </p>
           </div>
 
@@ -95,23 +106,25 @@ export const MamXanhPage: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-black uppercase tracking-wider text-[#4E8773] block font-heading">
-                    TRỤ CỘT 01
+                    {language === 'en' ? 'PILLAR 01' : 'TRỤ CỘT 01'}
                   </span>
                   <h3 className="text-xl font-bold text-[#2F403A] font-heading mt-0.5">
-                    1. MẶC XANH
+                    {language === 'en' ? '1. WEAR GREEN' : '1. MẶC XANH'}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
-                  Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.
+                  {language === 'en'
+                    ? 'Mầm Kids prioritizes eco-friendly fabrics like Organic Cotton, Bamboo, and recycled fibers whenever suitable for every product.'
+                    : 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.'}
                 </p>
                 <div className="p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#EFE8D8] text-xs text-[#355F52] space-y-1.5 font-medium">
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Chứng nhận dệt an toàn Oeko-Tex Standard 100</span>
+                    <span>{language === 'en' ? 'Certified skin-safe with Oeko-Tex Standard 100' : 'Chứng nhận dệt an toàn Oeko-Tex Standard 100'}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Minh bạch thành phần trên từng nhãn áo</span>
+                    <span>{language === 'en' ? 'Transparent fiber composition on each care tag' : 'Minh bạch thành phần trên từng nhãn áo'}</span>
                   </div>
                 </div>
               </div>
@@ -121,7 +134,7 @@ export const MamXanhPage: React.FC = () => {
                   to="/san-pham"
                   className="text-xs font-bold text-[#355F52] hover:underline flex items-center gap-1"
                 >
-                  Xem sản phẩm Mầm Xanh
+                  {language === 'en' ? 'View Mầm Xanh Collection' : 'Xem sản phẩm Mầm Xanh'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -135,23 +148,25 @@ export const MamXanhPage: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-black uppercase tracking-wider text-[#B88E28] block font-heading">
-                    TRỤ CỘT 02
+                    {language === 'en' ? 'PILLAR 02' : 'TRỤ CỘT 02'}
                   </span>
                   <h3 className="text-xl font-bold text-[#2F403A] font-heading mt-0.5">
-                    2. HỌC XANH
+                    {language === 'en' ? '2. LEARN GREEN' : '2. HỌC XANH'}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
-                  Mỗi sản phẩm Mầm Xanh có Green QR / Eco Story. Bé có thể đọc truyện ngắn hoặc làm thử thách nhỏ về môi trường như tưới cây, gấp áo để nhận Điểm Mầm.
+                  {language === 'en'
+                    ? 'Each Mầm Xanh product features a Green QR / Eco Story. Kids can read short tales or complete small eco challenges to earn Mầm Points.'
+                    : 'Mỗi sản phẩm Mầm Xanh có Green QR / Eco Story. Bé có thể đọc truyện ngắn hoặc làm thử thách nhỏ về môi trường như tưới cây, gấp áo để nhận Điểm Mầm.'}
                 </p>
                 <div className="p-3.5 rounded-2xl bg-[#FFF9E6] border border-[#F5DFA0] text-xs text-[#355F52] space-y-1.5 font-medium">
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Giọng đọc audio ấm áp, ru bé vào giấc ngủ</span>
+                    <span>{language === 'en' ? 'Gentle audio voice to lull child to sleep' : 'Giọng đọc audio ấm áp, ru bé vào giấc ngủ'}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Thử thách xanh nhận +50 Điểm Mầm mỗi bài</span>
+                    <span>{language === 'en' ? 'Green challenge awards +50 Mầm Points each' : 'Thử thách xanh nhận +50 Điểm Mầm mỗi bài'}</span>
                   </div>
                 </div>
               </div>
@@ -162,7 +177,7 @@ export const MamXanhPage: React.FC = () => {
                   onClick={() => setSelectedStory(ECO_STORIES[0])}
                   className="text-xs font-bold text-[#355F52] hover:underline flex items-center gap-1 cursor-pointer"
                 >
-                  Đọc thử câu chuyện mẫu
+                  {language === 'en' ? 'Sample an eco story' : 'Đọc thử câu chuyện mẫu'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -176,23 +191,25 @@ export const MamXanhPage: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[11px] font-black uppercase tracking-wider text-[#D96B43] block font-heading">
-                    TRỤ CỘT 03
+                    {language === 'en' ? 'PILLAR 03' : 'TRỤ CỘT 03'}
                   </span>
                   <h3 className="text-xl font-bold text-[#2F403A] font-heading mt-0.5">
-                    3. TRAO LẠI
+                    {language === 'en' ? '3. GIVE BACK' : '3. TRAO LẠI'}
                   </h3>
                 </div>
                 <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
-                  Khi bé không còn mặc vừa, phụ huynh có thể gửi lại đồ qua chương trình Mầm Again. Quần áo được phân loại để tái sử dụng, quyên góp hoặc xử lý phù hợp.
+                  {language === 'en'
+                    ? 'When outgrown, parents can send back preloved clothes through Mầm Again to be sorted, donated, or recycled sustainably.'
+                    : 'Khi bé không còn mặc vừa, phụ huynh có thể gửi lại đồ qua chương trình Mầm Again. Quần áo được phân loại để tái sử dụng, quyên góp hoặc xử lý phù hợp.'}
                 </p>
                 <div className="p-3.5 rounded-2xl bg-[#FCE7D8]/60 border border-[#F8B195]/40 text-xs text-[#355F52] space-y-1.5 font-medium">
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Thu nhận tận nhà hoàn toàn miễn phí</span>
+                    <span>{language === 'en' ? 'Free doorstep pickup nationwide' : 'Thu nhận tận nhà hoàn toàn miễn phí'}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#4E8773] shrink-0" />
-                    <span>Tặng voucher hoặc Điểm Mầm tri ân</span>
+                    <span>{language === 'en' ? 'Receive vouchers or Mầm Points in return' : 'Tặng voucher hoặc Điểm Mầm tri ân'}</span>
                   </div>
                 </div>
               </div>
@@ -202,7 +219,7 @@ export const MamXanhPage: React.FC = () => {
                   to="/mam-again"
                   className="text-xs font-bold text-[#355F52] hover:underline flex items-center gap-1"
                 >
-                  Tham gia gửi đồ qua Mầm Again
+                  {language === 'en' ? 'Join Mầm Again Giving' : 'Tham gia gửi đồ qua Mầm Again'}
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -215,13 +232,15 @@ export const MamXanhPage: React.FC = () => {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
               <span className="text-xs font-extrabold uppercase tracking-widest text-[#4E8773] block mb-1 font-heading">
-                THƯ VIỆN ECO STORIES
+                {language === 'en' ? 'ECO STORIES LIBRARY' : 'THƯ VIỆN ECO STORIES'}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-[#355F52] font-heading">
-                Một chiếc áo – Một câu chuyện – Một hành động xanh
+                {language === 'en' ? 'One outfit – One story – One green habit' : 'Một chiếc áo – Một câu chuyện – Một hành động xanh'}
               </h2>
               <p className="text-xs sm:text-sm text-[#5D726A] mt-1">
-                Quét Green QR trên nhãn áo hoặc bấm vào câu chuyện để đọc và nghe cùng con
+                {language === 'en'
+                  ? 'Scan the Green QR on garment tags or click stories below to read and listen with your child'
+                  : 'Quét Green QR trên nhãn áo hoặc bấm vào câu chuyện để đọc và nghe cùng con'}
               </p>
             </div>
           </div>
@@ -262,14 +281,14 @@ export const MamXanhPage: React.FC = () => {
                     className="px-4 py-2.5 rounded-xl bg-[#355F52] hover:bg-[#28473D] text-white text-xs font-bold transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
                   >
                     <BookOpen className="w-3.5 h-3.5 text-[#F5DFA0]" />
-                    <span>Đọc truyện ngay</span>
+                    <span>{language === 'en' ? 'Read story now' : 'Đọc truyện ngay'}</span>
                   </button>
 
                   <Link
                     to={`/eco-story/${story.id}`}
                     className="text-xs font-bold text-[#4E8773] hover:underline flex items-center gap-1"
                   >
-                    Trang chi tiết
+                    {language === 'en' ? 'Story details' : 'Trang chi tiết'}
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -283,20 +302,22 @@ export const MamXanhPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
               <span className="text-xs font-extrabold uppercase tracking-widest text-[#4E8773] block mb-1 font-heading">
-                THỜI TRANG BỀN VỮNG
+                {language === 'en' ? 'SUSTAINABLE FASHION' : 'THỜI TRANG BỀN VỮNG'}
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-[#355F52] font-heading">
-                Sản phẩm gắn liền với Mầm Xanh
+                {language === 'en' ? 'Products connected with Mầm Xanh' : 'Sản phẩm gắn liền với Mầm Xanh'}
               </h2>
               <p className="text-xs sm:text-sm text-[#5D726A] mt-1">
-                Các sản phẩm mang huy hiệu 🌱 Mầm Xanh và chứa câu chuyện Eco Story
+                {language === 'en'
+                  ? 'Apparel carrying the 🌱 Mầm Xanh badge and containing an Eco Story'
+                  : 'Các sản phẩm mang huy hiệu 🌱 Mầm Xanh và chứa câu chuyện Eco Story'}
               </p>
             </div>
             <Link
               to="/san-pham"
               className="text-xs sm:text-sm font-bold text-[#4E8773] hover:underline flex items-center gap-1"
             >
-              Xem tất cả sản phẩm
+              {language === 'en' ? 'View all products' : 'Xem tất cả sản phẩm'}
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -313,20 +334,24 @@ export const MamXanhPage: React.FC = () => {
           <div className="space-y-3 max-w-xl">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EAF3EF] text-[#355F52] text-xs font-black uppercase">
               <Recycle className="w-3.5 h-3.5 text-[#4E8773]" />
-              <span>CHƯƠNG TRÌNH MẦM AGAIN</span>
+              <span>{language === 'en' ? 'MẦM AGAIN INITIATIVE' : 'CHƯƠNG TRÌNH MẦM AGAIN'}</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading">
-              Bé lớn rồi? Cùng gửi lại áo cho bạn nhỏ tiếp theo
+              {language === 'en'
+                ? 'Child outgrew their clothes? Pass them on to another little buddy'
+                : 'Bé lớn rồi? Cùng gửi lại áo cho bạn nhỏ tiếp theo'}
             </h3>
             <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
-              Mầm Kids thu gom đồ cũ miễn phí tận nhà, giặt ủi và phân loại để quyên góp đến các em nhỏ khó khăn, đồng thời tặng ba mẹ Điểm Mầm và voucher mua sắm mới.
+              {language === 'en'
+                ? 'Mầm Kids collects gently used items free from home, cleans and donates them to children in need while rewarding parents with Mầm Points and vouchers.'
+                : 'Mầm Kids thu gom đồ cũ miễn phí tận nhà, giặt ủi và phân loại để quyên góp đến các em nhỏ khó khăn, đồng thời tặng ba mẹ Điểm Mầm và voucher mua sắm mới.'}
             </p>
             <div className="pt-2">
               <Link
                 to="/mam-again"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#355F52] hover:bg-[#28473D] text-white font-bold text-xs sm:text-sm transition-all shadow-sm"
               >
-                <span>ĐĂNG KÝ GỬI ĐỒ QUA MẦM AGAIN</span>
+                <span>{language === 'en' ? 'REGISTER FOR MẦM AGAIN PICKUP' : 'ĐĂNG KÝ GỬI ĐỒ QUA MẦM AGAIN'}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -335,10 +360,12 @@ export const MamXanhPage: React.FC = () => {
           <div className="shrink-0 text-center p-6 bg-white rounded-2xl border border-[#EFE8D8] shadow-2xs w-full md:w-64 space-y-2">
             <div className="text-3xl">🌱 ➡️ 💖</div>
             <div className="text-xs font-bold text-[#355F52] font-heading">
-              +100 Điểm Mầm
+              +{language === 'en' ? '100 Mầm Points' : '100 Điểm Mầm'}
             </div>
             <p className="text-[11px] text-[#5D726A]">
-              Tặng ngay cho mỗi lần gửi lại đồ đạt chuẩn cùng Mầm Kids.
+              {language === 'en'
+                ? 'Awarded for every qualified batch returned to Mầm Kids.'
+                : 'Tặng ngay cho mỗi lần gửi lại đồ đạt chuẩn cùng Mầm Kids.'}
             </p>
           </div>
         </section>

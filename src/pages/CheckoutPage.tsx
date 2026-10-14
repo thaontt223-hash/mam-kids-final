@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import { formatVND } from '../data/products';
 import { CustomerInfo } from '../types';
 
@@ -22,6 +23,7 @@ export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const { cart, subtotal, shippingFee, createOrder } = useCart();
   const { user, isLoggedIn, useVoucher, addPoints, redeemPoints } = useAuth();
+  const { language, t, getProductName } = useLanguage();
 
   const [formData, setFormData] = useState({
     fullName: user?.fullName || '',
@@ -91,15 +93,19 @@ export const CheckoutPage: React.FC = () => {
   if (cart.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-20 text-center space-y-4">
-        <h2 className="text-2xl font-bold text-[#3E5149] font-heading">Không có sản phẩm nào để thanh toán</h2>
+        <h2 className="text-2xl font-bold text-[#3E5149] font-heading">
+          {language === 'en' ? 'No items to checkout' : 'Không có sản phẩm nào để thanh toán'}
+        </h2>
         <p className="text-sm text-[#647B72]">
-          Vui lòng thêm sản phẩm vào giỏ hàng trước khi tiến hành thanh toán.
+          {language === 'en'
+            ? 'Please add products to your cart before proceeding to checkout.'
+            : 'Vui lòng thêm sản phẩm vào giỏ hàng trước khi tiến hành thanh toán.'}
         </p>
         <Link
           to="/san-pham"
           className="inline-block mt-4 px-6 py-3 rounded-2xl bg-[#4E8773] text-white text-xs font-bold"
         >
-          Quay lại cửa hàng
+          {language === 'en' ? 'Return to shop' : 'Quay lại cửa hàng'}
         </Link>
       </div>
     );
@@ -108,15 +114,15 @@ export const CheckoutPage: React.FC = () => {
   const validate = () => {
     const errs: Record<string, string> = {};
     if (!formData.fullName.trim()) {
-      errs.fullName = 'Vui lòng nhập họ và tên của bạn';
+      errs.fullName = language === 'en' ? 'Please enter your full name' : 'Vui lòng nhập họ và tên của bạn';
     }
     if (!formData.phone.trim()) {
-      errs.phone = 'Vui lòng nhập số điện thoại nhận hàng';
+      errs.phone = language === 'en' ? 'Please enter your delivery phone number' : 'Vui lòng nhập số điện thoại nhận hàng';
     } else if (!/(0[3|5|7|8|9])+([0-9]{8})\b/.test(formData.phone.trim())) {
-      errs.phone = 'Số điện thoại chưa hợp lệ (gồm 10 chữ số)';
+      errs.phone = language === 'en' ? 'Invalid phone number (must be 10 digits)' : 'Số điện thoại chưa hợp lệ (gồm 10 chữ số)';
     }
     if (!formData.address.trim()) {
-      errs.address = 'Vui lòng nhập số nhà, tên đường hoặc thôn/xã';
+      errs.address = language === 'en' ? 'Please enter your street address or ward' : 'Vui lòng nhập số nhà, tên đường hoặc thôn/xã';
     }
     setErrors(errs);
     return Object.keys(errs).length === 0;
@@ -155,12 +161,19 @@ export const CheckoutPage: React.FC = () => {
           useVoucher(selectedVoucherCode);
         }
         if (usePointsToggle && pointsUsedCount > 0) {
-          redeemPoints(pointsUsedCount, `Dùng điểm cho đơn hàng #${order.orderId}`);
+          redeemPoints(
+            pointsUsedCount,
+            language === 'en'
+              ? `Redeemed points for order #${order.orderId}`
+              : `Dùng điểm cho đơn hàng #${order.orderId}`
+          );
         }
         if (pointsEarnedCount > 0) {
           addPoints(
             pointsEarnedCount,
-            `Tích điểm đơn hàng #${order.orderId} (${formatVND(subtotal)})`,
+            language === 'en'
+              ? `Earned points for order #${order.orderId} (${formatVND(subtotal)})`
+              : `Tích điểm đơn hàng #${order.orderId} (${formatVND(subtotal)})`,
             order.orderId
           );
         }
@@ -181,15 +194,15 @@ export const CheckoutPage: React.FC = () => {
             className="text-xs font-semibold text-[#647B72] hover:text-[#4E8773] flex items-center gap-1 mb-1"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Quay lại giỏ hàng</span>
+            <span>{language === 'en' ? 'Back to shopping bag' : 'Quay lại giỏ hàng'}</span>
           </Link>
           <h1 className="text-2xl sm:text-3xl font-black text-[#3E5149] font-heading">
-            Thanh toán đơn hàng
+            {language === 'en' ? 'Order Checkout' : 'Thanh toán đơn hàng'}
           </h1>
         </div>
         <div className="hidden sm:flex items-center gap-2 text-xs text-[#355E50] font-bold bg-[#EBF3EF] px-3.5 py-1.5 rounded-full border border-[#D4E5DE]">
           <Lock className="w-3.5 h-3.5 text-[#4E8773]" />
-          <span>Bảo mật đơn hàng 100%</span>
+          <span>{language === 'en' ? '100% Secure Checkout' : 'Bảo mật đơn hàng 100%'}</span>
         </div>
       </div>
 
@@ -204,21 +217,24 @@ export const CheckoutPage: React.FC = () => {
                   <span className="w-6 h-6 rounded-full bg-[#4E8773] text-white text-xs font-bold flex items-center justify-center">
                     1
                   </span>
-                  Thông tin giao hàng cho bé
+                  {language === 'en' ? 'Delivery Details for Child' : 'Thông tin giao hàng cho bé'}
                 </h3>
-                <span className="text-xs text-[#647B72]">Không cần đăng ký tài khoản</span>
+                <span className="text-xs text-[#647B72]">
+                  {language === 'en' ? 'No registration required' : 'Không cần đăng ký tài khoản'}
+                </span>
               </div>
 
               {/* Full Name */}
               <div>
                 <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                  Họ và tên người nhận <span className="text-[#F4B99B]">*</span>
+                  {language === 'en' ? 'Recipient Full Name' : 'Họ và tên người nhận'}{' '}
+                  <span className="text-[#F4B99B]">*</span>
                 </label>
                 <input
                   type="text"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  placeholder="Ví dụ: Nguyễn Thị Mai"
+                  placeholder={language === 'en' ? 'e.g. Mary Nguyen' : 'Ví dụ: Nguyễn Thị Mai'}
                   className={`w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773] ${
                     errors.fullName ? 'border-red-400' : 'border-[#EFE8D8]'
                   }`}
@@ -232,227 +248,256 @@ export const CheckoutPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                    Số điện thoại nhận hàng <span className="text-[#F4B99B]">*</span>
+                    {language === 'en' ? 'Recipient Phone Number' : 'Số điện thoại nhận hàng'}{' '}
+                    <span className="text-[#F4B99B]">*</span>
                   </label>
                   <input
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="Ví dụ: 0912345678"
+                    placeholder={language === 'en' ? 'e.g. 0912345678' : 'Ví dụ: 0912345678'}
                     className={`w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773] ${
-                      errors.phone ? 'border-red-400' : 'border-[#EFE8D8]'
-                    }`}
-                  />
-                  {errors.phone && (
-                    <p className="text-[11px] text-red-500 mt-1">{errors.phone}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                    Email nhận thông báo đơn (tùy chọn)
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="email@example.com"
-                    className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
-                  />
-                </div>
-              </div>
-
-              {/* City & District */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                    Tỉnh / Thành phố
-                  </label>
-                  <select
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
-                  >
-                    <option value="Hồ Chí Minh">TP. Hồ Chí Minh</option>
-                    <option value="Hà Nội">Hà Nội</option>
-                    <option value="Đà Nẵng">Đà Nẵng</option>
-                    <option value="Hải Phòng">Hải Phòng</option>
-                    <option value="Cần Thơ">Cần Thơ</option>
-                    <option value="Bình Dương">Bình Dương</option>
-                    <option value="Đồng Nai">Đồng Nai</option>
-                    <option value="Tỉnh thành khác">Tỉnh thành khác</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                    Quận / Huyện
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.district}
-                    onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                    placeholder="Quận/Huyện"
-                    className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
-                  />
-                </div>
-              </div>
-
-              {/* Address details */}
-              <div>
-                <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                  Địa chỉ chi tiết (Số nhà, tên đường, tòa nhà) <span className="text-[#F4B99B]">*</span>
-                </label>
-                <input
-                  type="text"
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                  placeholder="Ví dụ: 123 Lê Lợi, Phường Bến Nghé"
-                  className={`w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773] ${
-                    errors.address ? 'border-red-400' : 'border-[#EFE8D8]'
+                    errors.phone ? 'border-red-400' : 'border-[#EFE8D8]'
                   }`}
                 />
-                {errors.address && (
-                  <p className="text-[11px] text-red-500 mt-1">{errors.address}</p>
+                {errors.phone && (
+                  <p className="text-[11px] text-red-500 mt-1">{errors.phone}</p>
                 )}
               </div>
 
-              {/* Notes */}
               <div>
                 <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-                  Ghi chú cho shipper (tùy chọn)
+                  {language === 'en' ? 'Order Notification Email (Optional)' : 'Email nhận thông báo đơn (tùy chọn)'}
                 </label>
-                <textarea
-                  rows={2}
-                  value={formData.notes}
-                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  placeholder="Ví dụ: Giao giờ hành chính, gọi trước khi giao 15 phút..."
-                  className="w-full px-4 py-2 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-xs text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="email@example.com"
+                  className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
                 />
               </div>
             </div>
 
-            {/* Step 2: Phương thức thanh toán */}
-            <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#EFE8D8] shadow-xs space-y-4">
-              <div className="flex items-center justify-between border-b border-[#FAF6EC] pb-3">
-                <h3 className="font-bold text-[#3E5149] text-base sm:text-lg flex items-center gap-2 font-heading">
-                  <span className="w-6 h-6 rounded-full bg-[#4E8773] text-white text-xs font-bold flex items-center justify-center">
-                    2
-                  </span>
-                  Phương thức thanh toán
-                </h3>
+            {/* City & District */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
+                  {language === 'en' ? 'Province / City' : 'Tỉnh / Thành phố'}
+                </label>
+                <select
+                  value={formData.city}
+                  onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                  className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
+                >
+                  <option value="Hồ Chí Minh">{language === 'en' ? 'Ho Chi Minh City' : 'TP. Hồ Chí Minh'}</option>
+                  <option value="Hà Nội">{language === 'en' ? 'Hanoi' : 'Hà Nội'}</option>
+                  <option value="Đà Nẵng">{language === 'en' ? 'Da Nang' : 'Đà Nẵng'}</option>
+                  <option value="Hải Phòng">{language === 'en' ? 'Hai Phong' : 'Hải Phòng'}</option>
+                  <option value="Cần Thơ">{language === 'en' ? 'Can Tho' : 'Cần Thơ'}</option>
+                  <option value="Bình Dương">{language === 'en' ? 'Binh Duong' : 'Bình Dương'}</option>
+                  <option value="Đồng Nai">{language === 'en' ? 'Dong Nai' : 'Đồng Nai'}</option>
+                  <option value="Tỉnh thành khác">{language === 'en' ? 'Other Province' : 'Tỉnh thành khác'}</option>
+                </select>
               </div>
 
-              <div className="space-y-3">
-                {/* COD */}
-                <label
-                  className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
-                    formData.paymentMethod === 'cod'
-                      ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
-                      : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="cod"
-                    checked={formData.paymentMethod === 'cod'}
-                    onChange={() => setFormData({ ...formData, paymentMethod: 'cod' })}
-                    className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <Banknote className="w-5 h-5 text-[#4E8773]" />
-                      <span className="text-sm font-bold text-[#3E5149]">
-                        COD – Thanh toán tiền mặt khi nhận hàng
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#647B72] mt-1">
-                      Kiểm tra hàng trước khi thanh toán. An tâm tuyệt đối cho ba mẹ.
-                    </p>
-                  </div>
+              <div>
+                <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
+                  {language === 'en' ? 'District' : 'Quận / Huyện'}
                 </label>
-
-                {/* Bank transfer */}
-                <label
-                  className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
-                    formData.paymentMethod === 'bank_transfer'
-                      ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
-                      : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="bank_transfer"
-                    checked={formData.paymentMethod === 'bank_transfer'}
-                    onChange={() => setFormData({ ...formData, paymentMethod: 'bank_transfer' })}
-                    className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <CreditCard className="w-5 h-5 text-[#4E8773]" />
-                      <span className="text-sm font-bold text-[#3E5149]">
-                        Chuyển khoản ngân hàng (Vietcombank / MB / QR Pay)
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#647B72] mt-1">
-                      Chuyển khoản qua số tài khoản chính thức hoặc quét mã VietQR tự động.
-                    </p>
-
-                    {formData.paymentMethod === 'bank_transfer' && (
-                      <div className="mt-3 p-3.5 rounded-xl bg-white border border-[#D4E5DE] text-xs space-y-1.5 text-[#3E5149]">
-                        <div className="font-bold text-[#4E8773]">Thông tin tài khoản Mầm Kids:</div>
-                        <div>Ngân hàng: <strong>Vietcombank (Chi nhánh TP.HCM)</strong></div>
-                        <div>Số tài khoản: <strong className="tabular-nums">1029 888 999</strong></div>
-                        <div>Chủ tài khoản: <strong>CÔNG TY TNHH THỜI TRANG MẦM KIDS</strong></div>
-                        <div className="text-[11px] text-[#647B72] italic pt-1">
-                          Nội dung chuyển khoản: Tên bạn + SĐT (Hệ thống sẽ tự động xác nhận đơn ngay khi nhận tiền)
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </label>
-
-                {/* E-wallet */}
-                <label
-                  className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
-                    formData.paymentMethod === 'e_wallet'
-                      ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
-                      : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
-                  }`}
-                >
-                  <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="e_wallet"
-                    checked={formData.paymentMethod === 'e_wallet'}
-                    onChange={() => setFormData({ ...formData, paymentMethod: 'e_wallet' })}
-                    className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
-                  />
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <Smartphone className="w-5 h-5 text-[#4E8773]" />
-                      <span className="text-sm font-bold text-[#3E5149]">
-                        Ví điện tử MoMo / ZaloPay / ShopeePay
-                      </span>
-                    </div>
-                    <p className="text-xs text-[#647B72] mt-1">
-                      Thanh toán một chạm nhanh chóng qua ứng dụng ví điện tử trên điện thoại.
-                    </p>
-                  </div>
-                </label>
+                <input
+                  type="text"
+                  value={formData.district}
+                  onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                  placeholder={language === 'en' ? 'District' : 'Quận/Huyện'}
+                  className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
+                />
               </div>
             </div>
+
+            {/* Address details */}
+            <div>
+              <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
+                {language === 'en'
+                  ? 'Detailed Address (House number, street)'
+                  : 'Địa chỉ chi tiết (Số nhà, tên đường, tòa nhà)'}{' '}
+                <span className="text-[#F4B99B]">*</span>
+              </label>
+              <input
+                type="text"
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                placeholder={language === 'en' ? 'e.g. 123 Le Loi Street, Ward 1' : 'Ví dụ: 123 Lê Lợi, Phường Bến Nghé'}
+                className={`w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border text-sm text-[#3E5149] focus:outline-hidden focus:border-[#4E8773] ${
+                  errors.address ? 'border-red-400' : 'border-[#EFE8D8]'
+                }`}
+              />
+              {errors.address && (
+                <p className="text-[11px] text-red-500 mt-1">{errors.address}</p>
+              )}
+            </div>
+
+            {/* Notes */}
+            <div>
+              <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
+                {language === 'en' ? 'Delivery Notes for Shipper (Optional)' : 'Ghi chú cho shipper (tùy chọn)'}
+              </label>
+              <textarea
+                rows={2}
+                value={formData.notes}
+                onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                placeholder={
+                  language === 'en'
+                    ? 'e.g. Deliver during business hours, call 15 mins prior...'
+                    : 'Ví dụ: Giao giờ hành chính, gọi trước khi giao 15 phút...'
+                }
+                className="w-full px-4 py-2 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-xs text-[#3E5149] focus:outline-hidden focus:border-[#4E8773]"
+              />
+            </div>
           </div>
+
+          {/* Step 2: Phương thức thanh toán */}
+          <div className="p-6 sm:p-7 rounded-3xl bg-white border border-[#EFE8D8] shadow-xs space-y-4">
+            <div className="flex items-center justify-between border-b border-[#FAF6EC] pb-3">
+              <h3 className="font-bold text-[#3E5149] text-base sm:text-lg flex items-center gap-2 font-heading">
+                <span className="w-6 h-6 rounded-full bg-[#4E8773] text-white text-xs font-bold flex items-center justify-center">
+                  2
+                </span>
+                {language === 'en' ? 'Payment Method' : 'Phương thức thanh toán'}
+              </h3>
+            </div>
+
+            <div className="space-y-3">
+              {/* COD */}
+              <label
+                className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
+                  formData.paymentMethod === 'cod'
+                    ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
+                    : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="cod"
+                  checked={formData.paymentMethod === 'cod'}
+                  onChange={() => setFormData({ ...formData, paymentMethod: 'cod' })}
+                  className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <Banknote className="w-5 h-5 text-[#4E8773]" />
+                    <span className="text-sm font-bold text-[#3E5149]">
+                      {language === 'en' ? 'COD – Cash on Delivery' : 'COD – Thanh toán tiền mặt khi nhận hàng'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#647B72] mt-1">
+                    {language === 'en'
+                      ? 'Inspect your items upon arrival before payment. Complete reassurance for parents.'
+                      : 'Kiểm tra hàng trước khi thanh toán. An tâm tuyệt đối cho ba mẹ.'}
+                  </p>
+                </div>
+              </label>
+
+              {/* Bank transfer */}
+              <label
+                className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
+                  formData.paymentMethod === 'bank_transfer'
+                    ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
+                    : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="bank_transfer"
+                  checked={formData.paymentMethod === 'bank_transfer'}
+                  onChange={() => setFormData({ ...formData, paymentMethod: 'bank_transfer' })}
+                  className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="w-5 h-5 text-[#4E8773]" />
+                    <span className="text-sm font-bold text-[#3E5149]">
+                      {language === 'en'
+                        ? 'Bank Wire Transfer (Vietcombank / MB / QR Pay)'
+                        : 'Chuyển khoản ngân hàng (Vietcombank / MB / QR Pay)'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#647B72] mt-1">
+                    {language === 'en'
+                      ? 'Direct bank transfer or automated VietQR scan for immediate processing.'
+                      : 'Chuyển khoản qua số tài khoản chính thức hoặc quét mã VietQR tự động.'}
+                  </p>
+
+                  {formData.paymentMethod === 'bank_transfer' && (
+                    <div className="mt-3 p-3.5 rounded-xl bg-white border border-[#D4E5DE] text-xs space-y-1.5 text-[#3E5149]">
+                      <div className="font-bold text-[#4E8773]">
+                        {language === 'en' ? 'Mầm Kids Bank Information:' : 'Thông tin tài khoản Mầm Kids:'}
+                      </div>
+                      <div>
+                        {language === 'en' ? 'Bank: ' : 'Ngân hàng: '}
+                        <strong>Vietcombank ({language === 'en' ? 'HCMC Branch' : 'Chi nhánh TP.HCM'})</strong>
+                      </div>
+                      <div>
+                        {language === 'en' ? 'Account Number: ' : 'Số tài khoản: '}
+                        <strong className="tabular-nums">1029 888 999</strong>
+                      </div>
+                      <div>
+                        {language === 'en' ? 'Account Name: ' : 'Chủ tài khoản: '}
+                        <strong>CÔNG TY TNHH THỜI TRANG MẦM KIDS</strong>
+                      </div>
+                      <div className="text-[11px] text-[#647B72] italic pt-1">
+                        {language === 'en'
+                          ? 'Transfer note: Your Name + Phone (System automatically verifies upon payment)'
+                          : 'Nội dung chuyển khoản: Tên bạn + SĐT (Hệ thống sẽ tự động xác nhận đơn ngay khi nhận tiền)'}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </label>
+
+              {/* E-wallet */}
+              <label
+                className={`flex items-start gap-3.5 p-4 rounded-2xl border cursor-pointer transition-all ${
+                  formData.paymentMethod === 'e_wallet'
+                    ? 'border-[#4E8773] bg-[#EBF3EF] ring-1 ring-[#4E8773]'
+                    : 'border-[#EFE8D8] bg-white hover:border-[#4E8773]'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="e_wallet"
+                  checked={formData.paymentMethod === 'e_wallet'}
+                  onChange={() => setFormData({ ...formData, paymentMethod: 'e_wallet' })}
+                  className="mt-1 text-[#4E8773] focus:ring-[#4E8773]"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <Smartphone className="w-5 h-5 text-[#4E8773]" />
+                    <span className="text-sm font-bold text-[#3E5149]">
+                      {language === 'en' ? 'E-Wallets MoMo / ZaloPay / ShopeePay' : 'Ví điện tử MoMo / ZaloPay / ShopeePay'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[#647B72] mt-1">
+                    {language === 'en'
+                      ? 'Seamless 1-tap checkout via your preferred digital wallet.'
+                      : 'Thanh toán một chạm nhanh chóng qua ứng dụng ví điện tử trên điện thoại.'}
+                  </p>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
 
           {/* Right Summary: Items & Order Total */}
           <div className="lg:col-span-5">
             <div className="p-6 rounded-3xl bg-white border border-[#EFE8D8] space-y-6 shadow-xs sticky top-28">
               <h3 className="font-bold text-[#3E5149] text-lg border-b border-[#EFE8D8] pb-3 flex items-center justify-between font-heading">
-                <span>Đơn hàng của bạn</span>
+                <span>{language === 'en' ? 'Your Order' : 'Đơn hàng của bạn'}</span>
                 <span className="text-xs font-semibold text-[#647B72]">
-                  {cart.length} sản phẩm
+                  {cart.length} {language === 'en' ? 'items' : 'sản phẩm'}
                 </span>
               </h3>
 
@@ -462,17 +507,20 @@ export const CheckoutPage: React.FC = () => {
                   <div key={item.id} className="flex items-center gap-3 text-xs">
                     <img
                       src={item.product.images[0]}
-                      alt={item.product.name}
+                      alt={getProductName(item.product)}
                       className="w-12 h-15 aspect-4/5 rounded-xl object-cover object-center bg-[#FAF6EE] shrink-0 border border-[#EFE8D8]"
                     />
                     <div className="flex-1 min-w-0">
-                      <p className="font-bold text-[#3E5149] truncate font-heading">{item.product.name}</p>
+                      <p className="font-bold text-[#3E5149] truncate font-heading">
+                        {getProductName(item.product)}
+                      </p>
                       <p className="text-[#647B72]">
-                        {item.selectedSize} · SL: {item.quantity}
+                        {item.selectedSize} · {language === 'en' ? 'Qty' : 'SL'}: {item.quantity}
                       </p>
                       {item.personalization && (
                         <p className="text-[10px] text-[#4E8773] font-semibold">
-                          Thêu tên: {item.personalization.childName}
+                          {language === 'en' ? 'Embroidery: ' : 'Thêu tên: '}
+                          {item.personalization.childName}
                         </p>
                       )}
                     </div>
@@ -487,9 +535,11 @@ export const CheckoutPage: React.FC = () => {
               <div className="p-3 rounded-2xl bg-[#FAF2DF] border border-[#EFE5CD] flex items-center justify-between text-xs">
                 <span className="flex items-center gap-1.5 font-bold text-[#3E5149]">
                   <Gift className="w-4 h-4 text-[#4E8773]" />
-                  Túi tote Mầm Kids tặng kèm
+                  {language === 'en' ? 'Complimentary Mầm Kids Canvas Tote' : 'Túi tote Mầm Kids tặng kèm'}
                 </span>
-                <span className="text-[#4E8773] font-bold">0 VND (Miễn phí)</span>
+                <span className="text-[#4E8773] font-bold">
+                  {language === 'en' ? '0 VND (Free Gift)' : '0 VND (Miễn phí)'}
+                </span>
               </div>
 
               {/* Member Rewards Section */}
@@ -498,24 +548,26 @@ export const CheckoutPage: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[#355F52] flex items-center gap-1.5 font-heading">
                       <Sparkles className="w-4 h-4 text-[#ECA032]" />
-                      Ưu đãi thành viên Mầm Kids
+                      {language === 'en' ? 'Mầm Kids Member Rewards' : 'Ưu đãi thành viên Mầm Kids'}
                     </span>
                     <span className="text-[11px] font-bold text-[#ECA032] tabular-nums">
-                      Ví: {user.mamPoints} điểm
+                      {language === 'en' ? `Wallet: ${user.mamPoints} pts` : `Ví: ${user.mamPoints} điểm`}
                     </span>
                   </div>
 
                   {/* Voucher picker */}
                   <div>
                     <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                      Chọn voucher thành viên:
+                      {language === 'en' ? 'Select member voucher:' : 'Chọn voucher thành viên:'}
                     </label>
                     <select
                       value={selectedVoucherCode}
                       onChange={(e) => setSelectedVoucherCode(e.target.value)}
                       className="w-full px-3 py-2 rounded-xl bg-white border border-[#EFE8D8] text-xs text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                     >
-                      <option value="">Không sử dụng voucher</option>
+                      <option value="">
+                        {language === 'en' ? 'Do not use voucher' : 'Không sử dụng voucher'}
+                      </option>
                       {availableVouchers.map((v) => (
                         <option key={v.id} value={v.code}>
                           {v.code} - {v.title}
@@ -535,7 +587,9 @@ export const CheckoutPage: React.FC = () => {
                           className="w-4 h-4 rounded text-[#4E8773] focus:ring-[#4E8773]"
                         />
                         <span className="font-semibold">
-                          Dùng Điểm Mầm ({Math.floor(user.mamPoints / 100) * 100} điểm)
+                          {language === 'en'
+                            ? `Use Mầm Points (${Math.floor(user.mamPoints / 100) * 100} pts)`
+                            : `Dùng Điểm Mầm (${Math.floor(user.mamPoints / 100) * 100} điểm)`}
                         </span>
                       </label>
                       <span className="text-xs font-bold text-green-700">
@@ -547,20 +601,30 @@ export const CheckoutPage: React.FC = () => {
                   {/* Expected points to earn */}
                   <div className="pt-1 text-[11px] text-[#4E8773] font-bold flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />
-                    <span>Đơn này sẽ tích lũy: +{pointsEarnedCount} Điểm Mầm</span>
+                    <span>
+                      {language === 'en'
+                        ? `This order earns: +${pointsEarnedCount} Mầm Points`
+                        : `Đơn này sẽ tích lũy: +${pointsEarnedCount} Điểm Mầm`}
+                    </span>
                   </div>
                 </div>
               ) : (
                 <div className="p-3.5 rounded-2xl bg-[#FAF6EC] border border-[#F5DFA0] flex items-center justify-between text-xs">
                   <div>
-                    <p className="font-bold text-[#355F52]">Đăng ký thành viên Mầm Kids</p>
-                    <p className="text-[11px] text-[#6A7F77]">Tích điểm và nhận voucher 10% ngay!</p>
+                    <p className="font-bold text-[#355F52]">
+                      {language === 'en' ? 'Join Mầm Kids Membership' : 'Đăng ký thành viên Mầm Kids'}
+                    </p>
+                    <p className="text-[11px] text-[#6A7F77]">
+                      {language === 'en'
+                        ? 'Earn reward points & get a 10% voucher immediately!'
+                        : 'Tích điểm và nhận voucher 10% ngay!'}
+                    </p>
                   </div>
                   <Link
                     to="/dang-nhap"
                     className="px-3 py-1.5 rounded-xl bg-[#4E8773] text-white font-bold text-[11px] shrink-0 hover:bg-[#355F52]"
                   >
-                    Đăng nhập
+                    {language === 'en' ? 'Sign In' : 'Đăng nhập'}
                   </Link>
                 </div>
               )}
@@ -568,17 +632,19 @@ export const CheckoutPage: React.FC = () => {
               {/* Calculations */}
               <div className="space-y-2.5 text-xs sm:text-sm text-[#5D6F66] pt-2 border-t border-[#EFE8D8]">
                 <div className="flex justify-between">
-                  <span>Tạm tính</span>
+                  <span>{language === 'en' ? 'Subtotal' : 'Tạm tính'}</span>
                   <span className="font-semibold tabular-nums text-[#3E5149]">
                     {formatVND(subtotal)}
                   </span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span>Phí vận chuyển</span>
+                  <span>{language === 'en' ? 'Shipping Fee' : 'Phí vận chuyển'}</span>
                   <span className="font-semibold tabular-nums">
                     {shippingFee === 0 ? (
-                      <span className="text-[#4E8773] font-bold">Miễn phí giao hàng</span>
+                      <span className="text-[#4E8773] font-bold">
+                        {language === 'en' ? 'Free Shipping' : 'Miễn phí giao hàng'}
+                      </span>
                     ) : (
                       formatVND(shippingFee)
                     )}
@@ -594,13 +660,15 @@ export const CheckoutPage: React.FC = () => {
 
                 {pointsDiscount > 0 && (
                   <div className="flex justify-between text-green-700 font-semibold">
-                    <span>Điểm Mầm quy đổi</span>
+                    <span>{language === 'en' ? 'Mầm Points Discount' : 'Điểm Mầm quy đổi'}</span>
                     <span className="tabular-nums">-{formatVND(pointsDiscount)}</span>
                   </div>
                 )}
 
                 <div className="pt-3 border-t border-[#EFE8D8] flex justify-between items-baseline">
-                  <span className="text-base font-bold text-[#3E5149]">Tổng thanh toán</span>
+                  <span className="text-base font-bold text-[#3E5149]">
+                    {language === 'en' ? 'Total Payment' : 'Tổng thanh toán'}
+                  </span>
                   <span className="text-2xl font-black text-[#4E8773] tabular-nums font-heading">
                     {formatVND(finalTotal)}
                   </span>
@@ -611,21 +679,29 @@ export const CheckoutPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 px-6 rounded-2xl bg-[#4E8773] hover:bg-[#417361] text-white font-bold text-sm sm:text-base transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-70"
+                className="w-full py-4 px-6 rounded-2xl bg-[#4E8773] hover:bg-[#417361] text-white font-bold text-sm sm:text-base transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
               >
                 {isSubmitting ? (
-                  <span>Đang xử lý đơn hàng...</span>
+                  <span>{language === 'en' ? 'Processing order...' : 'Đang xử lý đơn hàng...'}</span>
                 ) : (
                   <>
                     <CheckCircle2 className="w-5 h-5" />
-                    <span>Hoàn tất đặt hàng</span>
+                    <span>{language === 'en' ? 'Complete Order' : 'Hoàn tất đặt hàng'}</span>
                   </>
                 )}
               </button>
 
               <div className="text-[11px] text-[#647B72] text-center space-y-1">
-                <p>Nhân viên Mầm Kids sẽ gọi điện xác nhận đơn trong vòng 15 phút.</p>
-                <p>Đổi trả miễn phí trong 15 ngày nếu bé mặc không vừa.</p>
+                <p>
+                  {language === 'en'
+                    ? 'Mầm Kids representative will confirm order via SMS/call within 15 minutes.'
+                    : 'Nhân viên Mầm Kids sẽ gọi điện xác nhận đơn trong vòng 15 phút.'}
+                </p>
+                <p>
+                  {language === 'en'
+                    ? 'Free 15-day exchange policy if sizing is not ideal.'
+                    : 'Đổi trả miễn phí trong 15 ngày nếu bé mặc không vừa.'}
+                </p>
               </div>
             </div>
           </div>

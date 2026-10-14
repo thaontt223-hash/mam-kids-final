@@ -169,7 +169,7 @@ export const Header: React.FC = () => {
               className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
                 language === 'vi' ? 'bg-[#285A48] text-white shadow-2xs' : 'text-[#285A48] hover:text-[#1E3F33]'
               }`}
-              aria-label="Chuyển ngôn ngữ sang tiếng Việt"
+              aria-label={language === 'en' ? 'Switch language to Vietnamese' : 'Chuyển ngôn ngữ sang tiếng Việt'}
             >
               VI
             </button>
@@ -193,8 +193,8 @@ export const Header: React.FC = () => {
           {/* Mobile Menu trigger */}
           <button
             onClick={() => setMobileMenuOpen(true)}
-            className="lg:hidden p-2.5 -ml-2 text-[#2F403A] hover:text-[#4E8773] hover:bg-[#EAF3EF] rounded-2xl transition-colors"
-            aria-label="Mở menu"
+            className="lg:hidden p-2.5 -ml-2 text-[#2F403A] hover:text-[#4E8773] hover:bg-[#EAF3EF] rounded-2xl transition-colors cursor-pointer"
+            aria-label={language === 'en' ? 'Open navigation menu' : 'Mở menu'}
           >
             <Menu className="w-5 h-5" />
           </button>
@@ -446,7 +446,7 @@ export const Header: React.FC = () => {
                 className={`px-2 py-1 rounded-lg transition-all cursor-pointer ${
                   language === 'vi' ? 'bg-[#4E8773] text-white shadow-2xs font-extrabold' : 'text-[#355F52] hover:text-[#2F403A]'
                 }`}
-                aria-label="Tiếng Việt"
+                aria-label={language === 'en' ? 'Switch to Vietnamese' : 'Tiếng Việt'}
               >
                 VI
               </button>
@@ -495,8 +495,8 @@ export const Header: React.FC = () => {
                   ? 'bg-[#EAF3EF] text-[#355F52] hover:bg-[#D2E3DC]'
                   : 'text-[#2F403A] hover:text-[#4E8773] hover:bg-[#EAF3EF]'
               }`}
-              aria-label={isLoggedIn ? `Tài khoản ${user?.fullName}` : t('nav.account')}
-              title={isLoggedIn ? `Tài khoản: ${user?.fullName}` : t('nav.account')}
+              aria-label={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản ${user?.fullName}`) : t('nav.account')}
+              title={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản: ${user?.fullName}`) : t('nav.account')}
             >
               {isLoggedIn ? (
                 <div className="flex items-center gap-1.5">
@@ -556,7 +556,7 @@ export const Header: React.FC = () => {
                 to="/"
                 onClick={() => setMobileMenuOpen(false)}
                 style={{ direction: 'ltr', transform: 'none' }}
-                aria-label="Về trang chủ Mầm Kids"
+                aria-label={language === 'en' ? 'Back to Mầm Kids homepage' : 'Về trang chủ Mầm Kids'}
               >
                 <Logo size="sm" isLink={false} />
               </Link>
@@ -624,7 +624,7 @@ export const Header: React.FC = () => {
                       type="button"
                       onClick={() => setMobileExpanded(mobileExpanded === 'products' ? null : 'products')}
                       className="p-1.5 text-[#5D726A] hover:text-[#4E8773] rounded-lg cursor-pointer"
-                      aria-label="Mở danh mục sản phẩm"
+                      aria-label={language === 'en' ? 'Toggle products menu' : 'Mở danh mục sản phẩm'}
                     >
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded === 'products' ? 'rotate-180 text-[#4E8773]' : ''}`} />
                     </button>
@@ -677,7 +677,7 @@ export const Header: React.FC = () => {
                       type="button"
                       onClick={() => setMobileExpanded(mobileExpanded === 'mamXanh' ? null : 'mamXanh')}
                       className="p-1.5 text-[#5D726A] hover:text-[#4E8773] rounded-lg cursor-pointer"
-                      aria-label="Mở danh mục Mầm Xanh"
+                      aria-label={language === 'en' ? 'Toggle Mầm Xanh menu' : 'Mở danh mục Mầm Xanh'}
                     >
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded === 'mamXanh' ? 'rotate-180 text-[#4E8773]' : ''}`} />
                     </button>
@@ -723,7 +723,7 @@ export const Header: React.FC = () => {
                       type="button"
                       onClick={() => setMobileExpanded(mobileExpanded === 'promo' ? null : 'promo')}
                       className="p-1.5 text-[#5D726A] hover:text-[#4E8773] rounded-lg cursor-pointer"
-                      aria-label="Mở danh mục khuyến mãi"
+                      aria-label={language === 'en' ? 'Toggle promotions menu' : 'Mở danh mục khuyến mãi'}
                     >
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded === 'promo' ? 'rotate-180 text-[#4E8773]' : ''}`} />
                     </button>
@@ -766,7 +766,7 @@ export const Header: React.FC = () => {
                       type="button"
                       onClick={() => setMobileExpanded(mobileExpanded === 'policy' ? null : 'policy')}
                       className="p-1.5 text-[#5D726A] hover:text-[#4E8773] rounded-lg cursor-pointer"
-                      aria-label="Mở chính sách khách hàng"
+                      aria-label={language === 'en' ? 'Toggle customer policies menu' : 'Mở chính sách khách hàng'}
                     >
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileExpanded === 'policy' ? 'rotate-180 text-[#4E8773]' : ''}`} />
                     </button>

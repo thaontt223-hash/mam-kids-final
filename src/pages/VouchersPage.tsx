@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   Ticket,
   Copy,
@@ -16,6 +17,7 @@ import {
 
 export const VouchersPage: React.FC = () => {
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
   const { user, isLoggedIn } = useAuth();
   const { showToast } = useCart();
 
@@ -37,7 +39,7 @@ export const VouchersPage: React.FC = () => {
   const handleCopy = (code: string) => {
     navigator.clipboard?.writeText(code);
     setCopiedCode(code);
-    showToast('Đã sao chép mã voucher!', code);
+    showToast(language === 'en' ? 'Voucher code copied!' : 'Đã sao chép mã voucher!', code);
     setTimeout(() => {
       setCopiedCode(null);
     }, 2500);
@@ -46,7 +48,12 @@ export const VouchersPage: React.FC = () => {
   const handleApplyCustomCode = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputCode.trim()) return;
-    showToast('Mã voucher hợp lệ!', `Đã thêm mã ${inputCode.toUpperCase()} vào ví của bạn.`);
+    showToast(
+      language === 'en' ? 'Valid voucher code!' : 'Mã voucher hợp lệ!',
+      language === 'en'
+        ? `Added code ${inputCode.toUpperCase()} to your wallet.`
+        : `Đã thêm mã ${inputCode.toUpperCase()} vào ví của bạn.`
+    );
     setInputCode('');
   };
 
@@ -55,14 +62,16 @@ export const VouchersPage: React.FC = () => {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {t('nav.home')}
         </Link>
         <span>/</span>
         <Link to="/tai-khoan" className="hover:text-[#4E8773] transition-colors">
-          Tài khoản
+          {language === 'en' ? 'Account' : 'Tài khoản'}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Kho voucher của tôi</span>
+        <span className="text-[#355F52] font-semibold">
+          {language === 'en' ? 'My Voucher Wallet' : 'Kho voucher của tôi'}
+        </span>
       </nav>
 
       {/* Header Banner */}
@@ -70,13 +79,15 @@ export const VouchersPage: React.FC = () => {
         <div>
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EAF3EF] text-[#355F52] mb-3">
             <Ticket className="w-3.5 h-3.5" />
-            Đặc quyền thành viên Mầm
+            {language === 'en' ? 'Mầm Member Privileges' : 'Đặc quyền thành viên Mầm'}
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight">
-            Kho voucher của tôi ({availableVouchers.length})
+            {language === 'en' ? `My Voucher Wallet (${availableVouchers.length})` : `Kho voucher của tôi (${availableVouchers.length})`}
           </h1>
           <p className="text-xs sm:text-sm text-[#6A7F77] mt-1 max-w-xl">
-            Sử dụng mã ưu đãi khi thanh toán hoặc tự động chọn trực tiếp ngay tại trang thanh toán đơn hàng.
+            {language === 'en'
+              ? 'Apply coupon codes during checkout or choose directly from your saved voucher wallet.'
+              : 'Sử dụng mã ưu đãi khi thanh toán hoặc tự động chọn trực tiếp ngay tại trang thanh toán đơn hàng.'}
           </p>
         </div>
 
@@ -86,14 +97,14 @@ export const VouchersPage: React.FC = () => {
             type="text"
             value={inputCode}
             onChange={(e) => setInputCode(e.target.value)}
-            placeholder="Nhập mã voucher mới..."
+            placeholder={language === 'en' ? 'Enter voucher code...' : 'Nhập mã voucher mới...'}
             className="px-4 py-2.5 rounded-2xl bg-white border border-[#EFE8D8] text-xs text-[#2F403A] placeholder-[#8B9D95] focus:outline-hidden focus:border-[#4E8773] uppercase font-bold"
           />
           <button
             type="submit"
             className="px-4 py-2.5 rounded-2xl bg-[#355F52] hover:bg-[#28473D] text-white text-xs font-bold transition-colors shrink-0 shadow-xs cursor-pointer"
           >
-            Lưu mã
+            {language === 'en' ? 'Save Code' : 'Lưu mã'}
           </button>
         </form>
       </div>
@@ -106,7 +117,7 @@ export const VouchersPage: React.FC = () => {
             activeTab === 'available' ? 'text-[#355F52]' : 'text-[#6A7F77] hover:text-[#2F403A]'
           }`}
         >
-          <span>Khả dụng ({availableVouchers.length})</span>
+          <span>{language === 'en' ? `Available (${availableVouchers.length})` : `Khả dụng (${availableVouchers.length})`}</span>
           {activeTab === 'available' && (
             <span className="absolute bottom-0 left-0 right-0 h-0.75 bg-[#355F52] rounded-full" />
           )}
@@ -118,7 +129,7 @@ export const VouchersPage: React.FC = () => {
             activeTab === 'used' ? 'text-[#355F52]' : 'text-[#6A7F77] hover:text-[#2F403A]'
           }`}
         >
-          <span>Đã sử dụng / Hết hạn ({usedVouchers.length})</span>
+          <span>{language === 'en' ? `Used / Expired (${usedVouchers.length})` : `Đã sử dụng / Hết hạn (${usedVouchers.length})`}</span>
           {activeTab === 'used' && (
             <span className="absolute bottom-0 left-0 right-0 h-0.75 bg-[#355F52] rounded-full" />
           )}
@@ -141,25 +152,25 @@ export const VouchersPage: React.FC = () => {
                   <div className="flex items-center justify-between gap-2 mb-3">
                     <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FAF6EC] text-[#355F52] border border-[#F5DFA0]">
                       <Gift className="w-3 h-3 text-[#ECA032]" />
-                      {voucher.badge || 'Ưu đãi'}
+                      {language === 'en' ? (voucher.badgeEn || voucher.badge || 'Offer') : (voucher.badge || 'Ưu đãi')}
                     </span>
                     <span className="text-[11px] text-[#6A7F77] flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      HSD: {voucher.expiryDate}
+                      {language === 'en' ? 'Exp:' : 'HSD:'} {voucher.expiryDate}
                     </span>
                   </div>
 
                   <h3 className="font-black text-base sm:text-lg text-[#2F403A] font-heading">
-                    {voucher.title}
+                    {language === 'en' ? (voucher.titleEn || voucher.title) : voucher.title}
                   </h3>
                   <p className="text-xs text-[#6A7F77] mt-1 leading-relaxed">
-                    {voucher.description}
+                    {language === 'en' ? (voucher.descriptionEn || voucher.description) : voucher.description}
                   </p>
 
                   <div className="mt-4 p-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] flex items-center justify-between">
                     <div>
                       <span className="text-[10px] text-[#6A7F77] block font-semibold uppercase">
-                        Mã voucher:
+                        {language === 'en' ? 'Voucher Code:' : 'Mã voucher:'}
                       </span>
                       <span className="font-black text-base text-[#355F52] font-heading tracking-wider">
                         {voucher.code}
@@ -173,12 +184,12 @@ export const VouchersPage: React.FC = () => {
                       {copiedCode === voucher.code ? (
                         <>
                           <Check className="w-3.5 h-3.5 text-green-600" />
-                          <span className="text-green-600">Đã sao chép</span>
+                          <span className="text-green-600">{language === 'en' ? 'Copied' : 'Đã sao chép'}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3.5 h-3.5" />
-                          <span>Sao chép</span>
+                          <span>{language === 'en' ? 'Copy' : 'Sao chép'}</span>
                         </>
                       )}
                     </button>
@@ -188,15 +199,17 @@ export const VouchersPage: React.FC = () => {
                 <div className="mt-5 pt-4 border-t border-[#FAF6EC] flex items-center justify-between">
                   <span className="text-[11px] text-[#6A7F77]">
                     {voucher.minOrderValue > 0
-                      ? `Áp dụng đơn từ ${voucher.minOrderValue.toLocaleString('vi-VN')} đ`
-                      : 'Áp dụng cho mọi giá trị đơn hàng'}
+                      ? (language === 'en'
+                          ? `Orders from ${voucher.minOrderValue.toLocaleString('vi-VN')} VND`
+                          : `Áp dụng đơn từ ${voucher.minOrderValue.toLocaleString('vi-VN')} đ`)
+                      : (language === 'en' ? 'Valid for all order values' : 'Áp dụng cho mọi giá trị đơn hàng')}
                   </span>
                   <Link
                     to="/san-pham"
                     className="px-4 py-2 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors flex items-center gap-1 shadow-xs"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Dùng ngay</span>
+                    <span>{language === 'en' ? 'Shop Now' : 'Dùng ngay'}</span>
                   </Link>
                 </div>
               </div>
@@ -205,9 +218,13 @@ export const VouchersPage: React.FC = () => {
         ) : (
           <div className="text-center py-12 bg-white rounded-3xl border border-[#EFE8D8]">
             <Ticket className="w-12 h-12 text-[#C1D2CB] mx-auto mb-3" />
-            <h3 className="text-base font-bold text-[#2F403A]">Hiện chưa có voucher khả dụng</h3>
+            <h3 className="text-base font-bold text-[#2F403A]">
+              {language === 'en' ? 'No active vouchers at the moment' : 'Hiện chưa có voucher khả dụng'}
+            </h3>
             <p className="text-xs text-[#6A7F77] mt-1">
-              Bạn hãy theo dõi các chương trình mùa mới hoặc tích Điểm Mầm để đổi voucher nhé!
+              {language === 'en'
+                ? 'Follow new seasonal programs or redeem your Mầm Points to receive exclusive vouchers!'
+                : 'Bạn hãy theo dõi các chương trình mùa mới hoặc tích Điểm Mầm để đổi voucher nhé!'}
             </p>
           </div>
         )
@@ -221,25 +238,29 @@ export const VouchersPage: React.FC = () => {
               >
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-gray-100 text-gray-600">
-                    ĐÃ SỬ DỤNG
+                    {language === 'en' ? 'USED' : 'ĐÃ SỬ DỤNG'}
                   </span>
                   <span className="text-[11px] text-gray-500">
-                    Sử dụng ngày: {voucher.usedAt || 'Trước đây'}
+                    {language === 'en' ? 'Used on:' : 'Sử dụng ngày:'} {voucher.usedAt || (language === 'en' ? 'Earlier' : 'Trước đây')}
                   </span>
                 </div>
                 <h3 className="font-bold text-base text-gray-600 font-heading">
-                  {voucher.title}
+                  {language === 'en' ? (voucher.titleEn || voucher.title) : voucher.title}
                 </h3>
-                <p className="text-xs text-gray-500 mt-1">{voucher.description}</p>
+                <p className="text-xs text-gray-500 mt-1">
+                  {language === 'en' ? (voucher.descriptionEn || voucher.description) : voucher.description}
+                </p>
                 <div className="mt-3 text-xs font-mono font-bold text-gray-500">
-                  Mã: {voucher.code}
+                  {language === 'en' ? 'Code:' : 'Mã:'} {voucher.code}
                 </div>
               </div>
             ))}
           </div>
         ) : (
           <div className="text-center py-12 bg-white rounded-3xl border border-[#EFE8D8]">
-            <p className="text-xs text-[#6A7F77]">Chưa có voucher nào đã sử dụng.</p>
+            <p className="text-xs text-[#6A7F77]">
+              {language === 'en' ? 'No used vouchers found.' : 'Chưa có voucher nào đã sử dụng.'}
+            </p>
           </div>
         )
       )}

@@ -1249,53 +1249,65 @@ export function calculateSizeRecommendation(age: number, height: number, weight:
     return {
       recommendedSize: 'Size 140',
       ageRange: '11–12 tuổi',
+      ageRangeEn: '11–12 yrs',
       heightRange: '135 – 145 cm',
       weightRange: '30 – 38 kg',
-      advice: 'Size 140 là kích thước chuẩn nhất. Nếu bé có tạng người mũm mĩm hoặc thích mặc form rộng rãi giấu dáng, bố mẹ có thể hoàn toàn yên tâm chọn size này.'
+      advice: 'Size 140 là kích thước chuẩn nhất. Nếu bé có tạng người mũm mĩm hoặc thích mặc form rộng rãi giấu dáng, bố mẹ có thể hoàn toàn yên tâm chọn size này.',
+      adviceEn: 'Size 140 is the most suitable standard size. If your child has a sturdier build or prefers a relaxed fit, parents can comfortably pick this size.'
     };
   }
   if (weight >= 25 || height >= 125 || age >= 9) {
     return {
       recommendedSize: 'Size 130',
       ageRange: '9–10 tuổi',
+      ageRangeEn: '9–10 yrs',
       heightRange: '125 – 135 cm',
       weightRange: '25 – 30 kg',
-      advice: 'Size 130 sẽ vừa vặn và tôn dáng bé nhất. Chiều dài áo và ống quần vừa vặn cử động tự do.'
+      advice: 'Size 130 sẽ vừa vặn và tôn dáng bé nhất. Chiều dài áo và ống quần vừa vặn cử động tự do.',
+      adviceEn: 'Size 130 will fit best and flatter your child’s frame. Shirt length and trouser hem allow free movement.'
     };
   }
   if (weight >= 20 || height >= 115 || age >= 7) {
     return {
       recommendedSize: 'Size 120',
       ageRange: '7–8 tuổi',
+      ageRangeEn: '7–8 yrs',
       heightRange: '115 – 125 cm',
       weightRange: '20 – 25 kg',
-      advice: 'Size 120 chuẩn cho độ tuổi tiểu học năng động. Vải co giãn tốt giúp bé thoải mái chạy nhảy.'
+      advice: 'Size 120 chuẩn cho độ tuổi tiểu học năng động. Vải co giãn tốt giúp bé thoải mái chạy nhảy.',
+      adviceEn: 'Size 120 is standard for active primary school age. Flexible breathable fabric helps your child run and jump freely.'
     };
   }
   if (weight >= 16 || height >= 105 || age >= 5) {
     return {
       recommendedSize: 'Size 110',
       ageRange: '5–6 tuổi',
+      ageRangeEn: '5–6 yrs',
       heightRange: '105 – 115 cm',
       weightRange: '16 – 20 kg',
-      advice: 'Size 110 rất phù hợp. Nếu chiều cao bé ở mức cận trên (115cm), bố mẹ có thể cân nhắc chọn Size 120 để bé mặc được lâu hơn.'
+      advice: 'Size 110 rất phù hợp. Nếu chiều cao bé ở mức cận trên (115cm), bố mẹ có thể cân nhắc chọn Size 120 để bé mặc được lâu hơn.',
+      adviceEn: 'Size 110 is very suitable. If your child’s height is at the upper limit (115cm), you may consider Size 120 for longer wear.'
     };
   }
   if (weight >= 13 || height >= 95 || age >= 3) {
     return {
       recommendedSize: 'Size 100',
       ageRange: '3–4 tuổi',
+      ageRangeEn: '3–4 yrs',
       heightRange: '95 – 105 cm',
       weightRange: '13 – 16 kg',
-      advice: 'Size 100 là lựa chọn tối ưu cho bé mầm non, chất liệu 100% cotton bảo vệ tối đa làn da nhạy cảm.'
+      advice: 'Size 100 là lựa chọn tối ưu cho bé mầm non, chất liệu 100% cotton bảo vệ tối đa làn da nhạy cảm.',
+      adviceEn: 'Size 100 is optimal for kindergarten toddlers; 100% natural cotton protects delicate skin.'
     };
   }
   return {
     recommendedSize: 'Size 90',
     ageRange: '2–3 tuổi',
+    ageRangeEn: '2–3 yrs',
     heightRange: '85 – 95 cm',
     weightRange: '11 – 13 kg',
-    advice: 'Size 90 thiết kế cúc cài mềm hoặc cạp chun co giãn cực kỳ êm dịu cho các bé chập chững.'
+    advice: 'Size 90 thiết kế cúc cài mềm hoặc cạp chun co giãn cực kỳ êm dịu cho các bé chập chững.',
+    adviceEn: 'Size 90 features soft snap buttons or elastic waists, extra gentle for toddlers.'
   };
 }
 

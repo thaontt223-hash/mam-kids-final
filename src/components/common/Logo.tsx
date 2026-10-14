@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -28,6 +29,7 @@ export const Logo: React.FC<LogoProps> = ({
   isLink = true,
   iconOnly = false
 }) => {
+  const { language } = useLanguage();
   const isDark = variant === 'dark';
 
   // Pixel sizing for the vector icon
@@ -190,14 +192,14 @@ export const Logo: React.FC<LogoProps> = ({
             </span>
           </div>
 
-          {/* Dòng phụ định vị ngành hàng: THỜI TRANG TRẺ EM */}
+          {/* Dòng phụ định vị ngành hàng: THỜI TRANG TRẺ EM / KIDS FASHION */}
           {showSubtitle && (
             <span
               className={`font-bold uppercase tracking-wider font-sans ${textClasses.sub} ${
                 isDark ? 'text-[#E6F1EB]/90' : 'text-[#4E8773]'
               }`}
             >
-              Thời trang trẻ em
+              {language === 'en' ? 'Kids Fashion 3–12' : 'Thời trang trẻ em'}
             </span>
           )}
 
@@ -208,7 +210,9 @@ export const Logo: React.FC<LogoProps> = ({
                 isDark ? 'text-[#F4C95D]' : 'text-[#3E6F5D]'
               }`}
             >
-              Không chỉ mặc đẹp – cùng bé gieo thói quen xanh
+              {language === 'en'
+                ? 'More Than Style – Growing Green Habits Together'
+                : 'Không chỉ mặc đẹp – cùng bé gieo thói quen xanh'}
             </span>
           )}
         </div>
@@ -221,8 +225,8 @@ export const Logo: React.FC<LogoProps> = ({
       <Link
         to="/"
         className="inline-flex items-center group bg-transparent focus:outline-hidden hover:opacity-95 transition-opacity"
-        title="Mầm Kids – Thời trang trẻ em"
-        aria-label="Về trang chủ Mầm Kids"
+        title={language === 'en' ? 'Mầm Kids – Kids Fashion' : 'Mầm Kids – Thời trang trẻ em'}
+        aria-label={language === 'en' ? 'Back to Mầm Kids Home' : 'Về trang chủ Mầm Kids'}
       >
         {logoContent}
       </Link>

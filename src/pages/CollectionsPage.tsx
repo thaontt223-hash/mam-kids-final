@@ -5,8 +5,10 @@ import { ProductCard } from '../components/common/ProductCard';
 import { SizeAdvisorModal } from '../components/common/SizeAdvisorModal';
 import { OutfitStylingSection } from '../components/common/OutfitStylingSection';
 import { Product } from '../types';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const CollectionsPage: React.FC = () => {
+  const { language, t } = useLanguage();
   const [activeCollectionId, setActiveCollectionId] = useState<string>('all');
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
 
@@ -16,13 +18,15 @@ export const CollectionsPage: React.FC = () => {
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FAF2DF] border border-[#F4E5BD] text-[#355F52] text-xs font-bold">
           <Sparkles className="w-3.5 h-3.5 text-[#4E8773]" />
-          <span>LOOKBOOK & BỘ SƯU TẬP 2026</span>
+          <span>{language === 'en' ? 'LOOKBOOK & 2026 COLLECTIONS' : 'LOOKBOOK & BỘ SƯU TẬP 2026'}</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-[#2F403A] font-heading">
-          Bộ sưu tập thời trang Mầm Kids
+          {language === 'en' ? 'Mầm Kids Fashion Collections' : 'Bộ sưu tập thời trang Mầm Kids'}
         </h1>
         <p className="text-sm sm:text-base text-[#5D726A] leading-relaxed">
-          7 concept thời trang độc đáo dành cho bé trai và bé gái: mềm mại, an toàn, chuẩn phong cách hiện đại đong đầy yêu thương.
+          {language === 'en'
+            ? 'Distinct seasonal concepts crafted for boys and girls: gentle on skin, completely safe, and inspired by nature.'
+            : '7 concept thời trang độc đáo dành cho bé trai và bé gái: mềm mại, an toàn, chuẩn phong cách hiện đại đong đầy yêu thương.'}
         </p>
       </div>
 
@@ -36,7 +40,7 @@ export const CollectionsPage: React.FC = () => {
               : 'bg-white text-[#2F403A] border border-[#EFE8D8] hover:border-[#355F52]'
           }`}
         >
-          Tất cả 7 bộ sưu tập
+          {language === 'en' ? 'All 7 Collections' : 'Tất cả 7 bộ sưu tập'}
         </button>
         {COLLECTIONS.map((c) => (
           <button
@@ -80,7 +84,9 @@ export const CollectionsPage: React.FC = () => {
                   </div>
                   <div className="lg:col-span-8 p-6 sm:p-8 space-y-2">
                     <span className="text-xs font-black uppercase tracking-wider text-[#355F52] block font-heading">
-                      Concept Bộ Sưu Tập · {colProducts.length} Thiết Kế
+                      {language === 'en'
+                        ? `Collection Concept · ${colProducts.length} Designs`
+                        : `Concept Bộ Sưu Tập · ${colProducts.length} Thiết Kế`}
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading">
                       {col.title}
@@ -111,8 +117,12 @@ export const CollectionsPage: React.FC = () => {
 
       {/* Embedded Complete Outfits Showcase */}
       <OutfitStylingSection
-        title="GỢI Ý PHỐI CÙNG TRỌN BỘ OUTFIT"
-        subtitle="Khám phá các set đồ dạo phố, thể thao và công chúa pastel được phối sẵn hoàn chỉnh"
+        title={language === 'en' ? 'COMPLETE STYLED OUTFITS' : 'GỢI Ý PHỐI CÙNG TRỌN BỘ OUTFIT'}
+        subtitle={
+          language === 'en'
+            ? 'Explore pre-coordinated streetwear, activewear, and pastel sets styled for effortless mornings'
+            : 'Khám phá các set đồ dạo phố, thể thao và công chúa pastel được phối sẵn hoàn chỉnh'
+        }
         className="rounded-[32px] overflow-hidden"
       />
 

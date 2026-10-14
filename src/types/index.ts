@@ -154,7 +154,9 @@ export interface MemberVoucher {
   id: string;
   code: string;
   title: string;
+  titleEn?: string;
   description: string;
+  descriptionEn?: string;
   discountType: 'percentage' | 'fixed' | 'shipping';
   discountValue: number;
   minOrderValue: number;
@@ -163,6 +165,7 @@ export interface MemberVoucher {
   isUsed: boolean;
   usedAt?: string;
   badge?: string;
+  badgeEn?: string;
 }
 
 export interface MamPointsHistory {
@@ -171,6 +174,7 @@ export interface MamPointsHistory {
   type: 'earn' | 'redeem' | 'bonus';
   points: number;
   description: string;
+  descriptionEn?: string;
   orderId?: string;
 }
 

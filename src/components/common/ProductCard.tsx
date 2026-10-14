@@ -60,7 +60,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="absolute top-2.5 left-2.5 flex flex-col gap-1 z-10 pointer-events-none max-w-[85%]">
           {product.isSet && (
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#355F52] text-[#F5DFA0] text-[10px] font-bold shadow-2xs backdrop-blur-xs">
-              <span>✨</span> Set phối
+              <span>✨</span> {language === 'en' ? 'Styled Set' : 'Set phối'}
             </span>
           )}
           {product.isGreenProduct && (

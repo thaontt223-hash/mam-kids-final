@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   Package,
   Clock,
@@ -19,6 +20,7 @@ export const OrdersHistoryPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, isLoggedIn } = useAuth();
   const { orders, addToCart, showToast } = useCart();
+  const { language } = useLanguage();
 
   const [filterStatus, setFilterStatus] = useState<string>('all');
 
@@ -44,20 +46,36 @@ export const OrdersHistoryPage: React.FC = () => {
       addToCart(item.product, item.selectedSize, item.selectedColor, item.quantity, item.personalization);
       count++;
     });
-    showToast(`Đã thêm ${count} sản phẩm từ đơn #${order.orderId} vào giỏ hàng!`);
+    showToast(
+      language === 'en'
+        ? `Added ${count} items from order #${order.orderId} to bag!`
+        : `Đã thêm ${count} sản phẩm từ đơn #${order.orderId} vào giỏ hàng!`
+    );
     navigate('/gio-hang');
   };
 
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'cho-xac-nhan':
-        return { label: 'Chờ xác nhận', bg: 'bg-amber-50 text-amber-700 border-amber-200' };
+        return {
+          label: language === 'en' ? 'Pending Confirmation' : 'Chờ xác nhận',
+          bg: 'bg-amber-50 text-amber-700 border-amber-200'
+        };
       case 'dang-chuan-bi':
-        return { label: 'Đang chuẩn bị', bg: 'bg-blue-50 text-blue-700 border-blue-200' };
+        return {
+          label: language === 'en' ? 'Preparing' : 'Đang chuẩn bị',
+          bg: 'bg-blue-50 text-blue-700 border-blue-200'
+        };
       case 'dang-giao':
-        return { label: 'Đang giao hàng', bg: 'bg-purple-50 text-purple-700 border-purple-200' };
+        return {
+          label: language === 'en' ? 'In Transit' : 'Đang giao hàng',
+          bg: 'bg-purple-50 text-purple-700 border-purple-200'
+        };
       case 'da-giao':
-        return { label: 'Giao thành công', bg: 'bg-[#EAF3EF] text-[#355F52] border-[#D2E3DC]' };
+        return {
+          label: language === 'en' ? 'Delivered' : 'Giao thành công',
+          bg: 'bg-[#EAF3EF] text-[#355F52] border-[#D2E3DC]'
+        };
       default:
         return { label: status, bg: 'bg-gray-100 text-gray-700 border-gray-200' };
     }
@@ -68,35 +86,39 @@ export const OrdersHistoryPage: React.FC = () => {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {language === 'en' ? 'Home' : 'Trang chủ'}
         </Link>
         <span>/</span>
         <Link to="/tai-khoan" className="hover:text-[#4E8773] transition-colors">
-          Tài khoản
+          {language === 'en' ? 'Account' : 'Tài khoản'}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Lịch sử đơn hàng</span>
+        <span className="text-[#355F52] font-semibold">
+          {language === 'en' ? 'Order History' : 'Lịch sử đơn hàng'}
+        </span>
       </nav>
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 mb-8 border-b border-[#EFE8D8]">
         <div>
           <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight">
-            Lịch sử đơn hàng ({userOrders.length})
+            {language === 'en' ? `Order History (${userOrders.length})` : `Lịch sử đơn hàng (${userOrders.length})`}
           </h1>
           <p className="text-xs sm:text-sm text-[#6A7F77] mt-1">
-            Quản lý, xem lại chi tiết và theo dõi hành trình giao nhận các đơn hàng của bạn
+            {language === 'en'
+              ? 'Manage, review details and track the shipping progress of all your orders'
+              : 'Quản lý, xem lại chi tiết và theo dõi hành trình giao nhận các đơn hàng của bạn'}
           </p>
         </div>
 
         {/* Status filter tabs */}
         <div className="flex flex-wrap items-center gap-2">
           {[
-            { id: 'all', label: 'Tất cả' },
-            { id: 'cho-xac-nhan', label: 'Chờ xác nhận' },
-            { id: 'dang-chuan-bi', label: 'Đang chuẩn bị' },
-            { id: 'dang-giao', label: 'Đang giao' },
-            { id: 'da-giao', label: 'Hoàn thành' }
+            { id: 'all', label: language === 'en' ? 'All' : 'Tất cả' },
+            { id: 'cho-xac-nhan', label: language === 'en' ? 'Pending' : 'Chờ xác nhận' },
+            { id: 'dang-chuan-bi', label: language === 'en' ? 'Preparing' : 'Đang chuẩn bị' },
+            { id: 'dang-giao', label: language === 'en' ? 'In Transit' : 'Đang giao' },
+            { id: 'da-giao', label: language === 'en' ? 'Completed' : 'Hoàn thành' }
           ].map((tab) => (
             <button
               key={tab.id}
@@ -164,11 +186,12 @@ export const OrdersHistoryPage: React.FC = () => {
                             {item.product.name}
                           </Link>
                           <p className="text-xs text-[#6A7F77] mt-0.5">
-                            Phân loại: {item.selectedSize} · Màu {item.selectedColor.name}
+                            {language === 'en' ? 'Variant: ' : 'Phân loại: '}
+                            {item.selectedSize} · {language === 'en' ? 'Color' : 'Màu'} {item.selectedColor.name}
                           </p>
                           {item.personalization && (
                             <span className="inline-block text-[10px] font-bold text-[#355F52] bg-[#EAF3EF] px-1.5 py-0.5 rounded-md mt-1">
-                              Thêu tên: &quot;{item.personalization.childName}&quot;
+                              {language === 'en' ? "Embroider: " : 'Thêu tên: '}&quot;{item.personalization.childName}&quot;
                             </span>
                           )}
                         </div>
@@ -176,7 +199,7 @@ export const OrdersHistoryPage: React.FC = () => {
 
                       <div className="text-right shrink-0">
                         <span className="text-xs sm:text-sm font-bold text-[#355F52] tabular-nums font-heading">
-                          {item.product.price.toLocaleString('vi-VN')} đ
+                          {item.product.price.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                         </span>
                         <span className="block text-xs text-[#6A7F77]">x{item.quantity}</span>
                       </div>
@@ -188,22 +211,23 @@ export const OrdersHistoryPage: React.FC = () => {
                 <div className="pt-4 border-t border-[#FAF6EC] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <div className="text-xs text-[#6A7F77] space-y-1">
                     <p>
-                      Giao tới:{' '}
+                      {language === 'en' ? 'Deliver to: ' : 'Giao tới: '}
                       <strong className="text-[#2F403A]">
                         {order.customerInfo.fullName}
                       </strong>{' '}
                       ({order.customerInfo.phone}) - {order.customerInfo.address}, {order.customerInfo.city}
                     </p>
                     <p>
-                      Tổng tiền hàng: <strong>{order.subtotal.toLocaleString('vi-VN')} đ</strong>
+                      {language === 'en' ? 'Order Subtotal: ' : 'Tổng tiền hàng: '}
+                      <strong>{order.subtotal.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}</strong>
                       {order.discount > 0 && (
                         <span className="text-green-600 font-semibold ml-2">
-                          · Giảm voucher: -{order.discount.toLocaleString('vi-VN')} đ
+                          · {language === 'en' ? 'Voucher: ' : 'Giảm voucher: '}-{order.discount.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                         </span>
                       )}
                       {order.shippingFee > 0 && (
                         <span className="ml-2">
-                          · Phí ship: +{order.shippingFee.toLocaleString('vi-VN')} đ
+                          · {language === 'en' ? 'Shipping: ' : 'Phí ship: '}+{order.shippingFee.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                         </span>
                       )}
                     </p>
@@ -211,9 +235,11 @@ export const OrdersHistoryPage: React.FC = () => {
 
                   <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
                     <div className="text-right mr-2 hidden sm:block">
-                      <span className="text-[11px] text-[#6A7F77] block">Tổng thanh toán:</span>
+                      <span className="text-[11px] text-[#6A7F77] block">
+                        {language === 'en' ? 'Total Payment:' : 'Tổng thanh toán:'}
+                      </span>
                       <span className="font-black text-lg text-[#355F52] font-heading tabular-nums">
-                        {order.totalAmount.toLocaleString('vi-VN')} đ
+                        {order.totalAmount.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                       </span>
                     </div>
 
@@ -223,7 +249,7 @@ export const OrdersHistoryPage: React.FC = () => {
                       className="px-3.5 py-2 rounded-xl bg-white border border-[#D2E3DC] hover:bg-[#EAF3EF] text-[#355F52] text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
-                      <span>Mua lại</span>
+                      <span>{language === 'en' ? 'Reorder' : 'Mua lại'}</span>
                     </button>
 
                     <Link
@@ -231,7 +257,7 @@ export const OrdersHistoryPage: React.FC = () => {
                       className="px-4 py-2 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors shadow-xs flex items-center gap-1"
                     >
                       <Truck className="w-3.5 h-3.5" />
-                      <span>Theo dõi đơn</span>
+                      <span>{language === 'en' ? 'Track Order' : 'Theo dõi đơn'}</span>
                     </Link>
                   </div>
                 </div>
@@ -242,16 +268,20 @@ export const OrdersHistoryPage: React.FC = () => {
       ) : (
         <div className="text-center py-16 bg-white rounded-3xl border border-[#EFE8D8] shadow-xs">
           <Package className="w-12 h-12 text-[#C1D2CB] mx-auto mb-3" />
-          <h3 className="text-base font-bold text-[#2F403A]">Không tìm thấy đơn hàng nào</h3>
+          <h3 className="text-base font-bold text-[#2F403A]">
+            {language === 'en' ? 'No orders found' : 'Không tìm thấy đơn hàng nào'}
+          </h3>
           <p className="text-xs text-[#6A7F77] mt-1 max-w-sm mx-auto">
-            Bạn chưa có đơn hàng nào phù hợp với bộ lọc hiện tại. Khám phá các thiết kế mới nhất cho bé ngay nhé!
+            {language === 'en'
+              ? 'You have no orders matching the selected status filter. Explore fresh collections for kids today!'
+              : 'Bạn chưa có đơn hàng nào phù hợp với bộ lọc hiện tại. Khám phá các thiết kế mới nhất cho bé ngay nhé!'}
           </p>
           <Link
             to="/san-pham"
             className="inline-flex items-center gap-1.5 mt-5 px-5 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors shadow-xs"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Xem bộ sưu tập trang phục</span>
+            <span>{language === 'en' ? 'Browse Apparel Collections' : 'Xem bộ sưu tập trang phục'}</span>
           </Link>
         </div>
       )}

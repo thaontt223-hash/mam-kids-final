@@ -312,6 +312,53 @@ export interface Translations {
     memberBenefits: string;
     loginSuccess: string;
     registerSuccess: string;
+    loginTitle: string;
+    memberBadge: string;
+    loginSubtitle: string;
+    emailOrPhone: string;
+    emailOrPhonePlaceholder: string;
+    passwordPlaceholder: string;
+    forgotPasswordAlert: string;
+    loggingIn: string;
+    loginBtn: string;
+    demoLoginTip: string;
+    demoAccountDesc: string;
+    demoLoginBtn: string;
+    noAccountPrompt: string;
+    registerGiftLink: string;
+    benefitsClubTitle: string;
+    benefitsClubDesc: string;
+    createFreeAccountBtn: string;
+    trackOrderNoLoginPrompt: string;
+    trackOrderNoLoginLink: string;
+    registerTitle: string;
+    registerSubtitle: string;
+    personalInfoTitle: string;
+    fullName: string;
+    fullNamePlaceholder: string;
+    email: string;
+    phone: string;
+    completeRegisterBtn: string;
+    creatingAccount: string;
+    babyInfoOptionalTitle: string;
+    addNowCheckbox: string;
+    babyNameLabel: string;
+    babyNamePlaceholder: string;
+    babyBirthDateLabel: string;
+    babyGenderLabel: string;
+    babyGenderBoy: string;
+    babyGenderGirl: string;
+    babyGenderOther: string;
+    babyHeightLabel: string;
+    babyWeightLabel: string;
+    babyPreferredSizeLabel: string;
+    babySizeAutoNotice: string;
+    tenBenefitsTitle: string;
+    tenBenefitsSubtitle: string;
+    pointsAutoEarnTitle: string;
+    pointsAutoEarnDesc: string;
+    alreadyAccountPrompt: string;
+    loginNowLink: string;
   };
 
   // Footer
@@ -645,7 +692,54 @@ export const translations: Record<Language, Translations> = {
       quickDemoLogin: 'Trải nghiệm nhanh với tài khoản mẫu',
       memberBenefits: 'Đặc quyền thành viên Mầm Kids',
       loginSuccess: 'Đăng nhập thành công!',
-      registerSuccess: 'Đăng ký thành viên thành công!'
+      registerSuccess: 'Đăng ký thành viên thành công!',
+      loginTitle: 'Đăng nhập tài khoản',
+      memberBadge: 'Thành viên Mầm Kids',
+      loginSubtitle: 'Đăng nhập để xem tích điểm Mầm, nhận voucher và theo dõi đơn hàng của bạn.',
+      emailOrPhone: 'EMAIL HOẶC SỐ ĐIỆN THOẠI',
+      emailOrPhonePlaceholder: 'Ví dụ: me&be@mamkids.vn hoặc 0987654321',
+      passwordPlaceholder: 'Nhập mật khẩu (tối thiểu 6 ký tự)',
+      forgotPasswordAlert: 'Vui lòng sử dụng tài khoản dùng thử mẫu hoặc liên hệ hotline 1900 6868 để được cấp lại mật khẩu.',
+      loggingIn: 'Đang xử lý đăng nhập...',
+      loginBtn: 'ĐĂNG NHẬP',
+      demoLoginTip: 'Trải nghiệm nhanh không cần gõ phím',
+      demoAccountDesc: 'Tài khoản mẫu: mevabe@mamkids.vn (có sẵn 350 Điểm Mầm & 2 bé)',
+      demoLoginBtn: 'Đăng nhập ngay',
+      noAccountPrompt: 'Bạn chưa có tài khoản?',
+      registerGiftLink: 'Đăng ký thành viên nhận quà 10%',
+      benefitsClubTitle: 'Cùng bé lớn khôn và gieo thói quen xanh',
+      benefitsClubDesc: 'Tham gia câu lạc bộ thành viên Mầm Kids để nhận ngập tràn ưu đãi cùng tiện ích chăm sóc size chuẩn riêng cho bé yêu:',
+      createFreeAccountBtn: 'TẠO TÀI KHOẢN MỚI MIỄN PHÍ',
+      trackOrderNoLoginPrompt: 'Cần tra cứu nhanh đơn hàng mà không muốn đăng nhập?',
+      trackOrderNoLoginLink: 'Tra cứu đơn hàng bằng Mã đơn hàng & SĐT →',
+      registerTitle: 'Đăng ký tài khoản thành viên',
+      registerSubtitle: 'Trở thành thành viên Mầm Kids để nhận ngay voucher giảm 10% đơn đầu tiên và quản lý hồ sơ size của bé yêu.',
+      personalInfoTitle: '1. Thông tin cá nhân',
+      fullName: 'HỌ VÀ TÊN',
+      fullNamePlaceholder: 'Ví dụ: Nguyễn Hoàng Yến',
+      email: 'EMAIL',
+      phone: 'SỐ ĐIỆN THOẠI',
+      completeRegisterBtn: 'HOÀN TẤT ĐĂNG KÝ THÀNH VIÊN',
+      creatingAccount: 'Đang khởi tạo tài khoản...',
+      babyInfoOptionalTitle: '2. Thông tin của bé (Tặng thêm +50 Điểm Mầm)',
+      addNowCheckbox: 'Bổ sung ngay',
+      babyNameLabel: 'Tên gọi ở nhà hoặc Họ tên bé',
+      babyNamePlaceholder: 'Ví dụ: Bé Bơ, Bé Sóc...',
+      babyBirthDateLabel: 'Ngày sinh của bé (Để nhận quà sinh nhật)',
+      babyGenderLabel: 'Giới tính của bé',
+      babyGenderBoy: 'Bé trai',
+      babyGenderGirl: 'Bé gái',
+      babyGenderOther: 'Khác / Chưa xác định',
+      babyHeightLabel: 'Chiều cao của bé (cm)',
+      babyWeightLabel: 'Cân nặng của bé (kg)',
+      babyPreferredSizeLabel: 'Size thường mặc gợi ý',
+      babySizeAutoNotice: 'Hệ thống tự động tính toán dựa trên chiều cao & cân nặng theo chuẩn nhân trắc Mầm Kids.',
+      tenBenefitsTitle: '10 Quyền lợi thành viên Mầm Kids',
+      tenBenefitsSubtitle: 'Chăm sóc gia đình bạn với trải nghiệm trọn vẹn nhất',
+      pointsAutoEarnTitle: 'Tích điểm tự động',
+      pointsAutoEarnDesc: '100 Điểm Mầm có giá trị quy đổi giảm trực tiếp khi thanh toán đơn hàng.',
+      alreadyAccountPrompt: 'Đã có tài khoản Mầm Kids?',
+      loginNowLink: 'Đăng nhập ngay'
     },
 
     footer: {
@@ -967,16 +1061,63 @@ export const translations: Record<Language, Translations> = {
       login: 'Log In',
       signUp: 'Sign Up',
       createAccount: 'Create Account',
-      password: 'Password',
-      confirmPassword: 'Confirm Password',
-      forgotPassword: 'Forgot Password?',
+      password: 'PASSWORD',
+      confirmPassword: 'CONFIRM PASSWORD',
+      forgotPassword: 'Forgot password?',
       alreadyHaveAccount: 'Already have an account?',
       dontHaveAccount: 'Don’t have an account?',
-      rememberMe: 'Remember Me',
+      rememberMe: 'Remember me',
       quickDemoLogin: 'Quick Demo Sign In',
-      memberBenefits: 'Mầm Kids Member Privileges',
+      memberBenefits: 'MẦM MEMBER BENEFITS',
       loginSuccess: 'Logged in successfully!',
-      registerSuccess: 'Account registered successfully!'
+      registerSuccess: 'Account registered successfully!',
+      loginTitle: 'Log In to Your Account',
+      memberBadge: 'Mầm Kids Member',
+      loginSubtitle: 'Log in to view your Mầm Points, receive vouchers, and track your orders.',
+      emailOrPhone: 'EMAIL OR PHONE NUMBER',
+      emailOrPhonePlaceholder: 'Example: me&be@mamkids.vn or 0987654321',
+      passwordPlaceholder: 'Enter your password (minimum 6 characters)',
+      forgotPasswordAlert: 'Please use the sample demo account or contact hotline 1900 6868 to reset your password.',
+      loggingIn: 'Processing log in...',
+      loginBtn: 'LOG IN',
+      demoLoginTip: 'Quick demo login without typing',
+      demoAccountDesc: 'Demo account: mevabe@mamkids.vn (Includes 350 Mầm Points & 2 child profiles)',
+      demoLoginBtn: 'Log In Now',
+      noAccountPrompt: 'Don’t have an account yet?',
+      registerGiftLink: 'Sign up to get a 10% welcome gift',
+      benefitsClubTitle: 'Growing with your child & nurturing green habits',
+      benefitsClubDesc: 'Join the Mầm Kids Member Club to unlock generous perks and personalized Smart Size care for your little one:',
+      createFreeAccountBtn: 'CREATE A FREE ACCOUNT',
+      trackOrderNoLoginPrompt: 'Need to quickly track an order without logging in?',
+      trackOrderNoLoginLink: 'Track order with Order Code & Phone Number →',
+      registerTitle: 'Create Member Account',
+      registerSubtitle: 'Become a Mầm Kids member to immediately receive a 10% welcome voucher and manage your child’s size profile.',
+      personalInfoTitle: '1. Personal Information',
+      fullName: 'FULL NAME',
+      fullNamePlaceholder: 'Example: Emily Nguyen',
+      email: 'EMAIL',
+      phone: 'PHONE NUMBER',
+      completeRegisterBtn: 'COMPLETE REGISTRATION',
+      creatingAccount: 'Creating your account...',
+      babyInfoOptionalTitle: '2. Child Profile (Get an extra +50 Mầm Points)',
+      addNowCheckbox: 'Add now',
+      babyNameLabel: 'Child’s name or nickname',
+      babyNamePlaceholder: 'Example: Leo, Mia...',
+      babyBirthDateLabel: 'Date of birth (for birthday gifts)',
+      babyGenderLabel: 'Child’s gender',
+      babyGenderBoy: 'Boy',
+      babyGenderGirl: 'Girl',
+      babyGenderOther: 'Other / Not specified',
+      babyHeightLabel: 'Child’s height (cm)',
+      babyWeightLabel: 'Child’s weight (kg)',
+      babyPreferredSizeLabel: 'Recommended regular size',
+      babySizeAutoNotice: 'Automatically calculated based on height & weight according to Mầm Kids anthropometric standards.',
+      tenBenefitsTitle: '10 Mầm Kids Member Benefits',
+      tenBenefitsSubtitle: 'Caring for your family with the most comprehensive experience',
+      pointsAutoEarnTitle: 'Automatic Points Earning',
+      pointsAutoEarnDesc: '100 Mầm Points can be redeemed for direct cash discount at checkout.',
+      alreadyAccountPrompt: 'Already have a Mầm Kids account?',
+      loginNowLink: 'Log in now'
     },
 
     footer: {

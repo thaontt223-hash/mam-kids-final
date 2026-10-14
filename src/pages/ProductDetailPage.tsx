@@ -29,12 +29,14 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { PersonalizationConfig, Product } from '../types';
 import { Baby } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const ProductDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart, isInWishlist, toggleWishlist } = useCart();
   const { user } = useAuth();
+  const { language, getProductName, getCategoryName, getColorName, formatPrice } = useLanguage();
 
   const product = PRODUCTS.find((p) => p.id === id);
 
@@ -76,15 +78,19 @@ export const ProductDetailPage: React.FC = () => {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center space-y-4">
         <span className="text-4xl block">🌱</span>
-        <h2 className="text-2xl font-bold text-[#2F403A] font-heading">Không tìm thấy sản phẩm này</h2>
+        <h2 className="text-2xl font-bold text-[#2F403A] font-heading">
+          {language === 'en' ? 'Product Not Found' : 'Không tìm thấy sản phẩm này'}
+        </h2>
         <p className="text-sm text-[#5D726A]">
-          Sản phẩm có thể đã được cập nhật hoặc chuyển sang danh mục khác.
+          {language === 'en'
+            ? 'This product may have been updated or moved to another category.'
+            : 'Sản phẩm có thể đã được cập nhật hoặc chuyển sang danh mục khác.'}
         </p>
         <Link
           to="/san-pham"
           className="inline-block mt-4 px-6 py-3 rounded-2xl bg-[#355F52] text-white font-bold text-xs hover:bg-[#28473D]"
         >
-          Quay lại danh mục sản phẩm
+          {language === 'en' ? 'Back to Product Catalog' : 'Quay lại danh mục sản phẩm'}
         </Link>
       </div>
     );
@@ -137,18 +143,24 @@ export const ProductDetailPage: React.FC = () => {
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 lg:py-12 space-y-8 sm:space-y-12 min-w-0">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs text-[#5D726A]">
-        <Link to="/" className="hover:text-[#355F52]">Trang chủ</Link>
+        <Link to="/" className="hover:text-[#355F52]">
+          {language === 'en' ? 'Home' : 'Trang chủ'}
+        </Link>
         <ChevronRight className="w-3.5 h-3.5" />
-        <Link to="/san-pham" className="hover:text-[#355F52]">Sản phẩm</Link>
+        <Link to="/san-pham" className="hover:text-[#355F52]">
+          {language === 'en' ? 'Products' : 'Sản phẩm'}
+        </Link>
         <ChevronRight className="w-3.5 h-3.5" />
         <Link
           to={`/san-pham?category=${product.category}`}
           className="hover:text-[#355F52]"
         >
-          {product.categoryName}
+          {getCategoryName(product.category) || product.categoryName}
         </Link>
         <ChevronRight className="w-3.5 h-3.5" />
-        <span className="text-[#2F403A] font-semibold truncate">{product.name}</span>
+        <span className="text-[#2F403A] font-semibold truncate">
+          {getProductName(product)}
+        </span>
       </nav>
 
       {/* Main PDP Grid */}
@@ -176,7 +188,11 @@ export const ProductDetailPage: React.FC = () => {
                   ? 'bg-white text-[#F4B99B]'
                   : 'bg-white/80 text-[#2F403A] hover:bg-white hover:text-[#355F52]'
               }`}
-              title={isFavorite ? 'Đã yêu thích' : 'Yêu thích'}
+              title={
+                isFavorite
+                  ? (language === 'en' ? 'Favorited' : 'Đã yêu thích')
+                  : (language === 'en' ? 'Add to Favorites' : 'Yêu thích')
+              }
             >
               <Heart className={`w-5 h-5 ${isFavorite ? 'fill-[#F4B99B]' : ''}`} />
             </button>
@@ -190,7 +206,7 @@ export const ProductDetailPage: React.FC = () => {
             {product.isSet && !product.isGreenProduct && (
               <div className="absolute top-4 left-4 bg-[#355F52] text-white px-3.5 py-1 rounded-xl text-xs font-black flex items-center gap-1.5 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-[#F5DFA0]" />
-                <span>Set phối hoàn chỉnh</span>
+                <span>{language === 'en' ? 'Complete Outfit Set' : 'Set phối hoàn chỉnh'}</span>
               </div>
             )}
           </div>
@@ -210,7 +226,9 @@ export const ProductDetailPage: React.FC = () => {
                 >
                   <img src={img} alt="" referrerPolicy="no-referrer" className="w-full h-full object-cover object-center" />
                   <span className="absolute bottom-1 inset-x-1 text-[9px] font-bold text-center bg-black/60 text-white rounded-md py-0.5 leading-none backdrop-blur-xs">
-                    {idx === 0 ? 'Toàn cảnh' : idx === 1 ? 'Chất liệu' : 'Góc chụp'}
+                    {language === 'en'
+                      ? (idx === 0 ? 'Full View' : idx === 1 ? 'Fabric' : 'Detail')
+                      : (idx === 0 ? 'Toàn cảnh' : idx === 1 ? 'Chất liệu' : 'Góc chụp')}
                   </span>
                 </button>
               ))}
@@ -221,18 +239,30 @@ export const ProductDetailPage: React.FC = () => {
           <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[#EFE8D8]">
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-white border border-[#EFE8D8]">
               <Truck className="w-4 h-4 text-[#355F52] mb-1" />
-              <span className="text-[11px] font-bold text-[#2F403A]">Freeship từ 300k</span>
-              <span className="text-[10px] text-[#5D726A]">Toàn quốc 2–3 ngày</span>
+              <span className="text-[11px] font-bold text-[#2F403A]">
+                {language === 'en' ? 'Freeship from 300k' : 'Freeship từ 300k'}
+              </span>
+              <span className="text-[10px] text-[#5D726A]">
+                {language === 'en' ? 'Nationwide 2–3 days' : 'Toàn quốc 2–3 ngày'}
+              </span>
             </div>
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-white border border-[#EFE8D8]">
               <RefreshCw className="w-4 h-4 text-[#355F52] mb-1" />
-              <span className="text-[11px] font-bold text-[#2F403A]">Đổi trả 15 ngày</span>
-              <span className="text-[10px] text-[#5D726A]">Đổi size tận nơi</span>
+              <span className="text-[11px] font-bold text-[#2F403A]">
+                {language === 'en' ? '15-Day Exchange' : 'Đổi trả 15 ngày'}
+              </span>
+              <span className="text-[10px] text-[#5D726A]">
+                {language === 'en' ? 'Doorstep size swap' : 'Đổi size tận nơi'}
+              </span>
             </div>
             <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-white border border-[#EFE8D8]">
               <ShieldCheck className="w-4 h-4 text-[#355F52] mb-1" />
-              <span className="text-[11px] font-bold text-[#2F403A]">An toàn 100%</span>
-              <span className="text-[10px] text-[#5D726A]">Bông cotton hữu cơ</span>
+              <span className="text-[11px] font-bold text-[#2F403A]">
+                {language === 'en' ? '100% Skin Safe' : 'An toàn 100%'}
+              </span>
+              <span className="text-[10px] text-[#5D726A]">
+                {language === 'en' ? 'Organic cotton' : 'Bông cotton hữu cơ'}
+              </span>
             </div>
           </div>
         </div>
@@ -241,18 +271,22 @@ export const ProductDetailPage: React.FC = () => {
         <div className="lg:col-span-6 space-y-6">
           <div>
             <div className="flex items-center gap-2 text-xs text-[#5D726A] mb-2">
-              <span className="font-bold text-[#355F52]">{product.genderName}</span>
+              <span className="font-bold text-[#355F52]">
+                {language === 'en'
+                  ? (product.gender === 'be-trai' ? 'Boys' : product.gender === 'be-gai' ? 'Girls' : 'Unisex')
+                  : product.genderName}
+              </span>
               <span>·</span>
-              <span>{product.categoryName}</span>
+              <span>{getCategoryName(product.category) || product.categoryName}</span>
               <span>·</span>
               <span className="text-[#355F52] font-semibold flex items-center gap-1">
                 <span className="w-2 h-2 rounded-full bg-[#4E8773]" />
-                Còn hàng sẵn
+                {language === 'en' ? 'In Stock' : 'Còn hàng sẵn'}
               </span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading">
-              {product.name}
+              {getProductName(product)}
             </h1>
 
             {/* Rating */}
@@ -263,21 +297,27 @@ export const ProductDetailPage: React.FC = () => {
                 ))}
               </div>
               <span className="text-xs font-bold text-[#2F403A]">{product.rating}</span>
-              <span className="text-xs text-[#5D726A]">({product.reviewsCount} đánh giá từ phụ huynh)</span>
+              <span className="text-xs text-[#5D726A]">
+                {language === 'en'
+                  ? `(${product.reviewsCount} parent reviews)`
+                  : `(${product.reviewsCount} đánh giá từ phụ huynh)`}
+              </span>
             </div>
 
             {/* Price Box */}
             <div className="mt-4 p-4 rounded-2xl bg-white border border-[#EFE8D8] flex items-baseline gap-4 shadow-xs">
               <span className="text-3xl font-black text-[#355F52] tabular-nums font-heading">
-                {formatVND(product.price)}
+                {formatPrice(product.price)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
                 <>
                   <span className="text-base text-[#8B9D95] line-through tabular-nums">
-                    {formatVND(product.originalPrice)}
+                    {formatPrice(product.originalPrice)}
                   </span>
                   <span className="px-2 py-0.5 rounded-full bg-[#F4B99B] text-[#2F403A] text-xs font-bold">
-                    Tiết kiệm {formatVND(product.originalPrice - product.price)}
+                    {language === 'en'
+                      ? `Save ${formatPrice(product.originalPrice - product.price)}`
+                      : `Tiết kiệm ${formatVND(product.originalPrice - product.price)}`}
                   </span>
                 </>
               )}
@@ -289,7 +329,7 @@ export const ProductDetailPage: React.FC = () => {
             <div className="p-4 rounded-2xl bg-[#EFF5F2] border border-[#D2E3DC] space-y-2">
               <div className="flex items-center gap-2 text-xs font-black uppercase text-[#355F52] font-heading">
                 <Sparkles className="w-4 h-4 text-[#4E8773]" />
-                <span>Trọn bộ outfit bao gồm:</span>
+                <span>{language === 'en' ? 'Complete outfit includes:' : 'Trọn bộ outfit bao gồm:'}</span>
               </div>
               <ul className="space-y-1.5 text-xs text-[#2F403A]">
                 {product.setItems.map((item, i) => (
@@ -305,7 +345,10 @@ export const ProductDetailPage: React.FC = () => {
           {/* Color Selection */}
           <div>
             <label className="block text-xs font-bold text-[#2F403A] mb-2">
-              Màu sắc: <span className="font-semibold text-[#355F52]">{selectedColor?.name}</span>
+              {language === 'en' ? 'Color: ' : 'Màu sắc: '}
+              <span className="font-semibold text-[#355F52]">
+                {getColorName(selectedColor?.name || '') || selectedColor?.name}
+              </span>
             </label>
             <div className="flex flex-wrap gap-2.5">
               {product.colors.map((color) => (
@@ -323,7 +366,7 @@ export const ProductDetailPage: React.FC = () => {
                     className="w-4 h-4 rounded-full border border-black/10 shrink-0"
                     style={{ backgroundColor: color.hex }}
                   />
-                  <span>{color.name}</span>
+                  <span>{getColorName(color.name) || color.name}</span>
                 </button>
               ))}
             </div>
@@ -332,14 +375,16 @@ export const ProductDetailPage: React.FC = () => {
           {/* Size Selection */}
           <div>
             <div className="flex items-center justify-between mb-2">
-              <label className="text-xs font-bold text-[#2F403A]">Kích thước cho bé</label>
+              <label className="text-xs font-bold text-[#2F403A]">
+                {language === 'en' ? 'Child Sizing' : 'Kích thước cho bé'}
+              </label>
               <button
                 type="button"
                 onClick={() => setSizeModalOpen(true)}
-                className="text-xs text-[#355F52] font-bold hover:underline flex items-center gap-1"
+                className="text-xs text-[#355F52] font-bold hover:underline flex items-center gap-1 cursor-pointer"
               >
                 <Ruler className="w-3.5 h-3.5" />
-                Hướng dẫn chọn size cho bé
+                <span>{language === 'en' ? 'Size Guide & Recommendations' : 'Hướng dẫn chọn size cho bé'}</span>
               </button>
             </div>
 
@@ -348,7 +393,7 @@ export const ProductDetailPage: React.FC = () => {
               <div className="mb-2.5 p-2.5 rounded-2xl bg-[#FAF6EC] border border-[#F5DFA0] flex items-center justify-between gap-2 flex-wrap text-xs">
                 <span className="font-bold text-[#355F52] flex items-center gap-1.5 text-[11px]">
                   <Baby className="w-3.5 h-3.5 text-[#4E8773]" />
-                  Gợi ý size cho bé yêu:
+                  {language === 'en' ? 'Recommended size for your child:' : 'Gợi ý size cho bé yêu:'}
                 </span>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {user.babies.map((baby) => {
@@ -428,7 +473,7 @@ export const ProductDetailPage: React.FC = () => {
                 type="button"
                 onClick={handleAddToCart}
                 disabled={addedAnimation}
-                className={`flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-xs ${
+                className={`flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm transition-all flex items-center justify-center gap-2 shadow-xs cursor-pointer ${
                   addedAnimation
                     ? 'bg-[#355F52] text-white'
                     : 'bg-[#4E8773] hover:bg-[#355F52] text-white'
@@ -437,12 +482,12 @@ export const ProductDetailPage: React.FC = () => {
                 {addedAnimation ? (
                   <>
                     <Check className="w-5 h-5" />
-                    <span>Đã thêm vào giỏ hàng</span>
+                    <span>{language === 'en' ? 'Added to bag' : 'Đã thêm vào giỏ hàng'}</span>
                   </>
                 ) : (
                   <>
                     <ShoppingBag className="w-5 h-5" />
-                    <span>Thêm vào giỏ</span>
+                    <span>{language === 'en' ? 'Add to Bag' : 'Thêm vào giỏ'}</span>
                   </>
                 )}
               </button>
@@ -451,9 +496,9 @@ export const ProductDetailPage: React.FC = () => {
             <button
               type="button"
               onClick={handleBuyNow}
-              className="w-full py-3.5 px-6 rounded-2xl bg-[#2F403A] hover:bg-black text-white font-bold text-sm transition-all shadow-xs flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-6 rounded-2xl bg-[#2F403A] hover:bg-black text-white font-bold text-sm transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Mua ngay (Thanh toán nhanh)</span>
+              <span>{language === 'en' ? 'Buy Now (Instant Checkout)' : 'Mua ngay (Thanh toán nhanh)'}</span>
             </button>
           </div>
 
@@ -467,11 +512,17 @@ export const ProductDetailPage: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0">
                   <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#355F52] text-white text-[10px] font-black uppercase tracking-wider">
-                    <span>🌱</span> GREEN QR – MỞ CÂU CHUYỆN XANH
+                    <span>🌱</span> {language === 'en' ? 'GREEN QR – DISCOVER ECO STORY' : 'GREEN QR – MỞ CÂU CHUYỆN XANH'}
                   </span>
                   <p className="text-xs text-[#2F403A] font-medium mt-1 leading-relaxed">
-                    <span className="font-bold text-[#355F52] block">“Một chiếc áo – Một câu chuyện – Một hành động xanh.”</span>
-                    Chiếc áo này đang giấu một câu chuyện nhỏ về thiên nhiên. Cùng bé khám phá nhé!
+                    <span className="font-bold text-[#355F52] block">
+                      {language === 'en'
+                        ? '“One outfit – One story – One green action.”'
+                        : '“Một chiếc áo – Một câu chuyện – Một hành động xanh.”'}
+                    </span>
+                    {language === 'en'
+                      ? 'This garment holds a sweet tale about nature. Explore together with your child!'
+                      : 'Chiếc áo này đang giấu một câu chuyện nhỏ về thiên nhiên. Cùng bé khám phá nhé!'}
                   </p>
                 </div>
               </div>
@@ -483,14 +534,14 @@ export const ProductDetailPage: React.FC = () => {
                   className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
                 >
                   <BookOpen className="w-3.5 h-3.5 text-[#F5DFA0]" />
-                  <span>KHÁM PHÁ ECO STORY</span>
+                  <span>{language === 'en' ? 'EXPLORE ECO STORY' : 'KHÁM PHÁ ECO STORY'}</span>
                 </button>
                 {product.ecoStoryId && (
                   <Link
                     to={`/eco-story/${product.ecoStoryId}`}
                     className="text-xs font-semibold text-[#4E8773] hover:underline flex items-center gap-0.5"
                   >
-                    <span>Xem trang đầy đủ</span>
+                    <span>{language === 'en' ? 'View full story page' : 'Xem trang đầy đủ'}</span>
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 )}
@@ -502,7 +553,11 @@ export const ProductDetailPage: React.FC = () => {
           <div className="p-3.5 rounded-2xl bg-[#FAF2DF] border border-[#F4E5BD] flex items-center gap-3">
             <Gift className="w-5 h-5 text-[#355F52] shrink-0" />
             <p className="text-xs text-[#2F403A] font-medium leading-snug">
-              🎁 <strong>Quà tặng Mầm Kids:</strong> Tặng miễn phí 01 túi tote Mầm Kids cho mọi đơn hàng hôm nay!
+              {language === 'en' ? (
+                <>🎁 <strong>Mầm Kids Gift:</strong> Complimentary Mầm Kids tote bag included with today&apos;s order!</>
+              ) : (
+                <>🎁 <strong>Quà tặng Mầm Kids:</strong> Tặng miễn phí 01 túi tote Mầm Kids cho mọi đơn hàng hôm nay!</>
+              )}
             </p>
           </div>
 
@@ -510,7 +565,7 @@ export const ProductDetailPage: React.FC = () => {
           {product.stylingTip && (
             <div className="p-4 rounded-2xl bg-[#EFF5F2] border border-[#D2E3DC] text-xs text-[#2F403A]">
               <span className="font-bold text-[#355F52] block mb-1">
-                💡 Gợi ý phối đồ từ Stylist Mầm Kids:
+                {language === 'en' ? '💡 Stylist Recommendation:' : '💡 Gợi ý phối đồ từ Stylist Mầm Kids:'}
               </span>
               <p className="leading-relaxed">{product.stylingTip}</p>
             </div>
@@ -524,14 +579,18 @@ export const ProductDetailPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#EFE8D8] pb-4">
             <div>
               <span className="text-xs font-black uppercase tracking-wider text-[#355F52] font-heading block">
-                GỢI Ý PHỐI CÙNG HOÀN HẢO
+                {language === 'en' ? 'PERFECT PAIRING SUGGESTIONS' : 'GỢI Ý PHỐI CÙNG HOÀN HẢO'}
               </span>
               <h3 className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading">
-                Mặc đẹp chuẩn gu cùng {product.name}
+                {language === 'en'
+                  ? `Style looks great with ${getProductName(product)}`
+                  : `Mặc đẹp chuẩn gu cùng ${product.name}`}
               </h3>
             </div>
             <span className="text-xs text-[#5D726A]">
-              Phụ huynh thường mua kèm những món sau:
+              {language === 'en'
+                ? 'Parents frequently purchase these matching pieces:'
+                : 'Phụ huynh thường mua kèm những món sau:'}
             </span>
           </div>
 
@@ -549,16 +608,16 @@ export const ProductDetailPage: React.FC = () => {
                     to={`/san-pham/${paired.id}`}
                     className="text-xs font-bold text-[#2F403A] hover:text-[#355F52] block truncate font-heading"
                   >
-                    {paired.name}
+                    {getProductName(paired)}
                   </Link>
                   <span className="text-xs font-black text-[#355F52] block mt-0.5 tabular-nums">
-                    {formatVND(paired.price)}
+                    {formatPrice(paired.price)}
                   </span>
                   <Link
                     to={`/san-pham/${paired.id}`}
                     className="text-[11px] font-semibold text-[#4E8773] hover:underline flex items-center gap-1 mt-1"
                   >
-                    Xem chi tiết <ArrowRight className="w-3 h-3" />
+                    {language === 'en' ? 'View details' : 'Xem chi tiết'} <ArrowRight className="w-3 h-3" />
                   </Link>
                 </div>
               </div>
@@ -570,8 +629,16 @@ export const ProductDetailPage: React.FC = () => {
       {/* Embedded Outfit Styling Section */}
       <OutfitStylingSection
         currentProductId={product.id}
-        title={`Gợi ý phối đồ cho bé cùng ${product.name}`}
-        subtitle="Chọn nguyên set hoàn chỉnh để bé diện dạo phố hoặc dự tiệc thật phong cách"
+        title={
+          language === 'en'
+            ? `Outfit styling ideas with ${getProductName(product)}`
+            : `Gợi ý phối đồ cho bé cùng ${product.name}`
+        }
+        subtitle={
+          language === 'en'
+            ? 'Select a complete coordinated set for outings and parties'
+            : 'Chọn nguyên set hoàn chỉnh để bé diện dạo phố hoặc dự tiệc thật phong cách'
+        }
         className="rounded-[32px] overflow-hidden"
       />
 
@@ -581,17 +648,17 @@ export const ProductDetailPage: React.FC = () => {
           <div className="flex items-center justify-between mb-6">
             <div>
               <span className="text-xs font-black uppercase tracking-wider text-[#355F52] font-heading block">
-                ĐIỂM NHẤN THỜI TRANG
+                {language === 'en' ? 'STYLE ACCENTS' : 'ĐIỂM NHẤN THỜI TRANG'}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-[#2F403A] font-heading">
-                Phụ kiện phù hợp đi kèm
+                {language === 'en' ? 'Matching Accessories' : 'Phụ kiện phù hợp đi kèm'}
               </h3>
             </div>
             <Link
               to="/san-pham?category=phu-kien"
               className="text-xs font-bold text-[#355F52] hover:underline flex items-center gap-1"
             >
-              Xem tất cả phụ kiện <ChevronRight className="w-3.5 h-3.5" />
+              {language === 'en' ? 'View all accessories' : 'Xem tất cả phụ kiện'} <ChevronRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
@@ -608,33 +675,37 @@ export const ProductDetailPage: React.FC = () => {
         <div className="flex border-b border-[#EFE8D8] gap-6">
           <button
             onClick={() => setActiveTab('desc')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-colors ${
+            className={`pb-3 text-sm font-bold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'desc'
                 ? 'border-[#355F52] text-[#355F52]'
                 : 'border-transparent text-[#5D726A] hover:text-[#2F403A]'
             }`}
           >
-            Mô tả chi tiết
+            {language === 'en' ? 'Detailed Description' : 'Mô tả chi tiết'}
           </button>
           <button
             onClick={() => setActiveTab('material')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-colors ${
+            className={`pb-3 text-sm font-bold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'material'
                 ? 'border-[#355F52] text-[#355F52]'
                 : 'border-transparent text-[#5D726A] hover:text-[#2F403A]'
             }`}
           >
-            {product.isGreenProduct ? '🌱 Chất liệu & câu chuyện xanh' : 'Chất liệu & An toàn cho bé'}
+            {product.isGreenProduct
+              ? (language === 'en' ? '🌱 Materials & Eco Story' : '🌱 Chất liệu & câu chuyện xanh')
+              : (language === 'en' ? 'Materials & Safety' : 'Chất liệu & An toàn cho bé')}
           </button>
           <button
             onClick={() => setActiveTab('reviews')}
-            className={`pb-3 text-sm font-bold border-b-2 transition-colors ${
+            className={`pb-3 text-sm font-bold border-b-2 transition-colors cursor-pointer ${
               activeTab === 'reviews'
                 ? 'border-[#355F52] text-[#355F52]'
                 : 'border-transparent text-[#5D726A] hover:text-[#2F403A]'
             }`}
           >
-            Đánh giá từ phụ huynh ({product.reviewsCount})
+            {language === 'en'
+              ? `Parent Reviews (${product.reviewsCount})`
+              : `Đánh giá từ phụ huynh (${product.reviewsCount})`}
           </button>
         </div>
 
@@ -647,14 +718,14 @@ export const ProductDetailPage: React.FC = () => {
               {product.fabricDetail && (
                 <div className="p-4 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-xs text-[#2F403A]">
                   <strong className="block text-[#355F52] font-bold mb-1">
-                    Cảm giác chất liệu khi chạm vào:
+                    {language === 'en' ? 'Fabric Touch & Feel:' : 'Cảm giác chất liệu khi chạm vào:'}
                   </strong>
                   <p>{product.fabricDetail}</p>
                 </div>
               )}
               <div className="space-y-2 pt-2">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#2F403A]">
-                  Đặc điểm nổi bật:
+                  {language === 'en' ? 'Key Features:' : 'Đặc điểm nổi bật:'}
                 </h4>
                 <ul className="space-y-1.5 text-xs text-[#5D726A]">
                   {product.highlights.map((h, i) => (
@@ -675,15 +746,17 @@ export const ProductDetailPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <span className="text-base">🌱</span>
                     <strong className="text-xs font-bold uppercase tracking-wider text-[#355F52]">
-                      Cam kết chất liệu Mầm Xanh
+                      {language === 'en' ? 'Mầm Xanh Material Commitment' : 'Cam kết chất liệu Mầm Xanh'}
                     </strong>
                   </div>
                   <p className="text-xs text-[#2F403A] leading-relaxed">
-                    Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.
+                    {language === 'en'
+                      ? 'Mầm Kids prioritizes eco-friendly fabrics like Organic Cotton, Bamboo, and recycled fibers whenever suitable for every garment.'
+                      : 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.'}
                   </p>
                   {product.ecoStorySnippet && (
                     <p className="text-xs text-[#5D726A] italic pt-1 border-t border-[#CDE1D8]/60">
-                      "{product.ecoStorySnippet}"
+                      &quot;{product.ecoStorySnippet}&quot;
                     </p>
                   )}
                 </div>
@@ -691,7 +764,7 @@ export const ProductDetailPage: React.FC = () => {
 
               <div className="p-4 rounded-2xl bg-white border border-[#EFE8D8]">
                 <h4 className="text-sm font-bold text-[#2F403A] mb-1">
-                  Thành phần chất liệu:
+                  {language === 'en' ? 'Fabric Composition:' : 'Thành phần chất liệu:'}
                 </h4>
                 <p className="text-xs text-[#5D726A]">{product.material}</p>
               </div>
@@ -699,7 +772,7 @@ export const ProductDetailPage: React.FC = () => {
               {product.fabricDetail && (
                 <div className="p-4 rounded-2xl bg-[#FAF6EE] border border-[#EFE8D8]">
                   <h4 className="text-sm font-bold text-[#2F403A] mb-1">
-                    Đặc điểm thoải mái cho bé:
+                    {language === 'en' ? 'Comfort Features for Child:' : 'Đặc điểm thoải mái cho bé:'}
                   </h4>
                   <p className="text-xs text-[#5D726A]">{product.fabricDetail}</p>
                 </div>
@@ -708,21 +781,23 @@ export const ProductDetailPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#5D726A]">
                 <div className="p-4 rounded-2xl bg-white border border-[#EFE8D8]">
                   <strong className="block text-[#2F403A] font-bold mb-1">
-                    Hướng dẫn giặt ủi:
+                    {language === 'en' ? 'Care & Washing Instructions:' : 'Hướng dẫn giặt ủi:'}
                   </strong>
                   <ul className="list-disc pl-4 space-y-1">
-                    <li>Giặt máy bằng nước lạnh hoặc nước ấm dưới 30°C.</li>
-                    <li>Sử dụng nước giặt chuyên dụng cho trẻ em.</li>
-                    <li>Không dùng chất tẩy clo mạnh.</li>
-                    <li>Phơi trong bóng râm thoáng gió, tránh nắng gắt trực tiếp.</li>
+                    <li>{language === 'en' ? 'Machine wash cold or under 30°C.' : 'Giặt máy bằng nước lạnh hoặc nước ấm dưới 30°C.'}</li>
+                    <li>{language === 'en' ? 'Use mild detergent made for children.' : 'Sử dụng nước giặt chuyên dụng cho trẻ em.'}</li>
+                    <li>{language === 'en' ? 'Do not use harsh chlorine bleach.' : 'Không dùng chất tẩy clo mạnh.'}</li>
+                    <li>{language === 'en' ? 'Line dry in airy shade, avoid harsh direct sun.' : 'Phơi trong bóng râm thoáng gió, tránh nắng gắt trực tiếp.'}</li>
                   </ul>
                 </div>
                 <div className="p-4 rounded-2xl bg-white border border-[#EFE8D8]">
                   <strong className="block text-[#2F403A] font-bold mb-1">
-                    Cam kết chuẩn da nhạy cảm:
+                    {language === 'en' ? 'Sensitive Skin Certification:' : 'Cam kết chuẩn da nhạy cảm:'}
                   </strong>
                   <p>
-                    Tất cả sợi vải tại Mầm Kids được kiểm định không chứa formaldehyde hay phẩm nhuộm azo kim loại nặng độc hại, an toàn tuyệt đối cho bé.
+                    {language === 'en'
+                      ? 'All fabrics at Mầm Kids are certified free from formaldehyde and harmful azo dyes, strictly safe for children.'
+                      : 'Tất cả sợi vải tại Mầm Kids được kiểm định không chứa formaldehyde hay phẩm nhuộm azo kim loại nặng độc hại, an toàn tuyệt đối cho bé.'}
                   </p>
                 </div>
               </div>
@@ -736,36 +811,52 @@ export const ProductDetailPage: React.FC = () => {
                   <span className="text-4xl font-black text-[#355F52] tabular-nums font-heading">
                     {product.rating}
                   </span>
-                  <span className="text-xs text-[#5D726A] block">trên 5.0 sao</span>
+                  <span className="text-xs text-[#5D726A] block">
+                    {language === 'en' ? 'out of 5.0 stars' : 'trên 5.0 sao'}
+                  </span>
                 </div>
                 <div className="border-l border-[#EFE8D8] pl-6 space-y-1 text-xs text-[#5D726A]">
-                  <p>98% phụ huynh cảm thấy hài lòng về độ mềm của vải</p>
-                  <p>95% đánh giá cao tính năng in thêu tên bé độc quyền</p>
+                  <p>
+                    {language === 'en'
+                      ? '98% of parents are satisfied with the fabric softness'
+                      : '98% phụ huynh cảm thấy hài lòng về độ mềm của vải'}
+                  </p>
+                  <p>
+                    {language === 'en'
+                      ? '95% praise our tailored fit and child size guide'
+                      : '95% đánh giá cao tính năng in thêu tên bé độc quyền'}
+                  </p>
                 </div>
               </div>
 
               <div className="space-y-3 pt-2">
                 {[
                   {
-                    name: 'Mẹ Thu Trang (TP.HCM)',
+                    name: language === 'en' ? 'Mother Thu Trang (HCMC)' : 'Mẹ Thu Trang (TP.HCM)',
                     rating: 5,
-                    date: '2 ngày trước',
-                    comment: 'Chất vải mát mịn lắm, màu pastel rất xinh và tôn da, bé thích mê mặc đi học suốt!',
-                    sizeBought: 'Size 110 (5-6 tuổi)'
+                    date: language === 'en' ? '2 days ago' : '2 ngày trước',
+                    comment: language === 'en'
+                      ? 'The fabric is super cool and soft, lovely pastel tone that brightens child skin. My kid loves wearing it to school!'
+                      : 'Chất vải mát mịn lắm, màu pastel rất xinh và tôn da, bé thích mê mặc đi học suốt!',
+                    sizeBought: 'Size 110 (5–6 yo)'
                   },
                   {
-                    name: 'Bố Hoàng Long (Hà Nội)',
+                    name: language === 'en' ? 'Father Hoang Long (Hanoi)' : 'Bố Hoàng Long (Hà Nội)',
                     rating: 5,
-                    date: '1 tuần trước',
-                    comment: 'Giao hàng nhanh, túi tote tặng kèm rất dày dặn và xinh. Đồ vừa in theo công cụ tư vấn size của web.',
-                    sizeBought: 'Size 120 (7-8 tuổi)'
+                    date: language === 'en' ? '1 week ago' : '1 tuần trước',
+                    comment: language === 'en'
+                      ? 'Fast delivery, complimentary tote bag is thick and stylish. Clothes fit perfectly with the online size advisor.'
+                      : 'Giao hàng nhanh, túi tote tặng kèm rất dày dặn và xinh. Đồ vừa in theo công cụ tư vấn size của web.',
+                    sizeBought: 'Size 120 (7–8 yo)'
                   },
                   {
-                    name: 'Mẹ Bích Ngọc (Đà Nẵng)',
+                    name: language === 'en' ? 'Mother Bich Ngoc (Da Nang)' : 'Mẹ Bích Ngọc (Đà Nẵng)',
                     rating: 5,
-                    date: '3 ngày trước',
-                    comment: 'Set phối sẵn rất tiện, phối phụ kiện vừa vặn xinh xắn mà không tốn công suy nghĩ.',
-                    sizeBought: 'Size 100 (3-4 tuổi)'
+                    date: language === 'en' ? '3 days ago' : '3 ngày trước',
+                    comment: language === 'en'
+                      ? 'Coordinated sets are so convenient, beautifully matched accessories without taking time to plan.'
+                      : 'Set phối sẵn rất tiện, phối phụ kiện vừa vặn xinh xắn mà không tốn công suy nghĩ.',
+                    sizeBought: 'Size 100 (3–4 yo)'
                   }
                 ].map((rev, i) => (
                   <div key={i} className="p-4 rounded-2xl bg-white border border-[#EFE8D8]">
@@ -779,7 +870,10 @@ export const ProductDetailPage: React.FC = () => {
                           <Star key={idx} className="w-3.5 h-3.5 fill-amber-300 text-amber-300" />
                         ))}
                       </div>
-                      <span className="text-[11px] text-[#5D726A]">Đã mua: {rev.sizeBought}</span>
+                      <span className="text-[11px] text-[#5D726A]">
+                        {language === 'en' ? 'Purchased: ' : 'Đã mua: '}
+                        {rev.sizeBought}
+                      </span>
                     </div>
                     <p className="text-xs text-[#3E5149]">{rev.comment}</p>
                   </div>
@@ -794,13 +888,15 @@ export const ProductDetailPage: React.FC = () => {
       <div className="pt-8 border-t border-[#EFE8D8]">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl sm:text-2xl font-bold text-[#2F403A] font-heading">
-            Sản phẩm cùng phong cách ba mẹ yêu thích
+            {language === 'en'
+              ? 'Similar styles loved by parents'
+              : 'Sản phẩm cùng phong cách ba mẹ yêu thích'}
           </h3>
           <Link
             to="/san-pham"
             className="text-xs font-bold text-[#355F52] hover:underline flex items-center gap-1"
           >
-            Xem tất cả
+            {language === 'en' ? 'View all' : 'Xem tất cả'}
             <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>

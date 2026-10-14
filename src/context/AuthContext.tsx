@@ -50,51 +50,63 @@ const createDefaultVouchers = (): MemberVoucher[] => {
       id: 'vouch-1',
       code: 'MAMKIDS10',
       title: 'Chào mừng Mầm Kids',
+      titleEn: 'Welcome to Mầm Kids',
       description: 'Giảm 10% cho đơn hàng đầu tiên của thành viên mới Mầm Kids',
+      descriptionEn: '10% off your first order as a new Mầm Kids member',
       discountType: 'percentage',
       discountValue: 10,
       minOrderValue: 0,
       maxDiscount: 60000,
       expiryDate: plusDays(45),
       isUsed: false,
-      badge: 'Chào mừng'
+      badge: 'Chào mừng',
+      badgeEn: 'Welcome'
     },
     {
       id: 'vouch-2',
       code: 'SINHNHAT15',
       title: 'Sinh nhật của bé',
+      titleEn: 'Child Birthday Gift',
       description: 'Giảm 15% trong tháng sinh nhật bé yêu cho toàn bộ sản phẩm',
+      descriptionEn: '15% off during child birthday month on all products',
       discountType: 'percentage',
       discountValue: 15,
       minOrderValue: 200000,
       maxDiscount: 100000,
       expiryDate: plusDays(60),
       isUsed: false,
-      badge: 'Sinh nhật'
+      badge: 'Sinh nhật',
+      badgeEn: 'Birthday'
     },
     {
       id: 'vouch-3',
       code: 'MAMPOINT10K',
       title: 'Đổi 100 Điểm Mầm',
+      titleEn: 'Redeem 100 Mầm Points',
       description: 'Giảm 10.000 VND quy đổi từ 100 Điểm Mầm tích lũy',
+      descriptionEn: '10,000 VND discount converted from 100 accumulated Mầm Points',
       discountType: 'fixed',
       discountValue: 10000,
       minOrderValue: 0,
       expiryDate: plusDays(90),
       isUsed: false,
-      badge: 'Đổi 100 Điểm'
+      badge: 'Đổi 100 Điểm',
+      badgeEn: '100 Pts Voucher'
     },
     {
       id: 'vouch-4',
       code: 'FREESHIPMAM',
       title: 'Freeship Thành viên',
+      titleEn: 'Member Free Shipping',
       description: 'Miễn phí vận chuyển toàn quốc cho đơn hàng từ 150.000 VND',
+      descriptionEn: 'Nationwide free shipping on orders from 150,000 VND',
       discountType: 'shipping',
       discountValue: 25000,
       minOrderValue: 150000,
       expiryDate: plusDays(30),
       isUsed: false,
-      badge: 'Freeship'
+      badge: 'Freeship',
+      badgeEn: 'Free Shipping'
     }
   ];
 };
@@ -141,14 +153,16 @@ const DEMO_USER: User = {
       date: '15/01/2026',
       type: 'bonus',
       points: 100,
-      description: 'Quà tặng chào mừng đăng ký thành viên mới Mầm Kids'
+      description: 'Quà tặng chào mừng đăng ký thành viên mới Mầm Kids',
+      descriptionEn: 'Welcome gift for registering a new Mầm Kids account'
     },
     {
       id: 'pt-2',
       date: '15/01/2026',
       type: 'bonus',
       points: 50,
-      description: 'Thưởng cập nhật hồ sơ bé yêu (Bé Bơ)'
+      description: 'Thưởng cập nhật hồ sơ bé yêu (Bé Bơ)',
+      descriptionEn: 'Bonus points for updating child profile (Bé Bơ)'
     },
     {
       id: 'pt-3',
@@ -156,6 +170,7 @@ const DEMO_USER: User = {
       type: 'earn',
       points: 170,
       description: 'Tích điểm đơn hàng MK-268924 (Trị giá 170.000đ)',
+      descriptionEn: 'Points earned for order MK-268924 (Value 170,000 VND)',
       orderId: 'MK-268924'
     }
   ]
@@ -484,13 +499,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: `vouch-${Date.now()}`,
       code: voucherCode,
       title: 'Đổi 100 Điểm Mầm',
+      titleEn: 'Redeem 100 Mầm Points',
       description: 'Giảm 10.000 VND quy đổi từ 100 Điểm Mầm tích lũy',
+      descriptionEn: '10,000 VND discount converted from 100 accumulated Mầm Points',
       discountType: 'fixed',
       discountValue: 10000,
       minOrderValue: 0,
       expiryDate: expiry,
       isUsed: false,
-      badge: 'Đổi 100 Điểm'
+      badge: 'Đổi 100 Điểm',
+      badgeEn: '100 Pts Voucher'
     };
 
     const newEntry: MamPointsHistory = {
@@ -498,7 +516,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       date: new Date().toLocaleDateString('vi-VN'),
       type: 'redeem',
       points: -100,
-      description: `Đổi 100 Điểm Mầm lấy Voucher ${voucherCode} (-10.000đ)`
+      description: `Đổi 100 Điểm Mầm lấy Voucher ${voucherCode} (-10.000đ)`,
+      descriptionEn: `Redeemed 100 Mầm Points for Voucher ${voucherCode} (-10,000 VND)`
     };
 
     setUser({

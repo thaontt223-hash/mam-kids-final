@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import {
   User,
   Lock,
@@ -9,7 +10,6 @@ import {
   Phone,
   Eye,
   EyeOff,
-  Sparkles,
   Heart,
   Baby,
   ArrowRight,
@@ -22,6 +22,7 @@ export const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
   const { register, isLoggedIn, getBabyRecommendedSize } = useAuth();
   const { showToast } = useCart();
+  const { language, t } = useLanguage();
 
   // Form states
   const [fullName, setFullName] = useState('');
@@ -63,23 +64,23 @@ export const RegisterPage: React.FC = () => {
     setError('');
 
     if (!fullName.trim()) {
-      setError('Vui lòng nhập Họ và tên');
+      setError(language === 'en' ? 'Please enter your Full Name' : 'Vui lòng nhập Họ và tên');
       return;
     }
     if (!email.trim()) {
-      setError('Vui lòng nhập Email');
+      setError(language === 'en' ? 'Please enter your Email' : 'Vui lòng nhập Email');
       return;
     }
     if (!phone.trim()) {
-      setError('Vui lòng nhập Số điện thoại');
+      setError(language === 'en' ? 'Please enter your Phone number' : 'Vui lòng nhập Số điện thoại');
       return;
     }
     if (password.length < 6) {
-      setError('Mật khẩu phải có ít nhất 6 ký tự');
+      setError(language === 'en' ? 'Password must be at least 6 characters' : 'Mật khẩu phải có ít nhất 6 ký tự');
       return;
     }
     if (password !== confirmPassword) {
-      setError('Mật khẩu xác nhận không khớp');
+      setError(language === 'en' ? 'Password confirmation does not match' : 'Mật khẩu xác nhận không khớp');
       return;
     }
 
@@ -101,24 +102,39 @@ export const RegisterPage: React.FC = () => {
 
     if (res.success) {
       showToast(
-        'Đăng ký tài khoản thành công!',
-        'Chào mừng bạn đến với Mầm Kids. Bạn nhận được +100 Điểm Mầm & Voucher 10%!'
+        language === 'en' ? 'Account registered successfully!' : 'Đăng ký tài khoản thành công!',
+        language === 'en'
+          ? 'Welcome to Mầm Kids. You received +100 Mầm Points & a 10% Voucher!'
+          : 'Chào mừng bạn đến với Mầm Kids. Bạn nhận được +100 Điểm Mầm & Voucher 10%!'
       );
       navigate('/tai-khoan');
     } else {
-      setError(res.message || 'Đăng ký không thành công');
+      setError(res.message || (language === 'en' ? 'Registration failed' : 'Đăng ký không thành công'));
     }
   };
+
+  const tenBenefits = [
+    language === 'en' ? '1. 10% discount on your first order (Code MAMKIDS10)' : '1. Giảm ngay 10% cho đơn hàng đầu tiên (Mã MAMKIDS10)',
+    language === 'en' ? '2. Earn Mầm Points on every order (1,000 VND = 1 point)' : '2. Tích lũy Điểm Mầm sau mỗi đơn hàng (1.000đ = 1 điểm)',
+    language === 'en' ? '3. 50,000 VND birthday gift or voucher for your child' : '3. Quà tặng hoặc Voucher sinh nhật 50.000đ cho bé',
+    language === 'en' ? '4. Save child height, weight & sizing profile' : '4. Lưu hồ sơ chiều cao, cân nặng & size thường mặc của bé',
+    language === 'en' ? '5. Save and manage your favorite wishlist' : '5. Lưu trữ danh sách sản phẩm yêu thích (Wishlist)',
+    language === 'en' ? '6. Real-time and transparent order tracking' : '6. Theo dõi tiến trình đơn hàng trực tiếp và chính xác',
+    language === 'en' ? '7. Revisit complete purchase history anytime' : '7. Xem lại toàn bộ lịch sử mua hàng mọi lúc mọi nơi',
+    language === 'en' ? '8. Exclusive tier-based rewards and anniversary vouchers' : '8. Nhận voucher riêng biệt dành riêng cho từng cấp bậc',
+    language === 'en' ? '9. Priority early access to new seasonal collections' : '9. Ưu tiên thông báo và đặt trước bộ sưu tập mới',
+    language === 'en' ? '10. Member-only seasonal campaigns and bundle offers' : '10. Nhận ưu đãi mùa vụ và combo dành riêng thành viên'
+  ];
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {t('nav.home')}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Đăng ký thành viên</span>
+        <span className="text-[#355F52] font-semibold">{t('auth.registerTitle')}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -128,13 +144,13 @@ export const RegisterPage: React.FC = () => {
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#F5DFA0] text-[#355F52] mb-3">
                 <Gift className="w-3.5 h-3.5 text-[#355F52]" />
-                Nhận ngay Voucher 10% + 100 Điểm Mầm
+                {language === 'en' ? 'Get 10% Voucher + 100 Mầm Points' : 'Nhận ngay Voucher 10% + 100 Điểm Mầm'}
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight">
-                Đăng ký tài khoản thành viên
+                {t('auth.registerTitle')}
               </h1>
               <p className="text-sm text-[#6A7F77] mt-1.5">
-                Cùng Mầm Kids đồng hành trên hành trình lớn khôn an lành của bé yêu.
+                {t('auth.registerSubtitle')}
               </p>
             </div>
             <div className="shrink-0">
@@ -153,19 +169,19 @@ export const RegisterPage: React.FC = () => {
             {/* Account info section */}
             <div className="space-y-4">
               <h2 className="text-xs font-bold uppercase tracking-wider text-[#355F52] border-b border-[#FAF6EC] pb-2">
-                1. Thông tin cá nhân
+                {t('auth.personalInfoTitle')}
               </h2>
 
               <div>
                 <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                  Họ và tên <span className="text-red-500">*</span>
+                  {t('auth.fullName')} <span className="text-red-500">*</span>
                 </label>
                 <div className="relative">
                   <input
                     type="text"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Ví dụ: Nguyễn Hoàng Yến"
+                    placeholder={t('auth.fullNamePlaceholder')}
                     className="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773] focus:ring-2 focus:ring-[#4E8773]/20 transition-all placeholder-[#9EB1A9]"
                   />
                   <User className="w-4 h-4 text-[#8B9D95] absolute left-4 top-3.5" />
@@ -175,7 +191,7 @@ export const RegisterPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                    Email <span className="text-red-500">*</span>
+                    {t('auth.email')} <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -191,7 +207,7 @@ export const RegisterPage: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                    Số điện thoại <span className="text-red-500">*</span>
+                    {t('auth.phone')} <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -209,22 +225,22 @@ export const RegisterPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                    Mật khẩu <span className="text-red-500">*</span>
+                    {t('auth.password')} <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder="Ít nhất 6 ký tự"
+                      placeholder={t('auth.passwordPlaceholder')}
                       className="w-full pl-11 pr-11 py-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773] focus:ring-2 focus:ring-[#4E8773]/20 transition-all placeholder-[#9EB1A9]"
                     />
                     <Lock className="w-4 h-4 text-[#8B9D95] absolute left-4 top-3.5" />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="p-1.5 text-[#8B9D95] hover:text-[#2F403A] absolute right-3 top-2.5 transition-colors"
-                      aria-label="Ẩn hiện mật khẩu"
+                      className="p-1.5 text-[#8B9D95] hover:text-[#2F403A] absolute right-3 top-2.5 transition-colors cursor-pointer"
+                      aria-label={showPassword ? (language === 'en' ? 'Hide password' : 'Ẩn mật khẩu') : (language === 'en' ? 'Show password' : 'Hiện mật khẩu')}
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -233,14 +249,14 @@ export const RegisterPage: React.FC = () => {
 
                 <div>
                   <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                    Xác nhận mật khẩu <span className="text-red-500">*</span>
+                    {t('auth.confirmPassword')} <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <input
                       type={showPassword ? 'text' : 'password'}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Nhập lại mật khẩu"
+                      placeholder={language === 'en' ? 'Re-enter your password' : 'Nhập lại mật khẩu'}
                       className="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773] focus:ring-2 focus:ring-[#4E8773]/20 transition-all placeholder-[#9EB1A9]"
                     />
                     <Lock className="w-4 h-4 text-[#8B9D95] absolute left-4 top-3.5" />
@@ -255,7 +271,7 @@ export const RegisterPage: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <Baby className="w-4 h-4 text-[#4E8773]" />
                   <span className="text-xs font-bold uppercase tracking-wider text-[#355F52]">
-                    2. Thông tin của bé (Tặng thêm +50 Điểm Mầm)
+                    {t('auth.babyInfoOptionalTitle')}
                   </span>
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer text-xs font-bold text-[#355F52]">
@@ -265,7 +281,7 @@ export const RegisterPage: React.FC = () => {
                     onChange={(e) => setHasBaby(e.target.checked)}
                     className="w-4 h-4 rounded text-[#4E8773] focus:ring-[#4E8773]"
                   />
-                  <span>Bổ sung ngay</span>
+                  <span>{t('auth.addNowCheckbox')}</span>
                 </label>
               </div>
 
@@ -274,20 +290,20 @@ export const RegisterPage: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                        Tên gọi ở nhà hoặc Họ tên bé
+                        {t('auth.babyNameLabel')}
                       </label>
                       <input
                         type="text"
                         value={babyName}
                         onChange={(e) => setBabyName(e.target.value)}
-                        placeholder="Ví dụ: Bé Bơ, Bé Sóc..."
+                        placeholder={t('auth.babyNamePlaceholder')}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                        Ngày sinh của bé (Để nhận quà sinh nhật)
+                        {t('auth.babyBirthDateLabel')}
                       </label>
                       <input
                         type="date"
@@ -301,42 +317,42 @@ export const RegisterPage: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                        Giới tính của bé
+                        {t('auth.babyGenderLabel')}
                       </label>
                       <select
                         value={babyGender}
                         onChange={(e) => setBabyGender(e.target.value as any)}
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                       >
-                        <option value="be-gai">Bé gái</option>
-                        <option value="be-trai">Bé trai</option>
-                        <option value="khac">Khác / Chưa xác định</option>
+                        <option value="be-gai">{t('auth.babyGenderGirl')}</option>
+                        <option value="be-trai">{t('auth.babyGenderBoy')}</option>
+                        <option value="khac">{t('auth.babyGenderOther')}</option>
                       </select>
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                        Chiều cao của bé (cm)
+                        {t('auth.babyHeightLabel')}
                       </label>
                       <input
                         type="number"
                         value={babyHeight}
                         onChange={(e) => setBabyHeight(e.target.value)}
-                        placeholder="Ví dụ: 105"
+                        placeholder="105"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                        Cân nặng của bé (kg)
+                        {t('auth.babyWeightLabel')}
                       </label>
                       <input
                         type="number"
                         step="0.5"
                         value={babyWeight}
                         onChange={(e) => setBabyWeight(e.target.value)}
-                        placeholder="Ví dụ: 16"
+                        placeholder="16"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                       />
                     </div>
@@ -344,17 +360,17 @@ export const RegisterPage: React.FC = () => {
 
                   <div>
                     <label className="block text-[11px] font-bold text-[#2F403A] mb-1">
-                      Size thường mặc gợi ý
+                      {t('auth.babyPreferredSizeLabel')}
                     </label>
                     <input
                       type="text"
                       value={babyPreferredSize}
                       onChange={(e) => setBabyPreferredSize(e.target.value)}
-                      placeholder="Ví dụ: 110 (4-5 tuổi)"
+                      placeholder={language === 'en' ? 'Example: 110 (4-5 years)' : 'Ví dụ: 110 (4-5 tuổi)'}
                       className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                     />
                     <p className="text-[10px] text-[#6A7F77] mt-1">
-                      Hệ thống tự động tính toán dựa trên chiều cao & cân nặng theo chuẩn nhân trắc Mầm Kids.
+                      {t('auth.babySizeAutoNotice')}
                     </p>
                   </div>
                 </div>
@@ -367,10 +383,10 @@ export const RegisterPage: React.FC = () => {
               className="w-full py-3.5 px-6 rounded-2xl bg-[#4E8773] hover:bg-[#355F52] text-white font-bold text-sm tracking-wide transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
             >
               {isLoading ? (
-                <span>Đang khởi tạo tài khoản...</span>
+                <span>{t('auth.creatingAccount')}</span>
               ) : (
                 <>
-                  <span>HOÀN TẤT ĐĂNG KÝ THÀNH VIÊN</span>
+                  <span>{t('auth.completeRegisterBtn')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -379,12 +395,12 @@ export const RegisterPage: React.FC = () => {
 
           <div className="mt-8 text-center pt-4 border-t border-[#EFE8D8]">
             <p className="text-xs text-[#6A7F77]">
-              Đã có tài khoản Mầm Kids?{' '}
+              {t('auth.alreadyAccountPrompt')}{' '}
               <Link
                 to="/dang-nhap"
                 className="font-bold text-[#4E8773] hover:text-[#355F52] hover:underline"
               >
-                Đăng nhập ngay
+                {t('auth.loginNowLink')}
               </Link>
             </p>
           </div>
@@ -399,27 +415,16 @@ export const RegisterPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="text-base font-bold text-[#2F403A] font-heading">
-                  10 Quyền lợi thành viên Mầm Kids
+                  {t('auth.tenBenefitsTitle')}
                 </h3>
                 <p className="text-[11px] text-[#6A7F77]">
-                  Chăm sóc gia đình bạn với trải nghiệm trọn vẹn nhất
+                  {t('auth.tenBenefitsSubtitle')}
                 </p>
               </div>
             </div>
 
             <ul className="space-y-3">
-              {[
-                '1. Giảm ngay 10% cho đơn hàng đầu tiên (Mã MAMKIDS10)',
-                '2. Tích lũy Điểm Mầm sau mỗi đơn hàng (1.000đ = 1 điểm)',
-                '3. Quà tặng hoặc Voucher sinh nhật 50.000đ cho bé',
-                '4. Lưu hồ sơ chiều cao, cân nặng & size thường mặc của bé',
-                '5. Lưu trữ danh sách sản phẩm yêu thích (Wishlist)',
-                '6. Theo dõi tiến trình đơn hàng trực tiếp và chính xác',
-                '7. Xem lại toàn bộ lịch sử mua hàng mọi lúc mọi nơi',
-                '8. Nhận voucher riêng biệt dành riêng cho từng cấp bậc',
-                '9. Ưu tiên thông báo và đặt trước bộ sưu tập mới',
-                '10. Nhận ưu đãi mùa vụ và combo dành riêng thành viên'
-              ].map((benefit, idx) => (
+              {tenBenefits.map((benefit, idx) => (
                 <li key={idx} className="flex items-start gap-2.5 text-xs text-[#2F403A]">
                   <CheckCircle2 className="w-4 h-4 text-[#4E8773] shrink-0 mt-0.5" />
                   <span className="leading-relaxed">{benefit}</span>
@@ -433,9 +438,9 @@ export const RegisterPage: React.FC = () => {
                   100+
                 </span>
                 <div>
-                  <p className="text-xs font-bold text-[#355F52]">Tích điểm tự động</p>
+                  <p className="text-xs font-bold text-[#355F52]">{t('auth.pointsAutoEarnTitle')}</p>
                   <p className="text-[11px] text-[#6A7F77]">
-                    100 Điểm Mầm có giá trị quy đổi giảm trực tiếp khi thanh toán đơn hàng.
+                    {t('auth.pointsAutoEarnDesc')}
                   </p>
                 </div>
               </div>

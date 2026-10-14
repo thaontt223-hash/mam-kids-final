@@ -86,7 +86,7 @@ export const Footer: React.FC = () => {
             <div className="pt-2 text-xs text-[#E6F1EB]/90 space-y-2 border-t border-white/10">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#F4C95D] shrink-0" />
-                <span>Hotline: <strong className="text-white">1900 6868</strong> (8h – 21h)</span>
+                <span>Hotline: <strong className="text-white">1900 6868</strong> {language === 'en' ? '(8:00 AM – 9:00 PM)' : '(8h – 21h)'}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#F4C95D] shrink-0" />
@@ -95,18 +95,26 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#F4C95D] shrink-0 mt-0.5" />
                 <span className="text-[11px] leading-snug">
-                  186 Nguyễn Thị Minh Khai, Q.3, TP.HCM · 45 Phố Huế, Q. Hai Bà Trưng, HN
+                  {language === 'en'
+                    ? '186 Nguyen Thi Minh Khai, Dist. 3, HCMC · 45 Pho Hue, Hai Ba Trung Dist., Hanoi'
+                    : '186 Nguyễn Thị Minh Khai, Q.3, TP.HCM · 45 Phố Huế, Q. Hai Bà Trưng, HN'}
                 </span>
               </div>
             </div>
 
             {/* Brand Links */}
             <div className="pt-2 text-xs flex flex-wrap gap-x-3 gap-y-1 text-[#F4C95D]">
-              <Link to="/gioi-thieu" className="hover:underline">Về Mầm Kids</Link>
+              <Link to="/gioi-thieu" className="hover:underline">
+                {language === 'en' ? 'About Mầm Kids' : 'Về Mầm Kids'}
+              </Link>
               <span>·</span>
-              <Link to="/gioi-thieu#chat-lieu" className="hover:underline">Chất liệu an toàn</Link>
+              <Link to="/gioi-thieu#chat-lieu" className="hover:underline">
+                {language === 'en' ? 'Safe Fabrics' : 'Chất liệu an toàn'}
+              </Link>
               <span>·</span>
-              <Link to="/lien-he" className="hover:underline">Liên hệ</Link>
+              <Link to="/lien-he" className="hover:underline">
+                {language === 'en' ? 'Contact Us' : 'Liên hệ'}
+              </Link>
             </div>
           </div>
 
@@ -154,7 +162,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/khuyen-mai" className="hover:text-[#F4C95D] transition-colors flex items-center gap-1">
-                  <span>Ưu đãi & Khuyến mãi</span>
+                  <span>{language === 'en' ? 'Deals & Promotions' : 'Ưu đãi & Khuyến mãi'}</span>
                   <span className="px-1.5 py-0.2 rounded-full bg-[#F4C95D] text-[#285A48] text-[9px] font-bold">HOT</span>
                 </Link>
               </li>
@@ -180,12 +188,12 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/eco-story" className="hover:text-[#F4C95D] transition-colors flex items-center gap-1">
-                  <span>📚 Thư viện Eco Stories</span>
+                  <span>{language === 'en' ? '📚 Eco Stories Library' : '📚 Thư viện Eco Stories'}</span>
                 </Link>
               </li>
               <li>
                 <Link to="/mam-again" className="hover:text-[#F4C95D] transition-colors flex items-center gap-1">
-                  <span>♻️ Mầm Again – Trao lại đồ cũ</span>
+                  <span>{language === 'en' ? '♻️ Mầm Again – Give Back Clothes' : '♻️ Mầm Again – Trao lại đồ cũ'}</span>
                 </Link>
               </li>
               <li>
@@ -195,14 +203,18 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link to="/diem-mam" className="hover:text-[#F4C95D] transition-colors">
-                  {language === 'en' ? 'Earn Green Points' : 'Tích Điểm Mầm xanh'}
+                  {language === 'en' ? 'Earn Mầm Points' : 'Tích Điểm Mầm xanh'}
                 </Link>
               </li>
             </ul>
 
             {/* Micro Eco Banner */}
             <div className="mt-4 p-3 rounded-2xl bg-white/5 border border-white/10 text-[11px] text-[#E6F1EB]/85 leading-snug">
-              <span>🌱 1 chiếc áo – 1 câu chuyện – 1 hành động xanh bảo vệ trái đất cho bé.</span>
+              <span>
+                {language === 'en'
+                  ? '🌱 1 outfit – 1 story – 1 green action protecting the earth for our kids.'
+                  : '🌱 1 chiếc áo – 1 câu chuyện – 1 hành động xanh bảo vệ trái đất cho bé.'}
+              </span>
             </div>
           </div>
 

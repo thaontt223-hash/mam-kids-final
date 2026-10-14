@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sparkles, Heart, Star, Cloud } from 'lucide-react';
 import { PersonalizationConfig } from '../../types';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface PersonalizationStudioProps {
   config: PersonalizationConfig;
@@ -15,17 +16,19 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
   productImage,
   productName
 }) => {
+  const { language } = useLanguage();
+
   const icons = [
-    { id: 'heart', label: 'Trái tim', symbol: '♥', icon: Heart },
-    { id: 'star', label: 'Ngôi sao', symbol: '★', icon: Star },
-    { id: 'cloud', label: 'Đám mây', symbol: '☁', icon: Cloud },
+    { id: 'heart', label: language === 'en' ? 'Heart' : 'Trái tim', symbol: '♥', icon: Heart },
+    { id: 'star', label: language === 'en' ? 'Star' : 'Ngôi sao', symbol: '★', icon: Star },
+    { id: 'cloud', label: language === 'en' ? 'Cloud' : 'Đám mây', symbol: '☁', icon: Cloud },
     {
       id: 'rainbow',
-      label: 'Cầu vồng',
+      label: language === 'en' ? 'Rainbow' : 'Cầu vồng',
       symbol: '🌈',
       renderIcon: () => <span className="text-sm">🌈</span>
     },
-    { id: 'none', label: 'Không icon', symbol: '—' }
+    { id: 'none', label: language === 'en' ? 'No Icon' : 'Không icon', symbol: '—' }
   ];
 
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,10 +67,12 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
         </div>
         <div>
           <h4 className="text-base sm:text-lg font-bold text-[#3E5149] font-heading">
-            Một món đồ chỉ dành riêng cho bé
+            {language === 'en' ? 'A Piece Made Exclusively for Your Child' : 'Một món đồ chỉ dành riêng cho bé'}
           </h4>
           <p className="text-xs text-[#647B72]">
-            Thêu hoặc in tên bé cùng thông điệp yêu thương trực tiếp lên áo
+            {language === 'en'
+              ? "Embroider or print child's name and loving messages directly onto the garment"
+              : 'Thêu hoặc in tên bé cùng thông điệp yêu thương trực tiếp lên áo'}
           </p>
         </div>
       </div>
@@ -76,9 +81,11 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
         {/* Live Visual Canvas Preview */}
         <div className="flex flex-col items-center">
           <div className="text-xs font-semibold text-[#647B72] mb-2 flex items-center gap-1.5">
-            <span>Mô phỏng vị trí:</span>
+            <span>{language === 'en' ? 'Placement preview:' : 'Mô phỏng vị trí:'}</span>
             <span className="text-[#4E8773] font-bold">
-              {config.position === 'chest' ? 'Trước ngực áo' : 'Sau lưng áo'}
+              {config.position === 'chest'
+                ? (language === 'en' ? 'Front Chest' : 'Trước ngực áo')
+                : (language === 'en' ? 'Back' : 'Sau lưng áo')}
             </span>
           </div>
 
@@ -104,7 +111,7 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
                     </span>
                   )}
                   <span className="tracking-wide">
-                    {config.childName.trim() || 'Tên của bé'}
+                    {config.childName.trim() || (language === 'en' ? "Child's Name" : 'Tên của bé')}
                   </span>
                 </div>
                 {config.message && (
@@ -113,14 +120,16 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
                   </p>
                 )}
                 <span className="inline-block text-[8px] uppercase tracking-wider text-[#4E8773] bg-[#EBF3EF] px-2 py-0.5 rounded-md mt-1 font-semibold">
-                  Chỉ tơ hữu cơ êm dịu
+                  {language === 'en' ? 'Organic Gentle Silk Thread' : 'Chỉ tơ hữu cơ êm dịu'}
                 </span>
               </div>
             </div>
           </div>
 
           <span className="text-[11px] text-[#647B72] mt-2 italic text-center">
-            * Mầm Kids sử dụng chỉ tơ cotton mềm mại, hoàn toàn không gây cộm ngứa da bé.
+            {language === 'en'
+              ? '* Mầm Kids uses super-soft organic cotton embroidery threads that are 100% scratch-free on sensitive skin.'
+              : '* Mầm Kids sử dụng chỉ tơ cotton mềm mại, hoàn toàn không gây cộm ngứa da bé.'}
           </span>
         </div>
 
@@ -129,13 +138,14 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
           {/* Tên bé */}
           <div>
             <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-              1. Tên bé hoặc chữ cái đầu <span className="text-[#F4B99B]">*</span>
+              {language === 'en' ? "1. Child's Name or Monogram" : '1. Tên bé hoặc chữ cái đầu'}{' '}
+              <span className="text-[#F4B99B]">*</span>
             </label>
             <input
               type="text"
               value={config.childName}
               onChange={handleTextChange}
-              placeholder="Ví dụ: Bé Bơ, An Nhiên, Minh Khang..."
+              placeholder={language === 'en' ? 'E.g., Leo, Maya, Oliver...' : 'Ví dụ: Bé Bơ, An Nhiên, Minh Khang...'}
               maxLength={16}
               className="w-full px-3.5 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-[#3E5149] text-sm focus:outline-hidden focus:border-[#4E8773]"
             />
@@ -144,13 +154,13 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
           {/* Thông điệp ngắn */}
           <div>
             <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-              2. Thông điệp yêu thương (tùy chọn)
+              {language === 'en' ? '2. Loving message (optional)' : '2. Thông điệp yêu thương (tùy chọn)'}
             </label>
             <input
               type="text"
               value={config.message || ''}
               onChange={handleMessageChange}
-              placeholder="Ví dụ: Bé Mầm đáng yêu, Little Sunshine..."
+              placeholder={language === 'en' ? 'E.g., Little Sunshine, Stay Curious...' : 'Ví dụ: Bé Mầm đáng yêu, Little Sunshine...'}
               maxLength={28}
               className="w-full px-3.5 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-[#3E5149] text-sm focus:outline-hidden focus:border-[#4E8773]"
             />
@@ -159,7 +169,7 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
           {/* Biểu tượng */}
           <div>
             <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-              3. Chọn biểu tượng dễ thương
+              {language === 'en' ? '3. Select cute icon' : '3. Chọn biểu tượng dễ thương'}
             </label>
             <div className="grid grid-cols-3 gap-2">
               {icons.map((ic) => (
@@ -167,7 +177,7 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
                   key={ic.id}
                   type="button"
                   onClick={() => handleIconSelect(ic.id as PersonalizationConfig['icon'])}
-                  className={`py-2 px-2.5 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all ${
+                  className={`py-2 px-2.5 rounded-xl text-xs font-semibold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                     config.icon === ic.id
                       ? 'border-[#4E8773] bg-[#4E8773] text-white shadow-xs'
                       : 'border-[#EFE8D8] bg-[#FDF9F1] text-[#3E5149] hover:border-[#4E8773]'
@@ -183,30 +193,30 @@ export const PersonalizationStudio: React.FC<PersonalizationStudioProps> = ({
           {/* Vị trí in */}
           <div>
             <label className="block text-xs font-bold text-[#3E5149] mb-1.5">
-              4. Vị trí in / thêu
+              {language === 'en' ? '4. Embroidery placement' : '4. Vị trí in / thêu'}
             </label>
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => handlePositionSelect('chest')}
-                className={`py-2.5 px-3 rounded-xl text-xs font-bold border text-center transition-all ${
+                className={`py-2.5 px-3 rounded-xl text-xs font-bold border text-center transition-all cursor-pointer ${
                   config.position === 'chest'
                     ? 'border-[#4E8773] bg-[#4E8773] text-white'
                     : 'border-[#EFE8D8] bg-[#FDF9F1] text-[#3E5149] hover:border-[#4E8773]'
                 }`}
               >
-                Trước ngực áo (Gần trái tim)
+                {language === 'en' ? 'Front Chest (Near Heart)' : 'Trước ngực áo (Gần trái tim)'}
               </button>
               <button
                 type="button"
                 onClick={() => handlePositionSelect('back')}
-                className={`py-2.5 px-3 rounded-xl text-xs font-bold border text-center transition-all ${
+                className={`py-2.5 px-3 rounded-xl text-xs font-bold border text-center transition-all cursor-pointer ${
                   config.position === 'back'
                     ? 'border-[#4E8773] bg-[#4E8773] text-white'
                     : 'border-[#EFE8D8] bg-[#FDF9F1] text-[#3E5149] hover:border-[#4E8773]'
                 }`}
               >
-                Sau lưng áo (Năng động)
+                {language === 'en' ? 'Upper Back (Sporty)' : 'Sau lưng áo (Năng động)'}
               </button>
             </div>
           </div>

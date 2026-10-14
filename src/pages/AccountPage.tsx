@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
+import { useLanguage } from '../i18n/LanguageContext';
 import { PRODUCTS } from '../data/products';
 import {
   User,
@@ -33,6 +34,7 @@ export const AccountPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, isLoggedIn, logout, updateProfile, exchangePointsForVoucher } = useAuth();
   const { orders, wishlist, addToCart, showToast } = useCart();
+  const { language, t, getProductName } = useLanguage();
 
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [editName, setEditName] = useState(user?.fullName || '');
@@ -79,21 +81,31 @@ export const AccountPage: React.FC = () => {
       defaultDistrict: editDistrict.trim()
     });
     setIsEditingProfile(false);
-    showToast('Đã lưu thông tin cá nhân!');
+    showToast(
+      language === 'en' ? 'Profile updated successfully!' : 'Đã lưu thông tin cá nhân!'
+    );
   };
 
   const handleExchangePoints = () => {
     const res = exchangePointsForVoucher();
     if (res.success) {
-      showToast('Đổi điểm thành công!', res.message);
+      showToast(
+        language === 'en' ? 'Points redeemed successfully!' : 'Đổi điểm thành công!',
+        res.message
+      );
     } else {
-      showToast('Không thể đổi điểm', res.message);
+      showToast(
+        language === 'en' ? 'Cannot redeem points' : 'Không thể đổi điểm',
+        res.message
+      );
     }
   };
 
   const handleLogout = () => {
     logout();
-    showToast('Đã đăng xuất tài khoản Mầm Kids');
+    showToast(
+      language === 'en' ? 'Logged out of Mầm Kids account' : 'Đã đăng xuất tài khoản Mầm Kids'
+    );
     navigate('/');
   };
 
@@ -102,10 +114,12 @@ export const AccountPage: React.FC = () => {
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {language === 'en' ? 'Home' : 'Trang chủ'}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Tài khoản thành viên</span>
+        <span className="text-[#355F52] font-semibold">
+          {language === 'en' ? 'Member Account' : 'Tài khoản thành viên'}
+        </span>
       </nav>
 
       {/* Greeting Header */}
@@ -113,10 +127,10 @@ export const AccountPage: React.FC = () => {
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-[#4E8773] flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-[#ECA032]" />
-            Thành viên gia đình Mầm Kids
+            {language === 'en' ? 'Mầm Kids Family Member' : 'Thành viên gia đình Mầm Kids'}
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight mt-0.5">
-            Xin chào, {user.fullName}
+            {language === 'en' ? `Welcome, ${user.fullName}` : `Xin chào, ${user.fullName}`}
           </h1>
         </div>
 
@@ -132,14 +146,14 @@ export const AccountPage: React.FC = () => {
             className="px-4 py-2 rounded-xl bg-white border border-[#D2E3DC] hover:border-[#4E8773] text-[#355F52] text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer"
           >
             <Edit2 className="w-3.5 h-3.5" />
-            <span>Sửa thông tin</span>
+            <span>{language === 'en' ? 'Edit Profile' : 'Sửa thông tin'}</span>
           </button>
           <button
             onClick={handleLogout}
             className="px-4 py-2 rounded-xl bg-white border border-red-200 hover:bg-red-50 text-red-600 text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer"
           >
             <LogOut className="w-3.5 h-3.5" />
-            <span>Đăng xuất</span>
+            <span>{language === 'en' ? 'Log Out' : 'Đăng xuất'}</span>
           </button>
         </div>
       </div>
@@ -151,23 +165,25 @@ export const AccountPage: React.FC = () => {
           <div className="lg:col-span-7 space-y-4">
             <div className="flex items-center gap-2">
               <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#F5DFA0] text-[#2F403A] shadow-xs">
-                Tích Điểm Mầm
+                {language === 'en' ? 'Mầm Points Loyalty' : 'Tích Điểm Mầm'}
               </span>
               <span className="text-xs text-[#EAF3EF] font-medium">
-                Thành viên từ {user.joinedDate}
+                {language === 'en' ? `Member since ${user.joinedDate}` : `Thành viên từ ${user.joinedDate}`}
               </span>
             </div>
 
             <div className="flex flex-wrap items-baseline gap-4 sm:gap-6">
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-[#F5DFA0] font-bold block">
-                  Điểm hiện tại
+                  {language === 'en' ? 'Current Points' : 'Điểm hiện tại'}
                 </span>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl sm:text-5xl font-black font-heading tabular-nums text-white">
-                    {user.mamPoints.toLocaleString('vi-VN')}
+                    {user.mamPoints.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')}
                   </span>
-                  <span className="text-sm font-bold text-[#FDF9F1]">điểm</span>
+                  <span className="text-sm font-bold text-[#FDF9F1]">
+                    {language === 'en' ? 'pts' : 'điểm'}
+                  </span>
                 </div>
               </div>
 
@@ -175,13 +191,15 @@ export const AccountPage: React.FC = () => {
 
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-[#D2E3DC] font-semibold block">
-                  Đã tích luỹ
+                  {language === 'en' ? 'Total Earned' : 'Đã tích luỹ'}
                 </span>
                 <div className="flex items-baseline gap-1 mt-0.5">
                   <span className="text-xl sm:text-2xl font-bold font-heading tabular-nums text-[#FDF9F1]">
-                    {totalEarnedPoints.toLocaleString('vi-VN')}
+                    {totalEarnedPoints.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')}
                   </span>
-                  <span className="text-xs text-[#D2E3DC]">điểm</span>
+                  <span className="text-xs text-[#D2E3DC]">
+                    {language === 'en' ? 'pts' : 'điểm'}
+                  </span>
                 </div>
               </div>
 
@@ -189,20 +207,26 @@ export const AccountPage: React.FC = () => {
 
               <div>
                 <span className="text-[11px] uppercase tracking-wider text-[#D2E3DC] font-semibold block">
-                  Đã sử dụng
+                  {language === 'en' ? 'Total Redeemed' : 'Đã sử dụng'}
                 </span>
                 <div className="flex items-baseline gap-1 mt-0.5">
                   <span className="text-xl sm:text-2xl font-bold font-heading tabular-nums text-[#FDF9F1]">
-                    {totalUsedPoints.toLocaleString('vi-VN')}
+                    {totalUsedPoints.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')}
                   </span>
-                  <span className="text-xs text-[#D2E3DC]">điểm</span>
+                  <span className="text-xs text-[#D2E3DC]">
+                    {language === 'en' ? 'pts' : 'điểm'}
+                  </span>
                 </div>
               </div>
             </div>
 
             <div className="pt-2 text-xs text-[#EAF3EF]/90 flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#F5DFA0] shrink-0" />
-              <span>Quy tắc: 1.000đ = 1 Điểm Mầm · 100 điểm = Voucher 10.000đ</span>
+              <span>
+                {language === 'en'
+                  ? 'Rule: 1,000 VND spent = 1 Mầm Point · 100 points = 10,000 VND Voucher'
+                  : 'Quy tắc: 1.000đ = 1 Điểm Mầm · 100 điểm = Voucher 10.000đ'}
+              </span>
             </div>
           </div>
 
@@ -212,19 +236,23 @@ export const AccountPage: React.FC = () => {
               <div className="flex items-center gap-2">
                 <Ticket className="w-4 h-4 text-[#F5DFA0]" />
                 <span className="text-xs font-bold uppercase tracking-wider text-white">
-                  Voucher đang có ({availableVouchers.length})
+                  {language === 'en'
+                    ? `Available Vouchers (${availableVouchers.length})`
+                    : `Voucher đang có (${availableVouchers.length})`}
                 </span>
               </div>
               <Link
                 to="/voucher"
                 className="text-xs font-bold text-[#F5DFA0] hover:underline"
               >
-                Xem tất cả mã →
+                {language === 'en' ? 'View all codes →' : 'Xem tất cả mã →'}
               </Link>
             </div>
 
             <p className="text-xs text-[#EAF3EF] leading-relaxed">
-              Bạn có thể sử dụng 100 Điểm Mầm để đổi thêm voucher giảm 10.000 VND áp dụng cho mọi đơn hàng.
+              {language === 'en'
+                ? 'You can exchange 100 Mầm Points for an extra 10,000 VND discount voucher valid for all orders.'
+                : 'Bạn có thể sử dụng 100 Điểm Mầm để đổi thêm voucher giảm 10.000 VND áp dụng cho mọi đơn hàng.'}
             </p>
 
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
@@ -235,13 +263,13 @@ export const AccountPage: React.FC = () => {
                 className="flex-1 py-2.5 px-3 rounded-xl bg-[#F5DFA0] hover:bg-[#F2D485] text-[#2F403A] text-xs font-bold transition-all shadow-xs disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#ECA032]" />
-                <span>Đổi 100 điểm lấy 10k</span>
+                <span>{language === 'en' ? 'Redeem 100 pts for 10k' : 'Đổi 100 điểm lấy 10k'}</span>
               </button>
               <Link
                 to="/san-pham"
                 className="py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition-all border border-white/20 text-center"
               >
-                Dùng voucher ngay
+                {language === 'en' ? 'Use Voucher Now' : 'Dùng voucher ngay'}
               </Link>
             </div>
           </div>
@@ -264,9 +292,11 @@ export const AccountPage: React.FC = () => {
             </span>
           </div>
           <p className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading tabular-nums">
-            {user.mamPoints.toLocaleString('vi-VN')}
+            {user.mamPoints.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')}
           </p>
-          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">Điểm Mầm (Mua sắm)</p>
+          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">
+            {language === 'en' ? 'Mầm Points (Shopping)' : 'Điểm Mầm (Mua sắm)'}
+          </p>
         </Link>
 
         {/* Stat 2: Điểm Xanh (Hành trình xanh) */}
@@ -285,7 +315,9 @@ export const AccountPage: React.FC = () => {
           <p className="text-xl sm:text-2xl font-black text-[#285A48] font-heading tabular-nums">
             120
           </p>
-          <p className="text-[11px] font-bold text-[#4E8773] mt-0.5">Điểm Xanh (Môi trường)</p>
+          <p className="text-[11px] font-bold text-[#4E8773] mt-0.5">
+            {language === 'en' ? 'Green Points (Eco)' : 'Điểm Xanh (Môi trường)'}
+          </p>
         </Link>
 
         {/* Stat 3: Voucher khả dụng */}
@@ -298,13 +330,15 @@ export const AccountPage: React.FC = () => {
               <Ticket className="w-4 h-4" />
             </span>
             <span className="text-[11px] font-bold text-[#4E8773] group-hover:underline flex items-center">
-              Kho mã <ChevronRight className="w-3 h-3" />
+              {language === 'en' ? 'Wallet' : 'Kho mã'} <ChevronRight className="w-3 h-3" />
             </span>
           </div>
           <p className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading tabular-nums">
             {availableVouchers.length}
           </p>
-          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">Voucher có thể dùng</p>
+          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">
+            {language === 'en' ? 'Usable Vouchers' : 'Voucher có thể dùng'}
+          </p>
         </Link>
 
         {/* Stat 4: Đơn hàng */}
@@ -317,13 +351,15 @@ export const AccountPage: React.FC = () => {
               <Package className="w-4 h-4" />
             </span>
             <span className="text-[11px] font-bold text-[#4E8773] group-hover:underline flex items-center">
-              Xem hết <ChevronRight className="w-3 h-3" />
+              {language === 'en' ? 'View all' : 'Xem hết'} <ChevronRight className="w-3 h-3" />
             </span>
           </div>
           <p className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading tabular-nums">
             {userOrders.length}
           </p>
-          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">Đơn hàng đã đặt</p>
+          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">
+            {language === 'en' ? 'Total Orders Placed' : 'Đơn hàng đã đặt'}
+          </p>
         </Link>
 
         {/* Stat 5: Bé yêu */}
@@ -336,13 +372,15 @@ export const AccountPage: React.FC = () => {
               <Baby className="w-4 h-4" />
             </span>
             <span className="text-[11px] font-bold text-[#4E8773] group-hover:underline flex items-center">
-              Hồ sơ <ChevronRight className="w-3 h-3" />
+              {language === 'en' ? 'Profiles' : 'Hồ sơ'} <ChevronRight className="w-3 h-3" />
             </span>
           </div>
           <p className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading tabular-nums">
             {user.babies.length}
           </p>
-          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">Hồ sơ bé đã lưu</p>
+          <p className="text-[11px] font-bold text-[#6A7F77] mt-0.5">
+            {language === 'en' ? 'Saved Child Profiles' : 'Hồ sơ bé đã lưu'}
+          </p>
         </Link>
       </div>
 
@@ -355,10 +393,16 @@ export const AccountPage: React.FC = () => {
               <div>
                 <h3 className="font-bold text-[#2F403A] text-lg font-heading flex items-center gap-2">
                   <Baby className="w-5 h-5 text-[#4E8773]" />
-                  <span>Hồ sơ bé yêu ({user.babies.length})</span>
+                  <span>
+                    {language === 'en'
+                      ? `Child Profiles (${user.babies.length})`
+                      : `Hồ sơ bé yêu (${user.babies.length})`}
+                  </span>
                 </h3>
                 <p className="text-xs text-[#6A7F77]">
-                  Lưu số đo để Mầm Kids tự động gợi ý size chuẩn xác cho từng bé
+                  {language === 'en'
+                    ? 'Save sizing metrics for Mầm Kids to recommend tailored sizes for each child'
+                    : 'Lưu số đo để Mầm Kids tự động gợi ý size chuẩn xác cho từng bé'}
                 </p>
               </div>
               <Link
@@ -366,7 +410,7 @@ export const AccountPage: React.FC = () => {
                 className="px-3.5 py-1.5 rounded-xl bg-[#EAF3EF] hover:bg-[#D2E3DC] text-[#355F52] text-xs font-bold transition-colors flex items-center gap-1"
               >
                 <PlusCircle className="w-3.5 h-3.5" />
-                <span>Thêm / Quản lý</span>
+                <span>{language === 'en' ? 'Add / Manage' : 'Thêm / Quản lý'}</span>
               </Link>
             </div>
 
@@ -390,11 +434,17 @@ export const AccountPage: React.FC = () => {
                         </span>
                       </div>
                       <p className="text-xs text-[#6A7F77] mt-0.5">
-                        {baby.gender === 'be-gai' ? 'Bé gái' : 'Bé trai'} · Sinh {baby.birthDate}
+                        {baby.gender === 'be-gai'
+                          ? (language === 'en' ? 'Girl' : 'Bé gái')
+                          : (language === 'en' ? 'Boy' : 'Bé trai')} · {language === 'en' ? 'Born' : 'Sinh'} {baby.birthDate}
                       </p>
                       <div className="flex items-center gap-3 text-[11px] text-[#355F52] font-semibold mt-2">
-                        {baby.height && <span>Cao: {baby.height} cm</span>}
-                        {baby.weight && <span>Nặng: {baby.weight} kg</span>}
+                        {baby.height && (
+                          <span>{language === 'en' ? `Height: ${baby.height} cm` : `Cao: ${baby.height} cm`}</span>
+                        )}
+                        {baby.weight && (
+                          <span>{language === 'en' ? `Weight: ${baby.weight} kg` : `Nặng: ${baby.weight} kg`}</span>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -402,13 +452,15 @@ export const AccountPage: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-6 text-sm text-[#6A7F77]">
-                <p>Bạn chưa thêm hồ sơ của bé nào.</p>
+                <p>{language === 'en' ? "You haven't added any child profiles yet." : 'Bạn chưa thêm hồ sơ của bé nào.'}</p>
                 <Link
                   to="/thong-tin-be"
                   className="inline-flex items-center gap-1 mt-2 text-xs font-bold text-[#4E8773] hover:underline"
                 >
                   <PlusCircle className="w-3.5 h-3.5" />
-                  Thêm thông tin bé để nhận ngay +50 Điểm Mầm
+                  {language === 'en'
+                    ? 'Add child profile to receive +50 Mầm Points now'
+                    : 'Thêm thông tin bé để nhận ngay +50 Điểm Mầm'}
                 </Link>
               </div>
             )}
@@ -420,17 +472,23 @@ export const AccountPage: React.FC = () => {
               <div>
                 <h3 className="font-bold text-[#2F403A] text-lg font-heading flex items-center gap-2">
                   <Package className="w-5 h-5 text-[#4E8773]" />
-                  <span>Đơn hàng gần đây</span>
+                  <span>{language === 'en' ? 'Recent Orders' : 'Đơn hàng gần đây'}</span>
                 </h3>
                 <p className="text-xs text-[#6A7F77]">
-                  Theo dõi trạng thái và lịch sử mua sắm của bạn
+                  {language === 'en'
+                    ? 'Track shipping milestones and your order history'
+                    : 'Theo dõi trạng thái và lịch sử mua sắm của bạn'}
                 </p>
               </div>
               <Link
                 to="/lich-su-don-hang"
                 className="text-xs font-bold text-[#4E8773] hover:text-[#355F52] hover:underline flex items-center gap-1"
               >
-                <span>Xem tất cả ({userOrders.length})</span>
+                <span>
+                  {language === 'en'
+                    ? `View all (${userOrders.length})`
+                    : `Xem tất cả (${userOrders.length})`}
+                </span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -454,12 +512,12 @@ export const AccountPage: React.FC = () => {
                       </div>
                       <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#EAF3EF] text-[#355F52]">
                         {order.status === 'cho-xac-nhan'
-                          ? 'Chờ xác nhận'
+                          ? (language === 'en' ? 'Pending' : 'Chờ xác nhận')
                           : order.status === 'dang-chuan-bi'
-                          ? 'Đang chuẩn bị'
+                          ? (language === 'en' ? 'Preparing' : 'Đang chuẩn bị')
                           : order.status === 'dang-giao'
-                          ? 'Đang vận chuyển'
-                          : 'Đã hoàn thành'}
+                          ? (language === 'en' ? 'Delivering' : 'Đang vận chuyển')
+                          : (language === 'en' ? 'Completed' : 'Đã hoàn thành')}
                       </span>
                     </div>
 
@@ -468,11 +526,13 @@ export const AccountPage: React.FC = () => {
                         <div key={idx} className="flex items-center gap-2 text-xs text-[#2F403A]">
                           <img
                             src={item.product.images[0]}
-                            alt={item.product.name}
+                            alt={getProductName(item.product)}
                             className="w-10 h-10 rounded-xl object-cover bg-white"
                           />
                           <div>
-                            <p className="font-semibold truncate max-w-[140px]">{item.product.name}</p>
+                            <p className="font-semibold truncate max-w-[140px]">
+                              {getProductName(item.product)}
+                            </p>
                             <p className="text-[11px] text-[#6A7F77]">
                               {item.selectedSize} · x{item.quantity}
                             </p>
@@ -481,23 +541,23 @@ export const AccountPage: React.FC = () => {
                       ))}
                       {order.items.length > 3 && (
                         <span className="text-xs text-[#6A7F77] font-semibold">
-                          +{order.items.length - 3} món khác
+                          +{order.items.length - 3} {language === 'en' ? 'other items' : 'món khác'}
                         </span>
                       )}
                     </div>
 
                     <div className="pt-3 border-t border-[#FAF6EC] flex items-center justify-between">
                       <div className="text-xs text-[#6A7F77]">
-                        Tổng thanh toán:{' '}
+                        {language === 'en' ? 'Total Payment: ' : 'Tổng thanh toán: '}
                         <span className="font-bold text-sm text-[#355F52] tabular-nums font-heading">
-                          {order.totalAmount.toLocaleString('vi-VN')} đ
+                          {order.totalAmount.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                         </span>
                       </div>
                       <Link
                         to={`/xac-nhan-don-hang?id=${order.orderId}`}
                         className="text-xs font-bold text-[#4E8773] hover:underline flex items-center gap-1"
                       >
-                        Chi tiết đơn →
+                        {language === 'en' ? 'Order details →' : 'Chi tiết đơn →'}
                       </Link>
                     </div>
                   </div>
@@ -506,13 +566,17 @@ export const AccountPage: React.FC = () => {
             ) : (
               <div className="text-center py-8">
                 <Package className="w-10 h-10 text-[#C1D2CB] mx-auto mb-2" />
-                <p className="text-sm text-[#6A7F77]">Bạn chưa có đơn hàng nào tại Mầm Kids.</p>
+                <p className="text-sm text-[#6A7F77]">
+                  {language === 'en'
+                    ? "You haven't placed any orders at Mầm Kids yet."
+                    : 'Bạn chưa có đơn hàng nào tại Mầm Kids.'}
+                </p>
                 <Link
                   to="/san-pham"
                   className="inline-flex items-center gap-1.5 mt-3 px-4 py-2 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors"
                 >
                   <ShoppingBag className="w-3.5 h-3.5" />
-                  Khám phá trang phục cho bé ngay
+                  {language === 'en' ? 'Explore kids apparel now' : 'Khám phá trang phục cho bé ngay'}
                 </Link>
               </div>
             )}
@@ -524,17 +588,23 @@ export const AccountPage: React.FC = () => {
               <div>
                 <h3 className="font-bold text-[#2F403A] text-lg font-heading flex items-center gap-2">
                   <Heart className="w-5 h-5 text-[#E07A8A]" />
-                  <span>Sản phẩm yêu thích ({wishlist.length})</span>
+                  <span>
+                    {language === 'en'
+                      ? `Favorite Wishlist (${wishlist.length})`
+                      : `Sản phẩm yêu thích (${wishlist.length})`}
+                  </span>
                 </h3>
                 <p className="text-xs text-[#6A7F77]">
-                  Các trang phục bạn đã đánh dấu để mua sắm cho bé
+                  {language === 'en'
+                    ? 'Saved items and outfits ready for your little one'
+                    : 'Các trang phục bạn đã đánh dấu để mua sắm cho bé'}
                 </p>
               </div>
               <Link
                 to="/yeu-thich"
                 className="text-xs font-bold text-[#4E8773] hover:text-[#355F52] hover:underline flex items-center gap-1"
               >
-                <span>Xem tất cả</span>
+                <span>{language === 'en' ? 'View all' : 'Xem tất cả'}</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -549,33 +619,33 @@ export const AccountPage: React.FC = () => {
                     <Link to={`/san-pham/${prod.id}`} className="block">
                       <img
                         src={prod.images[0]}
-                        alt={prod.name}
+                        alt={getProductName(prod)}
                         className="w-full aspect-4/5 object-cover object-center rounded-xl bg-[#FAF6EE] mb-2"
                       />
                       <h4 className="font-bold text-xs text-[#2F403A] truncate font-heading">
-                        {prod.name}
+                        {getProductName(prod)}
                       </h4>
                       <p className="text-xs font-bold text-[#355F52] mt-0.5 tabular-nums">
-                        {prod.price.toLocaleString('vi-VN')} đ
+                        {prod.price.toLocaleString(language === 'en' ? 'en-US' : 'vi-VN')} {language === 'en' ? 'VND' : 'đ'}
                       </p>
                     </Link>
                     <button
                       onClick={() => addToCart(prod, prod.sizes[0], prod.colors[0], 1)}
                       className="mt-3 w-full py-1.5 rounded-lg bg-[#4E8773] hover:bg-[#355F52] text-white text-[11px] font-bold transition-colors cursor-pointer"
                     >
-                      Thêm vào giỏ
+                      {language === 'en' ? 'Add to Bag' : 'Thêm vào giỏ'}
                     </button>
                   </div>
                 ))}
               </div>
             ) : (
               <div className="text-center py-6 text-sm text-[#6A7F77]">
-                <p>Danh sách yêu thích đang trống.</p>
+                <p>{language === 'en' ? 'Your wishlist is currently empty.' : 'Danh sách yêu thích đang trống.'}</p>
                 <Link
                   to="/san-pham"
                   className="inline-block mt-2 text-xs font-bold text-[#4E8773] hover:underline"
                 >
-                  Dạo xem bộ sưu tập mới →
+                  {language === 'en' ? 'Browse new collection →' : 'Dạo xem bộ sưu tập mới →'}
                 </Link>
               </div>
             )}
@@ -587,17 +657,23 @@ export const AccountPage: React.FC = () => {
               <div>
                 <h3 className="font-bold text-[#285A48] text-lg font-heading flex items-center gap-2">
                   <Leaf className="w-5 h-5 text-[#4E8773]" />
-                  <span>Hành trình xanh của bé (120 Điểm Xanh)</span>
+                  <span>
+                    {language === 'en'
+                      ? 'Child Eco Journey (120 Green Points)'
+                      : 'Hành trình xanh của bé (120 Điểm Xanh)'}
+                  </span>
                 </h3>
                 <p className="text-xs text-[#5D726A]">
-                  Gieo mầm thói quen xanh qua các thử thách Eco Story và chương trình Mầm Again
+                  {language === 'en'
+                    ? 'Planting green habits through Eco Story challenges and the Mầm Again initiative'
+                    : 'Gieo mầm thói quen xanh qua các thử thách Eco Story và chương trình Mầm Again'}
                 </p>
               </div>
               <Link
                 to="/mam-xanh"
                 className="text-xs font-bold text-[#4E8773] hover:text-[#285A48] hover:underline flex items-center gap-1"
               >
-                <span>Khám phá</span>
+                <span>{language === 'en' ? 'Explore' : 'Khám phá'}</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -607,22 +683,34 @@ export const AccountPage: React.FC = () => {
               <div className="p-3.5 rounded-2xl bg-[#EAF3EF] border border-[#D2E3DC] flex items-center gap-3">
                 <span className="text-2xl">🐢</span>
                 <div>
-                  <h4 className="text-xs font-bold text-[#285A48]">Bạn Nhỏ Đại Dương</h4>
-                  <p className="text-[10px] text-[#4E8773]">Đã cứu 5 chai nhựa biển</p>
+                  <h4 className="text-xs font-bold text-[#285A48]">
+                    {language === 'en' ? 'Ocean Little Buddy' : 'Bạn Nhỏ Đại Dương'}
+                  </h4>
+                  <p className="text-[10px] text-[#4E8773]">
+                    {language === 'en' ? 'Saved 5 ocean plastic bottles' : 'Đã cứu 5 chai nhựa biển'}
+                  </p>
                 </div>
               </div>
               <div className="p-3.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] flex items-center gap-3">
                 <span className="text-2xl">🐻</span>
                 <div>
-                  <h4 className="text-xs font-bold text-[#285A48]">Vệ Binh Rừng Xanh</h4>
-                  <p className="text-[10px] text-[#4E8773]">Bảo vệ cây non vươn chồi</p>
+                  <h4 className="text-xs font-bold text-[#285A48]">
+                    {language === 'en' ? 'Green Forest Ranger' : 'Vệ Binh Rừng Xanh'}
+                  </h4>
+                  <p className="text-[10px] text-[#4E8773]">
+                    {language === 'en' ? 'Protecting young saplings' : 'Bảo vệ cây non vươn chồi'}
+                  </p>
                 </div>
               </div>
               <div className="p-3.5 rounded-2xl bg-[#FAF2DF] border border-[#F4E3BA] flex items-center gap-3">
                 <span className="text-2xl">♻️</span>
                 <div>
-                  <h4 className="text-xs font-bold text-[#285A48]">Sứ Giả Mầm Again</h4>
-                  <p className="text-[10px] text-[#4E8773]">Trao lại đồ cũ tuần hoàn</p>
+                  <h4 className="text-xs font-bold text-[#285A48]">
+                    {language === 'en' ? 'Mầm Again Envoy' : 'Sứ Giả Mầm Again'}
+                  </h4>
+                  <p className="text-[10px] text-[#4E8773]">
+                    {language === 'en' ? 'Recycling preloved clothes' : 'Trao lại đồ cũ tuần hoàn'}
+                  </p>
                 </div>
               </div>
             </div>
@@ -630,14 +718,19 @@ export const AccountPage: React.FC = () => {
             {/* Note & CTAs */}
             <div className="p-3.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
               <div className="text-[#5D726A]">
-                <strong className="text-[#285A48]">💡 Phân biệt điểm:</strong> Điểm Xanh ghi nhận thói quen xanh của bé; Điểm Mầm dùng khấu trừ tiền khi mua sắm.
+                <strong className="text-[#285A48]">
+                  {language === 'en' ? '💡 Points distinction:' : '💡 Phân biệt điểm:'}
+                </strong>{' '}
+                {language === 'en'
+                  ? 'Green Points record your child’s eco-friendly habits; Mầm Points are used for shopping discounts.'
+                  : 'Điểm Xanh ghi nhận thói quen xanh của bé; Điểm Mầm dùng khấu trừ tiền khi mua sắm.'}
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <Link
                   to="/eco-story"
                   className="px-3 py-1.5 rounded-xl bg-[#4E8773] hover:bg-[#285A48] text-white font-bold text-xs shadow-2xs"
                 >
-                  Đọc Eco Story
+                  {language === 'en' ? 'Read Eco Story' : 'Đọc Eco Story'}
                 </Link>
                 <Link
                   to="/mam-again"
@@ -657,13 +750,13 @@ export const AccountPage: React.FC = () => {
             <div className="flex items-center justify-between pb-3 border-b border-[#FAF6EC] mb-4">
               <h3 className="font-bold text-[#2F403A] text-base font-heading flex items-center gap-2">
                 <Ticket className="w-4 h-4 text-[#ECA032]" />
-                <span>Voucher của tôi</span>
+                <span>{language === 'en' ? 'My Vouchers' : 'Voucher của tôi'}</span>
               </h3>
               <Link
                 to="/voucher"
                 className="text-xs font-bold text-[#4E8773] hover:underline"
               >
-                Xem hết
+                {language === 'en' ? 'View all' : 'Xem hết'}
               </Link>
             </div>
 
@@ -677,14 +770,18 @@ export const AccountPage: React.FC = () => {
                     <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-[#4E8773] text-white">
                       {voucher.code}
                     </span>
-                    <p className="text-xs font-bold text-[#2F403A] mt-1.5">{voucher.title}</p>
-                    <p className="text-[10px] text-[#6A7F77]">HSD: {voucher.expiryDate}</p>
+                    <p className="text-xs font-bold text-[#2F403A] mt-1.5">
+                      {language === 'en' ? (voucher.titleEn || voucher.title) : voucher.title}
+                    </p>
+                    <p className="text-[10px] text-[#6A7F77]">
+                      {language === 'en' ? `EXP: ${voucher.expiryDate}` : `HSD: ${voucher.expiryDate}`}
+                    </p>
                   </div>
                   <Link
                     to="/san-pham"
                     className="shrink-0 px-2.5 py-1.5 rounded-lg bg-[#355F52] hover:bg-[#28473D] text-white text-[11px] font-bold transition-colors cursor-pointer"
                   >
-                    Dùng
+                    {language === 'en' ? 'Use' : 'Dùng'}
                   </Link>
                 </div>
               ))}
@@ -694,7 +791,11 @@ export const AccountPage: React.FC = () => {
               to="/voucher"
               className="mt-4 w-full py-2.5 rounded-xl bg-[#EAF3EF] hover:bg-[#D2E3DC] text-[#355F52] font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
             >
-              <span>Vào kho voucher ({availableVouchers.length})</span>
+              <span>
+                {language === 'en'
+                  ? `Go to voucher wallet (${availableVouchers.length})`
+                  : `Vào kho voucher (${availableVouchers.length})`}
+              </span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -702,16 +803,40 @@ export const AccountPage: React.FC = () => {
           {/* Quick Menu Links */}
           <div className="bg-white rounded-3xl p-6 border border-[#EFE8D8] shadow-xs">
             <h3 className="font-bold text-[#2F403A] text-sm uppercase tracking-wider mb-3">
-              Quản lý tài khoản
+              {language === 'en' ? 'Account Management' : 'Quản lý tài khoản'}
             </h3>
             <ul className="space-y-1 text-xs">
               {[
-                { label: 'Điểm tích lũy Mầm Kids', path: '/diem-mam', icon: Sparkles },
-                { label: 'Kho voucher của tôi', path: '/voucher', icon: Ticket },
-                { label: 'Lịch sử và theo dõi đơn hàng', path: '/lich-su-don-hang', icon: Package },
-                { label: 'Hồ sơ số đo của bé yêu', path: '/thong-tin-be', icon: Baby },
-                { label: 'Sản phẩm yêu thích', path: '/yeu-thich', icon: Heart },
-                { label: 'Bảng quy đổi kích cỡ', path: '/huong-dan-size', icon: Award }
+                {
+                  label: language === 'en' ? 'Mầm Kids Loyalty Points' : 'Điểm tích lũy Mầm Kids',
+                  path: '/diem-mam',
+                  icon: Sparkles
+                },
+                {
+                  label: language === 'en' ? 'My Voucher Wallet' : 'Kho voucher của tôi',
+                  path: '/voucher',
+                  icon: Ticket
+                },
+                {
+                  label: language === 'en' ? 'Order History & Tracking' : 'Lịch sử và theo dõi đơn hàng',
+                  path: '/lich-su-don-hang',
+                  icon: Package
+                },
+                {
+                  label: language === 'en' ? 'Child Sizing Profiles' : 'Hồ sơ số đo của bé yêu',
+                  path: '/thong-tin-be',
+                  icon: Baby
+                },
+                {
+                  label: language === 'en' ? 'Favorite Wishlist' : 'Sản phẩm yêu thích',
+                  path: '/yeu-thich',
+                  icon: Heart
+                },
+                {
+                  label: language === 'en' ? 'Size Recommendation Guide' : 'Bảng quy đổi kích cỡ',
+                  path: '/huong-dan-size',
+                  icon: Award
+                }
               ].map((item, idx) => (
                 <li key={idx}>
                   <Link
@@ -741,19 +866,21 @@ export const AccountPage: React.FC = () => {
           <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl border border-[#EFE8D8] p-6 sm:p-8 z-10">
             <div className="flex items-center justify-between pb-4 border-b border-[#FAF6EC] mb-5">
               <h3 className="text-lg font-bold text-[#2F403A] font-heading">
-                Cập nhật thông tin cá nhân
+                {language === 'en' ? 'Update Profile Information' : 'Cập nhật thông tin cá nhân'}
               </h3>
               <button
                 onClick={() => setIsEditingProfile(false)}
                 className="text-xs font-semibold text-[#8B9D95] hover:text-[#2F403A]"
               >
-                Đóng
+                {language === 'en' ? 'Close' : 'Đóng'}
               </button>
             </div>
 
             <form onSubmit={handleSaveProfile} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-[#2F403A] mb-1.5">Họ và tên</label>
+                <label className="block text-xs font-bold text-[#2F403A] mb-1.5">
+                  {language === 'en' ? 'Full Name' : 'Họ và tên'}
+                </label>
                 <input
                   type="text"
                   value={editName}
@@ -763,34 +890,40 @@ export const AccountPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#2F403A] mb-1.5">Địa chỉ giao hàng mặc định</label>
+                <label className="block text-xs font-bold text-[#2F403A] mb-1.5">
+                  {language === 'en' ? 'Default Shipping Address' : 'Địa chỉ giao hàng mặc định'}
+                </label>
                 <input
                   type="text"
                   value={editAddress}
                   onChange={(e) => setEditAddress(e.target.value)}
-                  placeholder="Số nhà, tên đường, phường/xã..."
+                  placeholder={language === 'en' ? 'House number, street, ward...' : 'Số nhà, tên đường, phường/xã...'}
                   className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-[#2F403A] mb-1.5">Quận / Huyện</label>
+                  <label className="block text-xs font-bold text-[#2F403A] mb-1.5">
+                    {language === 'en' ? 'District' : 'Quận / Huyện'}
+                  </label>
                   <input
                     type="text"
                     value={editDistrict}
                     onChange={(e) => setEditDistrict(e.target.value)}
-                    placeholder="Quận Tây Hồ"
+                    placeholder={language === 'en' ? 'Tay Ho District' : 'Quận Tây Hồ'}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-[#2F403A] mb-1.5">Tỉnh / Thành phố</label>
+                  <label className="block text-xs font-bold text-[#2F403A] mb-1.5">
+                    {language === 'en' ? 'City / Province' : 'Tỉnh / Thành phố'}
+                  </label>
                   <input
                     type="text"
                     value={editCity}
                     onChange={(e) => setEditCity(e.target.value)}
-                    placeholder="Hà Nội"
+                    placeholder={language === 'en' ? 'Hanoi' : 'Hà Nội'}
                     className="w-full px-4 py-2.5 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773]"
                   />
                 </div>
@@ -802,13 +935,13 @@ export const AccountPage: React.FC = () => {
                   onClick={() => setIsEditingProfile(false)}
                   className="px-4 py-2.5 rounded-xl border border-[#EFE8D8] text-xs font-bold text-[#6A7F77] hover:bg-[#FDF9F1]"
                 >
-                  Hủy
+                  {language === 'en' ? 'Cancel' : 'Hủy'}
                 </button>
                 <button
                   type="submit"
                   className="px-6 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold transition-colors cursor-pointer"
                 >
-                  Lưu thay đổi
+                  {language === 'en' ? 'Save Changes' : 'Lưu thay đổi'}
                 </button>
               </div>
             </form>

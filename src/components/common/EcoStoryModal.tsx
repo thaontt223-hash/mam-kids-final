@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { EcoStory } from '../../types';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface EcoStoryModalProps {
   story: EcoStory;
@@ -14,6 +15,7 @@ interface EcoStoryModalProps {
 export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onClose }) => {
   const { user, addPoints } = useAuth();
   const { showToast } = useCart();
+  const { language } = useLanguage();
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const [audioProgress, setAudioProgress] = useState(0);
@@ -68,12 +70,19 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
     localStorage.setItem(`mam_eco_challenge_${story.id}`, 'true');
 
     if (user && addPoints) {
-      addPoints(story.challenge.pointsReward, `Hoàn thành thử thách Mầm Xanh: ${story.challenge.title}`);
+      addPoints(
+        story.challenge.pointsReward,
+        language === 'en'
+          ? `Completed Mầm Xanh challenge: ${story.challenge.title}`
+          : `Hoàn thành thử thách Mầm Xanh: ${story.challenge.title}`
+      );
     }
 
     showToast(
-      '🌱 Bé thật tuyệt vời!',
-      `Đã nhận +${story.challenge.pointsReward} Điểm Mầm & Huy hiệu "${story.challenge.badgeName}"!`
+      language === 'en' ? '🌱 Amazing job!' : '🌱 Bé thật tuyệt vời!',
+      language === 'en'
+        ? `Earned +${story.challenge.pointsReward} Mầm Points & "${story.challenge.badgeName}" Badge!`
+        : `Đã nhận +${story.challenge.pointsReward} Điểm Mầm & Huy hiệu "${story.challenge.badgeName}"!`
     );
   };
 
@@ -82,7 +91,10 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
       navigator.clipboard.writeText(window.location.href);
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2000);
-      showToast('Đã sao chép liên kết!', 'Mời bạn bè cùng đọc câu chuyện xanh cho bé yêu.');
+      showToast(
+        language === 'en' ? 'Link copied!' : 'Đã sao chép liên kết!',
+        language === 'en' ? 'Invite friends to read this eco story with kids.' : 'Mời bạn bè cùng đọc câu chuyện xanh cho bé yêu.'
+      );
     }
   };
 
@@ -100,8 +112,8 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors"
-            aria-label="Đóng câu chuyện"
+            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-full bg-white/15 hover:bg-white/25 text-white transition-colors cursor-pointer"
+            aria-label={language === 'en' ? 'Close story' : 'Đóng câu chuyện'}
           >
             <X className="w-5 h-5" />
           </button>
@@ -114,10 +126,10 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               ⏱ {story.readTime}
             </span>
             <span className="px-2.5 py-1 rounded-full bg-white/20 text-[11px] font-semibold text-[#FDF9F1]">
-              👶 Độ tuổi: {story.targetAge}
+              👶 {language === 'en' ? 'Age:' : 'Độ tuổi:'} {story.targetAge}
             </span>
             <span className="px-2.5 py-1 rounded-full bg-[#355F52]/60 text-[11px] font-bold text-[#F5DFA0]">
-              🌱 Một chiếc áo – Một câu chuyện – Một hành động xanh
+              {language === 'en' ? '🌱 1 Outfit – 1 Story – 1 Green Habit' : '🌱 Một chiếc áo – Một câu chuyện – Một hành động xanh'}
             </span>
           </div>
 
@@ -133,31 +145,33 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
             <div className="flex items-center gap-2.5">
               <button
                 onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                className="px-3 py-1.5 rounded-full bg-white text-[#355F52] hover:bg-[#F5DFA0] text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs"
+                className="px-3 py-1.5 rounded-full bg-white text-[#355F52] hover:bg-[#F5DFA0] text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
               >
                 {isPlayingAudio ? (
                   <>
                     <VolumeX className="w-3.5 h-3.5 text-[#355F52]" />
-                    <span>Tạm dừng giọng đọc</span>
+                    <span>{language === 'en' ? 'Pause narrator' : 'Tạm dừng giọng đọc'}</span>
                   </>
                 ) : (
                   <>
                     <Volume2 className="w-3.5 h-3.5 text-[#355F52]" />
-                    <span>🎧 Bật giọng đọc cho bé</span>
+                    <span>{language === 'en' ? '🎧 Play audio story' : '🎧 Bật giọng đọc cho bé'}</span>
                   </>
                 )}
               </button>
               <span className="text-[11px] text-[#E8F1EC] hidden sm:inline">
-                {isPlayingAudio ? 'Đang đọc theo từng đoạn...' : 'Ba mẹ có thể tự đọc hoặc bật giọng đọc dịu êm'}
+                {isPlayingAudio
+                  ? (language === 'en' ? 'Playing narration by chapter...' : 'Đang đọc theo từng đoạn...')
+                  : (language === 'en' ? 'Parents can read aloud or play gentle narration' : 'Ba mẹ có thể tự đọc hoặc bật giọng đọc dịu êm')}
               </span>
             </div>
 
             <button
               onClick={handleShare}
-              className="text-xs text-[#E8F1EC] hover:text-white flex items-center gap-1 transition-colors"
+              className="text-xs text-[#E8F1EC] hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
             >
               <Share2 className="w-3.5 h-3.5" />
-              <span>{copiedLink ? 'Đã sao chép' : 'Chia sẻ truyện'}</span>
+              <span>{copiedLink ? (language === 'en' ? 'Copied' : 'Đã sao chép') : (language === 'en' ? 'Share story' : 'Chia sẻ truyện')}</span>
             </button>
           </div>
 
@@ -183,14 +197,14 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
                   setIsPlayingAudio(false);
                   setAudioProgress(0);
                 }}
-                className={`flex-1 min-w-[130px] sm:min-w-0 py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 ${
+                className={`flex-1 min-w-[130px] sm:min-w-0 py-2 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
                   activeChapterIndex === idx
                     ? 'bg-[#355F52] text-white shadow-xs'
                     : 'text-[#5D726A] hover:text-[#355F52] hover:bg-white/60'
                 }`}
               >
                 <span>{ch.icon || '📖'}</span>
-                <span>Chương {ch.chapterNumber}</span>
+                <span>{language === 'en' ? `Chapter ${ch.chapterNumber}` : `Chương ${ch.chapterNumber}`}</span>
               </button>
             ))}
           </div>
@@ -199,7 +213,11 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
           <div className="bg-white rounded-[24px] p-5 sm:p-7 border border-[#EFE8D8] shadow-xs relative overflow-hidden">
             <div className="flex items-center gap-2 text-xs font-black text-[#4E8773] uppercase tracking-wider mb-2 font-heading">
               <span className="text-lg">{currentChapter.icon || '🌱'}</span>
-              <span>Chương {currentChapter.chapterNumber} trên {story.chapters.length}</span>
+              <span>
+                {language === 'en'
+                  ? `Chapter ${currentChapter.chapterNumber} of ${story.chapters.length}`
+                  : `Chương ${currentChapter.chapterNumber} trên ${story.chapters.length}`}
+              </span>
             </div>
 
             <h3 className="text-lg sm:text-xl font-black text-[#2F403A] font-heading mb-4">
@@ -215,7 +233,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               <Sparkles className="w-5 h-5 text-[#4E8773] shrink-0 mt-0.5" />
               <div>
                 <strong className="text-xs font-bold text-[#355F52] block mb-0.5">
-                  Bài học yêu thiên nhiên cho bé:
+                  {language === 'en' ? 'Nature lesson for your child:' : 'Bài học yêu thiên nhiên cho bé:'}
                 </strong>
                 <p className="text-xs text-[#5D726A] leading-relaxed">
                   {currentChapter.moral}
@@ -230,10 +248,10 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
                 disabled={activeChapterIndex === 0}
                 onClick={() => setActiveChapterIndex((i) => Math.max(0, i - 1))}
                 className={`text-xs font-bold flex items-center gap-1 transition-opacity ${
-                  activeChapterIndex === 0 ? 'opacity-30 cursor-not-allowed text-[#5D726A]' : 'text-[#355F52] hover:underline'
+                  activeChapterIndex === 0 ? 'opacity-30 cursor-not-allowed text-[#5D726A]' : 'text-[#355F52] hover:underline cursor-pointer'
                 }`}
               >
-                ← Chương trước
+                {language === 'en' ? '← Previous Chapter' : '← Chương trước'}
               </button>
 
               <span className="text-xs text-[#5D726A] font-semibold">
@@ -244,14 +262,14 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
                 <button
                   type="button"
                   onClick={() => setActiveChapterIndex((i) => i + 1)}
-                  className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold flex items-center gap-1 shadow-2xs"
+                  className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold flex items-center gap-1 shadow-2xs cursor-pointer"
                 >
-                  <span>Chương kế tiếp</span>
+                  <span>{language === 'en' ? 'Next Chapter' : 'Chương kế tiếp'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               ) : (
                 <span className="text-xs font-bold text-[#4E8773] flex items-center gap-1">
-                  <CheckCircle2 className="w-4 h-4" /> Đã đọc hết truyện
+                  <CheckCircle2 className="w-4 h-4" /> {language === 'en' ? 'Completed story' : 'Đã đọc hết truyện'}
                 </span>
               )}
             </div>
@@ -266,7 +284,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
                 </span>
                 <div>
                   <span className="text-[11px] font-black uppercase tracking-wider text-[#355F52] block font-heading">
-                    THỬ THÁCH XANH CÙNG BÉ
+                    {language === 'en' ? 'GREEN CHALLENGE WITH KIDS' : 'THỬ THÁCH XANH CÙNG BÉ'}
                   </span>
                   <h4 className="text-base sm:text-lg font-bold text-[#2F403A] font-heading">
                     {story.challenge.title}
@@ -275,7 +293,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               </div>
 
               <span className="shrink-0 px-2.5 py-1 rounded-full bg-[#355F52] text-[#F5DFA0] text-xs font-bold tabular-nums">
-                +{story.challenge.pointsReward} Điểm Mầm
+                +{story.challenge.pointsReward} {language === 'en' ? 'Mầm Points' : 'Điểm Mầm'}
               </span>
             </div>
 
@@ -291,7 +309,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               {isChallengeCompleted ? (
                 <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#355F52] text-white text-xs font-bold shadow-xs">
                   <CheckCircle2 className="w-4 h-4 text-[#F5DFA0]" />
-                  <span>Bé đã hoàn thành xuất sắc! 🌱</span>
+                  <span>{language === 'en' ? 'Challenge completed brilliantly! 🌱' : 'Bé đã hoàn thành xuất sắc! 🌱'}</span>
                 </div>
               ) : (
                 <button
@@ -300,7 +318,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
                   className="px-5 py-2.5 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-[#F5DFA0]" />
-                  <span>Bé đã làm thử thách này! 🌱</span>
+                  <span>{language === 'en' ? 'Mark Challenge Done! 🌱' : 'Bé đã làm thử thách này! 🌱'}</span>
                 </button>
               )}
             </div>
@@ -312,10 +330,12 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               <span className="text-2xl mt-0.5">♻️</span>
               <div>
                 <h4 className="text-sm sm:text-base font-bold text-[#2F403A] font-heading">
-                  Khi áo đã chật? Cùng trao lại qua "Mầm Again"
+                  {language === 'en' ? 'Outgrown Clothes? Pass Them On via Mầm Again' : 'Khi áo đã chật? Cùng trao lại qua "Mầm Again"'}
                 </h4>
                 <p className="text-xs text-[#5D726A] mt-1 max-w-md leading-relaxed">
-                  Quần áo Mầm Kids khi bé mặc không còn vừa có thể gửi lại về cho chúng tôi để trao tặng hoặc tái sinh, ba mẹ sẽ nhận lại Điểm Mầm hoặc voucher giảm giá.
+                  {language === 'en'
+                    ? 'When outgrown, send Mầm Kids clothes back to us for donation or upcycling to earn Mầm Points or shopping vouchers.'
+                    : 'Quần áo Mầm Kids khi bé mặc không còn vừa có thể gửi lại về cho chúng tôi để trao tặng hoặc tái sinh, ba mẹ sẽ nhận lại Điểm Mầm hoặc voucher giảm giá.'}
                 </p>
               </div>
             </div>
@@ -325,7 +345,7 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
               onClick={onClose}
               className="shrink-0 px-4 py-2.5 rounded-xl bg-white border border-[#355F52] hover:bg-[#355F52] hover:text-white text-[#355F52] text-xs font-bold transition-colors flex items-center justify-center gap-1"
             >
-              <span>Tìm hiểu Mầm Again</span>
+              <span>{language === 'en' ? 'Learn about Mầm Again' : 'Tìm hiểu Mầm Again'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
@@ -335,14 +355,18 @@ export const EcoStoryModal: React.FC<EcoStoryModalProps> = ({ story, isOpen, onC
         <div className="p-4 sm:p-5 bg-white border-t border-[#EFE8D8] flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-1.5 text-xs text-[#5D726A]">
             <Heart className="w-4 h-4 text-[#F3B59A] fill-[#F3B59A]" />
-            <span>Đồng hành cùng ba mẹ nuôi dưỡng mầm xanh yêu thương</span>
+            <span>
+              {language === 'en'
+                ? 'Accompanying parents in nurturing lovely green sprouts'
+                : 'Đồng hành cùng ba mẹ nuôi dưỡng mầm xanh yêu thương'}
+            </span>
           </div>
 
           <button
             onClick={onClose}
-            className="px-5 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold transition-colors"
+            className="px-5 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold transition-colors cursor-pointer"
           >
-            Đóng câu chuyện
+            {language === 'en' ? 'Close Story' : 'Đóng câu chuyện'}
           </button>
         </div>
       </div>

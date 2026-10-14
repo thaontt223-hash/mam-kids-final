@@ -23,9 +23,6 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const { language, t } = useLanguage();
 
-  const resolvedTitle = pageTitle || (language === 'en' ? 'Product Catalog' : 'Danh mục sản phẩm');
-  const resolvedSubtitle = pageSubtitle || (language === 'en' ? 'Gentle, skin-safe and personalized apparel for kids 3–12' : 'Khám phá trang phục dịu êm, an toàn và cá nhân hóa cho bé 3–12 tuổi');
-
   // Filters state
   const [searchTerm, setSearchTerm] = useState(searchParams.get('q') || '');
   const [saleOnly, setSaleOnly] = useState<boolean>(
@@ -44,6 +41,28 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
   // Modals
   const [sizeModalOpen, setSizeModalOpen] = useState(false);
+
+  const resolvedTitle =
+    pageTitle ||
+    (selectedGender === 'be-trai' || initialGenderFilter === 'be-trai'
+      ? (language === 'en' ? "Boys' Fashion" : 'Thời trang Bé trai')
+      : selectedGender === 'be-gai' || initialGenderFilter === 'be-gai'
+      ? (language === 'en' ? "Girls' Fashion" : 'Thời trang Bé gái')
+      : (language === 'en' ? 'Product Catalog' : 'Danh mục sản phẩm'));
+
+  const resolvedSubtitle =
+    pageSubtitle ||
+    (selectedGender === 'be-trai' || initialGenderFilter === 'be-trai'
+      ? (language === 'en'
+          ? 'Dynamic, smart and breathable tailored apparel for boys aged 3–12'
+          : 'Những thiết kế năng động, lịch lãm và chuẩn chất liệu thoáng mát cho bé trai từ 3–12 tuổi')
+      : selectedGender === 'be-gai' || initialGenderFilter === 'be-gai'
+      ? (language === 'en'
+          ? 'Floral dresses, gentle pastel sets and lovely outfits for girls aged 3–12'
+          : 'Váy hoa bồng bềnh, đồ bộ pastel dịu dàng và đầm công chúa xinh xắn cho bé gái từ 3–12 tuổi')
+      : (language === 'en'
+          ? 'Gentle, skin-safe and personalized apparel for kids aged 3–12'
+          : 'Khám phá trang phục dịu êm, an toàn và cá nhân hóa cho bé 3–12 tuổi'));
 
   useEffect(() => {
     const qParam = searchParams.get('q');
@@ -331,7 +350,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 <button
                   onClick={() => setSearchTerm('')}
                   className="absolute right-2.5 top-2.5 text-[#8B9D95] hover:text-[#2F403A] cursor-pointer"
-                  aria-label="Xóa từ khóa tìm kiếm"
+                  aria-label={language === 'en' ? 'Clear search keyword' : 'Xóa từ khóa tìm kiếm'}
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -477,11 +496,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           <div className="relative w-[82vw] max-w-sm sm:max-w-xs bg-white h-full shadow-2xl p-5 sm:p-6 overflow-y-auto flex flex-col justify-between z-10">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-[#EFE8D8]">
-                <h3 className="font-bold text-[#2F403A] text-base font-heading">Bộ lọc sản phẩm</h3>
+                <h3 className="font-bold text-[#2F403A] text-base font-heading">
+                  {language === 'en' ? 'Product Filters' : 'Bộ lọc sản phẩm'}
+                </h3>
                 <button
                   onClick={() => setMobileFilterOpen(false)}
                   className="p-1.5 text-[#2F403A] hover:bg-[#F2F7F4] rounded-lg"
-                  aria-label="Đóng bộ lọc"
+                  aria-label={language === 'en' ? 'Close filter' : 'Đóng bộ lọc'}
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -491,13 +512,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 {initialGenderFilter === 'all' && (
                   <div>
                     <label className="block text-xs font-bold uppercase text-[#7A8E85] mb-2">
-                      Dành cho bé
+                      {language === 'en' ? 'For Kids' : 'Dành cho bé'}
                     </label>
                     <div className="grid grid-cols-1 gap-1">
                       {[
-                        { id: 'all', label: 'Tất cả bé' },
-                        { id: 'be-trai', label: 'Bé trai' },
-                        { id: 'be-gai', label: 'Bé gái' }
+                        { id: 'all', label: language === 'en' ? 'All Kids' : 'Tất cả bé' },
+                        { id: 'be-trai', label: language === 'en' ? 'Boys' : 'Bé trai' },
+                        { id: 'be-gai', label: language === 'en' ? 'Girls' : 'Bé gái' }
                       ].map((g) => (
                         <button
                           key={g.id}
@@ -517,7 +538,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold uppercase text-[#7A8E85] mb-2">
-                    Danh mục
+                    {language === 'en' ? 'Categories' : 'Danh mục'}
                   </label>
                   <div className="grid grid-cols-1 gap-1 max-h-52 overflow-y-auto pr-1">
                     {categories.map((c) => (
@@ -538,7 +559,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold uppercase text-[#7A8E85] mb-2">
-                    Kích thước (Size)
+                    {language === 'en' ? 'Size' : 'Kích thước (Size)'}
                   </label>
                   <div className="grid grid-cols-2 gap-1.5">
                     {sizes.map((s) => (
@@ -551,7 +572,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                             : 'bg-[#FAF7F0] text-[#2F403A] border-[#EFE8D8]'
                         }`}
                       >
-                        {s === 'all' ? 'Tất cả' : s}
+                        {s === 'all' ? (language === 'en' ? 'All' : 'Tất cả') : s}
                       </button>
                     ))}
                   </div>
@@ -559,15 +580,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                 <div>
                   <label className="block text-xs font-bold uppercase text-[#7A8E85] mb-2">
-                    Khoảng giá
+                    {language === 'en' ? 'Price Range' : 'Khoảng giá'}
                   </label>
                   <div className="grid grid-cols-1 gap-1">
-                    {[
-                      { id: 'all', label: 'Tất cả mức giá' },
-                      { id: 'under-200', label: 'Dưới 200.000đ' },
-                      { id: '200-300', label: '200.000đ – 300.000đ' },
-                      { id: 'above-300', label: 'Trên 300.000đ' }
-                    ].map((p) => (
+                    {priceRanges.map((p) => (
                       <button
                         key={p.id}
                         onClick={() => setPriceRange(p.id)}
@@ -590,13 +606,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                 onClick={resetFilters}
                 className="w-1/2 py-2.5 rounded-2xl border border-[#EFE8D8] text-xs font-bold text-[#2F403A]"
               >
-                Đặt lại
+                {language === 'en' ? 'Reset' : 'Đặt lại'}
               </button>
               <button
                 onClick={() => setMobileFilterOpen(false)}
                 className="w-1/2 py-2.5 rounded-2xl bg-[#355F52] text-white text-xs font-bold"
               >
-                Áp dụng
+                {language === 'en' ? 'Apply' : 'Áp dụng'}
               </button>
             </div>
           </div>

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { User, Lock, Mail, Phone, Eye, EyeOff, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
+import { User, Lock, Mail, Eye, EyeOff, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { Logo } from '../components/common/Logo';
 
 export const LoginPage: React.FC = () => {
@@ -10,6 +11,7 @@ export const LoginPage: React.FC = () => {
   const location = useLocation();
   const { login, loginDemo, isLoggedIn } = useAuth();
   const { showToast } = useCart();
+  const { language, t } = useLanguage();
 
   const [accountInput, setAccountInput] = useState('');
   const [password, setPassword] = useState('');
@@ -30,11 +32,17 @@ export const LoginPage: React.FC = () => {
     setError('');
 
     if (!accountInput.trim()) {
-      setError('Vui lòng nhập email hoặc số điện thoại');
+      setError(
+        language === 'en'
+          ? 'Please enter your email or phone number'
+          : 'Vui lòng nhập email hoặc số điện thoại'
+      );
       return;
     }
     if (!password) {
-      setError('Vui lòng nhập mật khẩu');
+      setError(
+        language === 'en' ? 'Please enter your password' : 'Vui lòng nhập mật khẩu'
+      );
       return;
     }
 
@@ -43,29 +51,69 @@ export const LoginPage: React.FC = () => {
     setIsLoading(false);
 
     if (res.success) {
-      showToast('Đăng nhập thành công!', 'Chào mừng bạn quay trở lại với Mầm Kids');
+      showToast(
+        language === 'en' ? 'Login successful!' : 'Đăng nhập thành công!',
+        language === 'en'
+          ? 'Welcome back to Mầm Kids'
+          : 'Chào mừng bạn quay trở lại với Mầm Kids'
+      );
       const from = (location.state as any)?.from || '/tai-khoan';
       navigate(from);
     } else {
-      setError(res.message || 'Đăng nhập không thành công');
+      setError(
+        res.message ||
+          (language === 'en' ? 'Login failed' : 'Đăng nhập không thành công')
+      );
     }
   };
 
   const handleDemoLogin = () => {
     loginDemo();
-    showToast('Đăng nhập thành công với tài khoản trải nghiệm!', 'Xin chào Mẹ Hoàng Yến');
+    showToast(
+      language === 'en'
+        ? 'Signed in successfully with demo account!'
+        : 'Đăng nhập thành công với tài khoản trải nghiệm!',
+      language === 'en' ? 'Welcome, Mother Hoang Yen' : 'Xin chào Mẹ Hoàng Yến'
+    );
     navigate('/tai-khoan');
   };
+
+  const memberBenefitsList = [
+    {
+      title: language === 'en' ? '10% off your first order' : 'Giảm 10% cho đơn hàng đầu tiên',
+      desc: language === 'en' ? 'Code MAMKIDS10 automatically added to wallet' : 'Mã MAMKIDS10 tự động gửi vào ví'
+    },
+    {
+      title: language === 'en' ? 'Earn Mầm Points on every purchase' : 'Tích Điểm Mầm sau mỗi đơn hàng',
+      desc: language === 'en' ? '1,000 VND = 1 Mầm Point for instant checkout discounts' : '1.000đ = 1 Điểm Mầm quy đổi giảm giá'
+    },
+    {
+      title: language === 'en' ? 'Child birthday gift voucher' : 'Voucher mừng sinh nhật bé yêu',
+      desc: language === 'en' ? 'Get a 50,000 VND gift on your child’s birthday month' : 'Tặng 50.000đ vào tháng sinh nhật bé'
+    },
+    {
+      title: language === 'en' ? 'Save child height, weight & sizing profile' : 'Lưu hồ sơ chiều cao, cân nặng & size của bé',
+      desc: language === 'en' ? 'Automated smart size advice while browsing clothes' : 'Gợi ý size tự động khi mua sắm'
+    },
+    {
+      title: language === 'en' ? 'Live order tracking & full purchase history' : 'Theo dõi đơn hàng & lịch sử mua hàng',
+      desc: language === 'en' ? 'Check real-time package delivery milestones online' : 'Kiểm tra lộ trình giao hàng trực tuyến'
+    },
+    {
+      title: language === 'en' ? 'New collection & seasonal early access' : 'Thông báo bộ sưu tập & ưu đãi mùa mới',
+      desc: language === 'en' ? 'Priority notice for fresh releases and seasonal lookbooks' : 'Ưu tiên trải nghiệm trang phục mới ra mắt'
+    }
+  ];
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-14">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-xs text-[#6A7F77] mb-6">
         <Link to="/" className="hover:text-[#4E8773] transition-colors">
-          Trang chủ
+          {t('nav.home')}
         </Link>
         <span>/</span>
-        <span className="text-[#355F52] font-semibold">Đăng nhập tài khoản</span>
+        <span className="text-[#355F52] font-semibold">{t('auth.loginTitle')}</span>
       </nav>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
@@ -75,13 +123,13 @@ export const LoginPage: React.FC = () => {
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#EAF3EF] text-[#355F52] mb-3">
                 <User className="w-3.5 h-3.5" />
-                Thành viên Mầm Kids
+                {t('auth.memberBadge')}
               </span>
               <h1 className="text-2xl sm:text-3xl font-black text-[#2F403A] font-heading tracking-tight">
-                Đăng nhập tài khoản
+                {t('auth.loginTitle')}
               </h1>
               <p className="text-sm text-[#6A7F77] mt-1.5">
-                Đăng nhập để xem tích điểm Mầm, nhận voucher và theo dõi đơn hàng của bạn.
+                {t('auth.loginSubtitle')}
               </p>
             </div>
             <div className="shrink-0">
@@ -99,14 +147,14 @@ export const LoginPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider mb-2">
-                Email hoặc Số điện thoại <span className="text-red-500">*</span>
+                {t('auth.emailOrPhone')} <span className="text-red-500">*</span>
               </label>
               <div className="relative">
                 <input
                   type="text"
                   value={accountInput}
                   onChange={(e) => setAccountInput(e.target.value)}
-                  placeholder="Ví dụ: mevabe@mamkids.vn hoặc 0987654321"
+                  placeholder={t('auth.emailOrPhonePlaceholder')}
                   className="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773] focus:ring-2 focus:ring-[#4E8773]/20 transition-all placeholder-[#9EB1A9]"
                 />
                 <Mail className="w-4 h-4 text-[#8B9D95] absolute left-4 top-3.5" />
@@ -116,14 +164,16 @@ export const LoginPage: React.FC = () => {
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="block text-xs font-bold text-[#2F403A] uppercase tracking-wider">
-                  Mật khẩu <span className="text-red-500">*</span>
+                  {t('auth.password')} <span className="text-red-500">*</span>
                 </label>
                 <button
                   type="button"
-                  onClick={() => alert('Vui lòng sử dụng tài khoản dùng thử mẫu hoặc liên hệ hotline 1900 8866 để cấp lại mật khẩu.')}
-                  className="text-xs text-[#4E8773] hover:text-[#355F52] hover:underline transition-colors"
+                  onClick={() =>
+                    alert(t('auth.forgotPasswordAlert'))
+                  }
+                  className="text-xs text-[#4E8773] hover:text-[#355F52] hover:underline transition-colors cursor-pointer"
                 >
-                  Quên mật khẩu?
+                  {t('auth.forgotPassword')}
                 </button>
               </div>
               <div className="relative">
@@ -131,15 +181,15 @@ export const LoginPage: React.FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)"
+                  placeholder={t('auth.passwordPlaceholder')}
                   className="w-full pl-11 pr-11 py-3 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-sm text-[#2F403A] focus:outline-hidden focus:border-[#4E8773] focus:ring-2 focus:ring-[#4E8773]/20 transition-all placeholder-[#9EB1A9]"
                 />
                 <Lock className="w-4 h-4 text-[#8B9D95] absolute left-4 top-3.5" />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="p-1.5 text-[#8B9D95] hover:text-[#2F403A] absolute right-3 top-2.5 transition-colors"
-                  aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                  className="p-1.5 text-[#8B9D95] hover:text-[#2F403A] absolute right-3 top-2.5 transition-colors cursor-pointer"
+                  aria-label={showPassword ? (language === 'en' ? 'Hide password' : 'Ẩn mật khẩu') : (language === 'en' ? 'Show password' : 'Hiện mật khẩu')}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -154,7 +204,7 @@ export const LoginPage: React.FC = () => {
                   onChange={(e) => setRememberMe(e.target.checked)}
                   className="w-4 h-4 rounded text-[#4E8773] focus:ring-[#4E8773] border-[#D2E3DC]"
                 />
-                <span className="text-xs text-[#526860] font-medium">Ghi nhớ đăng nhập</span>
+                <span className="text-xs text-[#526860] font-medium">{t('auth.rememberMe')}</span>
               </label>
             </div>
 
@@ -164,10 +214,10 @@ export const LoginPage: React.FC = () => {
               className="w-full py-3.5 px-6 rounded-2xl bg-[#4E8773] hover:bg-[#355F52] text-white font-bold text-sm tracking-wide transition-all shadow-sm hover:shadow-md flex items-center justify-center gap-2 disabled:opacity-70 cursor-pointer"
             >
               {isLoading ? (
-                <span>Đang xử lý đăng nhập...</span>
+                <span>{t('auth.loggingIn')}</span>
               ) : (
                 <>
-                  <span>ĐĂNG NHẬP</span>
+                  <span>{t('auth.loginBtn')}</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
               )}
@@ -180,10 +230,10 @@ export const LoginPage: React.FC = () => {
               <div>
                 <p className="text-xs font-bold text-[#355F52] flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-[#ECA032]" />
-                  Trải nghiệm nhanh không cần gõ phím
+                  {t('auth.demoLoginTip')}
                 </p>
                 <p className="text-[11px] text-[#6A7F77] mt-0.5">
-                  Tài khoản mẫu: <span className="font-semibold text-[#2F403A]">mevabe@mamkids.vn</span> (có sẵn 350 Điểm Mầm & 2 bé)
+                  {t('auth.demoAccountDesc')}
                 </p>
               </div>
               <button
@@ -191,19 +241,19 @@ export const LoginPage: React.FC = () => {
                 onClick={handleDemoLogin}
                 className="shrink-0 px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#28473D] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
               >
-                Đăng nhập ngay
+                {t('auth.demoLoginBtn')}
               </button>
             </div>
           </div>
 
           <div className="mt-8 text-center">
             <p className="text-xs text-[#6A7F77]">
-              Bạn chưa có tài khoản?{' '}
+              {t('auth.noAccountPrompt')}{' '}
               <Link
                 to="/dang-ky"
                 className="font-bold text-[#4E8773] hover:text-[#355F52] hover:underline"
               >
-                Đăng ký thành viên nhận quà 10%
+                {t('auth.registerGiftLink')}
               </Link>
             </p>
           </div>
@@ -217,26 +267,19 @@ export const LoginPage: React.FC = () => {
                 <Sparkles className="w-4 h-4" />
               </span>
               <span className="text-xs font-bold uppercase tracking-wider text-[#F5DFA0]">
-                Đặc quyền thành viên Mầm
+                {t('auth.memberBenefits')}
               </span>
             </div>
 
             <h3 className="text-xl sm:text-2xl font-black font-heading leading-tight mb-3">
-              Cùng bé lớn khôn và gieo thói quen xanh
+              {t('auth.benefitsClubTitle')}
             </h3>
             <p className="text-xs text-[#EAF3EF] leading-relaxed mb-6">
-              Tham gia câu lạc bộ thành viên Mầm Kids để nhận ngập tràn ưu đãi cùng tiện ích chăm sóc size chuẩn riêng cho bé yêu:
+              {t('auth.benefitsClubDesc')}
             </p>
 
             <ul className="space-y-3.5 text-xs text-[#FDF9F1]">
-              {[
-                { title: 'Giảm 10% cho đơn hàng đầu tiên', desc: 'Mã MAMKIDS10 tự động gửi vào ví' },
-                { title: 'Tích Điểm Mầm sau mỗi đơn hàng', desc: '1.000đ = 1 Điểm Mầm quy đổi giảm giá' },
-                { title: 'Voucher mừng sinh nhật bé yêu', desc: 'Tặng 50.000đ vào tháng sinh nhật bé' },
-                { title: 'Lưu hồ sơ chiều cao, cân nặng & size của bé', desc: 'Gợi ý size tự động khi mua sắm' },
-                { title: 'Theo dõi đơn hàng & lịch sử mua hàng', desc: 'Kiểm tra lộ trình giao hàng trực tuyến' },
-                { title: 'Thông báo bộ sưu tập & ưu đãi mùa mới', desc: 'Ưu tiên trải nghiệm trang phục mới ra mắt' }
-              ].map((item, idx) => (
+              {memberBenefitsList.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#F5DFA0] shrink-0 mt-0.5" />
                   <div>
@@ -252,7 +295,7 @@ export const LoginPage: React.FC = () => {
                 to="/dang-ky"
                 className="w-full py-3 px-4 rounded-2xl bg-[#F5DFA0] hover:bg-[#F2D485] text-[#2F403A] font-bold text-xs tracking-wide transition-all shadow-xs flex items-center justify-center gap-2"
               >
-                <span>TẠO TÀI KHOẢN MỚI MIỄN PHÍ</span>
+                <span>{t('auth.createFreeAccountBtn')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -260,13 +303,13 @@ export const LoginPage: React.FC = () => {
 
           <div className="p-5 rounded-3xl bg-white border border-[#EFE8D8] text-center">
             <p className="text-xs text-[#6A7F77]">
-              Cần tra cứu nhanh đơn hàng mà không muốn đăng nhập?
+              {t('auth.trackOrderNoLoginPrompt')}
             </p>
             <Link
               to="/theo-doi-don-hang"
               className="inline-block mt-2 text-xs font-bold text-[#4E8773] hover:text-[#355F52] hover:underline"
             >
-              Tra cứu đơn hàng bằng Mã đơn hàng & SĐT →
+              {t('auth.trackOrderNoLoginLink')}
             </Link>
           </div>
         </div>

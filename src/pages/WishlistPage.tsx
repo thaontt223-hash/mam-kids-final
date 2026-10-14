@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { Heart, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { PRODUCTS, formatVND } from '../data/products';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const WishlistPage: React.FC = () => {
+  const { language, t } = useLanguage();
   const { wishlist, toggleWishlist, moveToCartFromWishlist } = useCart();
 
   const favoriteProducts = PRODUCTS.filter((p) => wishlist.includes(p.id));
@@ -15,10 +17,12 @@ export const WishlistPage: React.FC = () => {
       <div className="pb-6 mb-8 border-b border-[#EFE8D8] flex items-center justify-between">
         <div>
           <span className="text-xs font-bold uppercase tracking-wider text-[#4E8773] block mb-1 font-heading">
-            Bộ sưu tập lưu giữ
+            {language === 'en' ? 'Saved Collection' : 'Bộ sưu tập lưu giữ'}
           </span>
           <h1 className="text-2xl sm:text-3xl font-black text-[#3E5149] font-heading">
-            Sản phẩm yêu thích của bé ({favoriteProducts.length})
+            {language === 'en'
+              ? `Child's Favorite Items (${favoriteProducts.length})`
+              : `Sản phẩm yêu thích của bé (${favoriteProducts.length})`}
           </h1>
         </div>
 
@@ -26,7 +30,7 @@ export const WishlistPage: React.FC = () => {
           to="/san-pham"
           className="text-xs font-bold text-[#4E8773] hover:text-[#355E50] flex items-center gap-1"
         >
-          <span>Khám phá thêm</span>
+          <span>{language === 'en' ? 'Explore more' : 'Khám phá thêm'}</span>
           <ArrowRight className="w-3.5 h-3.5" />
         </Link>
       </div>
@@ -49,7 +53,7 @@ export const WishlistPage: React.FC = () => {
                 <button
                   onClick={() => toggleWishlist(product.id)}
                   className="absolute top-3 right-3 p-2 rounded-full bg-white/90 text-[#F4B99B] hover:bg-white shadow-xs z-10 cursor-pointer"
-                  title="Xóa khỏi yêu thích"
+                  title={language === 'en' ? 'Remove from favorites' : 'Xóa khỏi yêu thích'}
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -58,7 +62,9 @@ export const WishlistPage: React.FC = () => {
               <div className="p-4 flex-1 flex flex-col justify-between">
                 <div>
                   <div className="text-[11px] text-[#647B72] mb-1">
-                    {product.genderName} · {product.categoryName}
+                    {language === 'en'
+                      ? `${product.gender === 'be-trai' ? 'Boys' : product.gender === 'be-gai' ? 'Girls' : 'Unisex'} · ${product.categoryName}`
+                      : `${product.genderName} · ${product.categoryName}`}
                   </div>
                   <Link
                     to={`/san-pham/${product.id}`}
@@ -74,10 +80,10 @@ export const WishlistPage: React.FC = () => {
                 <div className="mt-4 pt-3 border-t border-[#FAF6EC] flex gap-2">
                   <button
                     onClick={() => moveToCartFromWishlist(product.id)}
-                    className="w-full py-2.5 px-3 rounded-xl bg-[#4E8773] hover:bg-[#417361] text-white text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-xs"
+                    className="w-full py-2.5 px-3 rounded-xl bg-[#4E8773] hover:bg-[#417361] text-white text-xs font-bold transition-colors flex items-center justify-center gap-1.5 shadow-xs cursor-pointer"
                   >
                     <ShoppingBag className="w-3.5 h-3.5" />
-                    <span>Chuyển vào giỏ hàng</span>
+                    <span>{language === 'en' ? 'Move to bag' : 'Chuyển vào giỏ hàng'}</span>
                   </button>
                 </div>
               </div>
@@ -90,17 +96,19 @@ export const WishlistPage: React.FC = () => {
             <Heart className="w-8 h-8" />
           </div>
           <h3 className="text-xl font-bold text-[#3E5149] font-heading">
-            Chưa có sản phẩm nào trong danh sách yêu thích
+            {language === 'en' ? 'No saved items in your wishlist yet' : 'Chưa có sản phẩm nào trong danh sách yêu thích'}
           </h3>
           <p className="text-xs sm:text-sm text-[#647B72] max-w-sm mx-auto">
-            Khi duyệt xem các mẫu áo thun, váy, quần short... bạn hãy bấm vào biểu tượng trái tim để lưu lại xem sau nhé!
+            {language === 'en'
+              ? 'While browsing cotton tees, dresses, or shorts, click the heart icon to save favorite outfits for later!'
+              : 'Khi duyệt xem các mẫu áo thun, váy, quần short... bạn hãy bấm vào biểu tượng trái tim để lưu lại xem sau nhé!'}
           </p>
           <div className="pt-2">
             <Link
               to="/san-pham"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#4E8773] hover:bg-[#417361] text-white text-xs font-bold shadow-xs transition-colors"
             >
-              <span>Xem danh mục sản phẩm</span>
+              <span>{language === 'en' ? 'Browse product catalog' : 'Xem danh mục sản phẩm'}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

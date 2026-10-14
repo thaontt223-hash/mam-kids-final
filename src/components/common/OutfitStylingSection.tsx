@@ -4,6 +4,7 @@ import { ShoppingBag, Sparkles, Check, ArrowRight, Tag, Heart } from 'lucide-rea
 import { OUTFIT_SETS, formatVND } from '../../data/products';
 import { OutfitSet } from '../../types';
 import { useCart } from '../../context/CartContext';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface OutfitStylingSectionProps {
   title?: string;
@@ -14,15 +15,21 @@ interface OutfitStylingSectionProps {
 }
 
 export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
-  title = 'GỢI Ý PHỐI CÙNG',
-  subtitle = 'Các set trang phục phối sẵn chuẩn gu Mầm Kids – Tiện lợi cho ba mẹ, phong cách cho bé',
+  title,
+  subtitle,
   currentProductId,
   genderFilter: initialFilter = 'all',
   className = ''
 }) => {
+  const { language, t } = useLanguage();
   const { addOutfitSetToCart } = useCart();
   const [filter, setFilter] = useState<'all' | 'be-trai' | 'be-gai'>(initialFilter);
   const [addedOutfitId, setAddedOutfitId] = useState<string | null>(null);
+
+  const headingTitle = title || (language === 'en' ? 'MIX & MATCH RECOMMENDATIONS' : 'GỢI Ý PHỐI CÙNG');
+  const headingSubtitle = subtitle || (language === 'en'
+    ? 'Pre-styled signature sets — hassle-free for parents, wonderfully comfortable for children'
+    : 'Các set trang phục phối sẵn chuẩn gu Mầm Kids – Tiện lợi cho ba mẹ, phong cách cho bé');
 
   const displayedOutfits = OUTFIT_SETS.filter((outfit) => {
     if (currentProductId) {
@@ -50,13 +57,13 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#F4B99B]/40 text-[#355F52] text-xs font-bold mb-2 shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-[#F4B99B]" />
-              <span>OUTFIT & PHỐI ĐỒ HOÀN CHỈNH</span>
+              <span>{language === 'en' ? 'OUTFITS & PRE-STYLED SETS' : 'OUTFIT & PHỐI ĐỒ HOÀN CHỈNH'}</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#2F403A] font-heading tracking-tight">
-              {title}
+              {headingTitle}
             </h2>
             <p className="text-xs sm:text-sm text-[#5D726A] mt-1.5 font-medium max-w-2xl">
-              {subtitle}
+              {headingSubtitle}
             </p>
           </div>
 
@@ -72,7 +79,7 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                     : 'text-[#5D726A] hover:text-[#2F403A] hover:bg-[#EFF5F2]'
                 }`}
               >
-                Tất cả outfit
+                {language === 'en' ? 'All Outfits' : 'Tất cả outfit'}
               </button>
               <button
                 type="button"
@@ -83,7 +90,7 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                     : 'text-[#5D726A] hover:text-[#2F403A] hover:bg-[#EFF5F2]'
                 }`}
               >
-                👦 Bé trai
+                👦 {language === 'en' ? 'Boys' : 'Bé trai'}
               </button>
               <button
                 type="button"
@@ -94,7 +101,7 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                     : 'text-[#5D726A] hover:text-[#2F403A] hover:bg-[#EFF5F2]'
                 }`}
               >
-                👧 Bé gái
+                👧 {language === 'en' ? 'Girls' : 'Bé gái'}
               </button>
             </div>
           )}
@@ -132,13 +139,15 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                     {/* Top Right Saving Pill */}
                     <div className="absolute top-3 right-3">
                       <span className="px-3 py-1 rounded-full bg-[#F4B99B] text-[#2F403A] text-xs font-black shadow-2xs">
-                        Tiết kiệm {formatVND(outfit.saving)}
+                        {language === 'en' ? `Save ${formatVND(outfit.saving)}` : `Tiết kiệm ${formatVND(outfit.saving)}`}
                       </span>
                     </div>
 
                     {/* Gender Indicator in Image */}
                     <div className="absolute bottom-3 left-3 text-white text-xs font-bold drop-shadow-md">
-                      {outfit.gender === 'be-trai' ? '👦 Trang phục bé trai' : '👧 Trang phục bé gái'}
+                      {outfit.gender === 'be-trai'
+                        ? (language === 'en' ? '👦 Boys Apparel' : '👦 Trang phục bé trai')
+                        : (language === 'en' ? '👧 Girls Apparel' : '👧 Trang phục bé gái')}
                     </div>
                   </div>
 
@@ -158,7 +167,7 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                   {/* Items Included Breakdown */}
                   <div className="mt-5 space-y-2.5 bg-[#FDF9F1] p-4 rounded-2xl border border-[#EFE8D8]">
                     <span className="text-[11px] font-black uppercase tracking-wider text-[#355F52] block font-heading">
-                      Gồm {outfit.items.length} món trong outfit này:
+                      {language === 'en' ? `Includes ${outfit.items.length} items in this outfit:` : `Gồm ${outfit.items.length} món trong outfit này:`}
                     </span>
                     <div className="space-y-1.5">
                       {outfit.items.map((item, idx) => (
@@ -196,7 +205,7 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                       </span>
                     </div>
                     <span className="text-[11px] text-[#5D726A] font-medium block">
-                      Đã bao gồm 01 túi tote Mầm Kids miễn phí
+                      {language === 'en' ? 'Includes 01 complimentary Mầm Kids tote bag' : 'Đã bao gồm 01 túi tote Mầm Kids miễn phí'}
                     </span>
                   </div>
 
@@ -214,12 +223,12 @@ export const OutfitStylingSection: React.FC<OutfitStylingSectionProps> = ({
                       {isAdded ? (
                         <>
                           <Check className="w-4 h-4 text-[#F5DFA0]" />
-                          <span>Đã thêm cả set</span>
+                          <span>{language === 'en' ? 'Added Complete Set' : 'Đã thêm cả set'}</span>
                         </>
                       ) : (
                         <>
                           <ShoppingBag className="w-4 h-4 text-white" />
-                          <span>Thêm cả set vào giỏ</span>
+                          <span>{language === 'en' ? 'Add Complete Set to Bag' : 'Thêm cả set vào giỏ'}</span>
                         </>
                       )}
                     </button>

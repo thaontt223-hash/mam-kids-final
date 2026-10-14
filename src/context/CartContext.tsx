@@ -154,7 +154,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       ];
     });
 
-    showToast('Đã thêm vào giỏ hàng!', `${product.name} · ${selectedSize}`);
+    const isEn = typeof window !== 'undefined' && localStorage.getItem('mam_kids_language') === 'en';
+    showToast(
+      isEn ? 'Added to bag!' : 'Đã thêm vào giỏ hàng!',
+      `${product.name} · ${selectedSize}`
+    );
   };
 
   const addComboToCart = () => {
@@ -164,7 +168,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (item1 && item2) {
       addToCart(item1, item1.sizes[1] || item1.sizes[0], item1.colors[0], 1);
       addToCart(item2, item2.sizes[1] || item2.sizes[0], item2.colors[0], 1);
-      showToast('Đã thêm trọn bộ COMBO MÙA HÈ vào giỏ!', 'Tiết kiệm ngay 19.000 VND');
+      const isEn = typeof window !== 'undefined' && localStorage.getItem('mam_kids_language') === 'en';
+      showToast(
+        isEn ? 'Added SUMMER COMBO set to bag!' : 'Đã thêm trọn bộ COMBO MÙA HÈ vào giỏ!',
+        isEn ? 'Saved 19,000 VND instantly' : 'Tiết kiệm ngay 19.000 VND'
+      );
     }
   };
 
@@ -178,7 +186,11 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     });
     if (addedCount > 0) {
-      showToast(`Đã thêm trọn bộ ${outfit.name} vào giỏ!`, `Tiết kiệm ngay ${outfit.saving.toLocaleString('vi-VN')} VND`);
+      const isEn = typeof window !== 'undefined' && localStorage.getItem('mam_kids_language') === 'en';
+      showToast(
+        isEn ? `Added full ${outfit.name} to bag!` : `Đã thêm trọn bộ ${outfit.name} vào giỏ!`,
+        isEn ? `Saved ${outfit.saving.toLocaleString('vi-VN')} VND` : `Tiết kiệm ngay ${outfit.saving.toLocaleString('vi-VN')} VND`
+      );
     }
   };
 
@@ -194,7 +206,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const removeFromCart = (cartItemId: string) => {
     setCart((prev) => prev.filter((item) => item.id !== cartItemId));
-    showToast('Đã bỏ sản phẩm khỏi giỏ hàng');
+    const isEn = typeof window !== 'undefined' && localStorage.getItem('mam_kids_language') === 'en';
+    showToast(isEn ? 'Removed item from bag' : 'Đã bỏ sản phẩm khỏi giỏ hàng');
   };
 
   const clearCart = () => {
@@ -205,11 +218,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setWishlist((prev) => {
       const exists = prev.includes(productId);
       const targetProd = PRODUCTS.find((p) => p.id === productId);
+      const isEn = typeof window !== 'undefined' && localStorage.getItem('mam_kids_language') === 'en';
       if (exists) {
-        showToast('Đã xóa khỏi danh sách yêu thích');
+        showToast(isEn ? 'Removed from wishlist' : 'Đã xóa khỏi danh sách yêu thích');
         return prev.filter((id) => id !== productId);
       } else {
-        showToast('Đã lưu vào danh sách yêu thích', targetProd?.name);
+        showToast(
+          isEn ? 'Saved to wishlist' : 'Đã lưu vào danh sách yêu thích',
+          targetProd?.name
+        );
         return [...prev, productId];
       }
     });
