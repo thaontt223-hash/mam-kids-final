@@ -5,6 +5,7 @@ import { AuthProvider } from './context/AuthContext';
 import { CartProvider, useCart } from './context/CartContext';
 import { Header } from './components/common/Header';
 import { Footer } from './components/common/Footer';
+import { FloatingHotlineButton } from './components/common/FloatingHotlineButton';
 import { HomePage } from './pages/HomePage';
 import { ProductsPage } from './pages/ProductsPage';
 import { ProductDetailPage } from './pages/ProductDetailPage';
@@ -66,7 +67,7 @@ const ToastNotification: React.FC = () => {
   if (!toast) return null;
 
   return (
-    <div className="fixed bottom-4 inset-x-4 sm:inset-x-auto sm:right-6 sm:bottom-6 z-50 animate-bounce-subtle sm:max-w-sm pointer-events-auto">
+    <div className="fixed bottom-16 sm:bottom-20 inset-x-4 sm:inset-x-auto sm:right-6 z-50 animate-bounce-subtle sm:max-w-sm pointer-events-auto">
       <div className="flex items-center gap-3 p-3.5 sm:p-4 rounded-2xl bg-[#355F52] text-white shadow-2xl border border-[#4E8773]/40">
         <div className="w-8 h-8 rounded-full bg-[#4E8773] flex items-center justify-center shrink-0 text-white">
           <Check className="w-5 h-5" />
@@ -175,6 +176,7 @@ export default function App() {
               </Routes>
             </main>
             <Footer />
+            <FloatingHotlineButton />
             <ToastNotification />
           </div>
         </Router>

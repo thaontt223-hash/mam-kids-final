@@ -114,8 +114,8 @@ export const MamXanhPage: React.FC = () => {
                 </div>
                 <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
                   {language === 'en'
-                    ? 'Mầm Kids prioritizes eco-friendly fabrics like Organic Cotton, Bamboo, and recycled fibers whenever suitable for every product.'
-                    : 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.'}
+                    ? 'Mầm Kids prioritizes 100% cotton and develops the Mầm Xanh product line with organic cotton, aimed at softness, breathability, and child skin friendliness.'
+                    : 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.'}
                 </p>
                 <div className="p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#EFE8D8] text-xs text-[#355F52] space-y-1.5 font-medium">
                   <div className="flex items-center gap-1.5">
@@ -199,7 +199,7 @@ export const MamXanhPage: React.FC = () => {
                 </div>
                 <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
                   {language === 'en'
-                    ? 'When outgrown, parents can send back preloved clothes through Mầm Again to be sorted, donated, or recycled sustainably.'
+                    ? 'When outgrown, parents can send back preloved clothes through Mầm Again to be sorted, donated, or repurposed sustainably.'
                     : 'Khi bé không còn mặc vừa, phụ huynh có thể gửi lại đồ qua chương trình Mầm Again. Quần áo được phân loại để tái sử dụng, quyên góp hoặc xử lý phù hợp.'}
                 </p>
                 <div className="p-3.5 rounded-2xl bg-[#FCE7D8]/60 border border-[#F8B195]/40 text-xs text-[#355F52] space-y-1.5 font-medium">

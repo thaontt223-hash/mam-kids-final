@@ -6,7 +6,8 @@ import { ProductCard } from '../components/common/ProductCard';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useLanguage } from '../i18n/LanguageContext';
-import { BookOpen, Sparkles, Award, ArrowLeft, ArrowRight, Share2, Volume2, VolumeX, CheckCircle2, ChevronRight, Recycle } from 'lucide-react';
+import { useStoryNarrator } from '../hooks/useStoryNarrator';
+import { BookOpen, Sparkles, Award, ArrowLeft, ArrowRight, Share2, Volume2, VolumeX, Pause, Play, Square, CheckCircle2, ChevronRight, Recycle } from 'lucide-react';
 
 export const EcoStoryPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,33 +18,38 @@ export const EcoStoryPage: React.FC = () => {
 
   const story = ECO_STORIES.find((s) => s.id === id) || ECO_STORIES[0];
   const [activeChapterIndex, setActiveChapterIndex] = useState(0);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const [audioProgress, setAudioProgress] = useState(0);
   const [isChallengeCompleted, setIsChallengeCompleted] = useState(false);
 
   useEffect(() => {
     const completedStr = localStorage.getItem(`mam_eco_challenge_${story.id}`);
     setIsChallengeCompleted(completedStr === 'true');
     setActiveChapterIndex(0);
-    setIsPlayingAudio(false);
-    setAudioProgress(0);
   }, [story.id]);
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    if (isPlayingAudio) {
-      timer = setInterval(() => {
-        setAudioProgress((prev) => {
-          if (prev >= 100) {
-            setIsPlayingAudio(false);
-            return 0;
-          }
-          return prev + 2;
-        });
-      }, 500);
-    }
-    return () => clearInterval(timer);
-  }, [isPlayingAudio]);
+  // Current chapter and bilingual text
+  const currentChapter = story.chapters[activeChapterIndex] || story.chapters[0];
+  const currentTitle = language === 'en' ? (currentChapter.titleEn || currentChapter.title) : currentChapter.title;
+  const currentContent = language === 'en' ? (currentChapter.contentEn || currentChapter.content) : currentChapter.content;
+
+  // Audio Story Narrator Hook
+  const {
+    voiceState,
+    progress,
+    isSupported,
+    isAudioAvailable,
+    errorMessage,
+    clearError,
+    play,
+    pause,
+    resume,
+    stop
+  } = useStoryNarrator({
+    storyId: story.id,
+    chapterNumber: currentChapter.chapterNumber,
+    title: currentTitle,
+    content: currentContent,
+    lang: language === 'en' ? 'en' : 'vi'
+  });
 
   const handleCompleteChallenge = () => {
     if (isChallengeCompleted) return;
@@ -76,8 +82,6 @@ export const EcoStoryPage: React.FC = () => {
       );
     }
   };
-
-  const currentChapter = story.chapters[activeChapterIndex] || story.chapters[0];
 
   // Green products that link to this story
   const relatedGreenProducts = PRODUCTS.filter(
@@ -119,31 +123,87 @@ export const EcoStoryPage: React.FC = () => {
             </div>
 
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-black font-heading text-[#FFF9E6] leading-tight">
-              {story.title}
+              {language === 'en' ? (story.titleEn || story.title) : story.title}
             </h1>
 
             <p className="text-xs sm:text-sm text-[#E8F1EC] max-w-2xl leading-relaxed">
-              {story.subtitle}
+              {language === 'en' ? (story.subtitleEn || story.subtitle) : story.subtitle}
             </p>
 
             {/* Audio bar & share */}
             <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-3 flex-wrap">
-              <button
-                onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                className="px-3.5 py-1.5 rounded-full bg-white text-[#355F52] hover:bg-[#F5DFA0] text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer"
-              >
-                {isPlayingAudio ? (
-                  <>
-                    <VolumeX className="w-3.5 h-3.5" />
-                    <span>{language === 'en' ? 'Pause narration' : 'Tạm dừng giọng đọc'}</span>
-                  </>
+              <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
+                {voiceState === 'idle' ? (
+                  <button
+                    type="button"
+                    onClick={play}
+                    disabled={!isSupported}
+                    className="px-3.5 py-1.5 rounded-full bg-white text-[#355F52] hover:bg-[#F5DFA0] disabled:opacity-60 text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-95"
+                    aria-label={language === 'en' ? 'Read story to me' : 'Bật giọng đọc cho bé'}
+                  >
+                    <Volume2 className="w-3.5 h-3.5 text-[#355F52]" />
+                    <span>{language === 'en' ? '🔊 Read story to me' : '🔊 Bật giọng đọc cho bé'}</span>
+                  </button>
+                ) : voiceState === 'playing' ? (
+                  <div className="inline-flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={pause}
+                      className="px-3.5 py-1.5 rounded-full bg-[#F5DFA0] text-[#355F52] hover:bg-white text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-95"
+                      aria-label={language === 'en' ? 'Pause' : 'Tạm dừng'}
+                    >
+                      <Pause className="w-3.5 h-3.5 text-[#355F52]" />
+                      <span>{language === 'en' ? '⏸ Pause' : '⏸ Tạm dừng'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={stop}
+                      className="px-2.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-bold flex items-center gap-1 transition-all cursor-pointer active:scale-95"
+                      aria-label={language === 'en' ? 'Stop' : 'Dừng'}
+                      title={language === 'en' ? 'Stop' : 'Dừng'}
+                    >
+                      <Square className="w-3 h-3 fill-current" />
+                      <span>{language === 'en' ? '⏹ Stop' : '⏹ Dừng'}</span>
+                    </button>
+                  </div>
                 ) : (
-                  <>
-                    <Volume2 className="w-3.5 h-3.5" />
-                    <span>{language === 'en' ? '🎧 Listen to story narration' : '🎧 Bật giọng đọc cho bé nghe'}</span>
-                  </>
+                  <div className="inline-flex items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={resume}
+                      className="px-3.5 py-1.5 rounded-full bg-white text-[#355F52] hover:bg-[#F5DFA0] text-xs font-bold flex items-center gap-1.5 transition-all shadow-xs cursor-pointer active:scale-95"
+                      aria-label={language === 'en' ? 'Resume' : 'Tiếp tục'}
+                    >
+                      <Play className="w-3.5 h-3.5 text-[#355F52] fill-current" />
+                      <span>{language === 'en' ? '▶ Resume' : '▶ Tiếp tục'}</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={stop}
+                      className="px-2.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-bold flex items-center gap-1 transition-all cursor-pointer active:scale-95"
+                      aria-label={language === 'en' ? 'Stop' : 'Dừng'}
+                      title={language === 'en' ? 'Stop' : 'Dừng'}
+                    >
+                      <Square className="w-3 h-3 fill-current" />
+                      <span>{language === 'en' ? '⏹ Stop' : '⏹ Dừng'}</span>
+                    </button>
+                  </div>
                 )}
-              </button>
+
+                <span className={`text-[11px] ${errorMessage ? 'text-amber-200 font-semibold' : 'text-[#E8F1EC]'} hidden sm:inline`}>
+                  {errorMessage ? (
+                    `⚠️ ${errorMessage}`
+                  ) : voiceState === 'playing' ? (
+                    language === 'en' ? 'Reading chapter...' : 'Đang phát giọng đọc chương...'
+                  ) : voiceState === 'paused' ? (
+                    language === 'en' ? 'Paused' : 'Đang tạm dừng'
+                  ) : (
+                    language === 'en' ? 'English voice for kids' : 'Giọng đọc chuẩn tiếng Việt cho bé'
+                  )}
+                </span>
+              </div>
 
               <button
                 onClick={handleShare}
@@ -154,11 +214,29 @@ export const EcoStoryPage: React.FC = () => {
               </button>
             </div>
 
-            {isPlayingAudio && (
+            {/* Device voice missing notification */}
+            {errorMessage && (
+              <div className="mt-2.5 px-3 py-1.5 rounded-lg bg-amber-950/60 border border-amber-300/40 text-amber-200 text-xs flex items-center justify-between gap-2">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-sm">⚠️</span>
+                  <span className="font-medium">{errorMessage}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={clearError}
+                  className="text-amber-200/80 hover:text-white text-xs px-1.5 py-0.5 rounded cursor-pointer"
+                  aria-label="Đóng thông báo"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
+
+            {(voiceState === 'playing' || voiceState === 'paused') && (
               <div className="w-full bg-white/20 h-1.5 rounded-full mt-2 overflow-hidden">
                 <div
                   className="bg-[#F5DFA0] h-full transition-all duration-300"
-                  style={{ width: `${audioProgress}%` }}
+                  style={{ width: `${Math.max(5, progress)}%` }}
                 />
               </div>
             )}
@@ -171,9 +249,8 @@ export const EcoStoryPage: React.FC = () => {
             <button
               key={ch.chapterNumber}
               onClick={() => {
+                stop();
                 setActiveChapterIndex(idx);
-                setIsPlayingAudio(false);
-                setAudioProgress(0);
               }}
               className={`flex-1 min-w-[130px] sm:min-w-0 py-2.5 px-3 rounded-xl text-xs font-bold transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer ${
                 activeChapterIndex === idx
@@ -199,11 +276,11 @@ export const EcoStoryPage: React.FC = () => {
           </div>
 
           <h2 className="text-xl sm:text-2xl font-black text-[#2F403A] font-heading">
-            {currentChapter.title}
+            {currentTitle}
           </h2>
 
           <p className="text-sm sm:text-base text-[#3E5149] leading-relaxed sm:leading-loose whitespace-pre-line font-normal">
-            {currentChapter.content}
+            {currentContent}
           </p>
 
           {/* Moral box */}
@@ -214,7 +291,7 @@ export const EcoStoryPage: React.FC = () => {
                 {language === 'en' ? 'Nature lesson for child:' : 'Bài học yêu thiên nhiên cho bé:'}
               </strong>
               <p className="text-xs sm:text-sm text-[#5D726A] leading-relaxed">
-                {currentChapter.moral}
+                {language === 'en' ? (currentChapter.moralEn || currentChapter.moral) : currentChapter.moral}
               </p>
             </div>
           </div>
@@ -224,7 +301,10 @@ export const EcoStoryPage: React.FC = () => {
             <button
               type="button"
               disabled={activeChapterIndex === 0}
-              onClick={() => setActiveChapterIndex((i) => Math.max(0, i - 1))}
+              onClick={() => {
+                stop();
+                setActiveChapterIndex((i) => Math.max(0, i - 1));
+              }}
               className={`text-xs font-bold flex items-center gap-1 ${
                 activeChapterIndex === 0 ? 'opacity-30 cursor-not-allowed text-[#5D726A]' : 'text-[#355F52] hover:underline cursor-pointer'
               }`}
@@ -239,7 +319,10 @@ export const EcoStoryPage: React.FC = () => {
             {activeChapterIndex < story.chapters.length - 1 ? (
               <button
                 type="button"
-                onClick={() => setActiveChapterIndex((i) => i + 1)}
+                onClick={() => {
+                  stop();
+                  setActiveChapterIndex((i) => i + 1);
+                }}
                 className="px-4 py-2 rounded-xl bg-[#355F52] hover:bg-[#2A4D42] text-white text-xs font-bold flex items-center gap-1 shadow-2xs cursor-pointer"
               >
                 <span>{language === 'en' ? 'Next Chapter' : 'Chương tiếp theo'}</span>

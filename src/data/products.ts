@@ -42,7 +42,7 @@ export const PRODUCTS: Product[] = [
     ecoStoryId: 'chuyen-bong-gon-be-nho',
     ecoStoryTitle: 'Hành Trình Của Bông Gòn Bé Nhỏ',
     ecoStorySnippet: 'Chiếc áo này được dệt từ sợi Organic Cotton chải kỹ êm ái, mang theo câu chuyện về hạt mầm bông gòn thức giấc dưới nắng ấm.',
-    greenMaterialDescription: 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.',
+    greenMaterialDescription: 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.',
     pairedProductIds: ['quan-short-kaki-nang-dong', 'mu-bucket-choi-xanh', 'sandal-be-trai-nang-dong']
   },
   {
@@ -58,17 +58,17 @@ export const PRODUCTS: Product[] = [
     sizes: ['Size 100 (3-4 tuổi)', 'Size 110 (5-6 tuổi)', 'Size 120 (7-8 tuổi)', 'Size 130 (9-10 tuổi)', 'Size 140 (11-12 tuổi)'],
     colors: [
       { name: 'Trắng kem vintage', hex: '#FDFBF7' },
-      { name: 'Xanh lanh pastel', hex: '#CBDAD5' },
+      { name: 'Xanh pastel dịu mát', hex: '#CBDAD5' },
       { name: 'Vàng bơ mặt trời', hex: '#F7E7BE' }
     ],
-    material: 'Linen sợi lanh tự nhiên pha cotton mềm êm, đã qua công nghệ giặt enzym sinh học',
-    fabricDetail: 'Vải đũi lanh mộc mạc, tạo cảm giác thoáng mát tự nhiên như làn gió hè và thân thiện tuyệt đối với môi trường.',
+    material: '100% Cotton hữu cơ mềm mại, dệt thoi mộc mạc và thoáng khí tự nhiên',
+    fabricDetail: 'Vải 100% cotton hữu cơ mộc mạc, tạo cảm giác thoáng mát tự nhiên như làn gió hè và êm ái tuyệt đối cho làn da bé.',
     stylingTip: 'Mặc cùng Quần short Kaki hoặc Quần jean xắn gấu, mang thêm Túi mini Khám Phá.',
     description: 'Thiết kế cổ tàu thanh lịch mang hơi thở mộc mạc ấm áp. Họa tiết thêu mầm non và mặt trời nhỏ ở túi ngực tạo điểm nhấn tinh tế cho bé trai tự tin trong mọi dịp lễ hội, dạo phố hay du xuân.',
     highlights: [
       'Cổ trụ mềm mại không bó sát, khuy gỗ dừa tự nhiên',
       'Thấm hút mồ hôi gấp 3 lần vải sợi nhân tạo',
-      'Độ bền sợi lanh cao, giặt càng nhiều sợi vải càng mềm mịn'
+      'Độ bền sợi cotton tự nhiên cao, giặt càng nhiều sợi vải càng mềm mịn'
     ],
     stockStatus: 'con-hang',
     rating: 4.8,
@@ -83,8 +83,8 @@ export const PRODUCTS: Product[] = [
     isGreenProduct: true,
     ecoStoryId: 'chiec-ao-biet-tho',
     ecoStoryTitle: 'Chiếc Áo Biết Thở Của Bé',
-    ecoStorySnippet: 'Chiếc áo linen mộc mạc thoáng mát, chứa đựng bí mật của loài cây lanh dẻo dai bên sườn đồi xanh mát.',
-    greenMaterialDescription: 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Linen sợi lanh tự nhiên và Organic Cotton khi phù hợp với từng sản phẩm.',
+    ecoStorySnippet: 'Chiếc áo 100% cotton hữu cơ mộc mạc thoáng mát, chứa đựng bí mật của những sợi bông trắng tinh khôi và làn gió mát lành.',
+    greenMaterialDescription: 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.',
     pairedProductIds: ['quan-short-kaki-nang-dong', 'tui-mini-kham-pha']
   },
   {
@@ -291,9 +291,9 @@ export const PRODUCTS: Product[] = [
       { name: 'Nâu kaki đất', hex: '#CDB19B' },
       { name: 'Xanh sage tự nhiên', hex: '#4E8773' }
     ],
-    material: 'Canvas sợi tự nhiên trượt nước nhẹ, quai dù bản mềm không siết vai',
+    material: 'Canvas 100% cotton tự nhiên trượt nước nhẹ, quai dù bản mềm không siết vai',
     fabricDetail: 'Khóa kéo mượt mà có dây rút vải giúp đôi tay nhỏ của bé dễ dàng đóng mở.',
-    stylingTip: 'Đeo chéo ngực phối cùng áo sơ mi linen hoặc áo polo.',
+    stylingTip: 'Đeo chéo ngực phối cùng áo sơ mi hoặc áo polo.',
     description: 'Túi đeo chéo mini phong cách phiêu lưu cho các cậu bé tò mò. Vừa vặn để đựng khăn tay, khẩu trang, đồ chơi nhỏ hay vài chiếc kẹo ngọt khi cùng bố mẹ dạo phố cuối tuần.',
     highlights: [
       'Trọng lượng siêu nhẹ chỉ 80g không nặng vai bé',
@@ -364,7 +364,7 @@ export const PRODUCTS: Product[] = [
       { name: 'Hồng phấn mơ màng', hex: '#F5D7CE' },
       { name: 'Xanh thảo mộc dịu mát', hex: '#D6E2D5' }
     ],
-    material: 'Linen sợi tre pha cotton dệt thưa mềm rủ, lót cotton habutai mỏng nhẹ siêu mát',
+    material: '100% Cotton hữu cơ dệt thưa mềm rủ, lót 100% cotton mỏng nhẹ siêu mát',
     fabricDetail: 'Họa tiết hoa cúc dại vẽ tay độc quyền in bằng mực gốc nước an toàn thực phẩm trên sợi vải tự nhiên.',
     stylingTip: 'Phối cùng Băng đô Hoa Nhỏ và Sandal Kem Mây để bé hóa thành nàng thơ mùa hạ.',
     description: 'Thiết kế dáng xòe tự nhiên mang phong cách đồng quê Pháp thơ mộng. Tay bồng nhẹ viền bèo tinh xảo, cổ vuông retro tôn lên vẻ trong trẻo đáng yêu của bé gái.',
@@ -386,8 +386,8 @@ export const PRODUCTS: Product[] = [
     isGreenProduct: true,
     ecoStoryId: 'chiec-ao-biet-tho',
     ecoStoryTitle: 'Chiếc Áo Biết Thở Của Bé',
-    ecoStorySnippet: 'Sợi tre tự nhiên hòa quyện cùng bông mềm, in họa tiết hoa cúc với mực gốc nước bảo vệ làn da bé.',
-    greenMaterialDescription: 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Linen sợi tre và cotton hữu cơ khi phù hợp với từng sản phẩm.',
+    ecoStorySnippet: 'Sợi cotton hữu cơ tự nhiên mềm mại, in họa tiết hoa cúc với mực gốc nước bảo vệ làn da bé.',
+    greenMaterialDescription: 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.',
     pairedProductIds: ['bang-do-hoa-nho', 'sandal-kem-may', 'tui-mini-keo-bong']
   },
   {
@@ -723,7 +723,7 @@ export const PRODUCTS: Product[] = [
     ecoStoryId: 'chuyen-bong-gon-be-nho',
     ecoStoryTitle: 'Hành Trình Của Bông Gòn Bé Nhỏ',
     ecoStorySnippet: '100% sợi bông Organic chuẩn Oeko-Tex Class 1, ôm ấp làn da bé mỗi ngày như cái ôm ấm áp của mẹ.',
-    greenMaterialDescription: 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.',
+    greenMaterialDescription: 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.',
     pairedProductIds: ['quan-short-nang-dong', 'mu-bucket-choi-xanh']
   },
   {
@@ -742,7 +742,7 @@ export const PRODUCTS: Product[] = [
       { name: 'Hồng phấn mơ màng', hex: '#F5D7CE' },
       { name: 'Xanh thảo mộc dịu mát', hex: '#D6E2D5' }
     ],
-    material: 'Cotton thô đũi organic mềm rủ, lót cotton habutai mỏng nhẹ',
+    material: '100% Cotton hữu cơ mềm rủ, lót 100% cotton mỏng nhẹ',
     fabricDetail: 'Lớp lót cotton thoáng mát tự nhiên, giữ phom váy xòe duyên dáng.',
     stylingTip: 'Phối cùng băng đô hoa nhỏ và sandal kem mây.',
     description: 'Thiết kế dáng xòe tự nhiên mang phong cách đồng quê dịu dàng. Họa tiết hoa nhí vẽ tay độc quyền tại Mầm Kids, tay bồng nhẹ nhàng giúp bé vừa thanh lịch vừa thoải mái chạy nhảy vui đùa dưới nắng hạ.',
@@ -764,8 +764,8 @@ export const PRODUCTS: Product[] = [
     isGreenProduct: true,
     ecoStoryId: 'chiec-ao-biet-tho',
     ecoStoryTitle: 'Chiếc Áo Biết Thở Của Bé',
-    ecoStorySnippet: 'Váy hoa thô đũi organic mềm rủ tự nhiên, nhẹ như một làn gió mát trong vườn hoa.',
-    greenMaterialDescription: 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.',
+    ecoStorySnippet: 'Váy hoa 100% cotton hữu cơ mềm rủ tự nhiên, nhẹ như một làn gió mát trong vườn hoa.',
+    greenMaterialDescription: 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.',
     pairedProductIds: ['bang-do-hoa-nho', 'sandal-kem-may']
   },
   {
@@ -821,7 +821,7 @@ export const PRODUCTS: Product[] = [
       { name: 'Cam đất dịu nhẹ', hex: '#E29578' },
       { name: 'Xanh xám mint', hex: '#C2D8D3' }
     ],
-    material: 'Vải xô muslin 2 lớp dệt sợi tre tự nhiên, kháng khuẩn sinh học',
+    material: '100% Cotton hữu cơ (vải xô muslin 2 lớp dệt mềm mại, thoáng khí vượt trội)',
     fabricDetail: 'Vải xô mềm như mây, điều hòa nhiệt độ cực tốt cho bé.',
     stylingTip: 'Mặc nhà hoặc dạo chơi công viên mùa hè.',
     description: 'Set đồ bộ mặc nhà và đi dạo lý tưởng cho những ngày hè oi ả. Vải xô muslin nổi tiếng với độ mềm mại như mây và khả năng điều hòa thân nhiệt cực tốt cho cơ thể bé con.',
@@ -854,10 +854,10 @@ export const PRODUCTS: Product[] = [
     sizes: ['Size 100 (3-4 tuổi)', 'Size 110 (5-6 tuổi)', 'Size 120 (7-8 tuổi)', 'Size 130 (9-10 tuổi)', 'Size 140 (11-12 tuổi)'],
     colors: [
       { name: 'Trắng kem vintage', hex: '#FDFBF7' },
-      { name: 'Xanh lanh pastel', hex: '#CBDAD5' }
+      { name: 'Xanh pastel nhã nhặn', hex: '#CBDAD5' }
     ],
-    material: 'Cotton linen dệt cao cấp, ít nhăn và giữ form đứng dáng',
-    fabricDetail: 'Vải cotton linen thoáng mát cho ngày dài học tập tại trường.',
+    material: '100% Cotton dệt cao cấp, mềm êm thoáng khí và giữ form đứng dáng',
+    fabricDetail: 'Vải 100% cotton thoáng mát cho ngày dài học tập tại trường.',
     stylingTip: 'Phối cùng quần kaki hoặc quần jean.',
     description: 'Thiết kế cổ tàu thanh lịch mang hơi thở hoài niệm, tạo phong thái đĩnh đạc nhưng vẫn giữ trọn vẻ hồn nhiên của bé trai. Rất phù hợp cho các dịp lễ tựu trường, dự tiệc hay đi chúc Tết.',
     highlights: [
@@ -1112,7 +1112,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     gender: 'be-trai',
     genderName: 'Bé trai',
     subtitle: 'Cậu bé thám hiểm mộc mạc và năng động',
-    description: 'Sơ mi linen đũi mộc mạc phối Quần short cotton và Túi mini khám phá cho bé tha hồ thu thập những viên sỏi xinh xắn.',
+    description: 'Sơ mi 100% cotton mộc mạc phối Quần short cotton và Túi mini khám phá cho bé tha hồ thu thập những viên sỏi xinh xắn.',
     image: '/images/outfit_be_trai_kham_pha_flatlay.jpg',
     items: [
       { productId: 'ao-so-mi-linen-mat-troi-nho', productName: 'Áo sơ mi linen Mặt Trời Nhỏ', price: 249000, category: 'Áo' },
@@ -1122,7 +1122,7 @@ export const OUTFIT_SETS: OutfitSet[] = [
     originalPrice: 527000,
     comboPrice: 459000,
     saving: 68000,
-    badge: 'Phong Cách Linen'
+    badge: '100% Cotton Mộc Mạc'
   },
   {
     id: 'outfit-cong-chua-pastel-be-gai',
@@ -1167,7 +1167,7 @@ export const COLLECTIONS = [
     id: 'mua-he-nhe-em',
     title: 'Bộ sưu tập Mùa Hè Nhẹ Êm',
     tagline: 'Mát lành như giọt sương mai',
-    description: 'Chất liệu lanh, xô muslin và cotton hữu cơ siêu thoáng khí giúp bé yêu tự do khám phá thiên nhiên suốt mùa hè sôi động.',
+    description: 'Chất liệu 100% cotton và 100% cotton hữu cơ siêu thoáng khí giúp bé yêu tự do khám phá thiên nhiên suốt mùa hè sôi động.',
     colorScheme: 'from-[#FAF2E6] to-[#FFFDF8]',
     accentColor: '#4E8773',
     count: 6,

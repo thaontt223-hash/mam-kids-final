@@ -524,15 +524,15 @@ export const HomePage: React.FC = () => {
 
                 <p className="text-xs sm:text-sm text-[#4E675D] leading-relaxed">
                   {language === 'en'
-                    ? 'Prioritizing natural, skin-safe fibers such as Organic Cotton, Bamboo, and Linen. Meets Oeko-Tex Standard 100 Class 1, ensuring zero harsh chemicals and maximum comfort for active days.'
-                    : 'Ưu tiên các chất liệu tự nhiên lành tính như Organic Cotton, Bamboo và Linen đạt chuẩn an toàn cho trẻ sơ sinh & trẻ nhỏ. Mềm mịn, thông thoáng mồ hôi và bảo vệ tối đa làn da nhạy cảm.'}
+                    ? 'Mầm Kids prioritizes 100% cotton and develops the Mầm Xanh line with organic cotton, ensuring soft, breathable, and skin-friendly comfort for children.'
+                    : 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.'}
                 </p>
 
                 {/* Key Highlights */}
                 <div className="pt-2 space-y-1.5 text-xs text-[#253A32]">
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#4E8773]" />
-                    <span className="font-semibold">{language === 'en' ? '100% Organic & natural fibers' : '100% Sợi tự nhiên & Organic Cotton'}</span>
+                    <span className="font-semibold">{language === 'en' ? '100% Cotton & 100% Organic Cotton' : '100% Cotton & 100% Cotton hữu cơ'}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#4E8773]" />

@@ -327,10 +327,10 @@ export const CustomerPoliciesPage: React.FC<CustomerPoliciesPageProps> = ({ init
                   </h3>
                   <ul className="space-y-2 list-disc pl-5 text-[#5D726A]">
                     <li>
-                      <strong>{language === 'en' ? '100% Natural Fibers: ' : '100% sợi tự nhiên: '}</strong>
+                      <strong>{language === 'en' ? '100% Cotton & 100% Organic Cotton: ' : '100% Cotton & 100% Cotton hữu cơ: '}</strong>
                       {language === 'en'
-                        ? 'Prioritizing organic cotton, bamboo fibers, and bio-washed linen free from abrasiveness.'
-                        : 'Ưu tiên vải Organic Cotton, sợi tre (Bamboo), và Linen đã qua xử lý sinh học không xơ ráp.'}
+                        ? 'Prioritizing 100% cotton and developing the Mầm Xanh line with organic cotton for maximum softness, breathability, and child skin comfort.'
+                        : 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.'}
                     </li>
                     <li>
                       <strong>{language === 'en' ? 'Oeko-Tex Standard 100 Safety Certified: ' : 'Chuẩn an toàn Oeko-Tex Standard 100: '}</strong>

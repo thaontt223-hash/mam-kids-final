@@ -751,8 +751,8 @@ export const ProductDetailPage: React.FC = () => {
                   </div>
                   <p className="text-xs text-[#2F403A] leading-relaxed">
                     {language === 'en'
-                      ? 'Mầm Kids prioritizes eco-friendly fabrics like Organic Cotton, Bamboo, and recycled fibers whenever suitable for every garment.'
-                      : 'Mầm Kids ưu tiên các chất liệu thân thiện hơn với môi trường như Organic Cotton, Bamboo hoặc recycled fabrics khi phù hợp với từng sản phẩm.'}
+                      ? 'Mầm Kids prioritizes 100% cotton and develops the Mầm Xanh product line with organic cotton, aimed at softness, breathability, and child skin friendliness.'
+                      : 'Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ, hướng đến sự mềm mại, thoáng và thân thiện với làn da trẻ em.'}
                   </p>
                   {product.ecoStorySnippet && (
                     <p className="text-xs text-[#5D726A] italic pt-1 border-t border-[#CDE1D8]/60">
@@ -766,7 +766,11 @@ export const ProductDetailPage: React.FC = () => {
                 <h4 className="text-sm font-bold text-[#2F403A] mb-1">
                   {language === 'en' ? 'Fabric Composition:' : 'Thành phần chất liệu:'}
                 </h4>
-                <p className="text-xs text-[#5D726A]">{product.material}</p>
+                <p className="text-xs text-[#5D726A]">
+                  {language === 'en'
+                    ? (product.isGreenProduct ? '100% Organic Cotton' : (product.category === 'phu-kien' ? product.material : '100% Cotton'))
+                    : product.material}
+                </p>
               </div>
 
               {product.fabricDetail && (

@@ -148,7 +148,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </div>
             ) : (
               <div className="text-[10.5px] text-[#7A8E85] line-clamp-1 truncate w-full">
-                🌿 {product.material.split(',')[0]}
+                🌿 {language === 'en'
+                    ? (product.isGreenProduct ? '100% Organic Cotton' : (product.category === 'phu-kien' ? product.material.split(',')[0] : '100% Cotton'))
+                    : product.material.split(',')[0]}
               </div>
             )}
           </div>

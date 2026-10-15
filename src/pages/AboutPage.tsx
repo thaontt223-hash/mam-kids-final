@@ -51,8 +51,8 @@ export const AboutPage: React.FC = () => {
           </h3>
           <p className="text-xs sm:text-sm text-[#5D6F66] leading-relaxed">
             {language === 'en'
-              ? 'Prioritizing organic cotton, bamboo fiber, and gentle natural linen. Smooth flat seams prevent scratching, protecting delicate skin during playtime.'
-              : 'Ưu tiên bông hữu cơ, sợi tre và lanh tự nhiên lành tính. Đường may êm dịu, không cọ xát, bảo vệ làn da non nớt của bé trong mọi hoạt động vui chơi.'}
+              ? 'Prioritizing 100% cotton and developing the Mầm Xanh collection with 100% organic cotton. Smooth flat seams prevent scratching, protecting delicate skin during playtime.'
+              : 'Ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ. Đường may êm dịu, không cọ xát, bảo vệ làn da non nớt của bé trong mọi hoạt động vui chơi.'}
           </p>
         </div>
 
@@ -98,8 +98,8 @@ export const AboutPage: React.FC = () => {
           </p>
           <p>
             {language === 'en'
-              ? 'Understanding this, Mầm Kids strictly sources sustainably-harvested natural fibers: combed organic cotton, airy bamboo muslin, and enzyme-washed soft khaki that resists shrinking.'
-              : 'Hiểu được điều đó, Mầm Kids kiên định chỉ sử dụng các loại sợi tự nhiên có nguồn gốc bền vững. Vải cotton chải kỹ mịn màng, xô muslin thoáng khí như làn gió mát và kaki mềm đã qua giặt enzyme chống co rút.'}
+              ? 'Understanding this, Mầm Kids prioritizes 100% cotton and develops the Mầm Xanh collection with 100% organic cotton: combed cotton, airy cotton muslin, and enzyme-washed soft khaki cotton.'
+              : 'Hiểu được điều đó, Mầm Kids ưu tiên 100% cotton và phát triển dòng sản phẩm Mầm Xanh với cotton hữu cơ: vải cotton chải kỹ mịn màng, xô cotton thoáng khí và kaki 100% cotton mềm mại.'}
           </p>
           <div className="p-4 rounded-2xl bg-[#EBF3EF] border border-[#D4E5DE] flex items-center gap-3">
             <Award className="w-8 h-8 text-[#4E8773] shrink-0" />

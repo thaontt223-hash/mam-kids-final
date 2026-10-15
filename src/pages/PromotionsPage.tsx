@@ -521,7 +521,7 @@ export const PromotionsPage: React.FC = () => {
       },
       title: {
         vi: 'Combo “Ngày Nắng Năng Động” (Áo Polo + Quần Short)',
-        en: '“Active Sunny Days” Set (Polo Shirt + Linen Shorts)'
+        en: '“Active Sunny Days” Set (Polo Shirt + Cotton Shorts)'
       },
       saving: {
         vi: 'Tiết kiệm 50.000đ so với mua lẻ',
@@ -532,8 +532,8 @@ export const PromotionsPage: React.FC = () => {
         en: 'Pre-matched set in calm earth tones, breathable organic cotton giving freedom for all-day play.'
       },
       itemsIncluded: {
-        vi: ['01 Áo polo cotton organic cổ mềm', '01 Quần short linen lưng thun co giãn'],
-        en: ['01 Organic soft-collar polo', '01 Elastic-waist linen short']
+        vi: ['01 Áo polo 100% cotton hữu cơ cổ mềm', '01 Quần short 100% cotton lưng thun co giãn'],
+        en: ['01 100% organic cotton polo', '01 100% cotton elastic-waist shorts']
       },
       condition: {
         vi: 'Áp dụng trực tiếp khi chọn mua nguyên bộ trong mục Bộ sưu tập.',
@@ -564,8 +564,8 @@ export const PromotionsPage: React.FC = () => {
         en: 'Save 60,000 VND + Free 45k Hairband'
       },
       description: {
-        vi: 'Váy xòe vải sợi tre kháng khuẩn êm ái, tặng kèm phụ kiện đồng điệu cho bé diện đi tiệc, đi chơi cuối tuần.',
-        en: 'Hypoallergenic bamboo flared dress with complimentary matching headpiece for lovely weekend outings.'
+        vi: 'Váy xòe 100% cotton hữu cơ êm ái, tặng kèm phụ kiện đồng điệu cho bé diện đi tiệc, đi chơi cuối tuần.',
+        en: '100% organic cotton flared dress with complimentary matching headpiece for lovely weekend outings.'
       },
       itemsIncluded: {
         vi: ['01 Váy hoa xòe pastel công chúa', '01 Băng đô vải cotton hữu cơ êm tai'],

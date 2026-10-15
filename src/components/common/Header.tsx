@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   Search,
@@ -66,7 +67,7 @@ export const Header: React.FC = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (mobileMenuOpen || searchOpen || accountModalOpen) {
+    if (mobileMenuOpen || searchOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -74,7 +75,37 @@ export const Header: React.FC = () => {
     return () => {
       document.body.style.overflow = '';
     };
-  }, [mobileMenuOpen, searchOpen, accountModalOpen]);
+  }, [mobileMenuOpen, searchOpen]);
+
+  const accountRef = useRef<HTMLDivElement>(null);
+
+  // Close account dropdown on click outside (desktop)
+  useEffect(() => {
+    if (!accountModalOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(e.target as Node)) {
+        setAccountModalOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [accountModalOpen]);
+
+  // Close account popup on Escape key (desktop, tablet, mobile)
+  useEffect(() => {
+    if (!accountModalOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setAccountModalOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [accountModalOpen]);
 
   // 1. Sản phẩm Submenu (10 mục)
   const productsSubmenu = [
@@ -148,6 +179,196 @@ export const Header: React.FC = () => {
       setLookupOrderId('');
     }
   };
+
+  const renderAccountBody = () => (
+    <>
+      {isLoggedIn ? (
+        /* ĐÃ ĐĂNG NHẬP: Menu thành viên */
+        <div>
+          <div className="flex items-center justify-between pb-3.5 border-b border-[#FAF6EC]">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-[#EAF3EF] text-[#355F52] flex items-center justify-center font-black text-base font-heading border border-[#D2E3DC] shrink-0">
+                {user?.fullName.charAt(0).toUpperCase()}
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-bold text-[#2F403A] text-sm sm:text-base font-heading truncate max-w-[180px]">
+                  {user?.fullName}
+                </h3>
+                <div className="flex items-center gap-1.5 text-xs text-[#355F52] mt-0.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#ECA032] shrink-0" />
+                  <span className="font-bold text-[#355F52]">
+                    {user?.mamPoints} {language === 'en' ? 'Mầm Points' : 'Điểm Mầm'}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setAccountModalOpen(false)}
+              className="p-1.5 text-[#2F403A] hover:bg-[#EFF5F2] rounded-xl cursor-pointer transition-colors"
+              aria-label={language === 'en' ? 'Close' : 'Đóng'}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="py-3 space-y-1 text-xs">
+            <Link
+              to="/tai-khoan"
+              onClick={() => setAccountModalOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <User className="w-4 h-4 text-[#4E8773] shrink-0" />
+                <span>{language === 'en' ? 'My Account' : 'Tài khoản của tôi'}</span>
+              </span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#C1D2CB]" />
+            </Link>
+
+            <Link
+              to="/diem-mam"
+              onClick={() => setAccountModalOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <Sparkles className="w-4 h-4 text-[#ECA032] shrink-0" />
+                <span>{language === 'en' ? 'Earned Mầm Points' : 'Điểm Mầm tích lũy'}</span>
+              </span>
+              <span className="text-xs font-bold text-[#ECA032] tabular-nums">
+                {user?.mamPoints} {language === 'en' ? 'pts' : 'điểm'}
+              </span>
+            </Link>
+
+            <Link
+              to="/voucher"
+              onClick={() => setAccountModalOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <Ticket className="w-4 h-4 text-[#4E8773] shrink-0" />
+                <span>{language === 'en' ? 'My Vouchers' : 'Voucher của tôi'}</span>
+              </span>
+              <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-[#FAF6EC] text-[#355F52]">
+                {user?.vouchers.filter((v) => !v.isUsed).length} {language === 'en' ? 'available' : 'mã'}
+              </span>
+            </Link>
+
+            <Link
+              to="/lich-su-don-hang"
+              onClick={() => setAccountModalOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <Package className="w-4 h-4 text-[#355F52] shrink-0" />
+                <span>{language === 'en' ? 'Order History' : 'Đơn hàng đã đặt'}</span>
+              </span>
+              <ChevronRight className="w-3.5 h-3.5 text-[#C1D2CB]" />
+            </Link>
+
+            <Link
+              to="/thong-tin-be"
+              onClick={() => setAccountModalOpen(false)}
+              className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
+            >
+              <span className="flex items-center gap-2.5">
+                <Baby className="w-4 h-4 text-[#E07A8A] shrink-0" />
+                <span>{language === 'en' ? 'Child Profile' : 'Hồ sơ bé yêu'}</span>
+              </span>
+              <span className="text-xs font-semibold text-[#8B9D95]">
+                {user?.babies.length} {language === 'en' ? 'child(ren)' : 'bé'}
+              </span>
+            </Link>
+          </div>
+
+          <div className="pt-3 border-t border-[#FAF6EC] flex items-center justify-between">
+            <Link
+              to="/theo-doi-don-hang"
+              onClick={() => setAccountModalOpen(false)}
+              className="text-xs text-[#6A7F77] hover:underline hover:text-[#355F52]"
+            >
+              {language === 'en' ? 'Quick order tracking' : 'Tra cứu đơn nhanh'}
+            </Link>
+            <button
+              type="button"
+              onClick={() => {
+                logout();
+                setAccountModalOpen(false);
+              }}
+              className="px-3 py-1.5 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-colors flex items-center gap-1.5 cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span>{t('nav.logout')}</span>
+            </button>
+          </div>
+        </div>
+      ) : (
+        /* CHƯA ĐĂNG NHẬP: Nút Đăng nhập / Đăng ký + Tra cứu đơn */
+        <div>
+          <div className="flex items-start justify-between pb-3.5 border-b border-[#EFE8D8]">
+            <div className="pr-2">
+              <h3 className="font-bold text-[#2F403A] text-base font-heading">
+                {language === 'en' ? 'Mầm Kids Membership' : 'Thành viên Mầm Kids'}
+              </h3>
+              <p className="text-xs text-[#5D726A] mt-0.5 leading-snug">
+                {language === 'en' ? 'Sign in to get 10% voucher & earn Mầm Points' : 'Đăng nhập để nhận ưu đãi 10% và tích Điểm Mầm'}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setAccountModalOpen(false)}
+              className="p-1.5 text-[#2F403A] hover:bg-[#EFF5F2] rounded-xl cursor-pointer transition-colors shrink-0"
+              aria-label={language === 'en' ? 'Close' : 'Đóng'}
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Login & Register CTAs */}
+          <div className="py-4 space-y-2.5">
+            <Link
+              to="/dang-nhap"
+              onClick={() => setAccountModalOpen(false)}
+              className="w-full py-2.5 px-4 rounded-xl bg-[#4E8773] hover:bg-[#355F52] text-white font-bold text-xs transition-all shadow-xs flex items-center justify-center gap-2"
+            >
+              <User className="w-4 h-4" />
+              <span>{language === 'en' ? 'SIGN IN TO ACCOUNT' : 'ĐĂNG NHẬP TÀI KHOẢN'}</span>
+            </Link>
+
+            <Link
+              to="/dang-ky"
+              onClick={() => setAccountModalOpen(false)}
+              className="w-full py-2.5 px-3 rounded-xl bg-[#FAF6EC] hover:bg-[#F5DFA0] text-[#355F52] border border-[#F5DFA0] font-bold text-xs transition-all flex items-center justify-center gap-1.5 text-center"
+            >
+              <Gift className="w-4 h-4 text-[#ECA032] shrink-0" />
+              <span>{language === 'en' ? 'SIGN UP (FREE 10% VOUCHER + 100 PTS)' : 'ĐĂNG KÝ (TẶNG VOUCHER 10% + 100 ĐIỂM)'}</span>
+            </Link>
+          </div>
+
+          {/* Quick Order Lookup Form */}
+          <div className="pt-3.5 border-t border-[#EFE8D8]">
+            <p className="text-xs font-bold text-[#2F403A] mb-2">
+              {language === 'en' ? 'Or quick order tracking without sign in:' : 'Hoặc tra cứu nhanh đơn hàng không cần đăng nhập:'}
+            </p>
+            <form onSubmit={handleLookupSubmit} className="space-y-2.5">
+              <input
+                type="text"
+                value={lookupOrderId}
+                onChange={(e) => setLookupOrderId(e.target.value)}
+                placeholder={language === 'en' ? 'Enter order ID (e.g. MK-261234)...' : 'Nhập mã đơn hàng (Ví dụ: MK-261234)...'}
+                className="w-full px-3.5 py-2 rounded-xl bg-[#FDF9F1] border border-[#EFE8D8] text-[#2F403A] text-xs focus:outline-hidden focus:border-[#355F52]"
+              />
+              <button
+                type="submit"
+                className="w-full py-2 px-3 bg-[#355F52] hover:bg-[#28473D] text-white font-bold text-xs rounded-xl transition-colors shadow-xs cursor-pointer"
+              >
+                {language === 'en' ? 'Track Order Progress' : 'Tra cứu tiến trình đơn hàng'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </>
+  );
 
   return (
     <header className="sticky top-0 z-40 w-full bg-[#FDF9F1]/98 backdrop-blur-md border-b border-[#EFE8D8] shadow-xs transition-all">
@@ -487,30 +708,48 @@ export const Header: React.FC = () => {
               )}
             </Link>
 
-            {/* Account / Order tracking Button */}
-            <button
-              onClick={() => setAccountModalOpen(true)}
-              className={`p-2 sm:p-2.5 rounded-2xl transition-colors flex items-center gap-2 ${
-                isLoggedIn
-                  ? 'bg-[#EAF3EF] text-[#355F52] hover:bg-[#D2E3DC]'
-                  : 'text-[#2F403A] hover:text-[#4E8773] hover:bg-[#EAF3EF]'
-              }`}
-              aria-label={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản ${user?.fullName}`) : t('nav.account')}
-              title={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản: ${user?.fullName}`) : t('nav.account')}
-            >
-              {isLoggedIn ? (
-                <div className="flex items-center gap-1.5">
-                  <div className="w-6 h-6 rounded-full bg-[#4E8773] text-white flex items-center justify-center text-xs font-bold">
-                    {user?.fullName.charAt(0).toUpperCase()}
+            {/* Account / Order tracking Button & Desktop Dropdown */}
+            <div className="relative" ref={accountRef}>
+              <button
+                type="button"
+                onClick={() => setAccountModalOpen((prev) => !prev)}
+                className={`p-2 sm:p-2.5 rounded-2xl transition-colors flex items-center gap-2 cursor-pointer ${
+                  accountModalOpen
+                    ? 'bg-[#EAF3EF] text-[#355F52] ring-2 ring-[#4E8773]/30'
+                    : isLoggedIn
+                    ? 'bg-[#EAF3EF] text-[#355F52] hover:bg-[#D2E3DC]'
+                    : 'text-[#2F403A] hover:text-[#4E8773] hover:bg-[#EAF3EF]'
+                }`}
+                aria-haspopup="true"
+                aria-expanded={accountModalOpen}
+                aria-label={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản ${user?.fullName}`) : t('nav.account')}
+                title={isLoggedIn ? (language === 'en' ? `Account: ${user?.fullName}` : `Tài khoản: ${user?.fullName}`) : t('nav.account')}
+              >
+                {isLoggedIn ? (
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-6 h-6 rounded-full bg-[#4E8773] text-white flex items-center justify-center text-xs font-bold">
+                      {user?.fullName.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="hidden xl:inline text-xs font-bold text-[#355F52] max-w-[100px] truncate">
+                      {user?.fullName.split(' ').slice(-1)[0]}
+                    </span>
                   </div>
-                  <span className="hidden xl:inline text-xs font-bold text-[#355F52] max-w-[100px] truncate">
-                    {user?.fullName.split(' ').slice(-1)[0]}
-                  </span>
+                ) : (
+                  <User className="w-5 h-5" />
+                )}
+              </button>
+
+              {/* Desktop Dropdown: Small, compact, anchored directly below account icon, right aligned */}
+              {accountModalOpen && (
+                <div
+                  className="hidden md:block absolute top-full right-0 mt-2 w-[340px] sm:w-[350px] bg-white rounded-3xl shadow-xl border border-[#EFE8D8] p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[min(540px,calc(100vh-100px))] overflow-y-auto"
+                  role="dialog"
+                  aria-label={language === 'en' ? 'Account Menu' : 'Menu tài khoản'}
+                >
+                  {renderAccountBody()}
                 </div>
-              ) : (
-                <User className="w-5 h-5" />
               )}
-            </button>
+            </div>
 
             {/* Cart Button: Sage green #4E8773, hover Deep Forest Green #285A48 */}
             <Link
@@ -1070,7 +1309,7 @@ export const Header: React.FC = () => {
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {(language === 'en'
-                      ? ['Organic cotton polo', 'Floral summer dress', 'Active shorts', 'Rainbow hoodie', 'Linen playset']
+                      ? ['Organic cotton polo', 'Floral summer dress', 'Active shorts', 'Rainbow hoodie', '100% Cotton playset']
                       : ['Áo thun cotton Gấu Nhỏ', 'Váy hoa mùa hè', 'Quần short năng động', 'Áo hoodie Cầu Vồng', 'Đồ bộ Ngày Nắng']
                     ).map((tag) => (
                       <button
@@ -1090,197 +1329,31 @@ export const Header: React.FC = () => {
         </div>
       )}
 
-      {/* Account / Member Dropdown & Modal */}
-      {accountModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div
-            className="fixed inset-0 bg-[#2F403A]/40 backdrop-blur-xs transition-opacity"
-            onClick={() => setAccountModalOpen(false)}
-          />
-          <div className="relative w-full max-w-md bg-white rounded-3xl shadow-2xl border border-[#EFE8D8] p-6 z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            {isLoggedIn ? (
-              /* ĐÃ ĐĂNG NHẬP: Menu thành viên */
-              <div>
-                <div className="flex items-center justify-between pb-4 border-b border-[#FAF6EC]">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#EAF3EF] text-[#355F52] flex items-center justify-center font-black text-lg font-heading border border-[#D2E3DC]">
-                      {user?.fullName.charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-[#2F403A] text-base font-heading">
-                        {user?.fullName}
-                      </h3>
-                      <div className="flex items-center gap-1.5 text-xs text-[#355F52] mt-0.5">
-                        <Sparkles className="w-3.5 h-3.5 text-[#ECA032]" />
-                        <span className="font-bold text-[#355F52]">
-                          {user?.mamPoints} {language === 'en' ? 'Mầm Points' : 'Điểm Mầm'}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setAccountModalOpen(false)}
-                    className="p-1.5 text-[#2F403A] hover:bg-[#EFF5F2] rounded-xl cursor-pointer"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                <div className="py-4 space-y-1 text-xs">
-                  <Link
-                    to="/tai-khoan"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
-                  >
-                    <span className="flex items-center gap-3">
-                      <User className="w-4 h-4 text-[#4E8773]" />
-                      <span>{language === 'en' ? 'My Account' : 'Tài khoản của tôi'}</span>
-                    </span>
-                    <ChevronRight className="w-4 h-4 text-[#C1D2CB]" />
-                  </Link>
-
-                  <Link
-                    to="/diem-mam"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
-                  >
-                    <span className="flex items-center gap-3">
-                      <Sparkles className="w-4 h-4 text-[#ECA032]" />
-                      <span>{language === 'en' ? 'Earned Mầm Points' : 'Điểm Mầm tích lũy'}</span>
-                    </span>
-                    <span className="text-xs font-bold text-[#ECA032] tabular-nums">
-                      {user?.mamPoints} {language === 'en' ? 'pts' : 'điểm'}
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/voucher"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
-                  >
-                    <span className="flex items-center gap-3">
-                      <Ticket className="w-4 h-4 text-[#4E8773]" />
-                      <span>{language === 'en' ? 'My Vouchers' : 'Voucher của tôi'}</span>
-                    </span>
-                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-[#FAF6EC] text-[#355F52]">
-                      {user?.vouchers.filter((v) => !v.isUsed).length} {language === 'en' ? 'available' : 'mã'}
-                    </span>
-                  </Link>
-
-                  <Link
-                    to="/lich-su-don-hang"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
-                  >
-                    <span className="flex items-center gap-3">
-                      <Package className="w-4 h-4 text-[#355F52]" />
-                      <span>{language === 'en' ? 'Order History' : 'Đơn hàng đã đặt'}</span>
-                    </span>
-                    <ChevronRight className="w-4 h-4 text-[#C1D2CB]" />
-                  </Link>
-
-                  <Link
-                    to="/thong-tin-be"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="flex items-center justify-between p-3 rounded-2xl hover:bg-[#FDF9F1] text-[#2F403A] hover:text-[#4E8773] font-bold transition-colors"
-                  >
-                    <span className="flex items-center gap-3">
-                      <Baby className="w-4 h-4 text-[#E07A8A]" />
-                      <span>{language === 'en' ? 'Child Profile' : 'Hồ sơ bé yêu'}</span>
-                    </span>
-                    <span className="text-xs font-semibold text-[#8B9D95]">
-                      {user?.babies.length} {language === 'en' ? 'child(ren)' : 'bé'}
-                    </span>
-                  </Link>
-                </div>
-
-                <div className="pt-3 border-t border-[#FAF6EC] flex items-center justify-between">
-                  <Link
-                    to="/theo-doi-don-hang"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="text-xs text-[#6A7F77] hover:underline"
-                  >
-                    {language === 'en' ? 'Quick order tracking' : 'Tra cứu đơn nhanh'}
-                  </Link>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setAccountModalOpen(false);
-                    }}
-                    className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-colors flex items-center gap-1.5 cursor-pointer"
-                  >
-                    <LogOut className="w-3.5 h-3.5" />
-                    <span>{t('nav.logout')}</span>
-                  </button>
-                </div>
+      {/* Mobile Account Drawer & Backdrop (md:hidden) rendered via Portal to escape header containment */}
+      {accountModalOpen &&
+        typeof document !== 'undefined' &&
+        createPortal(
+          <div className="md:hidden fixed inset-0 z-45 overflow-hidden">
+            {/* Backdrop overlay */}
+            <div
+              className="fixed inset-0 bg-[#2F403A]/40 backdrop-blur-xs transition-opacity animate-in fade-in duration-200"
+              onClick={() => setAccountModalOpen(false)}
+              aria-hidden="true"
+            />
+            {/* Drawer container from right */}
+            <div
+              className="fixed inset-y-0 right-0 w-[min(350px,100vw)] max-w-[360px] bg-white shadow-2xl flex flex-col border-l border-[#EFE8D8] animate-in slide-in-from-right duration-250 ease-out z-10"
+              role="dialog"
+              aria-modal="true"
+              aria-label={language === 'en' ? 'Account Menu' : 'Menu tài khoản'}
+            >
+              <div className="flex-1 overflow-y-auto p-5">
+                {renderAccountBody()}
               </div>
-            ) : (
-              /* CHƯA ĐĂNG NHẬP: Nút Đăng nhập / Đăng ký + Tra cứu đơn */
-              <div>
-                <div className="flex items-center justify-between pb-4 border-b border-[#EFE8D8]">
-                  <div>
-                    <h3 className="font-bold text-[#2F403A] text-lg font-heading">
-                      {language === 'en' ? 'Mầm Kids Membership' : 'Thành viên Mầm Kids'}
-                    </h3>
-                    <p className="text-xs text-[#5D726A]">
-                      {language === 'en' ? 'Sign in to get 10% voucher and earn Mầm Points' : 'Đăng nhập để nhận ưu đãi 10% và tích Điểm Mầm'}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => setAccountModalOpen(false)}
-                    className="p-1.5 text-[#2F403A] hover:bg-[#EFF5F2] rounded-xl cursor-pointer"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                {/* Login & Register CTAs */}
-                <div className="py-5 space-y-3">
-                  <Link
-                    to="/dang-nhap"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="w-full py-3 px-4 rounded-2xl bg-[#4E8773] hover:bg-[#355F52] text-white font-bold text-sm transition-all shadow-xs flex items-center justify-center gap-2"
-                  >
-                    <User className="w-4 h-4" />
-                    <span>{language === 'en' ? 'SIGN IN TO ACCOUNT' : 'ĐĂNG NHẬP TÀI KHOẢN'}</span>
-                  </Link>
-
-                  <Link
-                    to="/dang-ky"
-                    onClick={() => setAccountModalOpen(false)}
-                    className="w-full py-3 px-4 rounded-2xl bg-[#FAF6EC] hover:bg-[#F5DFA0] text-[#355F52] border border-[#F5DFA0] font-bold text-sm transition-all flex items-center justify-center gap-2"
-                  >
-                    <Gift className="w-4 h-4 text-[#ECA032]" />
-                    <span>{language === 'en' ? 'SIGN UP (FREE 10% VOUCHER + 100 PTS)' : 'ĐĂNG KÝ (TẶNG VOUCHER 10% + 100 ĐIỂM)'}</span>
-                  </Link>
-                </div>
-
-                {/* Quick Order Lookup Form */}
-                <div className="pt-4 border-t border-[#EFE8D8]">
-                  <p className="text-xs font-bold text-[#2F403A] mb-2">
-                    {language === 'en' ? 'Or quick order tracking without sign in:' : 'Hoặc tra cứu nhanh đơn hàng không cần đăng nhập:'}
-                  </p>
-                  <form onSubmit={handleLookupSubmit} className="space-y-3">
-                    <input
-                      type="text"
-                      value={lookupOrderId}
-                      onChange={(e) => setLookupOrderId(e.target.value)}
-                      placeholder={language === 'en' ? 'Enter order ID (e.g. MK-261234)...' : 'Nhập mã đơn hàng (Ví dụ: MK-261234)...'}
-                      className="w-full px-4 py-2.5 rounded-2xl bg-[#FDF9F1] border border-[#EFE8D8] text-[#2F403A] text-xs focus:outline-hidden focus:border-[#355F52]"
-                    />
-                    <button
-                      type="submit"
-                      className="w-full py-2.5 px-4 bg-[#355F52] hover:bg-[#28473D] text-white font-bold text-xs rounded-2xl transition-colors shadow-xs cursor-pointer"
-                    >
-                      {language === 'en' ? 'Track Order Progress' : 'Tra cứu tiến trình đơn hàng'}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+            </div>
+          </div>,
+          document.body
+        )}
     </header>
   );
 };

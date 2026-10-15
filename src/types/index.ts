@@ -38,30 +38,43 @@ export interface Product {
 export interface EcoStoryChapter {
   chapterNumber: number;
   title: string;
+  titleEn?: string;
   content: string;
+  contentEn?: string;
   moral: string;
+  moralEn?: string;
   icon?: string;
 }
 
 export interface EcoStory {
   id: string;
   title: string;
+  titleEn?: string;
   subtitle: string;
+  subtitleEn?: string;
   badge: string;
+  badgeEn?: string;
   readTime: string;
+  readTimeEn?: string;
   targetAge: string;
   summary: string;
+  summaryEn?: string;
   coverImage: string;
   chapters: EcoStoryChapter[];
   challenge: {
     title: string;
+    titleEn?: string;
     action: string;
+    actionEn?: string;
     rewardDescription: string;
+    rewardDescriptionEn?: string;
     pointsReward: number;
     badgeName: string;
   };
   sustainabilityMessage: string;
+  sustainabilityMessageEn?: string;
   materialHighlight: string;
+  materialHighlightEn?: string;
 }
 
 export interface OutfitSet {

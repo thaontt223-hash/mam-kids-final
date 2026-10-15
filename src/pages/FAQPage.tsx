@@ -13,8 +13,8 @@ export const FAQPage: React.FC = () => {
         ? 'Is Mầm Kids apparel safe for children with sensitive or allergy-prone skin?'
         : 'Trang phục của Mầm Kids có an toàn cho da bé dễ bị dị ứng không?',
       a: language === 'en'
-        ? 'Completely safe. Mầm Kids guarantees 100% of our products use certified natural organic cotton, bamboo muslin, or natural raw linen. Fabrics are tested free of fluorescent whiteners, formaldehyde, and heavy metal azo dyes. All seams are flat-bound to eliminate chafing against delicate skin.'
-        : 'Hoàn toàn an toàn. Mầm Kids cam kết 100% sản phẩm sử dụng chất liệu bông cotton hữu cơ tự nhiên, vải xô muslin sợi tre hoặc đũi tự nhiên. Vải được chứng nhận không chứa chất huỳnh quang, không formaldehyde và phẩm nhuộm azo kim loại nặng độc hại. Các đường may đều được bọc viền phẳng êm ái để không cọ xát vào da bé.'
+        ? 'Completely safe. Mầm Kids guarantees 100% of our children’s clothing uses 100% Cotton, with 100% Organic Cotton for our Mầm Xanh line. Fabrics are tested free of fluorescent whiteners, formaldehyde, and heavy metal azo dyes. All seams are flat-bound to eliminate chafing against delicate skin.'
+        : 'Hoàn toàn an toàn. Mầm Kids cam kết toàn bộ trang phục trẻ em sử dụng 100% Cotton, riêng dòng Mầm Xanh sử dụng 100% Cotton hữu cơ. Vải được chứng nhận không chứa chất huỳnh quang, không formaldehyde và phẩm nhuộm azo kim loại nặng độc hại. Các đường may đều được bọc viền phẳng êm ái để không cọ xát vào da bé.'
     },
     {
       q: language === 'en'
